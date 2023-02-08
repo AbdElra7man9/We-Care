@@ -9,13 +9,13 @@ const userSchema = mongoose.Schema({
   phoneNumber: String,
   username: {
     type: String,
-    //required: true,
+    required: true,
     trim: true,
-    //unique: true
+    unique: true,
   },
   password: {
     type: String,
-    //required: [true, 'A user must have a password'],
+    required: [true, 'A user must have a password'],
   },
   profilePicture: String,
   account: Number,
