@@ -6,7 +6,7 @@ const router = express.Router();
 router
   .route('/')
   .get(doctorController.getAllDoctors)
-  .post(doctorController.addnewDoctor);
+  .post(doctorController.addNewDoctor);
 
 router.route('/:id').get(doctorController.getDoctor);
 module.exports = router;

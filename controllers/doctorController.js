@@ -14,7 +14,7 @@ exports.getDoctor = async (req, res) => {
   }
 };
 
-exports.addnewDoctor = async (req, res) => {
+exports.addNewDoctor = async (req, res) => {
   const newDoctor = await Doctor.create(req.body);
   res.json(newDoctor);
 };
