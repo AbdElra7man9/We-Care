@@ -3,7 +3,11 @@ const AppError = require('../utils/AppError');
 const catchAsync = require('../utils/catchAsync');
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const doctors = await Doctor.find();
-  res.json(doctors);
+  res.json({
+    status: 'success',
+    results: doctors.length,
+    doctors,
+  });
 });
 
 exports.getDoctor = catchAsync(async (req, res, next) => {
