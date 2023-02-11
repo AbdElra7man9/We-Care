@@ -1,20 +1,20 @@
 const Doctor = require('../Models/doctorModel');
-
-exports.getAllDoctors = async (req, res) => {
+const AppError = require('../utils/AppError');
+const catchAsync = require('../utils/catchAsync');
+exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const doctors = await Doctor.find();
   res.json(doctors);
-};
+});
 
-exports.getDoctor = async (req, res) => {
-  try {
-    const newDoctor = await Doctor.findById(req.params.id);
-    res.json(newDoctor);
-  } catch (err) {
-    console.log(err);
+exports.getDoctor = catchAsync(async (req, res, next) => {
+  const newDoctor = await Doctor.findById(req.params.id);
+  if (!newDoctor) {
+    return next(new AppError('there is no doctor by this ID', 404));
   }
-};
+  res.json(newDoctor);
+});
 
-exports.addNewDoctor = async (req, res) => {
+exports.addNewDoctor = catchAsync(async (req, res, next) => {
   const newDoctor = await Doctor.create(req.body);
   res.json(newDoctor);
-};
+});
