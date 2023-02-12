@@ -22,7 +22,7 @@ const handleValidationErrorDB = (err) => {
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
-  if (!err.isOperational) err.message = 'something went wrong';
+
   if (process.env.NODE_ENV === 'development') {
     res.status(err.statusCode).json({
       status: err.status,
@@ -31,6 +31,7 @@ module.exports = (err, req, res, next) => {
       message: err.message,
     });
   } else if (process.env.NODE_ENV === 'production') {
+    if (!err.isOperational) err.message = 'something went wrong';
     if (err.name === 'CastError') err = handleCastErrorDB(err);
     if (err.code === 11000) err = handleDuplicateFieldsDB(err);
     if (err.name === 'Validationerr') err = handleValidationErrorDB(err);
