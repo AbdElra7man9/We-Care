@@ -18,8 +18,3 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
   }
   res.json(newDoctor);
 });
-
-exports.addNewDoctor = catchAsync(async (req, res, next) => {
-  const newDoctor = await Doctor.create(req.body);
-  res.json(newDoctor);
-});

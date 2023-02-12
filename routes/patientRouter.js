@@ -1,8 +1,8 @@
 const express = require('express');
-const { patientSignUP } = require('../controllers/patientController');
+const { patientSignUP } = require('../controllers/authController');
 
 const router = express.Router();
 
-router.post('/signup', patientSignUP);
+router.post('/patient-signup', patientSignUP);
 
 module.exports = router;

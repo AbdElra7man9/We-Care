@@ -26,6 +26,11 @@ const Doctor = User.discriminator(
         type: Number,
         default: 4.5,
       },
+      status: {
+        type: String,
+        default: 'pending',
+        enum: ['refused', 'pending', 'accepted'],
+      },
     },
     { discriminatorKey: 'kind' }
   )
