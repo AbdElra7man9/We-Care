@@ -3,6 +3,6 @@ const { patientSignUP } = require('../controllers/authController');
 
 const router = express.Router();
 
-router.post('/patient-signup', patientSignUP);
+router.post('/signup', patientSignUP);
 
 module.exports = router;
