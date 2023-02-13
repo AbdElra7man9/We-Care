@@ -12,7 +12,6 @@ const userSchema = mongoose.Schema({
   phoneNumber: String,
   username: {
     type: String,
-    required: [true, 'you must provide a user name'],
     trim: true,
     unique: [true, 'user name must be unique'],
     lowercase: true,
@@ -39,6 +38,13 @@ const userSchema = mongoose.Schema({
   profilePicture: String,
   account: Number,
 });
+
+userSchema.pre('save', function (next) {
+  this.username =
+    this.username || `${this.name.split(' ').join('-')}-${this._id}`;
+  next();
+});
+
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 12);
