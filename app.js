@@ -11,13 +11,13 @@ const app = express();
 app.use(express.json());
 
 // doctors routs
-app.use('/api/v1/doctor', doctorRouter);
+app.use('/api/v1/doctors', doctorRouter);
 
 //patient routs
-app.use('/api/v1/patient', patientRouter);
+app.use('/api/v1/patients', patientRouter);
 
 //general user routs
-app.use('/api/v1/user', userRouter);
+app.use('/api/v1/users', userRouter);
 
 //handeling wrong urls
 app.all('*', (req, res, next) => {
