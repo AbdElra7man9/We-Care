@@ -11,6 +11,7 @@ const Patient = require('../Models/patientModel');
 const Doctor = require('../Models/doctorModel');
 const AppError = require('../utils/AppError');
 const filterObject = require('../utils/filterObject');
+const { findByIdAndUpdate } = require('../Models/patientModel');
 
 function getToken(id) {
   return jwt.sign({ id }, process.env.JWT_SECRET);
@@ -26,9 +27,9 @@ function createSendToken(user, statusCode, res) {
 
   res.cookie('jwt', token, cookieOptions);
 
-  // Remove password from output
+  // Remove password and pin from output
   user.password = undefined;
-
+  user.emailConfirm = undefined;
   res.status(statusCode).json({
     status: 'success',
     token,
@@ -43,7 +44,7 @@ function sendEmail(email, subject, text) {
     service: 'outlook',
     auth: {
       user: 're00zq@outlook.com',
-      pass: '**************',
+      pass: '*******',
     },
   });
 
@@ -64,6 +65,27 @@ function sendEmail(email, subject, text) {
   });
 }
 
+const sendCreatePIN = catchAsync(async function (id) {
+  user = await User.findById(id);
+  const PIN = await user.createPIN();
+  await user.save({ validateBeforeSave: false });
+  try {
+    sendEmail(
+      user.email,
+      'Confirmation Email!',
+      `your confirmation code is: ${PIN}`
+    );
+  } catch (err) {
+    user.emailConfirm = undefined;
+    await user.save({ validateBeforeSave: false });
+
+    return next(
+      new AppError('There was an error sending the email. Try again later!'),
+      500
+    );
+  }
+});
+
 exports.patientSignUP = catchAsync(async function (req, res, next) {
   const filteredInfo = filterObject(
     req.body,
@@ -74,11 +96,8 @@ exports.patientSignUP = catchAsync(async function (req, res, next) {
     'passwordConfirm'
   );
   const newPatient = await Patient.create(filteredInfo);
-  res.status(201).json({
-    status: 'success',
-    user: newPatient,
-    token: getToken(newPatient._id),
-  });
+  await sendCreatePIN(newPatient._id);
+  createSendToken(newPatient, 200, res);
 });
 
 exports.doctorSignUP = catchAsync(async function (req, res, next) {
@@ -92,11 +111,8 @@ exports.doctorSignUP = catchAsync(async function (req, res, next) {
     'specialization'
   );
   const newDoctor = await Doctor.create(filteredInfo);
-  res.status(201).json({
-    status: 'success',
-    user: newDoctor,
-    token: getToken(newDoctor._id),
-  });
+  await sendCreatePIN(newDoctor._id);
+  createSendToken(newDoctor, 200, res);
 });
 
 exports.userLogin = catchAsync(async function (req, res, next) {
@@ -107,15 +123,11 @@ exports.userLogin = catchAsync(async function (req, res, next) {
 
   //if email or password not correct
   const user = await User.findOne({ email }).select('+password');
-  if (!user || !(await bcrypt.compare(password, user.password)))
+  if (!user || !(await user.correctPassword(password, user.password)))
     return next(new AppError("email or password is't correct", 401));
 
   //every things OK
-  res.status(200).json({
-    staus: 'success',
-    user,
-    token: getToken(user._id),
-  });
+  createSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async function (req, res, next) {
@@ -228,17 +240,45 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // 1) Get user from collection
   const user = await User.findById(req.user.id).select('+password');
 
-  // 2) Check if POSTed current password is correct
+  // 2) check if password and password confirm are exist
+  if (!req.body.passwordCurrent || !req.body.passwordConfirm)
+    return next(
+      new AppError('password and password confirm are required', 401)
+    );
+
+  // 3) Check if POSTed current password is correct
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
     return next(new AppError('Your current password is wrong.', 401));
   }
 
-  // 3) If so, update password
+  // 4) If so, update password
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
   // User.findByIdAndUpdate will NOT work as intended!
 
-  // 4) Log user in, send JWT
+  // 5) Log user in, send JWT
   createSendToken(user, 200, res);
+});
+
+exports.emailConfirmation = catchAsync(async function (req, res, next) {
+  // 1) check if user enter pin
+  if (!req.body.pin) return next(new AppError('you shoud enter PIN'), 401);
+  // 2) check if user enter invalid pin
+  if (!(await bcrypt.compare(req.body.pin, req.user.emailConfirm)))
+    return next(new AppError('your PIN is incorrect, please try again', 401));
+  //3) if email is already confirmed
+  if (req.user.confirmed)
+    next(new AppError('your email is already confirmed', 401));
+  // 4) everythin is ok
+  if (await bcrypt.compare(req.body.pin, req.user.emailConfirm)) {
+    await User.findByIdAndUpdate(req.user._id, {
+      confirmed: true,
+      emailConfirm: undefined,
+    });
+    res.status(200).json({
+      status: 'success',
+      message: 'your email is confirmed',
+    });
+  }
 });

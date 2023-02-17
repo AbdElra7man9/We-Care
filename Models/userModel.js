@@ -50,6 +50,9 @@ const userSchema = mongoose.Schema({
     default: true,
     select: false,
   },
+  emailConfirm: {
+    type: String,
+  },
 });
 
 userSchema.pre('save', function (next) {
@@ -115,6 +118,12 @@ userSchema.methods.createPasswordResetToken = function () {
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;
+};
+
+userSchema.methods.createPIN = async function () {
+  const PIN = `${Math.floor(Math.random() * (9999 - 1000)) + 1000}`;
+  this.emailConfirm = await bcrypt.hash(PIN, 12);
+  return PIN;
 };
 
 const User = mongoose.model('User', userSchema);
