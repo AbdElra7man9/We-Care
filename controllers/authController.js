@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-var nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 
 const { promisify } = require('util');
 
@@ -11,7 +11,6 @@ const Patient = require('../Models/patientModel');
 const Doctor = require('../Models/doctorModel');
 const AppError = require('../utils/AppError');
 const filterObject = require('../utils/filterObject');
-const { findByIdAndUpdate } = require('../Models/patientModel');
 
 function getToken(id) {
   return jwt.sign({ id }, process.env.JWT_SECRET);
@@ -44,7 +43,7 @@ function sendEmail(email, subject, text) {
     service: 'outlook',
     auth: {
       user: 're00zq@outlook.com',
-      pass: '*******',
+      pass: 'mahmoud1Q2W3E#',
     },
   });
 
@@ -66,7 +65,7 @@ function sendEmail(email, subject, text) {
 }
 
 const sendCreatePIN = catchAsync(async function (id) {
-  user = await User.findById(id);
+  const user = await User.findById(id);
   const PIN = await user.createPIN();
   await user.save({ validateBeforeSave: false });
   try {
@@ -272,10 +271,10 @@ exports.emailConfirmation = catchAsync(async function (req, res, next) {
     next(new AppError('your email is already confirmed', 401));
   // 4) everythin is ok
   if (await bcrypt.compare(req.body.pin, req.user.emailConfirm)) {
-    await User.findByIdAndUpdate(req.user._id, {
-      confirmed: true,
-      emailConfirm: undefined,
-    });
+    const user = await User.findById(req.user._id);
+    user.confirmed = true;
+    user.emailConfirm = undefined;
+    await user.save({ validateBeforeSave: false });
     res.status(200).json({
       status: 'success',
       message: 'your email is confirmed',
