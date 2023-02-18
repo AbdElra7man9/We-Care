@@ -10,17 +10,27 @@ export { default as DoctorDash } from '../Routes/DoctorDash';
 
 
 export { default as LoadingScreen } from '../Components/Layouts/LoadingScreen';
+export { default as Emoji } from '../Components/Layouts/Emoji';
 
 ////////////////////////Doctor/////////////////////////////
 export { default as SideBar } from '../Components/Dashboard/Doctor/Layouts/SideBar';
 export { default as HeaderDoc } from '../Components/Dashboard/Doctor/Layouts/HeaderDoc';
+//Graphs
 export { default as ColumnChart } from '../Components/Dashboard/Doctor/Layouts/Graphs/ColumnChart';
+export { default as Calender } from '../Components/Dashboard/Doctor/Layouts/Graphs/Calender';
 //OverFlow
 export { default as CardDetails } from '../Components/Dashboard/Doctor/Layouts/OverFlow/CardDetails';
 export { default as RightPartOverFlow } from '../Components/Dashboard/Doctor/Layouts/OverFlow/RightPartOverFlow';
+
+//Messages
+export { default as PatientCart } from '../Components/Dashboard/Doctor/Layouts/Messsges/PatientCart';
+export { default as Conversation } from '../Components/Dashboard/Doctor/Layouts/Messsges/Conversation';
+export { default as Message } from '../Components/Dashboard/Doctor/Layouts/Messsges/Message';
+
 //Screens at Doctor
 export { default as OverFlow } from '../Components/Dashboard/Doctor/Screens/OverFlow';
 export { default as CalenderScreen } from '../Components/Dashboard/Doctor/Screens/CalenderScreen';
+export { default as Messages } from '../Components/Dashboard/Doctor/Screens/Messages';
 
 
 

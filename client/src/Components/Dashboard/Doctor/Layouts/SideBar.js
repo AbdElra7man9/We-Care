@@ -3,7 +3,7 @@ import { BsArrowUpShort, BsChatText, BsGear, BsGrid, BsJustifyLeft, BsPeople } f
 import AnimSlideRight from '../../../../Animation/AnimSlideRight';
 import { AiOutlineAlipay } from 'react-icons/ai'
 import { IoCalendarNumberOutline } from 'react-icons/io5'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import useBreakpoint from './../../../../Hooks/useBreakpoint';
 import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,15 +11,16 @@ import { FeatureAction } from './../../../../Redux/Slices/FeaturesSlice';
 
 const SideBar = () => {
     const Breakpoint = useBreakpoint();
+    const { pathname } = useLocation();
     const dispatch = useDispatch();
     const { DocSide } = useSelector(state => state.Features);
     const MobileView = (Breakpoint === 'xs') || (Breakpoint === 'sm') || (Breakpoint === 'md') || (Breakpoint === 'lg')
     const LinkList = ({ Icon, Title, Href }) => {
         return (
-            <div className='hover:bg-gray-100 font-light text-xl px-7 w-full'>
+            <div className={`hover:bg-gray-100 font-light text-xl px-7 w-full ${(pathname === Href) && '!bg-blue-600 !text-white '}`}>
                 <Link to={Href}>
                     <div className='flex gap-4 py-4 items-center'>
-                        <div className='text-gray-600'>{Icon}</div>
+                        <div className={(pathname===Href) ? 'text-white' : 'text-gray-600'}>{Icon}</div>
                         <p className='text-xl font-light'>{Title}</p>
                     </div>
                 </Link>
@@ -54,11 +55,11 @@ const SideBar = () => {
                 </div>
                 <div>
                     <LinkList Icon={<BsGrid size={20} />} Title='OverFlow' Href='/doctor/dashboard' />
-                    <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Calender' Href='/doctor/messages' />
+                    <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Calender' Href='/doctor/calender' />
                     <LinkList Icon={<BsPeople size={20} />} Title='Patient List' Href='/doctor/patientlist' />
                     <LinkList Icon={<BsChatText size={20} />} Title='Messages' Href='/doctor/messages' />
-                    <LinkList Icon={<AiOutlineAlipay size={20} />} Title='Payment Information' Href='/doctor/messages' />
-                    <LinkList Icon={<BsGear size={20} />} Title='Settings' Href='/doctor/messages' />
+                    <LinkList Icon={<AiOutlineAlipay size={20} />} Title='Payment Information' Href='/doctor/payment' />
+                    <LinkList Icon={<BsGear size={20} />} Title='Settings' Href='/doctor/settings' />
                 </div>
                 <div className='absolute bottom-3 w-full p-5 border-t'>
                     <Link className='flex justify-between'>
