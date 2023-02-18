@@ -6,9 +6,21 @@ export { default as ForgetPassword } from '../Routes/ForgetPassword';
 export { default as Confirm } from '../Routes/Confirm';
 export { default as Home } from '../Routes/Home';
 export { default as Profile } from '../Routes/Profile';
+export { default as DoctorDash } from '../Routes/DoctorDash';
 
 
 export { default as LoadingScreen } from '../Components/Layouts/LoadingScreen';
+
+////////////////////////Doctor/////////////////////////////
+export { default as SideBar } from '../Components/Dashboard/Doctor/Layouts/SideBar';
+export { default as HeaderDoc } from '../Components/Dashboard/Doctor/Layouts/HeaderDoc';
+export { default as ColumnChart } from '../Components/Dashboard/Doctor/Layouts/Graphs/ColumnChart';
+//OverFlow
+export { default as CardDetails } from '../Components/Dashboard/Doctor/Layouts/OverFlow/CardDetails';
+export { default as RightPartOverFlow } from '../Components/Dashboard/Doctor/Layouts/OverFlow/RightPartOverFlow';
+//Screens at Doctor
+export { default as OverFlow } from '../Components/Dashboard/Doctor/Screens/OverFlow';
+export { default as CalenderScreen } from '../Components/Dashboard/Doctor/Screens/CalenderScreen';
 
 
 

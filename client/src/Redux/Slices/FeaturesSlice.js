@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const FeaturesSlice = createSlice({
     name: 'Features',
     initialState: {
-        SideBar: false,
+        DocSide: false,
 
     },
     reducers: {
-        ShowSideBar(state) {
-            state.SideBar = !state.SideBar;
+        setDocSide(state) {
+            state.DocSide = !state.DocSide;
         },
     },
 });

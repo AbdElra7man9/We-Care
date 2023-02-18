@@ -1,6 +1,6 @@
 import {
   Home, SignIn, SignUp, RequireAuth,
-  Layout, Profile, PersistLogin,
+  Layout, Profile, PersistLogin, DoctorDash,
   Confirm, ForgetPassword, SocketConnect
 } from './Components/Exports'
 import { Route, Routes, useLocation } from 'react-router-dom';
@@ -13,11 +13,12 @@ function App() {
   const userInfo = useSelector(selectCurrentUser)
   const location = useLocation();
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Layout />}>
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="doctor/:dash" element={<DoctorDash />} />
           <Route element={<PersistLogin />}>
             <Route element={<SocketConnect />}>
               <Route path="confirm" element={<Confirm />} />
