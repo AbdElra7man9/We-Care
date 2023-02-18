@@ -1,9 +1,39 @@
+import {
+  Home, SignIn, SignUp, RequireAuth,
+  Layout, Profile, PersistLogin,
+  Confirm, ForgetPassword, SocketConnect
+} from './Components/Exports'
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { ROLES } from './Config/Roles';
+import { AnimatePresence } from 'framer-motion';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from './Redux/Slices/UserSlice';
 
 function App() {
+  const userInfo = useSelector(selectCurrentUser)
+  const location = useLocation();
   return (
-    <div className="App">
-      <p className="text-3xl font-medium underline">Hello MAn !</p>
-    </div>
+    <AnimatePresence exitBeforeEnter>
+      <Routes location={location} key={location.pathname}>
+        <Route path='/' element={<Layout />}>
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route element={<PersistLogin />}>
+            <Route element={<SocketConnect />}>
+              <Route path="confirm" element={<Confirm />} />
+              <Route path="forgetpassword" element={<ForgetPassword />} />
+              <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
+                <Route index element={<Home />} />
+                <Route path={userInfo?.username} element={<Profile />} />
+                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                  {/* <Route path="dashboard" element={<Dashboard />} /> */}
+                </Route>
+              </Route>
+            </Route>
+          </Route>
+        </Route>
+      </Routes>
+    </AnimatePresence>
   );
 }
 
