@@ -261,14 +261,17 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 });
 
 exports.emailConfirmation = catchAsync(async function (req, res, next) {
+  //console.log(req.user);
   // 1) check if user enter pin
   if (!req.body.pin) return next(new AppError('you shoud enter PIN'), 401);
-  // 2) check if user enter invalid pin
+  //2) if email is already confirmed
+  if (req.user.confirmed) {
+    return next(new AppError('your email is already confirmed', 401));
+  }
+  // 3) check if user enter invalid pin
   if (!(await bcrypt.compare(req.body.pin, req.user.emailConfirm)))
     return next(new AppError('your PIN is incorrect, please try again', 401));
-  //3) if email is already confirmed
-  if (req.user.confirmed)
-    next(new AppError('your email is already confirmed', 401));
+
   // 4) everythin is ok
   if (await bcrypt.compare(req.body.pin, req.user.emailConfirm)) {
     const user = await User.findById(req.user._id);
