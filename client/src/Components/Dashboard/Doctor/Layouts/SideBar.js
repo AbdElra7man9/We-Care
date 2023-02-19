@@ -64,7 +64,7 @@ const SideBar = () => {
                 <div className='absolute bottom-3 w-full p-5 border-t'>
                     <Link className='flex justify-between'>
                         <div className='w-full flex gap-3'>
-                            <img className='w-12 h-12 rounded-xl'
+                            <img className='w-12 h-12 rounded-full'
                                 src='https://res.cloudinary.com/abdo9/image/upload/v1676052171/profile_bikmhe.jpg' alt='' />
                             <div>
                                 <p className='text-lg font-bold'>Dr.Adam</p>

@@ -17,6 +17,7 @@ export { default as SideBar } from '../Components/Dashboard/Doctor/Layouts/SideB
 export { default as HeaderDoc } from '../Components/Dashboard/Doctor/Layouts/HeaderDoc';
 //Graphs
 export { default as ColumnChart } from '../Components/Dashboard/Doctor/Layouts/Graphs/ColumnChart';
+export { default as SplineChart } from '../Components/Dashboard/Doctor/Layouts/Graphs/SplineChart';
 export { default as Calender } from '../Components/Dashboard/Doctor/Layouts/Graphs/Calender';
 //OverFlow
 export { default as CardDetails } from '../Components/Dashboard/Doctor/Layouts/OverFlow/CardDetails';
@@ -30,7 +31,9 @@ export { default as Message } from '../Components/Dashboard/Doctor/Layouts/Messs
 //Screens at Doctor
 export { default as OverFlow } from '../Components/Dashboard/Doctor/Screens/OverFlow';
 export { default as CalenderScreen } from '../Components/Dashboard/Doctor/Screens/CalenderScreen';
+export { default as PatientList } from '../Components/Dashboard/Doctor/Screens/PatientList';
 export { default as Messages } from '../Components/Dashboard/Doctor/Screens/Messages';
+export { default as Payment } from '../Components/Dashboard/Doctor/Screens/Payment';
 
 
 

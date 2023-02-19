@@ -1,5 +1,5 @@
 import React from 'react'
-import { CalenderScreen, HeaderDoc, OverFlow, SideBar, Messages } from '../Components/Exports'
+import { CalenderScreen, HeaderDoc, OverFlow, SideBar, Messages, Payment, PatientList } from '../Components/Exports'
 import { useParams } from 'react-router-dom';
 
 const DoctorDash = () => {
@@ -14,7 +14,9 @@ const DoctorDash = () => {
                 <div className='pt-28'>
                     {(dash === 'dashboard') && <OverFlow />}
                     {(dash === 'calender') && <CalenderScreen />}
+                    {(dash === 'patientlist') && <PatientList />}
                     {(dash === 'messages') && <Messages />}
+                    {(dash === 'payment') && <Payment />}
                 </div>
             </div>
         </>
