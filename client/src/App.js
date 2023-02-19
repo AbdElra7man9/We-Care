@@ -16,6 +16,7 @@ function App() {
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Layout />}>
+          <Route index element={<Home />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="doctor/:dash" element={<DoctorDash />} />

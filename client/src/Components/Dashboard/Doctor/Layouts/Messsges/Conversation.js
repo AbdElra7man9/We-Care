@@ -67,7 +67,7 @@ const Conversation = () => {
                             </div>
                         ))}
                     </div>
-                    <form onSubmit={NewMSG} className='mb-3 py-5 px-6 flex items-center w-full gap-5 mt-auto absolute bottom-0'>
+                    <form onSubmit={NewMSG} className='mb-3 py-5 xl:px-6 flex items-center w-full gap-5 mt-auto absolute bottom-0'>
                         <>
                             <div className='relative w-full'>
                                 <input className='outline-none border rounded-full py-5 w-full px-12 placeholder:font-semibold'

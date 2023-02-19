@@ -6,10 +6,10 @@ const AnimSlideRight = {
     animate: {
         x: "0",
         opacity: 1,
-        transition: { duration: 0.4 }
+        transition: { duration: 0.5 }
     },
     exit: {
-        x: 250,
+        x: "-100vw",
         opacity: 0,
         transition: { ease: 'easeInOut' }
     }

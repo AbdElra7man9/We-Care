@@ -4,7 +4,7 @@ import { useState } from 'react';
 const PatientCart = () => {
     const [mute, setMute] = useState(false)
     return (
-        <div className='w-full rounded-xl border overflow-y-scroll hideScroll'>
+        <div className='w-full rounded-xl border overflow-y-scroll h-[90vh] hideScroll'>
             <div className='relative'>
                 <img className='h-96 w-full object-cover' src='https://res.cloudinary.com/abdo9/image/upload/v1676215069/Instegram/User/oynzrxgesqkpgjcpbzww.png' alt='' />
                 <div className='absolute bottom-0 m-5 space-y-2 text-white'>

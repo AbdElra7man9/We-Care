@@ -8,6 +8,7 @@ export { default as Home } from '../Routes/Home';
 export { default as Profile } from '../Routes/Profile';
 export { default as DoctorDash } from '../Routes/DoctorDash';
 
+export { default as UpperPart } from './Home/UpperPart';
 
 export { default as LoadingScreen } from '../Components/Layouts/LoadingScreen';
 export { default as Emoji } from '../Components/Layouts/Emoji';

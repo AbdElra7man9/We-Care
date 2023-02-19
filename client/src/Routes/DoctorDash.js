@@ -11,7 +11,7 @@ const DoctorDash = () => {
                 <div className='fixed top-0 inset-x-0 lg:ml-96'>
                     <HeaderDoc />
                 </div>
-                <div className='pt-28'>
+                <div className='pt-24'>
                     {(dash === 'dashboard') && <OverFlow />}
                     {(dash === 'calender') && <CalenderScreen />}
                     {(dash === 'patientlist') && <PatientList />}
