@@ -18,3 +18,5 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
   }
   res.json(newDoctor);
 });
+
+exports.examinPatient = function () {};

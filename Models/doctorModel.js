@@ -22,6 +22,12 @@ const Doctor = User.discriminator(
           ref: 'Patient',
         },
       ],
+      appointments: [
+        {
+          type: mongoose.Schema.ObjectId,
+          ref: 'Appointment',
+        },
+      ],
       averageRating: {
         type: Number,
         default: 4.5,

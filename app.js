@@ -1,3 +1,4 @@
+//third party packages
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
@@ -6,14 +7,15 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 
+// local modules
 const errorController = require('./controllers/errorController');
 const doctorRouter = require('./routes/doctorRouter');
 const patientRouter = require('./routes/patientRouter');
 const userRouter = require('./routes/userRouter');
+const appointmentRouter = require('./routes/appointmentRouter');
 const AppError = require('./utils/AppError');
 
 const app = express();
-// 1) GLOBAL MIDDLEWARES
 // Set security HTTP headers
 app.use(helmet());
 
@@ -58,6 +60,9 @@ app.use('/api/v1/doctors', doctorRouter);
 
 //patient routs
 app.use('/api/v1/patients', patientRouter);
+
+//appointment routs
+app.use('/api/v1/appointments', appointmentRouter);
 
 //general user routs
 app.use('/api/v1/users', userRouter);
