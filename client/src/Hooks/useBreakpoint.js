@@ -51,7 +51,9 @@ const useBreakpoint = () => {
         return () => window.removeEventListener('resize', handleResize);
         // eslint-disable-next-line
     }, [windowSize.width]);
-    return breakpoint;
+
+    const MobileView = (breakpoint === 'xs') || (breakpoint === 'sm') || (breakpoint === 'md') || (breakpoint === 'lg')
+    return { breakpoint, MobileView };
 };
 
 export default useBreakpoint;

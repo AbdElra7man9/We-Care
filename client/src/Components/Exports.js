@@ -4,11 +4,16 @@ export { default as SignIn } from '../Routes/SignIn';
 export { default as SignUp } from '../Routes/SignUp';
 export { default as ForgetPassword } from '../Routes/ForgetPassword';
 export { default as Confirm } from '../Routes/Confirm';
-export { default as Home } from '../Routes/Home';
+export { default as LandingPage } from '../Routes/LandingPage';
 export { default as Profile } from '../Routes/Profile';
 export { default as DoctorDash } from '../Routes/DoctorDash';
 
-export { default as UpperPart } from './Home/UpperPart';
+export { default as UpperPart } from './Home/LandingPage/UpperPart';
+export { default as AboutTreatment } from './Home/LandingPage/AboutTreatment';
+export { default as MedicalService } from './Home/LandingPage/MedicalService';
+export { default as TopDoctors } from './Home/LandingPage/TopDoctors';
+export { default as LastedBlogs } from './Home/LandingPage/LastedBlogs';
+export { default as Footer } from './Home/LandingPage/Footer';
 
 export { default as LoadingScreen } from '../Components/Layouts/LoadingScreen';
 export { default as Emoji } from '../Components/Layouts/Emoji';

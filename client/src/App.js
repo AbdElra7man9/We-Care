@@ -1,5 +1,5 @@
 import {
-  Home, SignIn, SignUp, RequireAuth,
+  LandingPage, SignIn, SignUp, RequireAuth,
   Layout, Profile, PersistLogin, DoctorDash,
   Confirm, ForgetPassword, SocketConnect
 } from './Components/Exports'
@@ -16,7 +16,7 @@ function App() {
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<LandingPage />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="doctor/:dash" element={<DoctorDash />} />
@@ -25,7 +25,7 @@ function App() {
               <Route path="confirm" element={<Confirm />} />
               <Route path="forgetpassword" element={<ForgetPassword />} />
               <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
-                <Route index element={<Home />} />
+                <Route index element={<LandingPage />} />
                 <Route path={userInfo?.username} element={<Profile />} />
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                   {/* <Route path="dashboard" element={<Dashboard />} /> */}

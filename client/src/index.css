@@ -13,32 +13,6 @@ html {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
-
-.custom-shape-divider-bottom-1676817977 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.custom-shape-divider-bottom-1676817977 svg {
-    position: relative;
-    display: block;
-    width: calc(157% + 1.3px);
-    height: 92px;
-    transform: rotateY(180deg);
-}
-
-.custom-shape-divider-bottom-1676817977 .shape-fill {
-    fill: #FFFFFF;
-}
-
-/** For mobile devices **/
-@media (max-width: 767px) {
-    .custom-shape-divider-bottom-1676817977 svg {
-        width: calc(157% + 1.3px);
-        height: 0px;
-    }
-}
+.home-card-image{
+    background-image:url('https://shreethemes.in/doctris/layouts/assets/images/bg/01.jpg' );
+  }
