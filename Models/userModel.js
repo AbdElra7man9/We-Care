@@ -10,7 +10,12 @@ const userSchema = mongoose.Schema({
     trim: true,
   },
   birthDate: Date,
+  gender: {
+    type: String,
+    enum: ['male', 'female'],
+  },
   phoneNumber: String,
+  address: String,
   username: {
     type: String,
     trim: true,

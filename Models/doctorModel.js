@@ -16,6 +16,11 @@ const Doctor = User.discriminator(
         type: Number,
         default: 300,
       },
+      timePerPatient: {
+        type: Number,
+        default: 15,
+      },
+      timeTable: [],
       patients: [
         {
           type: mongoose.Schema.ObjectId,

@@ -8,7 +8,7 @@ const handleCastErrorDB = (err) => {
 const handleDuplicateFieldsDB = (err) => {
   const key = Object.keys(err.keyValue)[0];
   const value = err.keyValue[key];
-  const message = `this ${key} (${value}) is already taken`;
+  const message = `this ${key} is already taken`;
   return new AppError(message, 400);
 };
 
