@@ -13,7 +13,9 @@ const AppError = require('../utils/AppError');
 const filterObject = require('../utils/filterObject');
 
 function getToken(id) {
-  return jwt.sign({ id }, process.env.JWT_SECRET);
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
 }
 
 function createSendToken(user, statusCode, res) {
@@ -92,7 +94,10 @@ exports.patientSignUP = catchAsync(async function (req, res, next) {
     'username',
     'email',
     'password',
-    'passwordConfirm'
+    'passwordConfirm',
+    'diagnosis',
+    'bloodType',
+    'address'
   );
   const newPatient = await Patient.create(filteredInfo);
   await sendCreatePIN(newPatient._id);
@@ -107,7 +112,8 @@ exports.doctorSignUP = catchAsync(async function (req, res, next) {
     'email',
     'password',
     'passwordConfirm',
-    'specialization'
+    'specialization',
+    'address'
   );
   const newDoctor = await Doctor.create(filteredInfo);
   await sendCreatePIN(newDoctor._id);
