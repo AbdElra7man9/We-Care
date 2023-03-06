@@ -1,7 +1,7 @@
 import {
   LandingPage, SignIn, SignUp, RequireAuth,
   Layout, Profile, PersistLogin, DoctorDash,
-  Confirm, ForgetPassword, SocketConnect
+  Confirm, ForgetPassword, SocketConnect, VerifyEmail, ResetPassword
 } from './Components/Exports'
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { ROLES } from './Config/Roles';
@@ -19,11 +19,14 @@ function App() {
           <Route index element={<LandingPage />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="confirm" element={<Confirm />} />
+          <Route path="forgetpassword" element={<ForgetPassword />} />
+          <Route path="verify" element={<VerifyEmail />} />
+          <Route path="reset" element={<ResetPassword />} />
           <Route path="doctor/:dash" element={<DoctorDash />} />
           <Route element={<PersistLogin />}>
             <Route element={<SocketConnect />}>
               <Route path="confirm" element={<Confirm />} />
-              <Route path="forgetpassword" element={<ForgetPassword />} />
               <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
                 <Route index element={<LandingPage />} />
                 <Route path={userInfo?.username} element={<Profile />} />
