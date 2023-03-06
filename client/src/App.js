@@ -16,15 +16,15 @@ function App() {
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Layout />}>
-          <Route index element={<LandingPage />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="confirm" element={<Confirm />} />
           <Route path="forgetpassword" element={<ForgetPassword />} />
           <Route path="verify" element={<VerifyEmail />} />
           <Route path="reset" element={<ResetPassword />} />
-          <Route path="doctor/:dash" element={<DoctorDash />} />
           <Route element={<PersistLogin />}>
+          <Route index element={<LandingPage />} />
+            <Route path="doctor/:dash" element={<DoctorDash />} />
             <Route element={<SocketConnect />}>
               <Route path="confirm" element={<Confirm />} />
               <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>

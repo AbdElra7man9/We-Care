@@ -14,7 +14,7 @@ export const AuthApi = apiSlice.injectEndpoints({
         }),
         signin: builder.mutation({
             query: (data) => ({
-                url: '/api/auth/signin',
+                url: '/api/v1/users/login',
                 method: 'POST',
                 body: data,
             }),
@@ -25,7 +25,7 @@ export const AuthApi = apiSlice.injectEndpoints({
                     localStorage.setItem('id', result?.data?.user?._id)
                     dispatch(
                         setCredentials({
-                            token: result.data.accessToken,
+                            token: result.data.token,
                             user: result.data.data.user,
                         })
                     );
@@ -86,14 +86,14 @@ export const AuthApi = apiSlice.injectEndpoints({
         }),
         refresh: builder.mutation({
             query: () => ({
-                url: '/api/auth/refresh',
+                url: '/api/v1/users/refresh',
                 method: 'GET',
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled
-                    const { accessToken, user } = data
-                    dispatch(setCredentials({ accessToken, user }))
+                    const { token, user } = data
+                    dispatch(setCredentials({ token, user }))
                 } catch (err) {
                     console.log(err)
                 }

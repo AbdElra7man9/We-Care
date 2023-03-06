@@ -32,9 +32,9 @@ const Confirm = () => {
         event.preventDefault();
         const data = { email }
         await RequestOTP2(data).unwrap()
-            .then(({ accessToken, user }) => {
+            .then(({ token, user }) => {
                 setSuccess(`A new confirmation code send to ${email}`)
-                dispatch(setCredentials({ accessToken, user }));
+                dispatch(setCredentials({ token, user }));
 
             }).catch(err => {
                 console.log(err?.data?.message)
