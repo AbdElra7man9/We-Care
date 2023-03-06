@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-
 // ////////////////////////////    IMPORT DATA INTO DB ///////////////////////////
 // const Doctor = require('./Models/doctorModel');
 // const fs = require('fs');
@@ -20,6 +19,7 @@ mongoose.set('strictQuery', false);
 mongoose
   .connect(process.env.CONNECTION_STRING)
   .then(() => console.log('database connected'));
+
 
 const port = 5000;
 app.listen(port, () => {
