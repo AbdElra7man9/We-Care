@@ -7,62 +7,62 @@ import { Link } from 'react-router-dom';
 const TopDoctors = () => {
     const TopDoctors = [
         {
-            _id:'1',
+            _id: '1',
             ImgSrc: 'https://shreethemes.in/doctris/layouts/assets/images/doctors/01.jpg',
             Name: 'Calvin Carlo',
             Spec: 'Eye Care'
         },
         {
-             _id:'2',
+            _id: '2',
             ImgSrc: 'https://shreethemes.in/doctris/layouts/assets/images/doctors/02.jpg',
             Name: 'Cristino Murphy',
             Spec: 'M.B.B.S, Gynecologist'
         }, {
-             _id:'3',
+            _id: '3',
             ImgSrc: 'https://shreethemes.in/doctris/layouts/assets/images/doctors/03.jpg',
             Name: 'Alia Reddy',
             Spec: 'M.B.B.S, Psychotherapist'
         }, {
-             _id:'4',
+            _id: '4',
             ImgSrc: 'https://shreethemes.in/doctris/layouts/assets/images/doctors/04.jpg',
             Name: 'Toni Kovar',
             Spec: 'M.B.B.S, Orthopedic'
         }, {
-             _id:'8',
+            _id: '8',
             ImgSrc: 'https://shreethemes.in/doctris/layouts/assets/images/doctors/05.jpg',
             Name: 'Jessica McFarlane',
             Spec: 'M.B.B.S, Dentist'
         }, {
-             _id:'5',
+            _id: '5',
             ImgSrc: 'https://shreethemes.in/doctris/layouts/assets/images/doctors/06.jpg',
             Name: 'Elsie Sherman',
             Spec: 'M.B.B.S, Gastrologist'
         }, {
-             _id:'6',
+            _id: '6',
             ImgSrc: 'https://shreethemes.in/doctris/layouts/assets/images/doctors/07.jpg',
             Name: 'Bertha Magers',
             Spec: 'M.B.B.S, Urologist'
         }, {
-             _id:'7',
+            _id: '7',
             ImgSrc: 'https://shreethemes.in/doctris/layouts/assets/images/doctors/08.jpg',
             Name: 'Louis Batey',
             Spec: 'M.B.B.S, Neurologist'
         },
     ]
-    const SingDoc = ({ ImgSrc, Name, Spec, Location, time, pay }) => {
+    const SingDoc = ({ doc }) => {
         const Icons = [<SlSocialFacebook size={23} />, <SlSocialLinkedin size={23} />, <SlSocialGithub size={23} />, <SlSocialTwitter size={23} />]
         return (
             <div className='border overflow-hidden rounded-lg w-full'>
                 <div className='w-full h-[20rem] overflow-hidden relative'>
-                    <img src={ImgSrc} className='w-full object-cover h-full hover:scale-[1.2] duration-200' alt='' />
+                    <img src={doc?.ImgSrc} className='w-full object-cover h-full hover:scale-[1.2] duration-200' alt='' />
                     <button className='w-10 h-10 absolute top-0 m-3 right-0 rounded-full bg-red-100 shadow-red-600 drop-shadow-xl text-red-500 hover:bg-red-500 hover:text-white duration-150 flex justify-center items-center shadow-2xl'>
                         <BsHeart size={15} />
                     </button>
                 </div>
                 <div className='space-y-3 p-5 overflow-hidden'>
                     <div>
-                        <p className='text-lg font-medium text-gray-800'>{Name}</p>
-                        <p className='text-sm text-gray-500'>{Spec}</p>
+                        <p className='text-lg font-medium text-gray-800'>{doc?.Name}</p>
+                        <p className='text-sm text-gray-500'>{doc?.Spec}</p>
                     </div>
                     <div className='flex justify-between'>
                         <div className='flex items-center gap-1 text-orange-500'>
@@ -90,7 +90,7 @@ const TopDoctors = () => {
                         </div>
                     </div>
                     <div className='flex items-center gap-3'>
-                        {Icons?.map((icon,index) => (
+                        {Icons?.map((icon, index) => (
                             <Link to='/' key={index} className='w-10 h-10 rounded-full bg-blue-100 shadow-blue-600 drop-shadow-xl text-blue-500 hover:bg-blue-500 hover:text-white duration-150 flex justify-center items-center shadow-2xl'>
                                 {icon}
                             </Link>
@@ -110,7 +110,7 @@ const TopDoctors = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-5'>
                 {TopDoctors?.map((doc) => (
                     <div key={doc?._id}>
-                        <SingDoc Name={doc?.Name} Spec={doc?.Spec} ImgSrc={doc?.ImgSrc} />
+                        <SingDoc doc={doc} />
                     </div>
                 ))}
             </div>

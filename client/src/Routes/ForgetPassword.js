@@ -23,7 +23,8 @@ const ForgetPassword = () => {
     event.preventDefault();
     await ForgetPassword({ email }).unwrap()
       .then((payload) => {
-        setSuccess(`We Send a reset message to your email ${email}`)
+        setSuccess(`We Send a reset message to your email ${email}`);
+        setEMail('')
       })
       .catch((err) => {
         console.log(err?.data?.message);

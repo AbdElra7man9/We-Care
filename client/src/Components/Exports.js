@@ -2,9 +2,10 @@
 ////////////////////////Routes/////////////////////////////
 export { default as SignIn } from '../Routes/SignIn';
 export { default as SignUp } from '../Routes/SignUp';
+export { default as DoctorSignUp } from '../Routes/DoctorSignUp';
 export { default as ForgetPassword } from '../Routes/ForgetPassword';
 export { default as ResetPassword } from '../Routes/ResetPassword';
-export { default as VerifyEmail } from '../Routes/VerifyEmail';
+export { default as ConfirmEmail } from '../Routes/ConfirmEmail';
 export { default as LandingPage } from '../Routes/LandingPage';
 export { default as Profile } from '../Routes/Profile';
 export { default as DoctorDash } from '../Routes/DoctorDash';

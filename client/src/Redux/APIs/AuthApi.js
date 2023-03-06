@@ -63,6 +63,30 @@ export const AuthApi = apiSlice.injectEndpoints({
                 }
             },
         }),
+        signupDoctor: builder.mutation({
+            query: (data) => ({
+                url: 'api/v1/doctors/signup',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['Auth'],
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    console.log(data)
+                    localStorage.setItem('persist', true)
+                    localStorage.setItem('id', data.data.user._id)
+                    dispatch(
+                        setCredentials({
+                            token: data.token,
+                            user: data.data.user,
+                        })
+                    );
+                } catch (err) {
+                    // do nothing
+                }
+            },
+        }),
         logOut: builder.mutation({
             query: () => ({
                 url: '/api/auth/logout',
@@ -163,9 +187,9 @@ export const {
     useRefreshMutation,
     useSigninMutation,
     useSignupMutation,
+    useSignupDoctorMutation,
     useVerifyEmailMutation,
     useRequestOTP2Mutation,
-    useVerifyEmailtoResestMutation,
     useForgetPasswordMutation,
     useResetPasswordMutation,
     useChangePasswordMutation,

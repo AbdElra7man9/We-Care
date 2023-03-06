@@ -58,14 +58,11 @@ const UpperPart = () => {
         <>
             {isHeader && <div onClick={() => setIsHeader(false)} className='fixed inset-0 z-10'></div>}
             <header className={`fixed z-20 container max-w-full bg-white lg:bg-transparent top-0 inset-x-0 ${isScrolled && '!bg-white'}`}>
-                <div className='container border-b lg:border-none max-w-[28rem] sm:max-w-[35rem] md:max-w-[50rem] lg:max-w-[60rem] xl:max-w-[80rem] flex justify-between items-center px-0 p-5 whitespace-nowrap'>
+                <div className='container border-b lg:border-none max-w-[28rem] sm:max-w-[35rem] md:max-w-[50rem] lg:max-w-[60rem] xl:max-w-[80rem] flex justify-between items-center p-3 whitespace-nowrap'>
                     <div className='flex items-center gap-2 lg:text-white'>
                         <img className='w-10 h-10 rounded-xl'
                             src='https://shreethemes.in/doctris/layouts/assets/images/logo-icon.png' alt='' />
-                        <div>
-                            <p className='text-2xl font-bold'>Zendenta</p>
-                            <p className='text-sm font-light'>Doctor page mangement</p>
-                        </div>
+                        <p className='text-2xl font-bold'>Doctris</p>
                     </div>
                     {!MobileView &&
                         <div className='list-none flex gap-5 text-lg text-gray-400 font-semibold uppercase'>
@@ -76,7 +73,7 @@ const UpperPart = () => {
                             <Link>Pages</Link>
                         </div>
                     }
-                    <div className='flex gap-4 items-center'>
+                    <div className='flex gap-2 md:gap-4 items-center'>
                         <button className='bg-blue-600 text-white rounded-full p-3'><BsGear size={15} /></button>
                         <button className='bg-blue-600 text-white rounded-full p-3'><BsSearch size={15} /></button>
                         <img className='h-10 w-10 rounded-full' src='https://shreethemes.in/doctris/layouts/assets/images/doctors/01.jpg' alt='' />

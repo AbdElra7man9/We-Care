@@ -19,15 +19,15 @@ const MedicalService = () => {
                 <p className='text-gray-400 leading-loose'>Great doctor if you need your family member to get effective immediate assistance,<br /> emergency treatment or a simple consultation.
                 </p>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-8 py-12'>
-                <Spici Icon={<AiFillEye size={25} />} Title='Eye Care' Des='There is now an abundance of readable dummy texts required purely to fill a space.'  />
-                <Spici Icon={<AiFillEye size={25} />} Title='Psychotherapy' Des='There is now an abundance of readable dummy texts required purely to fill a space.'  />
-                <Spici Icon={<AiFillEye size={25} />} Title='Primary Care' Des='There is now an abundance of readable dummy texts required purely to fill a space.'  />
-                <Spici Icon={<AiFillEye size={25} />} Title='Dental Care' Des='There is now an abundance of readable dummy texts required purely to fill a space.'  />
-                <Spici Icon={<AiFillEye size={25} />} Title='Orthopedic' Des='There is now an abundance of readable dummy texts required purely to fill a space.'  />
-                <Spici Icon={<AiFillEye size={25} />} Title='Cardiology' Des='There is now an abundance of readable dummy texts required purely to fill a space.'  />
-                <Spici Icon={<AiFillEye size={25} />} Title='Gynecology' Des='There is now an abundance of readable dummy texts required purely to fill a space.'  />
-                <Spici Icon={<AiFillEye size={25} />} Title='Neurology' Des='There is now an abundance of readable dummy texts required purely to fill a space.'  />
+            <div className='grid grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-8 py-12'>
+                <Spici Icon={<AiFillEye size={25} />} Title='Eye Care' Des='There is now an abundance of readable dummy texts required purely to fill a space.' />
+                <Spici Icon={<AiFillEye size={25} />} Title='Psychotherapy' Des='There is now an abundance of readable dummy texts required purely to fill a space.' />
+                <Spici Icon={<AiFillEye size={25} />} Title='Primary Care' Des='There is now an abundance of readable dummy texts required purely to fill a space.' />
+                <Spici Icon={<AiFillEye size={25} />} Title='Dental Care' Des='There is now an abundance of readable dummy texts required purely to fill a space.' />
+                <Spici Icon={<AiFillEye size={25} />} Title='Orthopedic' Des='There is now an abundance of readable dummy texts required purely to fill a space.' />
+                <Spici Icon={<AiFillEye size={25} />} Title='Cardiology' Des='There is now an abundance of readable dummy texts required purely to fill a space.' />
+                <Spici Icon={<AiFillEye size={25} />} Title='Gynecology' Des='There is now an abundance of readable dummy texts required purely to fill a space.' />
+                <Spici Icon={<AiFillEye size={25} />} Title='Neurology' Des='There is now an abundance of readable dummy texts required purely to fill a space.' />
             </div>
         </div>
     )

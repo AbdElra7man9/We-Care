@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useTitle } from '../Components/Exports';
-import { useSignupMutation } from '../Redux/APIs/AuthApi';
+import { useSignupDoctorMutation } from '../Redux/APIs/AuthApi';
 import { ImSpinner7 } from 'react-icons/im'
-const SignUp = () => {
+const DoctorSignUp = () => {
     useTitle('Sign Up');
     const navigate = useNavigate();
     const userRef = useRef();
@@ -14,8 +14,9 @@ const SignUp = () => {
     })
     const [inputs, setInputs] = useState({
         email: '',
-        password: '',
         name: '',
+        specialization: '',
+        password: '',
         passwordConfirm: ''
     })
     const handleChange = ({ currentTarget: input }) => {
@@ -24,13 +25,13 @@ const SignUp = () => {
     useEffect(() => {
         userRef.current.focus()
     }, []);
-    const [signup, { isError, error, isLoading }] = useSignupMutation();
+    const [signupDoctor, { isError, error, isLoading }] = useSignupDoctorMutation();
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { email, password, name, passwordConfirm } = inputs;
-        const data = { email, password, name, passwordConfirm }
-        await signup(data).unwrap()
-            .then((payload) => {
+        const { email, password, name, passwordConfirm, specialization } = inputs;
+        const data = { email, password, name, passwordConfirm, specialization }
+        await signupDoctor(data).unwrap()
+            .then(() => {
                 navigate(`/verify?email=${email}`)
             })
             .catch((err) => {
@@ -50,11 +51,11 @@ const SignUp = () => {
                                 <p className='text-2xl font-bold'>Doctris</p>
                             </div>
                         </Link>
-                        <p className='text-xl font-semibold text-gray-400 mb-5'>Sign up Book an appointment whith you doctor and chat with him.</p>
+                        <p className='text-xl font-semibold text-gray-400 mb-5'>Sign up as a doctor as you can manage your appointments</p>
                         <form onSubmit={handleSubmit} className='flex flex-col'>
                             <input onChange={handleChange} value={inputs.email} ref={userRef} name='email' type='email' className='inputfield' placeholder='Mobile Number Or Email' />
                             <input onChange={handleChange} value={inputs.name} name='name' type='text' className='inputfield' placeholder='First Name' />
-                            {/* <input onChange={handleChange} value={inputs.lastname} name='lastname' type='text' className='inputfield' placeholder='Last name' /> */}
+                            <input onChange={handleChange} value={inputs.specialization} name='specialization' type='text' className='inputfield' placeholder='Specialization' />
                             <input onChange={handleChange} value={inputs.password} name='password' type='password' className='inputfield' placeholder='Password' />
                             <input onChange={handleChange} value={inputs.passwordConfirm} name='passwordConfirm' type='password' className='inputfield' placeholder='Password' />
                             <p className='text-sm font-normal text-gray-500'>People who use our service may have uploaded your contact information to Instagram. <Link to='/more' className='font-semibold text-gray-500'>Learn More</Link></p>
@@ -62,7 +63,6 @@ const SignUp = () => {
                             <button type='submit' className='btn-primary mt-4 !mb-5' disabled={isLoading}>
                                 {isLoading ? <span className='flex items-center justify-center text-2xl py-1 animate-spin'><ImSpinner7 /> </span> : 'Sign Up'}
                             </button>
-                            <Link to='/signupDoctor' className='text-blue-800 focus:text-blue-300 md:mb-4 text-lg font-serif hover:underline'>sign up as a doctor ?</Link>
                             {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{error?.data?.message}</span>}
                         </form>
                     </div>
@@ -75,4 +75,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default DoctorSignUp
