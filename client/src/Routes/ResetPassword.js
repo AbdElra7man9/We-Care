@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTitle } from '../Components/Exports';
 import { ImSpinner7 } from 'react-icons/im'
 import { useResetPasswordMutation } from '../Redux/APIs/AuthApi';
@@ -12,12 +12,9 @@ const ResetPassword = () => {
             navigate("/");
         }
     })
-    const [searchQuery] = useSearchParams();
-    const email = searchQuery.get('email')
-    const [error, setError] = useState('');
     const [inputs, setInputs] = useState({
         password: '',
-        confirmpassword: ''
+        passwordConfirm: ''
     });
     const handleChange = ({ currentTarget: input }) => {
         setInputs({ ...inputs, [input.name]: input.value });
@@ -27,27 +24,22 @@ const ResetPassword = () => {
             navigate("/");
         }
     })
-
+    const { token } = useParams()
     useEffect(() => {
         userRef.current.focus()
     }, []);
     const [ResetPassword, { isError, error: errorres, isLoading }] = useResetPasswordMutation();
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { confirmpassword, password } = inputs;
-        const data = { confirmpassword, password, email }
-        if (!password || !confirmpassword) {
-            return setError('Fill all fields');
-        }
-        if (password !== confirmpassword) {
-            return setError('Passwords do not match');
-        }
-        if (password.length <= 6) {
-            return setError('Passowrd must be more than 6 characters');
-        }
-        await ResetPassword(data).unwrap()
+        const { password, passwordConfirm } = inputs
+        const data = { password, passwordConfirm }
+        await ResetPassword({ token, data }).unwrap()
             .then((payload) => {
                 navigate(`/`)
+                setInputs({
+                    password: '',
+                    passwordConfirm: ''
+                })
             })
             .catch((err) => {
                 console.log(err);
@@ -72,7 +64,7 @@ const ResetPassword = () => {
                         </div>
                         <form className='flex flex-col' onSubmit={handleSubmit}>
                             <input type='password' ref={userRef} onChange={handleChange} name='password' className='inputfield' placeholder='Password' />
-                            <input type='password' onChange={handleChange} name='confirmpassword' className='inputfield' placeholder='Confirm Password' />
+                            <input type='password' onChange={handleChange} name='passwordConfirm' className='inputfield' placeholder='Confirm Password' />
                             <button type='submit' className='btn-primary mt-4 !mb-8' disabled={isLoading}>
                                 {isLoading ? <span className='flex items-center justify-center text-2xl py-1 animate-spin'><ImSpinner7 /> </span> : 'Confirm'}</button>
                             <div className='flex justify-center mt-4'>
@@ -83,7 +75,6 @@ const ResetPassword = () => {
 
                             <Link to='/signup' className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm font-medium mt-3'>Create New Account ?</Link>
                             {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{errorres?.data?.message}</span>}
-                            {error && <span className="text-red-500 pb-3 font-poppins font-medium">{error}</span>}
                         </form>
                     </div>
                 </div>

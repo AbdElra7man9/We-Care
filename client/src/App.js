@@ -1,7 +1,7 @@
 import {
   LandingPage, SignIn, SignUp, RequireAuth,
   Layout, Profile, PersistLogin, DoctorDash,
-  Confirm, ForgetPassword, SocketConnect, VerifyEmail, ResetPassword
+  ForgetPassword, SocketConnect, VerifyEmail, ResetPassword
 } from './Components/Exports'
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { ROLES } from './Config/Roles';
@@ -18,21 +18,17 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="confirm" element={<Confirm />} />
           <Route path="forgetpassword" element={<ForgetPassword />} />
           <Route path="verify" element={<VerifyEmail />} />
-          <Route path="reset" element={<ResetPassword />} />
+          <Route path="reset/:token" element={<ResetPassword />} />
           <Route element={<PersistLogin />}>
-          <Route index element={<LandingPage />} />
+            <Route index element={<LandingPage />} />
             <Route path="doctor/:dash" element={<DoctorDash />} />
-            <Route element={<SocketConnect />}>
-              <Route path="confirm" element={<Confirm />} />
-              <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
-                <Route index element={<LandingPage />} />
-                <Route path={userInfo?.username} element={<Profile />} />
-                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                  {/* <Route path="dashboard" element={<Dashboard />} /> */}
-                </Route>
+            <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
+              <Route index element={<LandingPage />} />
+              <Route path={userInfo?.username} element={<Profile />} />
+              <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                {/* <Route path="dashboard" element={<Dashboard />} /> */}
               </Route>
             </Route>
           </Route>

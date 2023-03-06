@@ -5,7 +5,6 @@ export { default as SignUp } from '../Routes/SignUp';
 export { default as ForgetPassword } from '../Routes/ForgetPassword';
 export { default as ResetPassword } from '../Routes/ResetPassword';
 export { default as VerifyEmail } from '../Routes/VerifyEmail';
-export { default as Confirm } from '../Routes/Confirm';
 export { default as LandingPage } from '../Routes/LandingPage';
 export { default as Profile } from '../Routes/Profile';
 export { default as DoctorDash } from '../Routes/DoctorDash';

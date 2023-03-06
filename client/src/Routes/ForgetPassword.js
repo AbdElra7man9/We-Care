@@ -7,6 +7,7 @@ const ForgetPassword = () => {
   useTitle('Forget Password');
   const navigate = useNavigate();
   const userRef = useRef();
+  const [success, setSuccess] = useState('');
   useEffect(() => {
     if (localStorage.getItem("persist") === true) {
       navigate("/");
@@ -20,9 +21,9 @@ const ForgetPassword = () => {
   const [ForgetPassword, { isError, error, isLoading }] = useForgetPasswordMutation();
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await ForgetPassword(email).unwrap()
+    await ForgetPassword({ email }).unwrap()
       .then((payload) => {
-        navigate(`/verify?email=${email}&code=`)
+        setSuccess(`We Send a reset message to your email ${email}`)
       })
       .catch((err) => {
         console.log(err?.data?.message);
@@ -57,6 +58,7 @@ const ForgetPassword = () => {
 
               <Link to='/signup' className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm font-medium mt-3'>Create New Account ?</Link>
               {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{error?.data?.message}</span>}
+              {success && <span className="text-green-500 pb-3 font-poppins font-medium">{success}</span>}
             </form>
           </div>
           <div className='md:border rounded-lg max-w-[90%] border-gray-300 justify-center flex mt-5 md:bg-white'>

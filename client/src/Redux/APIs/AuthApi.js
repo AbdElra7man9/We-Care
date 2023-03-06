@@ -116,13 +116,6 @@ export const AuthApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Auth'],
         }),
-        VerifyEmailtoResest: builder.mutation({
-            query: ({ email, code }) => ({
-                url: `/api/auth/verifyOtp?email=${email}&code=${code}`,
-                method: 'POST',
-            }),
-            invalidatesTags: ['Auth'],
-        }),
         RequestOTP2: builder.mutation({
             query: (data) => ({
                 url: '/api/auth/request2otpactivate',
@@ -133,18 +126,33 @@ export const AuthApi = apiSlice.injectEndpoints({
         }),
         ForgetPassword: builder.mutation({
             query: (email) => ({
-                url: `/api/auth/forgetpassword?email=${email}&code=`,
+                url: `api/v1/users/forgotPassword`,
                 method: 'POST',
-                // body: data
+                body: email
             }),
             invalidatesTags: ['Auth'],
         }),
         ResetPassword: builder.mutation({
-            query: (data) => ({
-                url: '/api/auth/resetpassword',
-                method: 'POst',
+            query: ({ token, data }) => ({
+                url: `/api/v1/users/resetPassword/${token}`,
+                method: 'PATCH',
                 body: data
             }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    localStorage.setItem('persist', true)
+                    localStorage.setItem('id', data.data.user._id)
+                    dispatch(
+                        setCredentials({
+                            token: data.token,
+                            user: data.data.user,
+                        })
+                    );
+                } catch (err) {
+                    // do nothing
+                }
+            },
             invalidatesTags: ['Auth'],
         }),
     }),
