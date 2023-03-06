@@ -12,47 +12,47 @@ const Conversation = () => {
     const { username, id } = useParams();
     const { data: userById } = useGetUserByIdQuery(username) || {};
     const { data: FollowerMessages } = useGetMessagesQuery(id) || {};
-    const [recievedmsg, setRecieved] = useState({});
-    const [allMSGs, setAllMSGs] = useState([]);
+    const [recievedmessage, setRecieved] = useState({});
+    const [allmessages, setAllmessages] = useState([]);
     const [MewMessage] = useNewMessageMutation() || {};
-    const [msg, setMSG] = useState('');
+    const [message, setmessage] = useState('');
     const [isPikerVisiable, setIsPikerVisable] = useState(false);
     const ScrollRef = useRef();
     const { socket } = useSocket();
     useEffect(() => {
         ScrollRef.current?.scrollIntoView({ behavior: 'smooth' })
         ScrollRef.current?.focus();
-    }, [allMSGs]);
+    }, [allmessages]);
     useEffect(() => {
-        setAllMSGs(FollowerMessages);
-        socket?.on('MessagetoClient', ({ sender, receiver, createdAt, msg }) => {
-            console.log({ sender, receiver, createdAt, msg });
+        setAllmessages(FollowerMessages);
+        socket?.on('MessagetoClient', ({ sender, receiver, createdAt, message }) => {
+            console.log({ sender, receiver, createdAt, message });
             setRecieved({
-                sender, receiver, createdAt, msg
+                sender, receiver, createdAt, message
             });
         })
         // eslint-disable-next-line 
     }, [socket, FollowerMessages]);
 
     useEffect(() => {
-        recievedmsg &&
-            setAllMSGs([...allMSGs, recievedmsg]);
+        recievedmessage &&
+            setAllmessages([...allmessages, recievedmessage]);
         // eslint-disable-next-line 
-    }, [recievedmsg, setAllMSGs]);
+    }, [recievedmessage, setAllmessages]);
 
-    const NewMSG = (e) => {
+    const Newmessage = (e) => {
         e.preventDefault();
-        const data = { msg }
+        const data = { message }
         MewMessage({ data, id }).unwrap()
             .then(payload => {
-                setAllMSGs([...allMSGs, payload]);
+                setAllmessages([...allmessages, payload]);
                 socket.emit("Message", {
                     sender: payload.sender,
-                    msg: payload.msg,
+                    message: payload.message,
                     createdAt: payload.createdAt,
                     receiver: userById?._id
                 });
-                setMSG('')
+                setmessage('')
             })
             .catch(err => console.log(err))
     }
@@ -61,19 +61,19 @@ const Conversation = () => {
             <div className='pt-3 overflow-y-scroll hideScroll w-full h-full'>
                 <div>
                     <div className='mb-24'>
-                        {allMSGs?.map((message, index) => (
+                        {allmessages?.map((message, index) => (
                             <div ref={ScrollRef} key={index}>
                                 <Message message={message} Patient={message?.sender === userById?._id} />
                             </div>
                         ))}
                     </div>
-                    <form onSubmit={NewMSG} className='mb-3 py-5 xl:px-6 flex items-center w-full gap-5 mt-auto absolute bottom-0'>
+                    <form onSubmit={Newmessage} className='mb-3 py-5 xl:px-6 flex items-center w-full gap-5 mt-auto absolute bottom-0'>
                         <>
                             <div className='relative w-full'>
                                 <input className='outline-none border rounded-full py-5 w-full px-12 placeholder:font-semibold'
-                                    onChange={(e) => setMSG(e.target.value)}
+                                    onChange={(e) => setmessage(e.target.value)}
                                     onFocus={() => setIsPikerVisable(false)}
-                                    value={msg}
+                                    value={message}
                                     autoComplete='off'
                                     placeholder='Message ...'
                                 />
@@ -92,13 +92,13 @@ const Conversation = () => {
                                         exit='exit'
                                         className='absolute z-10 bottom-[4.5rem]'>
                                         <Emoji
-                                            setContent={setMSG}
-                                            content={msg} />
+                                            setContent={setmessage}
+                                            content={message} />
                                     </motion.div>
                                 }
                                 <button className='px-4 text-gray-500 absolute inset-y-0 flex items-center right-0 text-2xl'><RiAttachment2 /></button>
                             </div>
-                            {msg ?
+                            {message ?
                                 <button className='text-white text-2xl bg-blue-500 rounded-full flex items-center cursor-pointer justify-center p-4'>
                                     <IoMdPaperPlane />
                                 </button>

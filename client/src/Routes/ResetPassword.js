@@ -82,7 +82,7 @@ const ResetPassword = () => {
                             </div>
 
                             <Link to='/signup' className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm font-medium mt-3'>Create New Account ?</Link>
-                            {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{errorres?.data?.msg}</span>}
+                            {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{errorres?.data?.message}</span>}
                             {error && <span className="text-red-500 pb-3 font-poppins font-medium">{error}</span>}
                         </form>
                     </div>

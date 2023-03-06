@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';  
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useRequestOTP2Mutation, useVerifyEmailMutation } from '../Redux/APIs/AuthApi';
 import { ImSpinner7 } from 'react-icons/im';
 import { setCredentials } from '../Redux/Slices/UserSlice';
 import { useDispatch } from 'react-redux';
 const Confirm = () => {
-    const [code, setCode] = useState('');
+    const [pin, setPin] = useState('');
     const [success, setSuccess] = useState('');
     const userRef = useRef();
     useEffect(() => {
@@ -21,11 +21,11 @@ const Confirm = () => {
 
     const SubmitActivateEmail = async (event) => {
         event.preventDefault();
-        await VerifyEmail({ code, email }).unwrap()
+        const data = { pin }
+        await VerifyEmail(data).unwrap()
             .then(() => {
-
-                navigate(`/birthday?email=${email}`)
-                setCode('');
+                navigate(`/`)
+                setPin('');
             })
     }
     const RequestOTP2Activate = async (event) => {
@@ -37,7 +37,7 @@ const Confirm = () => {
                 dispatch(setCredentials({ accessToken, user }));
 
             }).catch(err => {
-                console.log(err?.data?.msg)
+                console.log(err?.data?.message)
             })
     }
     return (
@@ -66,8 +66,8 @@ const Confirm = () => {
                                 <input
                                     type='number'
                                     ref={userRef}
-                                    onChange={(e) => setCode(e.target.value)}
-                                    value={code}
+                                    onChange={(e) => setPin(e.target.value)}
+                                    value={pin}
                                     name='email'
                                     className='inputfield appearance-none !w-full'
                                     placeholder='Confirmation code' />
@@ -81,7 +81,7 @@ const Confirm = () => {
                             <Link to='/signin' className='font-medium text-blue-500 text-md focus:text-blue-300 '>Go Back?</Link>
                             {(isError || isErrorReq2opt) &&
                                 <span className="text-red-500 pb-3 font-poppins font-medium">
-                                    {error?.data?.msg || errorReq2opt?.data?.msg}
+                                    {error?.data?.message || errorReq2opt?.data?.message}
                                 </span>
                             }
                             {success &&

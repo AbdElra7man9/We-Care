@@ -66,7 +66,7 @@ const SignIn = () => {
                 <p className=' focus:text-blue-300 ml-2 text-base text-blue-900 font-medium'>Log in with facebook</p>
               </button>
               <Link to='/forgetpassword' className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm mt-2'>Forgot password ?</Link>
-              {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{error?.data?.msg}</span>}
+              {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{error?.data?.message}</span>}
             </form>
           </div>
           <div className='md:border rounded-lg max-w-[90%] border-gray-300 justify-center flex mt-5 md:bg-white'>

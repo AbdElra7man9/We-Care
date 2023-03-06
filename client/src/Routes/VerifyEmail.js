@@ -27,7 +27,7 @@ const VerifyEmail = () => {
                 navigate(`/reset?email=${email}`)
             })
             .catch((err) => {
-                console.log(err?.data?.msg);
+                console.log(err?.data?.message);
             });
     }
 
@@ -58,7 +58,7 @@ const VerifyEmail = () => {
                             </div>
 
                             <Link to='/signup' className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm font-medium mt-3'>Create New Account ?</Link>
-                            {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{error?.data?.msg}</span>}
+                            {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{error?.data?.message}</span>}
                         </form>
                     </div>
                 </div>

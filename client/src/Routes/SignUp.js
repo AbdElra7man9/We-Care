@@ -15,9 +15,8 @@ const SignUp = () => {
     const [inputs, setInputs] = useState({
         email: '',
         password: '',
-        firstname: '',
-        lastname: '',
-        confirmpassword: ''
+        name: '',
+        passwordConfirm: ''
     })
     const handleChange = ({ currentTarget: input }) => {
         setInputs({ ...inputs, [input.name]: input.value });
@@ -28,14 +27,14 @@ const SignUp = () => {
     const [signup, { isError, error, isLoading }] = useSignupMutation();
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { email, password, firstname, lastname, confirmpassword } = inputs;
-        const data = { email, password, firstname, lastname, confirmpassword }
+        const { email, password, name, passwordConfirm } = inputs;
+        const data = { email, password, name, passwordConfirm }
         await signup(data).unwrap()
             .then((payload) => {
                 navigate(`/confirm?email=${email}`)
             })
             .catch((err) => {
-                console.log(err?.data?.msg);
+                console.log(err?.data?.message);
             });
     }
 
@@ -54,17 +53,17 @@ const SignUp = () => {
                         <p className='text-xl font-semibold text-gray-400 mb-5'>Sign up Book an appointment whith you doctor and chat with him.</p>
                         <form onSubmit={handleSubmit} className='flex flex-col'>
                             <input onChange={handleChange} value={inputs.email} ref={userRef} name='email' type='email' className='inputfield' placeholder='Mobile Number Or Email' />
-                            <input onChange={handleChange} value={inputs.firstname} name='firstname' type='text' className='inputfield' placeholder='First Name' />
-                            <input onChange={handleChange} value={inputs.lastname} name='lastname' type='text' className='inputfield' placeholder='Last name' />
+                            <input onChange={handleChange} value={inputs.name} name='name' type='text' className='inputfield' placeholder='First Name' />
+                            {/* <input onChange={handleChange} value={inputs.lastname} name='lastname' type='text' className='inputfield' placeholder='Last name' /> */}
                             <input onChange={handleChange} value={inputs.password} name='password' type='password' className='inputfield' placeholder='Password' />
-                            <input onChange={handleChange} value={inputs.confirmpassword} name='confirmpassword' type='password' className='inputfield' placeholder='Password' />
+                            <input onChange={handleChange} value={inputs.passwordConfirm} name='passwordConfirm' type='password' className='inputfield' placeholder='Password' />
                             <p className='text-sm font-normal text-gray-500'>People who use our service may have uploaded your contact information to Instagram. <Link to='/more' className='font-semibold text-gray-500'>Learn More</Link></p>
                             <p className='text-sm font-normal text-gray-500 mt-5'>By signing up, you agree to our Terms , <Link to='/privacy' className='font-semibold text-gray-500'>Privacy Policy </Link>and<Link to='/cookies' className='font-semibold text-gray-500'> Cookies Policy .</Link></p>
                             <button type='submit' className='btn-primary mt-4 !mb-5' disabled={isLoading}>
                                 {isLoading ? <span className='flex items-center justify-center text-2xl py-1 animate-spin'><ImSpinner7 /> </span> : 'Sign Up'}
                             </button>
                             <Link to='/doctorsignup' className='text-blue-800 focus:text-blue-300 md:mb-4 text-lg font-serif hover:underline'>sign up as a doctor ?</Link>
-                            {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{error?.data?.msg}</span>}
+                            {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{error?.data?.message}</span>}
                         </form>
                     </div>
                     <div className='lg:border border-gray-300 justify-center flex md:mt-5 rounded-lg lg:bg-white'>

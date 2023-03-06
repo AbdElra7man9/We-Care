@@ -25,8 +25,8 @@ export const AuthApi = apiSlice.injectEndpoints({
                     localStorage.setItem('id', result?.data?.user?._id)
                     dispatch(
                         setCredentials({
-                            accessToken: result.data.accessToken,
-                            user: result.data.user,
+                            token: result.data.accessToken,
+                            user: result.data.data.user,
                         })
                     );
                     let userId = getState().auth?.user?._id;
@@ -46,6 +46,22 @@ export const AuthApi = apiSlice.injectEndpoints({
                 body: data,
             }),
             invalidatesTags: ['Auth'],
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    console.log(data)
+                    localStorage.setItem('persist', true)
+                    localStorage.setItem('id', data.data.user._id)
+                    dispatch(
+                        setCredentials({
+                            token: data.token,
+                            user: data.data.user,
+                        })
+                    );
+                } catch (err) {
+                    // do nothing
+                }
+            },
         }),
         logOut: builder.mutation({
             query: () => ({
@@ -85,26 +101,12 @@ export const AuthApi = apiSlice.injectEndpoints({
             invalidatesTags: ['Auth'],
         }),
         VerifyEmail: builder.mutation({
-            query: ({ email, code }) => ({
-                url: `/api/auth/activateEmail?email=${email}&code=${code}`,
-                method: 'PUT',
+            query: (data) => ({
+                url: `/api/v1/users/emailConfirmation`,
+                method: 'POST',
+                body: data
             }),
-            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-                try {
-                    const result = await queryFulfilled;
-                    console.log(result)
-                    localStorage.setItem('persist', true)
-                    localStorage.setItem('id', result.data.user._id)
-                    dispatch(
-                        setCredentials({
-                            accessToken: result.data.accessToken,
-                            user: result.data.user,
-                        })
-                    );
-                } catch (err) {
-                    // do nothing
-                }
-            },
+
         }),
         ChangePassword: builder.mutation({
             query: (data) => ({
