@@ -9,16 +9,37 @@ export { default as ConfirmEmail } from '../Routes/ConfirmEmail';
 export { default as LandingPage } from '../Routes/LandingPage';
 export { default as Profile } from '../Routes/Profile';
 export { default as DoctorDash } from '../Routes/DoctorDash';
-
+/////////////////////////Home///////////////////////////////
+export { default as Header } from './Home/LandingPage/Header';
 export { default as UpperPart } from './Home/LandingPage/UpperPart';
 export { default as AboutTreatment } from './Home/LandingPage/AboutTreatment';
 export { default as MedicalService } from './Home/LandingPage/MedicalService';
 export { default as TopDoctors } from './Home/LandingPage/TopDoctors';
 export { default as LastedBlogs } from './Home/LandingPage/LastedBlogs';
 export { default as Footer } from './Home/LandingPage/Footer';
-
 export { default as LoadingScreen } from '../Components/Layouts/LoadingScreen';
+
+////////////////////////Book Appointment/////////////////////
+export { default as MainAppintment } from '../Components/Home/BookAppointment/MainAppintment';
+export { default as ClincAppointment } from '../Components/Home/BookAppointment/ClincAppointment';
+export { default as OnlineAppointment } from '../Components/Home/BookAppointment/OnlineAppointment';
+
+
 export { default as Emoji } from '../Components/Layouts/Emoji';
+
+////////////////////////Utils/////////////////////////////
+export { default as RequireAuth } from '../utils/RequiredAuth';
+export { default as PersistLogin } from '../utils/PersistLogin';
+export { default as SocketConnect } from '../utils/SocketConnect';
+export { default as Layout } from '../utils/Layout';
+
+////////////////////////Hooks/////////////////////////////
+export { default as useBreakpoint } from '../Hooks/useBreakpoint';
+export { default as usePersist } from '../Hooks/usePersist';
+export { default as useAuth } from '../Hooks/useAuth';
+export { default as useTitle } from '../Hooks/useTitle';
+export { default as useSocket } from '../Hooks/useSocket';
+
 
 ////////////////////////Doctor/////////////////////////////
 export { default as SideBar } from '../Components/Dashboard/Doctor/Layouts/SideBar';
@@ -43,19 +64,3 @@ export { default as PatientList } from '../Components/Dashboard/Doctor/Screens/P
 export { default as Messages } from '../Components/Dashboard/Doctor/Screens/Messages';
 export { default as Payment } from '../Components/Dashboard/Doctor/Screens/Payment';
 
-
-
-////////////////////////Utils/////////////////////////////
-export { default as RequireAuth } from '../utils/RequiredAuth';
-export { default as PersistLogin } from '../utils/PersistLogin';
-export { default as SocketConnect } from '../utils/SocketConnect';
-export { default as Layout } from '../utils/Layout';
-
-
-
-////////////////////////Hooks/////////////////////////////
-export { default as useBreakpoint } from '../Hooks/useBreakpoint';
-export { default as usePersist } from '../Hooks/usePersist';
-export { default as useAuth } from '../Hooks/useAuth';
-export { default as useTitle } from '../Hooks/useTitle';
-export { default as useSocket } from '../Hooks/useSocket';
