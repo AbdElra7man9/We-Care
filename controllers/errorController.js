@@ -9,7 +9,7 @@ const handleDuplicateFieldsDB = (err) => {
   const key = Object.keys(err.keyValue)[0];
   const value = err.keyValue[key];
   const message = `this ${key} is already taken`;
-  return new AppError(message, 400);
+  return new AppError(message, 200);
 };
 
 const handleValidationErrorDB = (err) => {

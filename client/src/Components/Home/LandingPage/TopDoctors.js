@@ -91,7 +91,7 @@ const TopDoctors = () => {
                     </div>
                     <div className='flex items-center gap-3'>
                         {Icons?.map((icon, index) => (
-                            <Link to='/' key={index} className='w-10 h-10 rounded-full bg-blue-100 shadow-blue-600 drop-shadow-xl text-blue-500 hover:bg-blue-500 hover:text-white duration-150 flex justify-center items-center shadow-2xl'>
+                            <Link to='/' key={index} className='w-10 h-10 rounded-full bg-blue-100 shadow-blue-600 shadow-md drop-shadow-xl text-blue-500 hover:bg-blue-500 hover:text-white duration-150 flex justify-center items-center'>
                                 {icon}
                             </Link>
                         ))}

@@ -41,6 +41,14 @@ export { default as useTitle } from '../Hooks/useTitle';
 export { default as useSocket } from '../Hooks/useSocket';
 
 
+////////////////////////Patient/////////////////////////////
+export { default as PatientDash } from '../Routes/PatientDash';
+export { default as PatientMain } from '../Components/Dashboard/Patient/Screens/PatientMain';
+export { default as SidePatient } from '../Components/Dashboard/Patient/Layouts/SidePatient';
+//Graphs
+export { default as DonutPlot } from '../Components/Dashboard/Patient/Layouts/Graphs/DonutPlot';
+export { default as AreaPlot } from '../Components/Dashboard/Patient/Layouts/Graphs/AreaPlot';
+
 ////////////////////////Doctor/////////////////////////////
 export { default as SideBar } from '../Components/Dashboard/Doctor/Layouts/SideBar';
 export { default as HeaderDoc } from '../Components/Dashboard/Doctor/Layouts/HeaderDoc';
