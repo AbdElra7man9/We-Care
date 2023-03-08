@@ -1,13 +1,14 @@
 import React from 'react'
-import { BsArrowUpShort, BsChatText, BsGear, BsGrid, BsJustifyLeft, BsPeople } from 'react-icons/bs'
+import { BsChat, BsChatSquareText, BsChatText, BsGear, BsGrid, BsPeople, BsPersonLinesFill } from 'react-icons/bs'
 import AnimSlideRight from '../../../../Animation/AnimSlideRight';
 import { AiOutlineAlipay } from 'react-icons/ai'
-import { IoCalendarNumberOutline } from 'react-icons/io5'
+import { IoCalendarNumberOutline, IoNewspaperOutline } from 'react-icons/io5'
 import { Link, useLocation } from 'react-router-dom'
 import useBreakpoint from './../../../../Hooks/useBreakpoint';
 import { AnimatePresence, motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux';
 import { FeatureAction } from './../../../../Redux/Slices/FeaturesSlice';
+import { GiAlarmClock } from 'react-icons/gi';
 
 const SideBar = () => {
     const Breakpoint = useBreakpoint();
@@ -17,11 +18,11 @@ const SideBar = () => {
     const MobileView = (Breakpoint === 'xs') || (Breakpoint === 'sm') || (Breakpoint === 'md') || (Breakpoint === 'lg')
     const LinkList = ({ Icon, Title, Href, onClose }) => {
         return (
-            <div onClick={() => dispatch(FeatureAction.setDocSide(false))} className={`hover:bg-gray-100 font-light text-xl px-7 w-full ${(pathname === Href) && '!bg-blue-600 !text-white '}`}>
+            <div onClick={() => { DocSide && dispatch(FeatureAction.setDocSide(false)) }} className={`text-lg font-medium px-5 w-full ${(pathname === Href) ? '!text-blue-600' : ' text-gray-600'}`}>
                 <Link to={Href}>
-                    <div className='flex gap-4 py-4 items-center'>
-                        <div className={(pathname === Href) ? 'text-white' : 'text-gray-600'}>{Icon}</div>
-                        <p className='text-xl font-light'>{Title}</p>
+                    <div className='flex gap-4 py-2 items-center hover:text-blue-600 group-hover:text-blue-600'>
+                        <div className={` group ${(pathname === Href) ? 'text-blue-600' : 'text-gray-600'}`}>{Icon}</div>
+                        <p className='text-lg'>{Title}</p>
                     </div>
                 </Link>
             </div>
@@ -29,57 +30,72 @@ const SideBar = () => {
     }
 
     return (
-        <AnimatePresence>
-            {(!MobileView || DocSide) &&
-                <>
-                    <div
-                        onClick={() => dispatch(FeatureAction.setDocSide(true))}
-                        className='fixed inset-0 z-10 block lg:hidden bg-black/30'></div>
-                    <motion.div
-                        variants={(MobileView && DocSide) && AnimSlideRight}
-                        initial='initial'
-                        animate='animate'
-                        exit='exit'
-                        className='w-80 fixed bg-white border-r h-screen z-20 lg:z-10'>
-                        <div className='flex justify-between items-center p-5'>
-                            <div className='flex items-center gap-2'>
-                                <img className='w-10 h-12 rounded-xl'
-                                    src='https://res.cloudinary.com/abdo9/image/upload/v1676727644/b425ac90714005.5e1ee66a1d36b_2_chd7s0.png' alt='' />
-                                <div>
-                                    <p className='text-2xl font-bold'>Zendenta</p>
-                                    <p className='text-sm font-light'>Doctor page mangement</p>
-                                </div>
-                            </div>
-                            <button
-                                onClick={() => dispatch(FeatureAction.setDocSide(true))}
-                                className='text-gray-500'><BsJustifyLeft size={25} />
-                            </button>
-                        </div>
-                        <div>
-                            <LinkList Icon={<BsGrid size={20} />} Title='OverFlow' Href='/doctor/dashboard' />
-                            <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Calender' Href='/doctor/calender' />
-                            <LinkList Icon={<BsPeople size={20} />} Title='Patient List' Href='/doctor/patientlist' />
-                            <LinkList Icon={<BsChatText size={20} />} Title='Messages' Href='/doctor/messages' />
-                            <LinkList Icon={<AiOutlineAlipay size={20} />} Title='Payment Information' Href='/doctor/payment' />
-                            <LinkList Icon={<BsGear size={20} />} Title='Settings' Href='/doctor/settings' />
-                        </div>
-                        <div className='absolute bottom-3 w-full p-5 border-t'>
-                            <Link className='flex justify-between'>
-                                <div className='w-full flex gap-3'>
-                                    <img className='w-12 h-12 rounded-full'
-                                        src='https://res.cloudinary.com/abdo9/image/upload/v1676052171/profile_bikmhe.jpg' alt='' />
-                                    <div>
-                                        <p className='text-lg font-bold'>Dr.Adam</p>
-                                        <p className='text-sm font-light'>Dentist</p>
-                                    </div>
-                                </div>
-                                <button className='text-gray-500'><BsArrowUpShort size={25} /></button>
-                            </Link>
-                        </div>
-                    </motion.div>
-                </>
+        <>
+            {!MobileView &&
+                <div className='shadow-[.2px_.2px_3px_1px] shadow-gray-100 hidden lg:block px-0 overflow-hidden rounded-lg'>
+                    <div className='relative'>
+                        <img className='w-full relative' src='https://shreethemes.in/doctris/layouts/assets/images/doctors/profile-bg.jpg' alt='' />
+                        <img className='w-24 h-24 rounded-full absolute flex inset-x-0 !left-[40%] -bottom-10 shadow-lg'
+                            src='https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg' alt='' />
+                    </div>
+                    <div className='text-center w-full mt-12 mb-3'>
+                        <p className='font-medium text-lg'>Dr. Calvin Carlo</p>
+                        <p className='text-gray-500'>Orthopedic</p>
+                    </div>
+                    <div>
+                        <LinkList Icon={<BsGrid size={17} />} Title='Dashboard' Href='/doctor/doctor-dashboard' />
+                        <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Appointment ' Href='/doctor/doctor-appointment' />
+                        <LinkList Icon={<GiAlarmClock size={20} />} Title='Schedule Timing' Href='/doctor/doctor-schedule' />
+                        <LinkList Icon={<IoNewspaperOutline size={20} />} Title='Invoices' Href='/doctor/invoices' />
+                        <LinkList Icon={<BsChatText size={20} />} Title='Messages' Href='/doctor/doctor-messages' />
+                        <LinkList Icon={<BsPeople size={20} />} Title='Patient List' Href='/doctor/patient-list' />
+                        <LinkList Icon={<BsChatSquareText size={20} />} Title='Patients Review' Href='/doctor/patient-review' />
+                        <LinkList Icon={<BsChat size={20} />} Title='Chat' Href='/doctor/doctor-chat' />
+                        <LinkList Icon={<AiOutlineAlipay size={20} />} Title='Payment Information' Href='/doctor/payment' />
+                        <LinkList Icon={<BsGear size={20} />} Title='Profile' Href='/doctor/doctor-profile' />
+                        <LinkList Icon={<BsPersonLinesFill size={20} />} Title='Profile Settings' Href='/doctor/settings' />
+                    </div>
+                </div>
             }
-        </AnimatePresence>
+            <AnimatePresence>
+                {DocSide &&
+                    <>
+                        <div
+                            onClick={() => dispatch(FeatureAction.setDocSide(true))}
+                            className='fixed inset-0 z-10 block lg:hidden bg-black/30'></div>
+                        <motion.div
+                            variants={AnimSlideRight}
+                            initial='initial'
+                            animate='animate'
+                            exit='exit'
+                            className='fixed top-0 left-0 w-80 z-20 bg-white h-screen overflow-hidden'>
+                            <div className='relative'>
+                                <img className='w-full relative' src='https://shreethemes.in/doctris/layouts/assets/images/doctors/profile-bg.jpg' alt='' />
+                                <img className='w-24 h-24 rounded-full absolute flex inset-x-0 !left-[40%] -bottom-10 shadow-lg'
+                                    src='https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg' alt='' />
+                            </div>
+                            <div className='text-center w-full mt-12 mb-3'>
+                                <p className='font-medium text-lg'>Dr. Calvin Carlo</p>
+                                <p className='text-gray-500'>Orthopedic</p>
+                            </div>
+                            <div>
+                                <LinkList Icon={<BsGrid size={17} />} Title='Dashboard' Href='/doctor/doctor-dashboard' />
+                                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Appointment ' Href='/doctor/doctor-appointment' />
+                                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Schedule Timing' Href='/doctor/doctor-schedule' />
+                                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Invoices' Href='/doctor/invoices' />
+                                <LinkList Icon={<BsChatText size={20} />} Title='Messages' Href='/doctor/doctor-messages' />
+                                <LinkList Icon={<BsPeople size={20} />} Title='Patient List' Href='/doctor/patient-list' />
+                                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Patients Review' Href='/doctor/patient-review' />
+                                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Chat' Href='/doctor/doctor-chat' />
+                                <LinkList Icon={<AiOutlineAlipay size={20} />} Title='Payment Information' Href='/doctor/payment' />
+                                <LinkList Icon={<BsGear size={20} />} Title='Profile' Href='/doctor/doctor-profile' />
+                                <LinkList Icon={<BsGear size={20} />} Title='Profile Settings' Href='/doctor/settings' />
+                            </div>
+                        </motion.div>
+                    </>
+                }
+            </AnimatePresence>
+        </>
     )
 }
 

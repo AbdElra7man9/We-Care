@@ -1,20 +1,17 @@
 import React from 'react'
-import { ColumnChart, CardDetails, RightPartOverFlow } from '../../../Exports'
+import { AppointmentChart, PatientsChart, UrgentChart, CanceledChart } from '../../../Exports'
 
 const OverFlow = () => {
 
     return (
-        <div className='container px-5 max-w-full'>
-            <p className='text-3xl font-bold text-gray-700 py-5'>Good morning, Dr Adam</p>
-            <div className='grid grid-cols-1 xl:grid-cols-2 gap-x-10'>
-                <div>
-                    <div className='w-full'>
-                        <ColumnChart />
-                    </div>
-                </div>
-                <RightPartOverFlow />
+        <div className='container max-w-full'>
+            <p className='text-xl lg:text-3xl font-bold text-gray-700 py-5 px-5 lg:px-0'>Good morning, Dr Adam</p>
+            <div className='grid grid-cols-1 xl:grid-cols-4 gap-5'>
+                <AppointmentChart />
+                <PatientsChart />
+                <UrgentChart />
+                <CanceledChart />
             </div>
-            <CardDetails />
         </div>
     )
 }

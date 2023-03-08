@@ -5,7 +5,7 @@ import {
 } from './Components/Exports'
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { ROLES } from './Config/Roles';
-import { AnimatePresence } from 'framer-motion';
+// import { AnimatePresence } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from './Redux/Slices/UserSlice';
 
@@ -13,7 +13,7 @@ function App() {
   const userInfo = useSelector(selectCurrentUser)
   const location = useLocation();
   return (
-    <AnimatePresence>
+    // <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Layout />}>
           <Route path="signin" element={<SignIn />} />
@@ -24,7 +24,7 @@ function App() {
             <Route path="verify" element={<ConfirmEmail />} />
             <Route path="reset/:token" element={<ResetPassword />} />
             <Route index element={<LandingPage />} />
-            <Route path="doctor/:dash" element={<DoctorDash />} />
+            <Route path="doctor/:drDash" element={<DoctorDash />} />
             <Route path="patient/:dash" element={<PatientDash />} />
             <Route path="book-appointment" element={<MainAppintment />} />
             <Route path="profile" element={<PatientPage />} />
@@ -38,7 +38,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
-    </AnimatePresence>
+    // </AnimatePresence>
   );
 }
 

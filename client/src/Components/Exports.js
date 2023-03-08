@@ -26,6 +26,7 @@ export { default as OnlineAppointment } from '../Components/Home/BookAppointment
 
 
 export { default as Emoji } from '../Components/Layouts/Emoji';
+export { default as Pagination } from '../Components/Layouts/Pagination';
 
 ////////////////////////Utils/////////////////////////////
 export { default as RequireAuth } from '../utils/RequiredAuth';
@@ -78,6 +79,11 @@ export { default as HeaderDoc } from '../Components/Dashboard/Doctor/Layouts/Hea
 export { default as ColumnChart } from '../Components/Dashboard/Doctor/Layouts/Graphs/ColumnChart';
 export { default as SplineChart } from '../Components/Dashboard/Doctor/Layouts/Graphs/SplineChart';
 export { default as Calender } from '../Components/Dashboard/Doctor/Layouts/Graphs/Calender';
+
+export { default as CanceledChart } from './Dashboard/Doctor/Layouts/GridCharts/CanceledChart';
+export { default as AppointmentChart } from './Dashboard/Doctor/Layouts/GridCharts/AppointmentChart';
+export { default as PatientsChart } from './Dashboard/Doctor/Layouts/GridCharts/PatientsChart';
+export { default as UrgentChart } from './Dashboard/Doctor/Layouts/GridCharts/UrgentChart';
 //OverFlow
 export { default as CardDetails } from '../Components/Dashboard/Doctor/Layouts/OverFlow/CardDetails';
 export { default as RightPartOverFlow } from '../Components/Dashboard/Doctor/Layouts/OverFlow/RightPartOverFlow';
@@ -89,6 +95,7 @@ export { default as Message } from '../Components/Dashboard/Doctor/Layouts/Messs
 
 //Screens at Doctor
 export { default as OverFlow } from '../Components/Dashboard/Doctor/Screens/OverFlow';
+export { default as Appointments } from '../Components/Dashboard/Doctor/Screens/Appointments';
 export { default as CalenderScreen } from '../Components/Dashboard/Doctor/Screens/CalenderScreen';
 export { default as PatientList } from '../Components/Dashboard/Doctor/Screens/PatientList';
 export { default as Messages } from '../Components/Dashboard/Doctor/Screens/Messages';

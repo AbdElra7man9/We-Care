@@ -38,3 +38,15 @@ html {
     @apply
     bg-blue-500 rounded-md text-base font-bold text-white py-2 mb-3 focus:bg-blue-400 
 }
+.fc-daygrid-day-number{
+    @apply
+    !text-blue-500 !font-medium
+}
+.fc-button{
+    @apply
+    !bg-blue-500 !border-blue-500 focus:!shadow-none active:!ring-blue-500 active:!ring
+}
+.fc-col-header-cell-cushion{
+    @apply
+    !text-blue-600 !font-medium
+}
