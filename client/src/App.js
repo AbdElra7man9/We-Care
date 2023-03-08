@@ -1,6 +1,6 @@
 import {
   LandingPage, SignIn, SignUp, RequireAuth,
-  Layout, Profile, PersistLogin, DoctorDash, PatientDash,
+  Layout, Profile, PersistLogin, DoctorDash, PatientDash, PatientPage,
   ForgetPassword, ConfirmEmail, ResetPassword, DoctorSignUp, MainAppintment
 } from './Components/Exports'
 import { Route, Routes, useLocation } from 'react-router-dom';
@@ -27,6 +27,7 @@ function App() {
             <Route path="doctor/:dash" element={<DoctorDash />} />
             <Route path="patient/:dash" element={<PatientDash />} />
             <Route path="book-appointment" element={<MainAppintment />} />
+            <Route path="profile" element={<PatientPage />} />
             <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
               <Route index element={<LandingPage />} />
               <Route path={userInfo?.username} element={<Profile />} />

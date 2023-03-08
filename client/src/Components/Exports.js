@@ -44,10 +44,17 @@ export { default as useSocket } from '../Hooks/useSocket';
 ////////////////////////Patient/////////////////////////////
 export { default as PatientDash } from '../Routes/PatientDash';
 export { default as PatientMain } from '../Components/Dashboard/Patient/Screens/PatientMain';
+export { default as PatientPage } from '../Components/Dashboard/Patient/Screens/PatientPage';
 export { default as SidePatient } from '../Components/Dashboard/Patient/Layouts/SidePatient';
 //Graphs
 export { default as DonutPlot } from '../Components/Dashboard/Patient/Layouts/Graphs/DonutPlot';
 export { default as AreaPlot } from '../Components/Dashboard/Patient/Layouts/Graphs/AreaPlot';
+
+//Profile
+export { default as AppointmentsList } from '../Components/Dashboard/Patient/Layouts/Profile/AppointmentsList';
+export { default as PaymentsList } from '../Components/Dashboard/Patient/Layouts/Profile/PaymentsList';
+export { default as Contact } from '../Components/Dashboard/Patient/Layouts/Profile/Contact';
+export { default as ProfileSettings } from '../Components/Dashboard/Patient/Layouts/Profile/ProfileSettings';
 
 export { default as MonthlyReports } from '../Components/Dashboard/Patient/Layouts/MonthlyReports';
 
@@ -56,6 +63,14 @@ export { default as HeartbeatChart } from './Dashboard/Patient/Layouts/GridChart
 export { default as WaterChart } from './Dashboard/Patient/Layouts/GridCharts/WaterChart';
 export { default as HemoglobinChart } from './Dashboard/Patient/Layouts/GridCharts/HemoglobinChart';
 export { default as SugarChart } from './Dashboard/Patient/Layouts/GridCharts/SugarChart';
+
+
+
+
+
+
+
+
 ////////////////////////Doctor/////////////////////////////
 export { default as SideBar } from '../Components/Dashboard/Doctor/Layouts/SideBar';
 export { default as HeaderDoc } from '../Components/Dashboard/Doctor/Layouts/HeaderDoc';

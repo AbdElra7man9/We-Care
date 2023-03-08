@@ -78,9 +78,7 @@ const OnlineAppointment = () => {
           </div>
         </div>
         <label className='text-sm text-gray-500 font-medium text-start my-1'>Message</label>
-        <textarea placeholder='content...' cols='10' className='border p-3 outline-none rounded-lg g-24'>
-
-        </textarea>
+        <textarea placeholder='content...' cols="60" rows="5" className='border p-3 outline-none rounded-lg g-24' />
         <button type='submit' className='btn-primary mt-4' disabled={isLoading}>
           {isLoading ? <span className='flex items-center justify-center text-2xl py-1 animate-spin'><ImSpinner7 /> </span> : 'Book an appointment'}</button>
         {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{error?.data?.message}</span>}

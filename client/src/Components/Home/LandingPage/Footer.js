@@ -67,7 +67,7 @@ const Footer = () => {
     const Icons = [<SlSocialFacebook size={23} />, <SlSocialLinkedin size={20} />, <SlSocialGithub size={20} />, <SlSocialTwitter size={20} />]
 
     return (
-        <footer className='bg-[#202942] conatiner max-w-full mt-10'>
+        <footer className='bg-[#202942] duration-200 conatiner max-w-full mt-10'>
             <div className='container px-5 max-w-7xl py-10'>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
                     <div>

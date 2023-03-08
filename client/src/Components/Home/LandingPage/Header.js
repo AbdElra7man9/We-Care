@@ -22,7 +22,7 @@ const Header = () => {
             <header className={`fixed z-20 container max-w-full bg-white lg:bg-transparent top-0 inset-x-0 ${(isScrolled || !isHome) && '!bg-white lg:!border-b'}`}>
                 <div className={`container border-b lg:border-none flex justify-between items-center p-3 whitespace-nowrap 
                 ${dash ? 'max-w-full' : ' max-w-[28rem] sm:max-w-[35rem] md:max-w-[50rem] lg:max-w-[60rem] xl:max-w-[80rem]'}`}>
-                    <Link to='/' className='flex items-center gap-10 lg:text-white'>
+                    <Link to='/' className='flex items-center gap-10'>
                         <div className='flex gap-3'>
                             <img className='w-10 h-10 rounded-xl'
                                 src='https://shreethemes.in/doctris/layouts/assets/images/logo-icon.png' alt='' />
@@ -41,7 +41,9 @@ const Header = () => {
                     <div className='flex gap-2 md:gap-4 items-center'>
                         <button className='bg-blue-600 text-white rounded-full p-3'><BsGear size={15} /></button>
                         <button className='bg-blue-600 text-white rounded-full p-3'><BsSearch size={15} /></button>
-                        <img className='h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl' src='https://shreethemes.in/doctris/layouts/assets/images/doctors/01.jpg' alt='' />
+                        <Link to='/profile?user=profile'>
+                            <img className='h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl' src='https://shreethemes.in/doctris/layouts/assets/images/doctors/01.jpg' alt='' />
+                        </Link>
                         <button className='lg:hidden' onClick={() => setIsHeader(!isHeader)}><BsList size={24} /></button>
                     </div>
                 </div>
