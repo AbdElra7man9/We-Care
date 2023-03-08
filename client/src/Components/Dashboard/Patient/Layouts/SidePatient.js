@@ -3,21 +3,25 @@ import React from 'react'
 const SidePatient = () => {
     const payment = [
         {
+            _id:'1',
             img: 'https://shreethemes.in/doctris/layouts/assets/images/payment/mastercard.png',
             paymentName:'Mastercard',
             number: '4584',
             expires: '12/22'
         }, {
+            _id:'2',
             img: 'https://shreethemes.in/doctris/layouts/assets/images/payment/discover.png',
             paymentName:'Discover',
             number: '5796',
             expires: '12/22'
         }, {
+            _id:'3',
             img: 'https://shreethemes.in/doctris/layouts/assets/images/payment/rupay.png',
             paymentName:'Rupay',
             number: '4645',
             expires: '12/22'
         }, {
+            _id:'4',
             img: 'https://shreethemes.in/doctris/layouts/assets/images/payment/american.png',
             paymentName:'American',
             number: '4875',
@@ -25,7 +29,7 @@ const SidePatient = () => {
         },
     ]
     return (
-        <div className='border w-[35rem] rounded-md m-3 shadow-sm p-5 lg:px-8 container max-w-full'>
+        <div className='border rounded-md lg:m-3 shadow-sm p-5 lg:px-8 container max-w-full'>
             <div className='flex gap-5'>
                 <img className='w-20 h-20 rounded-full'
                     src='https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg' alt='' />
@@ -62,7 +66,7 @@ const SidePatient = () => {
                 <h3 className='font-medium text-lg my-5'>Payment</h3>
                 <div className='space-y-3'>
                     {payment?.map(item => (
-                        <div className='flex gap-3 items-center'>
+                        <div key={item?._id} className='flex gap-3 items-center'>
                             <img src={item?.img} alt='' className='w-16 h-16' />
                             <div className=''>
                                 <h3>{item?.paymentName} •••• {item?.number}</h3>

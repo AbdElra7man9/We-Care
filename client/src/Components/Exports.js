@@ -49,6 +49,13 @@ export { default as SidePatient } from '../Components/Dashboard/Patient/Layouts/
 export { default as DonutPlot } from '../Components/Dashboard/Patient/Layouts/Graphs/DonutPlot';
 export { default as AreaPlot } from '../Components/Dashboard/Patient/Layouts/Graphs/AreaPlot';
 
+export { default as MonthlyReports } from '../Components/Dashboard/Patient/Layouts/MonthlyReports';
+
+//Graphs
+export { default as HeartbeatChart } from './Dashboard/Patient/Layouts/GridCharts/HeartbeatChart';
+export { default as WaterChart } from './Dashboard/Patient/Layouts/GridCharts/WaterChart';
+export { default as HemoglobinChart } from './Dashboard/Patient/Layouts/GridCharts/HemoglobinChart';
+export { default as SugarChart } from './Dashboard/Patient/Layouts/GridCharts/SugarChart';
 ////////////////////////Doctor/////////////////////////////
 export { default as SideBar } from '../Components/Dashboard/Doctor/Layouts/SideBar';
 export { default as HeaderDoc } from '../Components/Dashboard/Doctor/Layouts/HeaderDoc';

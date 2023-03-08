@@ -1,31 +1,15 @@
 
 import { Area } from '@ant-design/plots';
 
-const AreaPlot = () => {
-    const data = [
-        {
-            "timePeriod": "2006 Q3",
-            "value": 1
-        },
-        {
-            "timePeriod": "2006 Q4",
-            "value": 3.08
-        },
-        {
-            "timePeriod": "2007 Q1",
-            "value": 2.17
-        },
-        {
-            "timePeriod": "2007 Q2",
-            "value": 1.26
-        },
-    ]
+const AreaPlot = ({ Color, data }) => {
+
     const config = {
         data,
-        hight: '20rem',
+        height: '500px', // set height to 400 pixels
+        width: '100%',
         autoFit: true,
         smooth: true,
-        color: 'green',
+        color: Color,
         yAxis: {
             grid: {
                 line: {
@@ -33,13 +17,17 @@ const AreaPlot = () => {
                         opacity: .0,
                     }
                 }
-            }
+            },
+            visible: false // hide Y-axis
+
         },
-        
+
         xField: 'timePeriod',
         yField: 'value',
         xAxis: {
             range: [0, 1],
+            visible: false // hide Y-axis
+
         },
     };
 
