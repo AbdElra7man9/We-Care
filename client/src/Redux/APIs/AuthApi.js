@@ -1,5 +1,6 @@
 import { LogOut, setCredentials } from '../Slices/UserSlice';
 import { apiSlice } from '../ApiSlice';
+import getSocket from '../SocketRTK';
 export const AuthApi = apiSlice.injectEndpoints({
     endpoints: builder => ({
 
@@ -13,27 +14,84 @@ export const AuthApi = apiSlice.injectEndpoints({
         }),
         signin: builder.mutation({
             query: (data) => ({
-                url: '/api/auth/signin',
+                url: '/api/v1/users/login',
                 method: 'POST',
-                credentials: 'include',
                 body: data,
             }),
-            invalidatesTags: ['Auth'],
+            async onQueryStarted(arg, { queryFulfilled, dispatch, getState }) {
+                try {
+                    const result = await queryFulfilled;
+                    localStorage.setItem('persist', true)
+                    localStorage.setItem('id', result?.data?.user?._id)
+                    dispatch(
+                        setCredentials({
+                            token: result.data.token,
+                            user: result.data.data.user,
+                        })
+                    );
+                    let userId = getState().auth?.user?._id;
+                    const socket = getSocket()
+                    socket.on("connect", () => {
+                        socket.emit("join", userId);
+                    });
+                } catch (err) {
+                    // do nothing
+                }
+            },
         }),
         signup: builder.mutation({
             query: (data) => ({
-                url: '/api/auth/signup',
+                url: '/api/v1/patients/signup',
                 method: 'POST',
-                // credentials: 'include',
                 body: data,
             }),
             invalidatesTags: ['Auth'],
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    console.log(data)
+                    localStorage.setItem('persist', true)
+                    localStorage.setItem('id', data.data.user._id)
+                    dispatch(
+                        setCredentials({
+                            token: data.token,
+                            user: data.data.user,
+                        })
+                    );
+                } catch (err) {
+                    // do nothing
+                }
+            },
+        }),
+        signupDoctor: builder.mutation({
+            query: (data) => ({
+                url: 'api/v1/doctors/signup',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['Auth'],
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    console.log(data)
+                    localStorage.setItem('persist', true)
+                    localStorage.setItem('id', data.data.user._id)
+                    dispatch(
+                        setCredentials({
+                            token: data.token,
+                            user: data.data.user,
+                        })
+                    );
+                } catch (err) {
+                    // do nothing
+                }
+            },
         }),
         logOut: builder.mutation({
             query: () => ({
                 url: '/api/auth/logout',
                 method: 'POST',
-                credentials: 'include',
+
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
@@ -41,6 +99,8 @@ export const AuthApi = apiSlice.injectEndpoints({
                     dispatch(LogOut())
                     setTimeout(() => {
                         dispatch(apiSlice.util.resetApiState())
+                        localStorage.removeItem('persist')
+                        localStorage.removeItem('id')
                     }, 1000)
                 } catch (err) {
                     console.log(err)
@@ -50,14 +110,14 @@ export const AuthApi = apiSlice.injectEndpoints({
         }),
         refresh: builder.mutation({
             query: () => ({
-                url: '/api/auth/refresh',
+                url: '/api/v1/users/refresh',
                 method: 'GET',
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled
-                    const { accessToken } = data
-                    dispatch(setCredentials({ accessToken }))
+                    const { token, user } = data
+                    dispatch(setCredentials({ token, user }))
                 } catch (err) {
                     console.log(err)
                 }
@@ -65,24 +125,18 @@ export const AuthApi = apiSlice.injectEndpoints({
             invalidatesTags: ['Auth'],
         }),
         VerifyEmail: builder.mutation({
-            query: ({ email, code }) => ({
-                url: `/api/auth/activateEmail?email=${email}&code=${code}`,
-                method: 'PUT',
+            query: (data) => ({
+                url: `/api/v1/users/emailConfirmation`,
+                method: 'POST',
+                body: data
             }),
-            invalidatesTags: ['Auth'],
+
         }),
         ChangePassword: builder.mutation({
             query: (data) => ({
                 url: `/api/auth/changepassword`,
                 method: 'PUT',
-                body:data
-            }),
-            invalidatesTags: ['Auth'],
-        }),
-        VerifyEmailtoResest: builder.mutation({
-            query: ({ email, code }) => ({
-                url: `/api/auth/verifyOtp?email=${email}&code=${code}`,
-                method: 'GET',
+                body: data
             }),
             invalidatesTags: ['Auth'],
         }),
@@ -96,18 +150,33 @@ export const AuthApi = apiSlice.injectEndpoints({
         }),
         ForgetPassword: builder.mutation({
             query: (email) => ({
-                url: `/api/auth/generateOtp?email=${email}&code=`,
-                method: 'GET',
-                // body: data
+                url: `api/v1/users/forgotPassword`,
+                method: 'POST',
+                body: email
             }),
             invalidatesTags: ['Auth'],
         }),
         ResetPassword: builder.mutation({
-            query: (data) => ({
-                url: '/api/auth/resetpassword',
-                method: 'PUT',
+            query: ({ token, data }) => ({
+                url: `/api/v1/users/resetPassword/${token}`,
+                method: 'PATCH',
                 body: data
             }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    localStorage.setItem('persist', true)
+                    localStorage.setItem('id', data.data.user._id)
+                    dispatch(
+                        setCredentials({
+                            token: data.token,
+                            user: data.data.user,
+                        })
+                    );
+                } catch (err) {
+                    // do nothing
+                }
+            },
             invalidatesTags: ['Auth'],
         }),
     }),
@@ -118,9 +187,9 @@ export const {
     useRefreshMutation,
     useSigninMutation,
     useSignupMutation,
+    useSignupDoctorMutation,
     useVerifyEmailMutation,
     useRequestOTP2Mutation,
-    useVerifyEmailtoResestMutation,
     useForgetPasswordMutation,
     useResetPasswordMutation,
     useChangePasswordMutation,

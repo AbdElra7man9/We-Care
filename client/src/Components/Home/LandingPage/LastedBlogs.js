@@ -31,33 +31,33 @@ const LastedBlogs = () => {
       numComments: '5'
     },
   ]
-  const SingleBlog = ({ ImgSrc, des, since, time, numLikes, numComments }) => {
+  const SingleBlog = ({ doc }) => {
     return (
       <div className='border overflow-hidden rounded-lg w-full'>
         <div className='w-full h-[20rem] overflow-hidden relative'>
-          <img src={ImgSrc} className='w-full object-cover h-full hover:scale-[1.1] duration-200' alt='' />
+          <img src={doc?.ImgSrc} className='w-full object-cover h-full hover:scale-[1.1] duration-200' alt='' />
         </div>
         <div className='space-y-3 p-5 overflow-hidden'>
-          <div className='flex gap-5 items-center'>
+          <div className='flex gap-5 items-center whitespace-nowrap'>
             <div className='flex gap-2 items-center'>
               <IoCalendar />
-              <p className='text-sm text-gray-500'>{time}</p>
+              <p className='text-sm text-gray-500'>{doc?.time}</p>
             </div>
             <div className='flex gap-2 items-center'>
               <IoTimeOutline />
-              <p className='text-sm text-gray-500'>{since}</p>
+              <p className='text-sm text-gray-500'>{doc?.since}</p>
             </div>
           </div>
-          <p className='text-lg font-medium'>{des}</p>
+          <p className='text-lg font-medium ellipse-2'>{doc?.des}</p>
           <div className='flex justify-between items-center py-3'>
             <div className='flex items-center gap-3'>
               <div className='flex gap-2 items-center'>
                 <BsHeart />
-                <p className='text-sm text-gray-500'>{numLikes}</p>
+                <p className='text-sm text-gray-500'>{doc?.numLikes}</p>
               </div>
               <div className='flex gap-2 items-center'>
                 <BsChat />
-                <p className='text-sm text-gray-500'>{numComments}</p>
+                <p className='text-sm text-gray-500'>{doc?.numComments}</p>
               </div>
             </div>
             <Link to='/' className='text-blue-600 flex gap-3 items-center whitespace-nowrap'>
@@ -79,7 +79,7 @@ const LastedBlogs = () => {
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-5'>
         {Blogs?.map((doc) => (
           <div key={doc?._id}>
-            <SingleBlog des={doc?.des} time={doc?.time} since={doc?.since} numComments={doc?.numComments} numLikes={doc?.numLikes} ImgSrc={doc?.ImgSrc} />
+            <SingleBlog doc={doc} />
           </div>
         ))}
       </div>

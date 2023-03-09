@@ -6,13 +6,14 @@ const {
   updatePassword,
   forgotPassword,
   resetPassword,
-  emailConfirmation,
+  emailConfirmation, Refresh
 } = require('../controllers/authController');
 const { updateInfo, deleteMe } = require('../controllers/userController');
 
 const router = express.Router();
 
 router.post('/login', userLogin);
+router.get('/refresh', Refresh);
 router.post('/emailConfirmation', protect, emailConfirmation);
 router.patch('/updateInfo', protect, updateInfo);
 router.post('/forgotPassword', forgotPassword);

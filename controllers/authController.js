@@ -69,6 +69,7 @@ function sendEmail(email, subject, text) {
 const sendCreatePIN = catchAsync(async function (id) {
   const user = await User.findById(id);
   const PIN = await user.createPIN();
+  console.log(PIN)
   await user.save({ validateBeforeSave: false });
   try {
     sendEmail(
@@ -133,6 +134,19 @@ exports.userLogin = catchAsync(async function (req, res, next) {
 
   //every things OK
   createSendToken(user, 200, res);
+});
+
+exports.Refresh = catchAsync(async function (req, res, next) {
+  const token = req.cookies.jwt
+  if (!token) {
+    return next(new AppError('Not authorized!', 401));
+  }
+  const auth = jwt.verify(token, process.env.JWT_SECRET)
+  if (!auth) {
+    return next(new AppError('Authorization Failed, Please Log In Again', 401));
+  }
+  const user = await User.findById(auth.id)
+  return res.json({ token, user })
 });
 
 exports.protect = catchAsync(async function (req, res, next) {

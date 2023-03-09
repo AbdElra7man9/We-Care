@@ -4,7 +4,7 @@ const Message = ({ message, Patient }) => {
         <div className='pt-3 p-3'>
             <div className={`flex ${Patient ? 'justify-start' : 'justify-end'}`}>
                 <div className={`border h-10 rounded-3xl flex items-center px-5 py-8 ${Patient ? 'justify-start' : 'justify-end bg-gray-200'}`}>
-                    <p>{message?.msg}</p>
+                    <p>{message?.message}</p>
                 </div>
             </div>
         </div>

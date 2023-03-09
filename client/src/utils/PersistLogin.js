@@ -21,8 +21,8 @@ const PersistLogin = () => {
             const verifyRefreshToken = async () => {
                 console.log('verifying refresh token')
                 try {
-                    const { accessToken, user } = await refresh().unwrap()
-                    dispatch(setCredentials({ accessToken, user }))
+                    const { token, user } = await refresh().unwrap()
+                    dispatch(setCredentials({ token, user }))
                     setTrueSuccess(true)
                 }
                 catch (err) {
