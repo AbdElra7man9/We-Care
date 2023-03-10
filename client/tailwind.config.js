@@ -42,7 +42,7 @@ module.exports = {
       },
     },
     screens: {
-      xsm: '360px',
+      ss: '360px',
       sm: '500px',
       md: '680px',
       lg: '952px',

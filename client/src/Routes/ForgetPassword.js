@@ -35,7 +35,7 @@ const ForgetPassword = () => {
     <>
       <div className='container px-5 max-w-5xl flex gap-1 place-content-center mt-[2rem] md:mt-[6rem] mb-5 md:mb-28'>
         <div className='container px-3 max-w-md md:mt-16'>
-          <div className='md:border rounded-lg  border-gray-300 md:max-w-[90%] xsm:px-5 md:px-12 items-center text-center md:bg-white'>
+          <div className='md:border rounded-lg  border-gray-300 md:max-w-[90%] ss:px-5 md:px-12 items-center text-center md:bg-white'>
             <Link to="/">
               <div className='flex items-center justify-center wfull gap-2 py-10 instalogo'>
                 <img className='w-10 h-10 rounded-xl'
