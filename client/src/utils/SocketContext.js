@@ -1,32 +1,25 @@
-import { createContext, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
-import { useSelector } from 'react-redux';
-import { selectCurrentToken } from './../Redux/Slices/UserSlice';
-import jwtDecode from 'jwt-decode';
+import { createContext, useEffect, useRef } from 'react';
 const url = process.env.REACT_APP_API_KEY;
 const SocketContext = createContext({});
 
 export const SocketProvider = ({ children }) => {
-    const [socket, setSocket] = useState(io(url));
-    const token = useSelector(selectCurrentToken);
-    useEffect(() => {
-        if (token) {
-            const { id } = jwtDecode(token)
-            if (id) {
-                socket.on("connect", () => {
-                    socket.emit("join", id);
-                    console.log('Goined !')
-                });
-            }
-            return
-        }
-        return () => {
-            socket.off('connect');
-        };
-        // eslint-disable-next-line
-    }, []);
 
-    return <SocketContext.Provider value={{ socket, setSocket }}>{children}</SocketContext.Provider>;
+    const socket = useRef(io(url));
+
+    const userId = localStorage.getItem('id')
+    useEffect(() => {
+        if (userId) {
+            socket.current.on("connect", () => {
+                // socket.current.emit("join", userId);
+            });
+            // socket.current.on("getusers", (data) => {
+            //     console.log(data)
+            // });
+        }
+    }, [userId, socket]);
+
+    return <SocketContext.Provider value={{ socket: socket.current }}>{children}</SocketContext.Provider>;
 };
 
 export default SocketContext;

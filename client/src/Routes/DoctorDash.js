@@ -12,7 +12,7 @@ const DoctordrDash = () => {
                     <SideBar />
                 </div>
                 <div className='w-full lg:col-span-2 xxl:col-span-3'>
-                    <div className='pt-24'>
+                    <div className='pt-16 xl:pt-24'>
                         {(drDash === 'doctor-dashboard') && <OverFlow />}
                         {(drDash === 'doctor-schedule') && <CalenderScreen />}
                         {(drDash === 'doctor-appointment') && <Appointments />}

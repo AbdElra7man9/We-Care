@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { BsEmojiSmile, BsMicFill } from 'react-icons/bs'
 import { RiAttachment2 } from 'react-icons/ri'
 import { useParams } from 'react-router-dom';
-import { useGetMessagesQuery, useNewMessageMutation } from '../../../../../Redux/APIs/MessageApi'
-import { useGetUserByIdQuery } from '../../../../../Redux/APIs/UserApi'
-import { useSocket, Message, Emoji } from '../../../../Exports';
+import { useGetMessagesQuery, useNewMessageMutation } from '../../../../Redux/APIs/MessageApi'
+import { useGetUserByIdQuery } from '../../../../Redux/APIs/UserApi'
+import { useSocket, Message, Emoji } from '../../../Exports';
 import { IoMdPaperPlane } from 'react-icons/io'
 import { motion } from 'framer-motion';
-import AnimDropdown from './../../../../../Animation/AnimDropdown';
+import AnimDropdown from '../../../../Animation/AnimDropdown';
 const Conversation = () => {
     const { username, id } = useParams();
     const { data: userById } = useGetUserByIdQuery(username) || {};
