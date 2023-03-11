@@ -10,7 +10,7 @@ export const SocketProvider = ({ children }) => {
     const userId = localStorage.getItem('id')
     useEffect(() => {
         if (userId) {
-            socket.current.on("connect", () => {
+            socket.current?.on("connect", () => {
                 // socket.current.emit("join", userId);
             });
             // socket.current.on("getusers", (data) => {

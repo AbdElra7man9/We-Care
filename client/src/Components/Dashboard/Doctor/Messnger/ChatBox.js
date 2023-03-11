@@ -26,7 +26,7 @@ const ChatBox = ({ setSelected }) => {
     const [isPikerVisiable, setIsPikerVisable] = useState(false);
     // const dispatch = useDispatch();
     useEffect(() => {
-        socket.on("getusers", (data) => {
+        socket?.on("getusers", (data) => {
             console.log(data)
             const online = data?.some(user => user.userId === userById?._id)
             online && setIsOnline(true)
@@ -83,9 +83,9 @@ const ChatBox = ({ setSelected }) => {
     return (
         details ? <CoversationCTRL userById={userById} setDetails={setDetails} details={details} id={id} setSelected={setSelected} /> :
             <div className='h-full'>
-                <div className='fixed lg:static top-0 insetx-0 bg-white w-full flex border-b p-2 lg:px-6 justify-between h-12'>
+                <div className='fixed md:static top-0 insetx-0 bg-white w-full flex border-b p-2 md:px-6 justify-between h-12'>
                     <div className='flex'>
-                        <Link to='/messages' onClick={() => setSelected(false)} className='block lg:hidden'><BiChevronLeft size={30} /></Link>
+                        <Link to={-1} onClick={() => setSelected(false)} className='block md:hidden'><BiChevronLeft size={30} /></Link>
                         <Link to={userById?.username ? `/${userById?.username}` : ''} className='flex gap-2 items-center'>
                             <img className="p-1 w-10 h-10 rounded-full object-cover focus:ring-2 focus:ring-gray-300"
                                 src={userById?.avatar?.url ? userById?.avatar?.url : process.env.REACT_APP_DefaultIcon} alt="" />
@@ -112,7 +112,7 @@ const ChatBox = ({ setSelected }) => {
 
                             <form
                                 onSubmit={NewMSG}
-                                className='fixed lg:absolute inset-x-0 bottom-4 mx-2 border bg-white rounded-full w-[97%] mb-2 py-3 lg:by-5 px-6 flex items-center mt-auto '
+                                className='fixed md:absolute inset-x-0 bottom-4 mx-2 border bg-white rounded-full w-[97%] mb-2 py-3 md:by-5 px-6 flex items-center mt-auto '
                             >
 
                                 <>

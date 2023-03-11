@@ -32,7 +32,7 @@ const SideBar = () => {
     return (
         <>
             {!MobileView &&
-                <div className='shadow-[.2px_.2px_3px_1px] shadow-gray-100 hidden lg:block px-0 overflow-hidden rounded-lg'>
+                <div className='shadow-[.2px_.2px_3px_1px] shadow-gray-100 hidden md:block px-0 overflow-hidden rounded-lg'>
                     <div className='relative'>
                         <img className='w-full relative' src='https://shreethemes.in/doctris/layouts/assets/images/doctors/profile-bg.jpg' alt='' />
                         <img className='w-24 h-24 rounded-full absolute flex inset-x-0 !left-[40%] -bottom-10 shadow-lg'
@@ -81,15 +81,15 @@ const SideBar = () => {
                             <div>
                                 <LinkList Icon={<BsGrid size={17} />} Title='Dashboard' Href='/doctor/doctor-dashboard' />
                                 <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Appointment ' Href='/doctor/doctor-appointment' />
-                                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Schedule Timing' Href='/doctor/doctor-schedule' />
-                                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Invoices' Href='/doctor/invoices' />
+                                <LinkList Icon={<GiAlarmClock size={20} />} Title='Schedule Timing' Href='/doctor/doctor-schedule' />
+                                <LinkList Icon={<IoNewspaperOutline size={20} />} Title='Invoices' Href='/doctor/invoices' />
                                 <LinkList Icon={<BsChatText size={20} />} Title='Messages' Href='/doctor/doctor-messages' />
                                 <LinkList Icon={<BsPeople size={20} />} Title='Patient List' Href='/doctor/patient-list' />
-                                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Patients Review' Href='/doctor/patient-review' />
-                                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Chat' Href='/doctor/doctor-chat' />
+                                <LinkList Icon={<BsChatSquareText size={20} />} Title='Patients Review' Href='/doctor/patient-review' />
+                                <LinkList Icon={<BsChat size={20} />} Title='Chat' Href='/doctor/doctor-chat' />
                                 <LinkList Icon={<AiOutlineAlipay size={20} />} Title='Payment Information' Href='/doctor/payment' />
                                 <LinkList Icon={<BsGear size={20} />} Title='Profile' Href='/doctor/doctor-profile' />
-                                <LinkList Icon={<BsGear size={20} />} Title='Profile Settings' Href='/doctor/settings' />
+                                <LinkList Icon={<BsPersonLinesFill size={20} />} Title='Profile Settings' Href='/doctor/settings' />
                             </div>
                         </motion.div>
                     </>
