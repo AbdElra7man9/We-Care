@@ -101,7 +101,6 @@ export { default as OverFlow } from './Dashboard/Doctor/Screens/OverFlow';
 export { default as Appointments } from './Dashboard/Doctor/Screens/Appointments';
 export { default as CalenderScreen } from './Dashboard/Doctor/Screens/CalenderScreen';
 export { default as PatientList } from './Dashboard/Doctor/Screens/PatientList';
-export { default as Messages } from './Dashboard/Doctor/Messnger/MainChat';
 export { default as Payment } from './Dashboard/Doctor/Screens/Payment';
 
 /////////////Skilliton

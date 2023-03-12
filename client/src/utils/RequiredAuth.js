@@ -8,7 +8,7 @@ const RequireAuth = ({ allowedRoles }) => {
     const userInfo = useSelector(selectCurrentUser)
     return (
         <>
-            {/* {!userInfo?.isEmailActivated && <Navigate to={`/confirm?email=${userInfo?.email}`} state={{ from: location }} replace />} */}
+            {!userInfo?.confirmed && <Navigate to={`/confirm?email=${userInfo?.email}`} state={{ from: location }} replace />}
             {roles.some(role => allowedRoles.includes(role))
                 ? <Outlet />
                 : <Navigate to="/signin" state={{ from: location }} replace />

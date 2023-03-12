@@ -51,7 +51,8 @@ const Header = () => {
                         <button className='bg-blue-600 text-white rounded-full p-3'><BsGear size={15} /></button>
                         <button className='bg-blue-600 text-white rounded-full p-3'><BsSearch size={15} /></button>
                         <Link to='/profile?user=profile'>
-                            <img className='h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl' src='https://shreethemes.in/doctris/layouts/assets/images/doctors/01.jpg' alt='' />
+                            <img className='h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl' 
+                            src='https://shreethemes.in/doctris/layouts/assets/images/doctors/01.jpg' alt='' />
                         </Link>
                         <button className='lg:hidden' onClick={() => setIsHeader(!isHeader)}><BsList size={24} /></button>
                     </div>
@@ -66,6 +67,7 @@ const Header = () => {
                     </div>
                 }
             </header>
+            <div className='bg-transparent h-16 max-w-full'></div>
         </>
     )
 }
