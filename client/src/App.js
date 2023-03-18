@@ -1,5 +1,5 @@
 import {
-  LandingPage, SignIn, SignUp, RequireAuth,
+  LandingPage, SignIn, SignUp, RequireAuth, AdminDash,
   Layout, Profile, PersistLogin, DoctorDash, PatientDash, PatientPage,
   ForgetPassword, ConfirmEmail, ResetPassword, DoctorSignUp, MainAppintment
 } from './Components/Exports'
@@ -14,30 +14,31 @@ function App() {
   const location = useLocation();
   return (
     // <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
-        <Route path='/' element={<Layout />}>
-          <Route path="signin" element={<SignIn />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route element={<PersistLogin />}>
-            <Route path="signupDoctor" element={<DoctorSignUp />} />
-            <Route path="forgetpassword" element={<ForgetPassword />} />
-            <Route path="verify" element={<ConfirmEmail />} />
-            <Route path="reset/:token" element={<ResetPassword />} />
+    <Routes location={location} key={location.pathname}>
+      <Route path='/' element={<Layout />}>
+        <Route path="signin" element={<SignIn />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route element={<PersistLogin />}>
+          <Route path="signupDoctor" element={<DoctorSignUp />} />
+          <Route path="forgetpassword" element={<ForgetPassword />} />
+          <Route path="verify" element={<ConfirmEmail />} />
+          <Route path="reset/:token" element={<ResetPassword />} />
+          <Route index element={<LandingPage />} />
+          <Route path="doctor/:drDash" element={<DoctorDash />} />
+          <Route path="patient/:dash" element={<PatientDash />} />
+          <Route path="admin/:admindash" element={<AdminDash />} />
+          <Route path="book-appointment" element={<MainAppintment />} />
+          <Route path="profile" element={<PatientPage />} />
+          <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
             <Route index element={<LandingPage />} />
-            <Route path="doctor/:drDash" element={<DoctorDash />} />
-            <Route path="patient/:dash" element={<PatientDash />} />
-            <Route path="book-appointment" element={<MainAppintment />} />
-            <Route path="profile" element={<PatientPage />} />
-            <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
-              <Route index element={<LandingPage />} />
-              <Route path={userInfo?.username} element={<Profile />} />
-              <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-                {/* <Route path="dashboard" element={<Dashboard />} /> */}
-              </Route>
+            <Route path={userInfo?.username} element={<Profile />} />
+            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+              {/* <Route path="dashboard" element={<Dashboard />} /> */}
             </Route>
           </Route>
         </Route>
-      </Routes>
+      </Route>
+    </Routes>
     // </AnimatePresence>
   );
 }

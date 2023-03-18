@@ -9,6 +9,7 @@ export { default as ConfirmEmail } from '../Routes/ConfirmEmail';
 export { default as LandingPage } from '../Routes/LandingPage';
 export { default as Profile } from '../Routes/Profile';
 export { default as DoctorDash } from '../Routes/DoctorDash';
+export { default as AdminDash } from '../Routes/AdminDash';
 /////////////////////////Home///////////////////////////////
 export { default as Header } from './Home/LandingPage/Header';
 export { default as UpperPart } from './Home/LandingPage/UpperPart';
@@ -105,3 +106,15 @@ export { default as Payment } from './Dashboard/Doctor/Screens/Payment';
 
 /////////////Skilliton
 export { default as SkilMSGs } from '../Skilitons/SkilMSGs';
+
+
+
+
+///////Admin
+//Layouts
+export { default as AdminSidebar } from './Dashboard/Admin/Layouts/AdminSidebar';
+// Charts 
+export { default as ColumnPlot } from './Dashboard/Admin/Overflow/Charts/ColumnPlot';
+
+export { default as MainOverflow } from './Dashboard/Admin/Overflow/MainOverflow';
+

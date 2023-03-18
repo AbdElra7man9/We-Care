@@ -120,21 +120,21 @@ const Appointments = () => {
             <p className='text-lg font-semibold py-5'>Appointment</p>
             <div className='w-full space-y-2'>
 
-                    <div className="flex items-center justify-between p-4 bg-white">
-                        {/* <div>
+                <div className="flex items-center justify-between p-4 bg-white">
+                    {/* <div>
                             <button className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5" type="button">
                                 <span className="sr-only">Action button</span>
                                 Action
                                 <BiChevronDown size={18} />
                             </button>
                         </div> */}
-                        <div className="relative">
-                            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <BsSearch />
-                            </div>
-                            <input type="text" className="block outline-none p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search for users" />
+                    <div className="relative">
+                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <BsSearch />
                         </div>
+                        <input type="text" className="block outline-none p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search for users" />
                     </div>
+                </div>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full text-sm text-left text-gray-500 ">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">

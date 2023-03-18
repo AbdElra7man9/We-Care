@@ -6,12 +6,12 @@ import { useLocation } from 'react-router-dom';
 import { FeatureAction } from './../../../Redux/Slices/FeaturesSlice';
 import { useDispatch } from 'react-redux';
 
-const Header = () => {
+const Header = ({ setIsSideMargin, setIsSideWidth, sideMargin }) => {
     const [isHeader, setIsHeader] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const { MobileView } = useBreakpoint();
     const dispatch = useDispatch();
-    const { dash, drDash } = useParams();
+    const { dash, drDash, admindash } = useParams();
     const location = useLocation();
     const isHome = (location.pathname === '/')
     useEffect(() => {
@@ -22,14 +22,24 @@ const Header = () => {
     return (
         <>
             {isHeader && <div onClick={() => setIsHeader(false)} className='fixed inset-0 z-10'></div>}
-            <header className={`fixed z-10 container max-w-full bg-white lg:bg-transparent top-0 inset-x-0 ${(isScrolled || !isHome) && '!bg-white lg:!border-b'}`}>
-                <div className={`container border-b lg:border-none flex justify-between items-center p-3 whitespace-nowrap 
-                ${(dash || drDash) ? 'max-w-full' : ' max-w-[28rem] sm:max-w-[35rem] md:max-w-[50rem] lg:max-w-[60rem] xl:max-w-[80rem]'}`}>
+            <header className={`fixed z-10 container max-w-full bg-white lg:bg-transparent top-0 duration-300 inset-x-0 ${(isScrolled || !isHome ) && '!bg-white lg:!border-b'}`}
+                style={{ paddingLeft: `${sideMargin}` }}
+            >
+                <div className={`container border-b lg:border-none flex justify-between items-center p-3 whitespace-nowrap
+                ${(dash || drDash || admindash) ? 'max-w-full' : ' max-w-[28rem] sm:max-w-[35rem] md:max-w-[50rem] lg:max-w-[60rem] xl:max-w-[80rem]'}`}>
                     <div className='flex items-center gap-10'>
                         <div className='flex gap-3'>
                             {drDash && <button
                                 onClick={() => dispatch(FeatureAction.setDocSide(true))}
                                 className='text-gray-500 lg:hidden text-lg lg:text-3xl'><BsJustifyLeft />
+                            </button>}
+                            {admindash && <button
+                                onClick={() => {
+                                    setIsSideMargin((sideMargin !== '300px') ? '300px' : '0px');
+                                    setIsSideWidth((sideMargin !== '300px') ? '300px' : '0px')
+                                }
+                                }
+                                className='text-gray-500 text-lg lg:text-3xl'><BsJustifyLeft />
                             </button>}
                             <Link to='/' className='flex gap-3'>
                                 <img className='w-10 h-10 rounded-xl'
@@ -51,8 +61,8 @@ const Header = () => {
                         <button className='bg-blue-600 text-white rounded-full p-3'><BsGear size={15} /></button>
                         <button className='bg-blue-600 text-white rounded-full p-3'><BsSearch size={15} /></button>
                         <Link to='/profile?user=profile'>
-                            <img className='h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl' 
-                            src='https://shreethemes.in/doctris/layouts/assets/images/doctors/01.jpg' alt='' />
+                            <img className='h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl'
+                                src='https://shreethemes.in/doctris/layouts/assets/images/doctors/01.jpg' alt='' />
                         </Link>
                         <button className='lg:hidden' onClick={() => setIsHeader(!isHeader)}><BsList size={24} /></button>
                     </div>
@@ -67,7 +77,10 @@ const Header = () => {
                     </div>
                 }
             </header>
-            <div className='bg-transparent h-16 max-w-full'></div>
+            <div className='bg-transparent h-16 max-w-full'
+                style={{ paddingLeft: `${sideMargin}` }}
+            >
+            </div>
         </>
     )
 }
