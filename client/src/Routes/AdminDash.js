@@ -22,11 +22,9 @@ const AdminDash = () => {
                 <Header />
             }
             <AdminSidebar sideWidth={sideWidth} />
-            <div className='grid grid-cols-1 md:grid-cols-4 gap-1 duration-300' style={{paddingLeft:`${sideMargin}`}}>
-                <div className='w-full md:col-span-2 xxl:col-span-3'>
-                    <div className='xl:pt-5'>
-                        {(admindash === 'admin-dashboard') && <MainOverflow />}
-                    </div>
+            <div className='gap-1 duration-300' style={{ paddingLeft: `${sideMargin}` }}>
+                <div className='pt-5'>
+                    {(admindash === 'admin-dashboard') && <MainOverflow />}
                 </div>
             </div>
         </>

@@ -115,6 +115,8 @@ export { default as SkilMSGs } from '../Skilitons/SkilMSGs';
 export { default as AdminSidebar } from './Dashboard/Admin/Layouts/AdminSidebar';
 // Charts 
 export { default as ColumnPlot } from './Dashboard/Admin/Overflow/Charts/ColumnPlot';
+export { default as RadialBarPlot } from './Dashboard/Admin/Overflow/Charts/RadialPlot';
 
 export { default as MainOverflow } from './Dashboard/Admin/Overflow/MainOverflow';
 
+export { default as Gridstatics } from './Dashboard/Admin/Overflow/Gridstatics';

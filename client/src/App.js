@@ -3,18 +3,15 @@ import {
   Layout, Profile, PersistLogin, DoctorDash, PatientDash, PatientPage,
   ForgetPassword, ConfirmEmail, ResetPassword, DoctorSignUp, MainAppintment
 } from './Components/Exports'
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { ROLES } from './Config/Roles';
-// import { AnimatePresence } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from './Redux/Slices/UserSlice';
 
 function App() {
   const userInfo = useSelector(selectCurrentUser)
-  const location = useLocation();
   return (
-    // <AnimatePresence>
-    <Routes location={location} key={location.pathname}>
+    <Routes>
       <Route path='/' element={<Layout />}>
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
@@ -39,7 +36,6 @@ function App() {
         </Route>
       </Route>
     </Routes>
-    // </AnimatePresence>
   );
 }
 

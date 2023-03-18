@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { FeatureAction } from './../../../Redux/Slices/FeaturesSlice';
 import { useDispatch } from 'react-redux';
+import { IoReorderThreeOutline } from 'react-icons/io5';
 
 const Header = ({ setIsSideMargin, setIsSideWidth, sideMargin }) => {
     const [isHeader, setIsHeader] = useState(false);
@@ -39,7 +40,7 @@ const Header = ({ setIsSideMargin, setIsSideWidth, sideMargin }) => {
                                     setIsSideWidth((sideMargin !== '300px') ? '300px' : '0px')
                                 }
                                 }
-                                className='text-gray-500 text-lg lg:text-3xl'><BsJustifyLeft />
+                                className='rounded-full f-10 w-10 flex justify-center items-center active:scale-90 duration-200 bg-blue-500 text-white'><IoReorderThreeOutline size={25}/>
                             </button>}
                             <Link to='/' className='flex gap-3'>
                                 <img className='w-10 h-10 rounded-xl'
@@ -53,7 +54,7 @@ const Header = ({ setIsSideMargin, setIsSideWidth, sideMargin }) => {
                                 <Link to='/doctor/doctor-dashboard'>Doctor</Link>
                                 <Link to='/patient/dashboard'>Patients</Link>
                                 <Link>Pharmacy</Link>
-                                <Link>Pages</Link>
+                                <Link to='/admin/admin-dashboard'>Admin</Link>
                             </div>
                         }
                     </div>
