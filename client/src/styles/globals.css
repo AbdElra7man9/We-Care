@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    -webkit-tap-highlight-color:transparent;
+}
+.hideScroll::-webkit-scrollbar {
+    display: none;
+}
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+.hideScroll {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.ellipse-2{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+}
+.home-card-image{
+    background-image:url('https://shreethemes.in/doctris/layouts/assets/images/bg/01.jpg' );
+  }
+.inputfield {
+    @apply
+    text-sm font-medium text-gray-900 border py-3 pl-3 rounded-md mb-3 bg-zinc-50 focus:outline-none
+    focus:border-gray-500 block placeholder:font-extralight 
+    dark:bg-slate-800 dark:border-slate-500 dark:text-slate-400
+}
+.btn-primary{
+    @apply
+    bg-blue-500 rounded-md text-base font-bold text-white py-2 mb-3 focus:bg-blue-400 
+}
+.fc-daygrid-day-number{
+    @apply
+    !text-blue-500 !font-medium
+}
+.fc-button{
+    @apply
+    !bg-blue-500 !border-blue-500 focus:!shadow-none active:!ring-blue-500 active:!ring
+}
+.fc-col-header-cell-cushion{
+    @apply
+    !text-blue-600 !font-medium
+}
