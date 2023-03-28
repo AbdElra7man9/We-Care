@@ -7,15 +7,15 @@ import MessageSlice from "./Slices/MessageSlice";
 import { apiSlice } from './ApiSlice';
 export const store = configureStore({
     reducer: {
-        // auth: UserSlice,
-        // MSGs: MessageSlice,
+        auth: UserSlice,
+        MSGs: MessageSlice,
         Features: FeaturesSlice,
-        // [apiSlice.reducerPath]: apiSlice.reducer,
+        [apiSlice.reducerPath]: apiSlice.reducer,
 
     },
-    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
-    //     apiSlice.middleware),
-    devTools: process.env.REACT_APP_NODE_ENV === "production" ? true : false
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
+        apiSlice.middleware),
+    devTools: process.env.REACT_APP_NODE_ENV !== "production"
 });
 setupListeners(store.dispatch)
 

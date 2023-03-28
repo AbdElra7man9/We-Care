@@ -1,14 +1,15 @@
 "use client";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredentials, LogOut } from "./Slices/UserSlice";
-import type { RootState } from "./types";
 import type {
     BaseQueryFn,
     FetchArgs,
     FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
+import { RootState } from "./Store";
+import { user } from "@/lib/types";
 
-const url = process.env.REACT_APP_API_KEY;
+const url: string = process.env.REACT_APP_API_KEY ?? 'http://localhost:5000';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: url,
@@ -26,17 +27,10 @@ const baseQuery = fetchBaseQuery({
     },
 });
 
-const baseQueryWithReauth: BaseQueryFn<
-    string | FetchArgs,
-    unknown,
-    FetchBaseQueryError
-> = async (args, api, extraOptions) => {
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, extraOptions) => {
+
     let result = await baseQuery(args, api, extraOptions);
-    if (
-        result?.error?.status === 403 ||
-        result?.error?.status === 500 ||
-        result?.error?.status === 403
-    ) {
+    if (result?.error?.status === 403 || result?.error?.status === 500) {
         // send refresh token to get new access token
         const refreshResult = await baseQuery(
             "/api/auth/refresh",
@@ -44,12 +38,9 @@ const baseQueryWithReauth: BaseQueryFn<
             extraOptions
         );
         if (refreshResult?.data) {
-            const user = refreshResult?.data?.user;
-            // const user = api.getState().auth.user
+            const { token, user } = refreshResult?.data as user;
             // store the new token
-            api.dispatch(setCredentials({ ...refreshResult.data, user }));
-
-
+            api.dispatch(setCredentials({ token: token as string, user: user }));
 
             // retry the original query with new access token
             result = await baseQuery(args, api, extraOptions);
@@ -65,6 +56,6 @@ const baseQueryWithReauth: BaseQueryFn<
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
     keepUnusedDataFor: 500,
-    tagTypes: ["Comments", "Posts", "Saves", "Auth", "Chat", "Message"],
+    tagTypes: ["auth"],
     endpoints: (builder) => ({}),
 });

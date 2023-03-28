@@ -1,5 +1,7 @@
 "use client";
+import { useSigninMutation } from "@/Redux/APIs/AuthApi";
 import React, { useState, useRef, useEffect } from "react";
+import { ImSpinner7 } from "react-icons/im";
 interface Inputs {
   name: string;
   department: string;
@@ -24,7 +26,7 @@ export default function Page(): JSX.Element {
   ) => {
     setInputs({ ...inputs, [event.target.name]: event.target.value });
   };
-  // const [signin, { isLoading, isError, error }] = useSigninMutation();
+  const [signin, { isLoading, isError, error }] = useSigninMutation();
   // useEffect(() => {
   //   userRef.current.focus()
   // }, []);
@@ -32,19 +34,19 @@ export default function Page(): JSX.Element {
     event.preventDefault();
     const { email, name, department, doctor, phone, message } = inputs;
     const data = { email, name, department, doctor, phone, message };
-    // await signin(data).unwrap()
-    //   .then(() => {
-    //     setInputs({
-    //       name: '',
-    //       department: '',
-    //       doctor: '',
-    //       email: '',
-    //       phone: '',
-    //       message: '',
-    //     });
-    //   }).catch(err => {
-    //     console.log(err)
-    //   })
+    await signin(data).unwrap()
+      .then(() => {
+        setInputs({
+          name: '',
+          department: '',
+          doctor: '',
+          email: '',
+          phone: '',
+          message: '',
+        });
+      }).catch(err => {
+        console.log(err)
+      })
   };
 
   return (
@@ -122,9 +124,9 @@ export default function Page(): JSX.Element {
           rows={5}
           className="border p-3 outline-none inputfield rounded-lg g-24"
         ></textarea>
-        {/* <button type='submit' className='btn-primary mt-4' disabled={isLoading}>
+        <button type='submit' className='btn-primary mt-4' disabled={isLoading}>
           {isLoading ? <span className='flex items-center justify-center text-2xl py-1 animate-spin'><ImSpinner7 /> </span> : 'Book an appointment'}</button>
-        {isError && <span className="text-red-500 pb-3 font-poppins font-medium">{error?.data?.message}</span>} */}
+        {isError && <span className="text-red-500 pb-3 font-poppins font-medium"></span>}
       </form>
     </div>
   );

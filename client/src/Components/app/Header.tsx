@@ -1,4 +1,3 @@
-// import useBreakpoint from "../Hooks/useBreakpoint";
 "use client";
 import { BsSearch, BsGear, BsList, BsJustifyLeft } from "react-icons/bs";
 import { useState, useEffect } from "react";
@@ -7,33 +6,41 @@ import { FeatureAction } from "../../Redux/Slices/FeaturesSlice";
 import Link from "next/link";
 import Image from "next/image";
 import useBreakpoint from "../../Hooks/useBreakpoint";
-import { useDispatch } from "react-redux";
 import { usePathname } from "next/navigation";
 import Themetoggle from "../Layouts/Themetoggle";
+import { useAppDispatch } from "@/Hooks/useRedux";
 interface HeaderProps {
   sideMargin: Boolean;
   setIsSideMargin: () => void;
   setIsSideWidth: () => void;
 }
-interface FeatureAction {
-  setDocSide: Boolean;
-}
+
 export default function Header() {
-  const [isHeader, setIsHeader] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHeader, setIsHeader] = useState<Boolean>(false);
   const { MobileView } = useBreakpoint();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const key = usePathname();
   const dash = key.includes("doctor");
   const drDash = key.includes("doctor");
   const admindash = key.includes("admin");
   const pathname = usePathname();
+  const [pos, setPos] = useState<string>("top");
+
   const isHome = pathname === "/";
+  // Check the top position of the navigation in the window
   useEffect(() => {
-    if (window.scrollY !== 0) {
-      setIsScrolled(true);
-    }
+    const handleScrollTop = () => {
+      const scrolled = document.scrollingElement?.scrollTop;
+      if ((scrolled as number) >= 5) {
+        setPos("moved");
+      } else {
+        setPos("top");
+      }
+    };
+    document.addEventListener("scroll", handleScrollTop);
+    return () => document.removeEventListener("scroll", handleScrollTop);
   }, []);
+
   return (
     <>
       {isHeader && (
@@ -43,9 +50,13 @@ export default function Header() {
         ></div>
       )}
       <header
-        className={`fixed z-10 container max-w-full bg-white !dark:bg-slate-900 lg:bg-transparent top-0 duration-300 inset-x-0 select-none
-        ${(isScrolled || !isHome) && "!bg-white dark:bg-slate-900 lg:!border-b"
-          }`}>
+        className={`top-0 z-10 flex flex-wrap container max-w-full duration-300 inset-x-0 select-none bg-white dark:bg-slate-900
+        ${key === "/" && pos === "top"
+            ? "bg-transparent absolute"
+            : pos === "top"
+              ? "absolute bg-white dark:bg-slate-900 "
+              : "fixed shadow-b-2xl bg-white dark:bg-slate-900"
+          }}`}>
         <div
           className={`container border-b lg:border-none flex justify-between items-center p-3 whitespace-nowrap
                 ${dash || drDash || admindash
@@ -55,14 +66,14 @@ export default function Header() {
         >
           <div className="flex items-center gap-10">
             <div className="flex gap-3">
-              {drDash && (
-                <button
-                  // onClick={() => dispatch(FeatureAction.setDocSide(true))}
-                  className="text-gray-500 dark:text-white lg:hidden text-lg lg:text-3xl"
-                >
-                  <BsJustifyLeft />
-                </button>
-              )}
+              {/* {drDash && ( */}
+              <button
+                onClick={() => dispatch(FeatureAction.setDocSide())}
+                className="text-gray-500 dark:text-white lg:hidden text-lg lg:text-3xl"
+              >
+                <BsJustifyLeft />
+              </button>
+              {/* )} */}
               <Link href="/" className="flex gap-3">
                 <Image
                   height={200}
@@ -119,9 +130,6 @@ export default function Header() {
           </div>
         )}
       </header>
-      <div
-        className="bg-transparent h-16 max-w-full dark:bg-slate-900"
-      ></div>
     </>
   );
 }
