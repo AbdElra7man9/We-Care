@@ -1,70 +1,43 @@
-import { Outlet } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
-import { useRefreshMutation } from "../Redux/APIs/AuthApi";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentToken, setCredentials } from "../Redux/Slices/UserSlice";
-import usePersist from "../Hooks/usePersist";
-import { LoadingScreen } from "../Components/Exports";
-const PersistLogin = () => {
-    const [persist] = usePersist();
-    const token = useSelector(selectCurrentToken);
+import { createContext, FC, useContext, useEffect, useState } from 'react';
+import { useRefreshMutation } from '../Redux/APIs/AuthApi';
+import { selectCurrentToken, setCredentials } from '@Redux/Slices/UserSlice';
+import usePersist from '@Hooks/usePersist';
+import { useAppDispatch, useAppSelector } from '@Hooks/useRedux';
+import Loadingscreen from '@Components/Layouts/Loadingscreen';
+import { user } from '@lib/types';
+interface AuthContextProps {
+    token?: string;
+    user?: user
+}
 
-    const effectRan = useRef(false);
-    const [trueSuccess, setTrueSuccess] = useState(false)
-    const dispatch = useDispatch();
+const AuthContext = createContext<AuthContextProps>({});
+
+export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
+
+    const [persist] = usePersist();
+    const token = useAppSelector(selectCurrentToken);
+
+    const dispatch = useAppDispatch();
     const [refresh, { isUninitialized, isLoading, isSuccess, isError }] = useRefreshMutation();
 
     useEffect(() => {
-
-        if (effectRan.current === true || process.env.NODE_ENVREACT_APP_NODE_ENV !== 'development') { // React 18 Strict Mode
-
-            const verifyRefreshToken = async () => {
-                console.log('verifying refresh token')
-                try {
-                    const { token, user } = await refresh().unwrap()
-                    dispatch(setCredentials({ token, user }))
-                    setTrueSuccess(true)
-                }
-                catch (err) {
-                    console.error(err)
-                }
-            }
-
-            if (!token && persist) verifyRefreshToken()
+        if (persist && !token) {
+            console.log('refreshing ...')
+            refresh()
+                .unwrap()
+                .then(({ token, user }) => {
+                    dispatch(setCredentials({ token, user }));
+                })
+                .catch((err) => console.error(err));
         }
-
-        return () => effectRan.current = true
-
-        // eslint-disable-next-line
-    }, [])
-
-
-
-    let content
-    if (!persist) { // persist: no
-        // console.log('no persist')
-        content = <Outlet />
-    } else if (isLoading) { //persist: yes, token: no
-        // console.log('loading')
-
-        content =
-            <>
-                <LoadingScreen />
-            </>
-    } else if (isError) { //persist: yes, token: no
-        // console.log('error')
-        // console.log(error)
-        content = <Outlet />
-    } else if (isSuccess && trueSuccess) { //persist: yes, token: yes
-        // console.log('success')
-        content = <Outlet />
-    } else if (token && isUninitialized) { //persist: yes, token: yes
-        // console.log('token and uninit')
-        // console.log(isUninitialized)
-        content = <Outlet />
+    }, []);
+    if (isLoading || isUninitialized) {
+        return <Loadingscreen />;
     }
-    return content
-}
 
-export default PersistLogin
+    if (isError) {
+        // handle error
+    }
 
+    return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>;
+};

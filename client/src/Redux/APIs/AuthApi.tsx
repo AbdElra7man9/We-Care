@@ -3,7 +3,7 @@ import { LogOut, setCredentials } from '../Slices/UserSlice';
 import { apiSlice } from '../ApiSlice';
 import getSocket from '../SocketRTK';
 import { RootState } from '../Store';
-import { AuthState, UserInfoProps } from '@lib/types';
+import { AuthState, user, UserInfoProps } from '@lib/types';
 export const AuthApi = apiSlice.injectEndpoints({
     endpoints: builder => ({
         signin: builder.mutation<AuthState, void>({
@@ -103,7 +103,7 @@ export const AuthApi = apiSlice.injectEndpoints({
             },
             invalidatesTags: ['Auth'],
         }),
-        refresh: builder.mutation({
+        refresh: builder.mutation<{ token: string; user: UserInfoProps }, void>({
             query: () => ({
                 url: '/api/v1/users/refresh',
                 method: 'GET',
