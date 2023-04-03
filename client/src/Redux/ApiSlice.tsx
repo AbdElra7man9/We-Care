@@ -7,7 +7,7 @@ import type {
     FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
 import { RootState } from "./Store";
-import { user } from "@/lib/types";
+import { AuthState, user } from "@/lib/types";
 
 const url: string = process.env.REACT_APP_API_KEY ?? 'http://localhost:5000';
 
@@ -38,9 +38,12 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             extraOptions
         );
         if (refreshResult?.data) {
-            const { token, user } = refreshResult?.data as user;
+            const { token, user } = refreshResult?.data as AuthState;
             // store the new token
-            api.dispatch(setCredentials({ token: token as string, user: user }));
+            api.dispatch(setCredentials({
+                token: token as string,
+                user: user as user
+            }));
 
             // retry the original query with new access token
             result = await baseQuery(args, api, extraOptions);

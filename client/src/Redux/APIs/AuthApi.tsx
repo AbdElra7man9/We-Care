@@ -3,10 +3,14 @@ import { LogOut, setCredentials } from '../Slices/UserSlice';
 import { apiSlice } from '../ApiSlice';
 import getSocket from '../SocketRTK';
 import { RootState } from '../Store';
-import { AuthState, user, UserInfoProps } from '@lib/types';
+import { AuthState, user } from '@lib/types';
+interface SignInData {
+    email: string;
+    password: string;
+}
 export const AuthApi = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        signin: builder.mutation<AuthState, void>({
+        signin: builder.mutation<AuthState, SignInData>({
             query: (data) => ({
                 url: '/api/v1/users/login',
                 method: 'POST',
@@ -16,49 +20,43 @@ export const AuthApi = apiSlice.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled;
 
-                    if (data && data.data && data.data.user) {
-                        dispatch(
-                            setCredentials({
-                                token: data.token as string,
-                                user: data.data.user,
-                            })
-                        );
-                        let userId = (getState() as RootState).auth?.user?._id;
-                        const socket = getSocket()
-                        socket.on("connect", () => {
-                            socket.emit("join", userId);
-                        });
-                    }
+                    dispatch(
+                        setCredentials({
+                            token: data.token as string,
+                            user: data.user as user,
+                        })
+                    );
+                    let userId = (getState() as RootState).auth?.user?._id;
+                    const socket = getSocket()
+                    socket.on("connect", () => {
+                        socket.emit("join", userId);
+                    });
                 } catch (err) {
                     // do nothing
                 }
             },
         }),
-        signup: builder.mutation<AuthState, void>({
+        signup: builder.mutation<{ status: string; token: string; user: user }, void>({
             query: (data) => ({
                 url: '/api/v1/patients/signup',
                 method: 'POST',
                 body: data,
             }),
-            invalidatesTags: [{ type: 'Auth' }],
+            invalidatesTags: ['Auth'],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     const { data } = await queryFulfilled;
-                    console.log(data)
+                    const { token, user } = data
                     localStorage.setItem('persist', 'true')
-                    localStorage.setItem('id', data.data.user._id)
                     dispatch(
-                        setCredentials({
-                            token: data.token,
-                            user: data.data.user,
-                        })
+                        setCredentials({ token, user })
                     );
                 } catch (err) {
                     // do nothing
                 }
             },
         }),
-        signupDoctor: builder.mutation({
+        signupDoctor: builder.mutation<{ status: string; token: string; user: user }, void>({
             query: (data) => ({
                 url: 'api/v1/doctors/signup',
                 method: 'POST',
@@ -69,12 +67,11 @@ export const AuthApi = apiSlice.injectEndpoints({
                 try {
                     const { data } = await queryFulfilled;
                     console.log(data)
-                    localStorage.setItem('persist', true)
-                    localStorage.setItem('id', data.data.user._id)
+                    localStorage.setItem('persist', 'true')
                     dispatch(
                         setCredentials({
                             token: data.token,
-                            user: data.data.user,
+                            user: data.user,
                         })
                     );
                 } catch (err) {
@@ -103,7 +100,7 @@ export const AuthApi = apiSlice.injectEndpoints({
             },
             invalidatesTags: ['Auth'],
         }),
-        refresh: builder.mutation<{ token: string; user: UserInfoProps }, void>({
+        refresh: builder.mutation<{ token: string; user: user }, void>({
             query: () => ({
                 url: '/api/v1/users/refresh',
                 method: 'GET',
@@ -160,7 +157,7 @@ export const AuthApi = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     const { data } = await queryFulfilled;
-                    localStorage.setItem('persist', true)
+                    localStorage.setItem('persist', 'true')
                     localStorage.setItem('id', data.data.user._id)
                     dispatch(
                         setCredentials({

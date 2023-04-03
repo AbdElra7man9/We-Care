@@ -1,17 +1,20 @@
+'use client';
 import React, { useEffect, useRef, useState } from 'react'
 import { ImSpinner7 } from 'react-icons/im'
 import { useResetPasswordMutation } from '@Redux/APIs/AuthApi';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import getToken from './getToken';
 
 interface Inputs {
     password: string;
     passwordConfirm: string;
 }
 
-export default function Page(): JSX.Element {
+export default function Page() {
     const router = useRouter();
+    const token = getToken();
     const userRef = useRef<HTMLInputElement>(null);
     const [inputs, setInputs] = useState<Inputs>({
         password: '',
@@ -32,7 +35,6 @@ export default function Page(): JSX.Element {
             router.push("/");
         }
     })
-    const { token } = useParams()
     useEffect(() => {
         userRef.current?.focus()
     }, []);

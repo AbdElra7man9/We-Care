@@ -23,7 +23,7 @@ export const UserApi = apiSlice.injectEndpoints({
                 method: 'GET',
                 credentials: 'include',
             }),
-            providesTags: ['Auth', 'Saves'],
+            providesTags: ['Auth'],
         }),
         Suggestion: builder.query({
             query: () => ({

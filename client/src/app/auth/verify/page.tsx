@@ -97,11 +97,10 @@ export default function page() {
                                 className='font-medium text-blue-500 text-md focus:text-blue-300 '>
                                 Go Back?
                             </Link>
-                            {(isError || isErrorReq2opt) &&
-                                <span className="text-red-500 pb-3 font-poppins font-medium">
-                                    {error?.data?.message as string || errorReq2opt?.data?.message as string}
-                                </span>
-                            }
+                            {((isError || isErrorReq2opt) && error && 'data' in error) && <span className="text-red-500 pb-3 font-poppins font-medium">
+                                {(error as { data: { message?: string } }).data?.message}
+                                {(errorReq2opt as { data: { message?: string } }).data?.message}
+                            </span>}
                             {success &&
                                 <span className="text-green-500 pb-3 font-poppins font-medium">
                                     {success}

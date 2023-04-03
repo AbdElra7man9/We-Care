@@ -16,6 +16,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
 
     const [persist] = usePersist();
     const token = useAppSelector(selectCurrentToken);
+    const [authState, setAuthState] = useState<AuthContextProps>({});
 
     const dispatch = useAppDispatch();
     const [refresh, { isUninitialized, isLoading, isSuccess, isError }] = useRefreshMutation();
@@ -28,7 +29,9 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
                 .then(({ token, user }) => {
                     dispatch(setCredentials({ token, user }));
                 })
-                .catch((err) => console.error(err));
+                .catch((err) =>{
+                    //Error here
+                });
         }
     }, []);
     if (isLoading || isUninitialized) {
@@ -39,5 +42,11 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
         // handle error
     }
 
-    return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={authState}>{children}</AuthContext.Provider>;
 };
+
+const useAuth = (): AuthContextProps => {
+    return useContext(AuthContext);
+};
+
+export default useAuth;

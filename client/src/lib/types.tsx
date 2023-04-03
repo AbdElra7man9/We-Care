@@ -3,7 +3,7 @@ export type appointments = {
     _id: string;
 };
 
-export type UserInfoProps = {
+export type user = {
     appointments: appointments | null;
     _id?: string;
     name?: string;
@@ -15,13 +15,9 @@ export type UserInfoProps = {
     createdAt?: Date;
     updatedAt?: Date;
 };
-export type user = {
-    user: UserInfoProps;
-    token?: string;
-};
 
 export interface AuthState {
     status?: string;
     token?: string;
-    data?: user
+    user?: user
 }

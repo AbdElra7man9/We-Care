@@ -5,6 +5,10 @@
 html {
     -webkit-tap-highlight-color:transparent;
 }
+*{
+    @apply
+    outline-1 outline-blue-500 dark:outline-black
+}
 .hideScroll::-webkit-scrollbar {
     display: none;
 }
