@@ -6,6 +6,7 @@ import { ImSpinner7 } from 'react-icons/im';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import GetError from '@lib/GetError';
 
 
 interface Inputs {
@@ -78,9 +79,8 @@ export default function page(): JSX.Element {
                 <p className=' focus:text-blue-300 ml-2 text-base text-blue-900 font-medium'>Log in with facebook</p>
               </button>
               <Link href='/forgetpassword' className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm mt-2'>Forgot password ?</Link>
-              {(isError && error && 'data' in error) && <span className="text-red-500 pb-3 font-poppins font-medium">
-                {(error as { data: { message?: string } }).data?.message}
-              </span>}
+              {isError && <GetError error={error} />}
+
             </form>
           </div>
           <div className='md:border rounded-lg max-w-[90%] border-gray-300 justify-center flex mt-5 md:bg-white'>

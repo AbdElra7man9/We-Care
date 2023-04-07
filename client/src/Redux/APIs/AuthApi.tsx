@@ -8,6 +8,12 @@ interface SignInData {
     email: string;
     password: string;
 }
+interface SignUpData {
+    email: string;
+    password: string;
+    name: string;
+    passwordConfirm: string;
+}
 export const AuthApi = apiSlice.injectEndpoints({
     endpoints: builder => ({
         signin: builder.mutation<AuthState, SignInData>({
@@ -36,7 +42,7 @@ export const AuthApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        signup: builder.mutation<{ status: string; token: string; user: user }, void>({
+        signup: builder.mutation<{ status: string; token: string; user: user }, SignUpData>({
             query: (data) => ({
                 url: '/api/v1/patients/signup',
                 method: 'POST',

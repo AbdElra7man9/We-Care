@@ -34,7 +34,8 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
                 });
         }
     }, []);
-    if (isLoading || isUninitialized) {
+    if (isLoading) {
+        console.log(isUninitialized)
         return <Loadingscreen />;
     }
 

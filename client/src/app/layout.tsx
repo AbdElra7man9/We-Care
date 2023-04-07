@@ -17,12 +17,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`bg-white text-slate-900 antialiased ${inter.className}`}
+      className={`bg-whit text-slate-900 antialiased ${inter.className}`}
     >
       <head>
         <link rel="stylesheet" type="text/css" href="/nprogress.css" />
       </head>
-      <body>
+      <body className="dark:bg-slate-900">
         <Providers>
           <ProgessBar />
           <Header />
