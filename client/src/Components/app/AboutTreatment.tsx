@@ -20,11 +20,13 @@ const AboutTreatment: React.FC = () => {
                 <div className='space-y-5'>
                     <h3 className='text-2xl font-medium'>About Our Treatments</h3>
                     <p className='text-gray-400 leading-loose'>
-                        Great doctor if you need your family member to get effective immediate assistance, examination,
+
+                        {`Great doctor if you need your family member to get effective immediate assistance, examination,
                         emergency treatment or a simple consultation. Thank you.
                         The most well-known dummy text is the Lorem Ipsum, which is said to have originated in the 16th century.
                         Lorem Ipsum is composed in a pseudo-Latin language which more or less corresponds to 'proper' Latin.
-                        It contains a series of real Latin words.
+                        It contains a series of real Latin words.`}
+
                     </p>
 
                     <button
