@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { BsFillHandbagFill, BsFillClockFill } from 'react-icons/bs';
 import { FaHeartbeat } from 'react-icons/fa';
 
-export default function upperpart() {
+export default function Upperpart() {
     const ChartBox = () => {
         return (
             <div className='absolute -bottom-[20rem] md:-bottom-20 inset-x-0'>

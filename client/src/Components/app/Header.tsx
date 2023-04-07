@@ -8,7 +8,7 @@ import Image from "next/image";
 import useBreakpoint from "../../Hooks/useBreakpoint";
 import { usePathname } from "next/navigation";
 import Themetoggle from "../Layouts/Themetoggle";
-import { useAppDispatch } from "@/Hooks/useRedux";
+import { useAppDispatch } from "@Hooks/useRedux";
 interface HeaderProps {
   sideMargin: Boolean;
   setIsSideMargin: () => void;

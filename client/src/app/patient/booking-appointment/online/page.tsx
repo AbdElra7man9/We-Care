@@ -1,5 +1,5 @@
 "use client";
-import { useSigninMutation } from "@/Redux/APIs/AuthApi";
+import { useSigninMutation } from "@Redux/APIs/AuthApi";
 import React, { useState, useRef, useEffect } from "react";
 import { ImSpinner7 } from "react-icons/im";
 

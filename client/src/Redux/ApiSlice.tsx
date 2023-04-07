@@ -7,7 +7,7 @@ import type {
     FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
 import { RootState } from "./Store";
-import { AuthState, user } from "@/lib/types";
+import { AuthState, user } from "@lib/types";
 
 const url: string = process.env.REACT_APP_API_KEY ?? 'http://localhost:5000';
 

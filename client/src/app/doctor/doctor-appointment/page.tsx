@@ -1,5 +1,9 @@
 import React from "react";
-
+import Calendar from "@Components/Graphs/Calendar";
 export default function page() {
-  return <div>hi doctor from appointments</div>;
+  return (
+    <div className='container px-5 max-w-full'>
+      <Calendar />
+    </div>
+  );
 }

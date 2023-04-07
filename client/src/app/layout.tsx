@@ -1,8 +1,8 @@
-import "@/styles/globals.css";
+import "@styles/globals.css";
 import { Inter } from "next/font/google";
-import Providers from "@/Components/Providers";
-import Header from "@/Components/app/Header";
-import Footer from "@/Components/app/Footer";
+import Providers from "@Components/Providers";
+import Header from "@Components/app/Header";
+import Footer from "@Components/app/Footer";
 import ProgessBar from "@Components/Layouts/ProgessBar";
 export const metadata = {
   title: "Helth care",

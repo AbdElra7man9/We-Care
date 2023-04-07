@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react'
 import { ImSpinner7 } from 'react-icons/im'
-import { useForgetPasswordMutation } from '@/Redux/APIs/AuthApi';
+import { useForgetPasswordMutation } from '@Redux/APIs/AuthApi';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 export default function page() {
