@@ -1,4 +1,5 @@
-import { Pie } from '@ant-design/plots';
+'use client';
+import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 
 const DonutPlot: React.FC = () => {
     const data = [
@@ -15,35 +16,33 @@ const DonutPlot: React.FC = () => {
             type: 'Heartbeat',
         },
     ];
-    const config = {
-        data,
-        angleField: 'value',
-        colorField: 'type',
-        radius: 0.8,
-        innerRadius: 0.8,
-        label: {
-            type: 'inner',
-            offset: '-50%',
-            content: '{value}',
-            style: {
-                textAlign: 'center',
-                fontSize: 14,
-            },
-        },
-        statistic: {
-            title: false,
-            content: {
-                style: {
-                    whiteSpace: 'pre-wrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    fontSize: 25,
-                },
-                content: '93%',
-            },
-        },
-    };
-    return <Pie {...config} />;
+    const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
+    return (
+        <PieChart width={300} height={280}>
+            <Pie
+                data={data}
+                dataKey="value"
+                nameKey="type"
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={80}
+                fill="#8884d8"
+                // label={{
+                //     position: 'inside',
+                //     content: '{value}',
+                //     fontSize: 14,
+                //     fill: '#fff',
+                // }}
+            >
+                {data.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+            </Pie>
+            <Legend />
+            <Tooltip />
+        </PieChart>
+    );
 };
 
 export default DonutPlot;

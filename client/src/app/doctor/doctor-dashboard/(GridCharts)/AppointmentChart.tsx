@@ -32,8 +32,10 @@ const AppointmentChart: React.FC = () => {
             value: 3.26,
         },
     ];
+    // const gradientColors = ['#00C2FF', '#0089FF'];
+
     return (
-        <div className='shadow-[.2px_.2px_3px_1px] h-52 shadow-gray-100 rounded-lg overflow-hidden'>
+        <div className='shadow-[.2px_.2px_3px_1px] dark:shadow-slate-700 h-52 shadow-gray-100 rounded-lg overflow-hidden'>
             <div className='flex justify-between p-5'>
                 <div className='flex gap-2'>
                     <p className='font-medium'>Appointment</p>

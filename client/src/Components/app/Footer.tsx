@@ -84,7 +84,7 @@ export default function Footer() {
     ]
 
     return (
-        <footer className='bg-[#202942] duration-200 conatiner max-w-full'>
+        <footer className='bg-[#202942] duration-200 conatiner max-w-full mt-16'>
             <div className='container px-5 max-w-7xl py-10'>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
                     <div>

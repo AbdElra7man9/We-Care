@@ -2,12 +2,11 @@
 import { BiChevronLeft } from 'react-icons/bi'
 import { MdOutlineInfo } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { preventScroll } from '../../../../Helpers/PreventScroll.tsx''
-import { useDeleteAllMSGsMutation } from '../../../../Redux/APIs/MessageApi'
-import { FeatureAction } from '../../../../Redux/Slices/FeaturesSlice'
+import { preventScroll } from '@Helpers/PreventScroll'
+import { useDeleteAllMSGsMutation } from '@Redux/APIs/MessageApi'
+import { FeatureAction } from '@Redux/Slices/FeaturesSlice'
 
-const CoversationCTRL = ({ setDetails, setSelected, details, id, userById }) => {
+const page = ({ setDetails, setSelected, details, id, userById }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const { isModalBlockConfirm } = useSelector(state => state.Features);
@@ -55,4 +54,4 @@ const CoversationCTRL = ({ setDetails, setSelected, details, id, userById }) => 
     )
 }
 
-export default CoversationCTRL
+export default page

@@ -2,10 +2,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Message from './Message';
-import { MessageApi, useGetMessagesQuery } from '../../../../Redux/APIs/MessageApi';
+import { MessageApi, useGetMessagesQuery } from '@Redux/APIs/MessageApi';
 import { useDispatch } from 'react-redux';
 import { ImSpinner3 } from 'react-icons/im';
-import { useBreakpoint, SkilMSGs } from '../../../Exports';
 
 const InfinteScrollableChat = ({ userById, id, image, isLoading }) => {
     const breakpoint = useBreakpoint();

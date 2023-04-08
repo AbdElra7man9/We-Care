@@ -38,8 +38,8 @@ export default function page() {
           <div className='md:border rounded-lg  border-gray-300 md:max-w-[90%] ss:px-5 md:px-12 items-center text-center md:bg-white'>
             <Link href="/">
               <div className='flex items-center justify-center wfull gap-2 py-10 instalogo'>
-                <img className='w-10 h-10 rounded-xl'
-                  src='https://shreethemes.in/doctris/layouts/assets/images/logo-icon.png' alt='' />
+                <Im className='w-10 h-10 rounded-xl'
+                  src='/Images/logo-icon.png' alt='' />
                 <p className='text-2xl font-bold'>Doctris</p>
               </div>
             </Link>

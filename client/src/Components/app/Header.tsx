@@ -8,7 +8,8 @@ import Image from "next/image";
 import useBreakpoint from "../../Hooks/useBreakpoint";
 import { usePathname } from "next/navigation";
 import Themetoggle from "../Layouts/Themetoggle";
-import { useAppDispatch } from "@Hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@Hooks/useRedux";
+import { selectCurrentUser } from "@Redux/Slices/UserSlice";
 interface HeaderProps {
   sideMargin: Boolean;
   setIsSideMargin: () => void;
@@ -19,8 +20,9 @@ export default function Header() {
   const [isHeader, setIsHeader] = useState<Boolean>(false);
   const { MobileView } = useBreakpoint();
   const dispatch = useAppDispatch();
+  const userInfo = useAppSelector(selectCurrentUser)
   const key = usePathname();
-  const dash = key.includes("doctor");
+  const dash = key.includes("patient");
   const drDash = key.includes("doctor");
   const admindash = key.includes("admin");
   const pathname = usePathname();
@@ -89,7 +91,7 @@ export default function Header() {
               <div className="list-none flex gap-5 text-lg text-gray-800 dark:text-slate-400 font-medium uppercase">
                 <Link href="/" className="hover:text-blue-600">Home</Link>
                 <Link href="/doctor/doctor-dashboard">Doctor</Link>
-                <Link href="/patient/dashboard">Patients</Link>
+                <Link href="/patient/patient-dashboard">Patients</Link>
                 <Link href='/'>Pharmacy</Link>
                 <Link href="/admin/admin-dashboard">Admin</Link>
               </div>
@@ -103,7 +105,7 @@ export default function Header() {
             <button className="bg-blue-600 text-white rounded-full p-3">
               <BsSearch size={15} />
             </button>
-            <Link href="/profile?user=profile">
+            <Link href={`/profile/${userInfo.username}`}>
               <Image
                 height={200}
                 width={200}

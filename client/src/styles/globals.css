@@ -38,8 +38,8 @@ html {
 .inputfield {
     @apply
     text-sm font-medium text-gray-900 border py-3 pl-3 rounded-md mb-3 bg-zinc-50 focus:outline-none
-    focus:border-gray-500 block placeholder:font-extralight 
-    dark:bg-slate-800 dark:border-slate-500 dark:text-slate-400
+    focus:border-black block placeholder:font-extralight 
+    dark:bg-slate-800 dark:border-slate-500 dark:text-slate-400 dark:focus:border-blue-700
 }
 .btn-primary{
     @apply
@@ -48,6 +48,10 @@ html {
 .fc-daygrid-day-number{
     @apply
     !text-blue-500 !font-medium
+}
+.fc-theme-standard td, .fc-theme-standard th,.fc-theme-standard .fc-scrollgrid{
+    @apply
+    dark:border-slate-500
 }
 .fc-button{
     @apply

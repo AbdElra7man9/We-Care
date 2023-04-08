@@ -1,6 +1,7 @@
 import React from 'react'
 import { BsSearch, BsCheck, BsX } from 'react-icons/bs';
 import { AiOutlineEye } from 'react-icons/ai';
+import Image from 'next/image';
 interface PatientListProps {
   _id: string;
   img: string;
@@ -157,7 +158,10 @@ export default function page() {
                 <tr className="bg-white hover:bg-gray-50 whitespace-nowrap">
                   <td className="w-4 p-4 font-medium">{index + 1}</td>
                   <th className="flex items-center px-3 pr-10 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    <img className="w-12 h-12 rounded-full"
+                    <Image
+                      height={500}
+                      width={500}
+                      className="w-12 h-12 rounded-full"
                       src={item?.img}
                       alt="" />
                     <div className="pl-3">

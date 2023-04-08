@@ -7,7 +7,7 @@ import UrgentChart from './(GridCharts)/UrgentChart'
 export default function page() {
   return (
     <div className='container max-w-full'>
-      <p className='text-xl lg:text-3xl font-bold text-gray-700 py-5 px-5 mt-16 lg:px-0'>Good morning, Dr Adam</p>
+      <p className='text-xl lg:text-2xl font-bold text-gray-700 py-5 px-5 mt-16 lg:px-0 dark:text-white'>Good morning, Dr Adam</p>
       <div className='grid grid-cols-1 xl:grid-cols-4 gap-5'>
         <AppointmentChart />
         <PatientsChart />

@@ -3,37 +3,14 @@ import React from 'react'
 
 const CanceledChart = () => {
     const data = [
-        {
-            "timePeriod": "2006 Q1",
-            "value": 1.5
-        },
-        {
-            "timePeriod": "2006 Q2",
-            "value": 2.05
-        },
-        {
-            "timePeriod": "2006 Q3",
-            "value": 3.08
-        },
-        {
-            "timePeriod": "2006 Q4",
-            "value": 2.08
-        },
-        {
-            "timePeriod": "2006 Q5",
-            "value": 3.08
-        },
-        {
-            "timePeriod": "2006 Q9",
-            "value": 2.17
-        },
-        {
-            "timePeriod": "2006 Q10",
-            "value": 3.26
-        },
-    ]
+        { timePeriod: 'Q1', value: 50 },
+        { timePeriod: 'Q2', value: 70 },
+        { timePeriod: 'Q3', value: 90 },
+        { timePeriod: 'Q4', value: 60 },
+    ];
+
     return (
-        <div className='shadow-[.2px_.2px_3px_1px] h-52 shadow-gray-100 rounded-lg overflow-hidden'>
+        <div className='shadow-[.2px_.2px_3px_1px] dark:shadow-slate-700 h-52 shadow-gray-100 rounded-lg overflow-hidden'>
             <div className='flex justify-between p-5'>
                 <div className='flex gap-2'>
                     <p className='font-medium'>Heartbeat</p>

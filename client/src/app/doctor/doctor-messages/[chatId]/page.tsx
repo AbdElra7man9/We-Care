@@ -11,10 +11,14 @@ import AnimDropdown from '@Animation/AnimDropdown'
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '@Redux/Slices/UserSlice'
 import { Scrolldown } from '@Helpers/Scroll'
+import useSocket from '@Hooks/useSocket';
+import CoversationCTRL from './datails/page';
+import Link from 'next/link';
+import InfinteScrollableChat from './(messenger)/InfinteScrollableChat';
 interface chatBoxProps {
-    setSelected?: (): void
+    setSelected?: () => void
 }
-const ChatBox = ({ setSelected }: chatBoxProps) => {
+const page: React.FC = ({ setSelected }: chatBoxProps) => {
     Scrolldown();
     const { username, id } = useParams();
     const { data: userById, error } = useGetUserByIdQuery(username) || {};
@@ -83,7 +87,13 @@ const ChatBox = ({ setSelected }: chatBoxProps) => {
     }, [image]);
 
     return (
-        details ? <CoversationCTRL userById={userById} setDetails={setDetails} details={details} id={id} setSelected={setSelected} /> :
+        details ? <CoversationCTRL
+            userById={userById}
+            setDetails={setDetails}
+            details={details}
+            id={id}
+            setSelected={setSelected}
+        /> :
             <div className='h-full'>
                 <div className='fixed md:static top-0 insetx-0 bg-white w-full flex border-b p-2 md:px-6 justify-between h-12'>
                     <div className='flex'>
@@ -107,7 +117,12 @@ const ChatBox = ({ setSelected }: chatBoxProps) => {
                 </div>
                 <div className='h-full'>
                     <>
-                        <InfinteScrollableChat userById={userById} id={id} image={image} isLoading={isLoading} />
+                        <InfinteScrollableChat
+                            userById={userById}
+                            id={id}
+                            image={image}
+                            isLoading={isLoading}
+                        />
 
                         {/* {isTyping && <p className='mx-3'>typing ....</p>} */}
                         {!(error?.status === 400) ?
@@ -171,4 +186,4 @@ const ChatBox = ({ setSelected }: chatBoxProps) => {
     )
 }
 
-export default ChatBox
+export default page

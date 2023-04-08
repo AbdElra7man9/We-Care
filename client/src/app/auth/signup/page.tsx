@@ -1,9 +1,11 @@
+'use client';
 import React, { useEffect, useRef, useState } from 'react'
 import { useSignupMutation } from '@Redux/APIs/AuthApi';
 import { ImSpinner7 } from 'react-icons/im'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import GetError from '@lib/GetError';
+import Image from 'next/image';
 const SignUp = () => {
     const router = useRouter();
     const userRef = useRef<HTMLInputElement>(null);
@@ -33,7 +35,7 @@ const SignUp = () => {
         const data = { email, password, name, passwordConfirm }
         await signup(data).unwrap()
             .then((payload) => {
-                router.push(`/verify?email=${email}`)
+                router.push(`/auth/verify?email=${email}`)
             })
             .catch((err) => {
                 console.log(err?.data?.message);
@@ -44,12 +46,18 @@ const SignUp = () => {
         <div>
             <div className='container px-0 max-w-4xl flex place-content-center h-[80%] lg:mt-20 mb-5'>
                 <div className='max-w-md'>
-                    <div className='lg:border border-gray-300 px-8 items-center text-center rounded-lg lg:bg-white'>
+                    <div className='lg:border border-gray-300 px-8 items-center text-center rounded-lg lg:bg-white dark:bg-slate-900 dark:border-slate-500'>
                         <Link href="/">
                             <div className='flex items-center justify-center wfull gap-2 py-10 instalogo'>
-                                <img className='w-10 h-10 rounded-xl'
-                                    src='https://shreethemes.in/doctris/layouts/assets/images/logo-icon.png' alt='' />
-                                <p className='text-2xl font-bold'>Doctris</p>
+                                <Image
+                                    height={100}
+                                    width={100}
+                                    draggable={false}
+                                    className='w-10 h-10 rounded-xl'
+                                    src='/Images/logo-icon.png'
+                                    alt=''
+                                />
+                                <p className='text-2xl font-bold dark:text-white'>Doctris</p>
                             </div>
                         </Link>
                         <p className='text-xl font-semibold text-gray-400 mb-5'>
@@ -112,18 +120,18 @@ const SignUp = () => {
                                     'Sign Up'
                                 }
                             </button>
-                            <Link href='/signupDoctor'
-                                className='text-blue-800 focus:text-blue-300 md:mb-4 text-lg font-serif hover:underline'>
+                            <Link href='/auth/doctor/signup'
+                                className='text-blue-800 dark:text-blue-400 focus:text-blue-300 md:mb-4 text-lg font-serif hover:underline'>
                                 sign up as a doctor ?
                             </Link>
                             {isError && <GetError error={error} />}
                         </form>
 
                     </div>
-                    <div className='lg:border border-gray-300 justify-center flex md:mt-5 rounded-lg lg:bg-white'>
+                    <div className='lg:border border-gray-300 justify-center flex md:mt-5 rounded-lg lg:bg-white dark:bg-slate-900 dark:border-slate-500'>
                         <p className="py-5 inline">
-                            Don't have an account?
-                            <Link href="/signin" className='font-semibold text-blue-400'>
+                            Don't have an account?{' '}
+                            <Link href="/auth/signin" className='font-semibold text-blue-400'>
                                 Log In
                             </Link>
                         </p>
