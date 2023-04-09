@@ -3,7 +3,8 @@ import { ThemeProvider } from 'next-themes'
 import React from "react";
 import { Provider } from 'react-redux';
 import { store } from '@Redux/Store';
-import { AuthProvider } from '@lib/AuthContext';
+import { AuthProvider } from '@Contexts/AuthContext';
+import {UserProvider} from '@Contexts/UserContextProps';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 
@@ -23,11 +24,13 @@ export default function Providers({ children }: providersProps) {
     <Provider store={store}>
       <ThemeProvider attribute="class" defaultTheme="system">
         <AuthProvider>
+          <UserProvider>
 
-          <div className=" dark:text-gray-500 text-gray-700 transition-colors duration-300 min-h-screen select-none">
-            {children}
-          </div>
+            <div className=" dark:text-gray-500 text-gray-700 transition-colors duration-300 min-h-screen select-none">
+              {children}
+            </div>
 
+          </UserProvider>
         </AuthProvider>
       </ThemeProvider>
     </Provider>

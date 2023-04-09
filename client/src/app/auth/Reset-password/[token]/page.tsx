@@ -1,62 +1,9 @@
-'use client';
-import React, { useEffect, useRef, useState } from 'react'
-import { ImSpinner7 } from 'react-icons/im'
-import { useResetPasswordMutation } from '@Redux/APIs/AuthApi';
-import GetError from '@lib/GetError';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import getToken from './getToken';
-
-interface Inputs {
-    password: string;
-    passwordConfirm: string;
-}
+import Form from './Form';
 
 export default function Page() {
-    const router = useRouter();
-    const token = getToken();
-    const userRef = useRef<HTMLInputElement>(null);
-    const [inputs, setInputs] = useState<Inputs>({
-        password: '',
-        passwordConfirm: ''
-    });
-    // useEffect(() => {
-    //     if (localStorage.getItem("persist") === 'true') {
-    //         router.push("/");
-    //     }
-    // });
-    const handleChange = ({
-        currentTarget: input,
-    }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setInputs({ ...inputs, [input.name]: input.value });
-    };
-    useEffect(() => {
-        if (localStorage.getItem("persist") === 'true') {
-            router.push("/");
-        }
-    })
-    useEffect(() => {
-        userRef.current?.focus()
-    }, []);
-    const [ResetPassword, { isError, error: errorres, isLoading }] = useResetPasswordMutation();
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const { password, passwordConfirm } = inputs
-        const data = { password, passwordConfirm }
-        await ResetPassword({ token, data }).unwrap()
-            .then(() => {
-                router.push('/')
-                setInputs({
-                    password: '',
-                    passwordConfirm: ''
-                })
-            })
-            .catch((err: any) => {
-                console.log(err);
-            });
-    }
-
+  
     return (
         <>
             <div className='container px-5 max-w-5xl flex gap-1 place-content-center mt-[2rem] md:mt-[6rem] mb-5 md:mb-28 dark:bg-slate-900'>
@@ -79,40 +26,7 @@ export default function Page() {
                             <p className='font-medium'>Reset Password</p>
                             <p className='text-gray-400 text-sm'>Please Enter your new password</p>
                         </div>
-                        <form className='flex flex-col'
-                            onSubmit={handleSubmit}>
-                            <input type='password'
-                                ref={userRef}
-                                onChange={handleChange}
-                                name='password'
-                                className='inputfield'
-                                placeholder='Password'
-                            />
-                            <input
-                                type='password'
-                                onChange={handleChange}
-                                name='passwordConfirm'
-                                className='inputfield'
-                                placeholder='Confirm Password'
-                            />
-                            <button
-                                type='submit'
-                                className='btn-primary mt-4 !mb-8'
-                                disabled={isLoading}>
-                                {isLoading ?
-                                    <span className='flex items-center justify-center text-2xl py-1 animate-spin'>
-                                        <ImSpinner7 />
-                                    </span> : 'Confirm'}
-                            </button>
-                            <div className='flex justify-center mt-4'>
-                                <hr className='w-[40%] mt-3'></hr>
-                                <p className='mx-3 font-semibold text-gray-500'>OR</p>
-                                <hr className='w-[40%] mt-3'></hr>
-                            </div>
-
-                            <Link href='/signup' className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm font-medium mt-3'>Create New Account ?</Link>
-                            {isError && <GetError error={errorres} />}
-                        </form>
+                        <Form/>
                     </div>
                 </div>
             </div>

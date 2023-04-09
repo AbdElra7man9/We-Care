@@ -60,12 +60,12 @@ const TopDoctors = () => {
         },
     ]
     const Icons = [
-        <SlSocialFacebook size={23} />,
-        <SlSocialLinkedin size={23} />,
-        <SlSocialGithub size={23} />,
-        <SlSocialTwitter size={23} />
-    ]
-    
+        { id: 'facebook', icon: <SlSocialFacebook size={23} /> },
+        { id: 'linkedin', icon: <SlSocialLinkedin size={23} /> },
+        { id: 'github', icon: <SlSocialGithub size={23} /> },
+        { id: 'twitter', icon: <SlSocialTwitter size={23} /> },
+    ];
+
     const SingDoc: React.FC<{ doc: DoctorsProps }> = ({ doc }) => {
 
         return (
@@ -116,14 +116,14 @@ const TopDoctors = () => {
                         </div>
                     </div>
                     <div className='flex items-center gap-3'>
-                        {Icons?.map((icon, index) => (
+                        {Icons?.map((item) => (
                             <Link
                                 href='/'
-                                key={index}
+                                key={item.id}
                                 className='w-10 h-10 rounded-full bg-blue-100 shadow-blue-600 shadow-md drop-shadow-xl dark:bg-slate-800 dark:hover:bg-blue-800
                             text-blue-500 hover:bg-blue-500 hover:text-white duration-150 flex justify-center items-center'
                             >
-                                {icon}
+                                {item.icon}
                             </Link>
                         ))}
                     </div>

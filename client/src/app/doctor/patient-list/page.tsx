@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 import { BiChevronDown } from 'react-icons/bi'
 import { BsSearch } from 'react-icons/bs'
@@ -49,7 +50,11 @@ export default function page() {
                   </div>
                 </td>
                 <th scope="row" className="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                  <img className="w-10 h-10 rounded-full"
+                  <Image
+                    height={500}
+                    width={500}
+                    draggable={false}
+                    className="w-10 h-10 rounded-full"
                     src="https://res.cloudinary.com/abdo9/image/upload/v1676229443/Instegram/User/gjqfae4jmyctjvkavwhy.png"
                     alt="" />
                   <div className="pl-3">

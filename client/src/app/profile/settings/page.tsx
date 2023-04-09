@@ -48,7 +48,7 @@ const page: React.FC = () => {
             <form className='space-y-3 my-5'>
                 <h3 className='text-lg font-semibold text-red-500'>Delete Account :</h3>
                 <p className='text-gray-400'>
-                    Do you want to delete the account? Please press below "Delete" button
+                    {`Do you want to delete the account? Please press below "Delete" button`}
                 </p>
                 <button
                     className='bg-orange-600 active:bg-orange-700 text-white w-36 font-medium py-2 my-3 

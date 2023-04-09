@@ -6,18 +6,11 @@ import { useAppDispatch, useAppSelector } from '@Hooks/useRedux';
 import Loadingscreen from '@Components/Layouts/Loadingscreen';
 import { user } from '@lib/types';
 
-interface auth {
+interface AuthContextProps {
     token?: string;
     user?: user
 }
 
-
-interface AuthContextProps {
-    authState: auth;
-    isPatient: Boolean;
-    isDoctor: Boolean;
-    isAdmin: Boolean;
-}
 
 const AuthContext = createContext<AuthContextProps>({});
 
@@ -25,11 +18,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
 
     const [persist] = usePersist();
     const token = useAppSelector(selectCurrentToken);
-    const [authState, setAuthState] = useState<auth>({});
-    const [isPatient, setIsPatient] = useState<Boolean>(false);
-    const [isDoctor, setIsDoctor] = useState<Boolean>(false);
-    const [isAdmin, setIsAdmin] = useState<Boolean>(false);
-
+    const [authState, setAuthState] = useState<AuthContextProps>({});
     const dispatch = useAppDispatch();
     const [refresh, { isUninitialized, isLoading, isSuccess, isError }] = useRefreshMutation();
 
@@ -47,20 +36,9 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
                 });
         }
     }, []);
-    useEffect(() => {
-        if (authState.user?.__t === 'patient') {
-            setIsPatient(true)
-        }
-        if (authState.user?.__t === 'doctor') {
-            setIsDoctor(true)
-        }
-        if (authState.user?.__t === 'admin') {
-            setIsAdmin(true)
-        }
-    }, []);
 
     if (isLoading) {
-        console.log(isUninitialized)
+        // console.log(isUninitialized)
         return <Loadingscreen />;
     }
 
@@ -68,12 +46,12 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
         // handle error
     }
 
-    return <AuthContext.Provider value={{ authState, isPatient, isDoctor, isAdmin }}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={authState}>{children}</AuthContext.Provider>;
 };
 
-const useAuth = (): AuthContextProps => {
-    const { authState, isPatient, isDoctor, isAdmin } = useContext(AuthContext);
-    return { authState, isPatient, isDoctor, isAdmin }
+export const useAuth = (): AuthContextProps => {
+    const authState = useContext(AuthContext);
+    return authState
 };
 
 export default useAuth;

@@ -40,7 +40,7 @@ export default function ProfileWraper({ children }: { children: React.ReactNode 
   return (
     <>
       <div className='container my-36 lg:max-w-[60rem] xl:max-w-[80rem] duration-300 flex items-center'>
-        <div className='grid grid-cols-1 lg:grid-cols-3 lg:gap-5'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 lg:gap-5 gap-y-5'>
           <div className='shadow-[.2px_.2px_3px_1px] dark:shadow-slate-700 shadow-gray-100 overflow-hidden rounded-lg'>
             <div className='relative'>
               <Image
