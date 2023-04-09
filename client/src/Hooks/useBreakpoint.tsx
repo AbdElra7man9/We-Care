@@ -59,7 +59,7 @@ const useBreakpoint = () => {
         }
         return () => window.removeEventListener('resize', handleResize);
 
-    }, [windowSize.width]);
+    }, [windowSize.width, breakpoints]);
 
     const MobileView = (breakpoint === 'xs') || (breakpoint === 'sm') || (breakpoint === 'md') || (breakpoint === 'lg');
     return { breakpoint, MobileView };

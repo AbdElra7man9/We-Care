@@ -26,7 +26,8 @@ export default function page() {
                         <Form />
                     </div>
                     <div className='lg:border border-gray-300 justify-center flex md:mt-5 rounded-lg lg:bg-white'>
-                        <p className="py-5 inline">Don't have an account?
+                        <p className="py-5 inline">
+                            {`Don't have an account? `}
                             <Link
                                 href="/auth/signin"
                                 className='font-semibold text-blue-400'>
