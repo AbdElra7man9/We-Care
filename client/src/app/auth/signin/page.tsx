@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 import Form from './Form';
@@ -27,7 +26,7 @@ export default function page(): JSX.Element {
           </div>
           <div className='md:border rounded-lg max-w-[90%] border-gray-300 justify-center
               flex mt-5 md:bg-white dark:bg-slate-900 dark:border-slate-500'>
-            <p className="py-5 inline">Don't have an account?{' '}
+            <p className="py-5 inline">{`Don't have an account? `}
               <Link href="/auth/signup" className='font-semibold text-blue-400'>
                 Sign up
               </Link>

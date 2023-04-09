@@ -14,6 +14,13 @@ interface SignUpData {
     name: string;
     passwordConfirm: string;
 }
+interface SignUpDoctorData {
+    email: string;
+    password: string;
+    name: string;
+    specialization: string;
+    passwordConfirm: string;
+}
 export const AuthApi = apiSlice.injectEndpoints({
     endpoints: builder => ({
         signin: builder.mutation<AuthState, SignInData>({
@@ -62,7 +69,7 @@ export const AuthApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        signupDoctor: builder.mutation<{ status: string; token: string; user: user }, void>({
+        signupDoctor: builder.mutation<{ status: string; token: string; user: user }, SignUpDoctorData>({
             query: (data) => ({
                 url: 'api/v1/doctors/signup',
                 method: 'POST',

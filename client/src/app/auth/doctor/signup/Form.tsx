@@ -1,6 +1,6 @@
 'use client';
 import GetError from '@lib/GetError';
-import { useSignupMutation } from '@Redux/APIs/AuthApi';
+import { useSignupDoctorMutation } from '@Redux/APIs/AuthApi';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useRef, useState } from 'react'
@@ -8,11 +8,11 @@ import { ImSpinner7 } from 'react-icons/im';
 
 interface InpupProps {
     email: string;
+    specialization: string;
     password: string;
     name: string;
     passwordConfirm: string;
 }
-
 
 const Form: FC = ({ }) => {
     const router = useRouter();
@@ -24,6 +24,7 @@ const Form: FC = ({ }) => {
     // })
     const [inputs, setInputs] = useState<InpupProps>({
         email: '',
+        specialization: '',
         password: '',
         name: '',
         passwordConfirm: ''
@@ -36,12 +37,12 @@ const Form: FC = ({ }) => {
     useEffect(() => {
         userRef.current?.focus()
     }, []);
-    const [signup, { isError, error, isLoading }] = useSignupMutation();
+    const [signupDoctor, { isError, error, isLoading }] = useSignupDoctorMutation();
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const { email, password, name, passwordConfirm } = inputs;
-        const data = { email, password, name, passwordConfirm }
-        await signup(data).unwrap()
+        const { email, password, specialization, name, passwordConfirm } = inputs;
+        const data = { email, password, name, specialization, passwordConfirm }
+        await signupDoctor(data).unwrap()
             .then((payload) => {
                 router.push(`/auth/verify?email=${email}`)
             })
@@ -69,6 +70,15 @@ const Form: FC = ({ }) => {
                 className='inputfield'
                 placeholder='First Name'
             />
+            <input
+                onChange={handleChange}
+                value={inputs.specialization}
+                name='specialization'
+                type='text'
+                className='inputfield'
+                placeholder='Specialization'
+            />
+
             <input
                 onChange={handleChange}
                 value={inputs.password}

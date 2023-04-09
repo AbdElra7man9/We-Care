@@ -63,22 +63,30 @@ const SidePatient = () => {
                     <Image
                         height={500}
                         width={500}
-                        className='h-10 w-10 rounded-full shadow-md drop-shadow-xl' src='/Images/Clients/01.jpg' alt=''
+                        className='h-10 w-10 rounded-full shadow-md drop-shadow-xl'
+                        src='/Images/Clients/01.jpg'
+                        alt=''
                     />
                     <Image
                         height={500}
                         width={500}
-                        className='h-10 w-10 rounded-full shadow-md drop-shadow-xl' src='/Images/Clients/01.jpg' alt=''
+                        className='h-10 w-10 rounded-full shadow-md drop-shadow-xl'
+                        src='/Images/Clients/01.jpg'
+                        alt=''
                     />
                     <Image
                         height={500}
                         width={500}
-                        className='h-10 w-10 rounded-full shadow-md drop-shadow-xl' src='/Images/Clients/01.jpg' alt=''
+                        className='h-10 w-10 rounded-full shadow-md drop-shadow-xl'
+                        src='/Images/Clients/01.jpg'
+                        alt=''
                     />
                     <Image
                         height={500}
                         width={500}
-                        className='h-10 w-10 rounded-full shadow-md drop-shadow-xl' src='/Images/Clients/01.jpg' alt=''
+                        className='h-10 w-10 rounded-full shadow-md drop-shadow-xl'
+                        src='/Images/Clients/01.jpg'
+                        alt=''
                     />
                 </div>
             </div>
@@ -87,7 +95,14 @@ const SidePatient = () => {
                 <div className='space-y-3'>
                     {payment?.map(item => (
                         <div key={item?._id} className='flex gap-3 items-center'>
-                            <img src={item?.img} alt='' className='w-16 h-16' />
+                            <Image
+                                height={300}
+                                width={300}
+                                draggable={false}
+                                src={item?.img}
+                                alt=''
+                                className='w-16 h-16'
+                            />
                             <div className=''>
                                 <h3>{item?.paymentName} •••• {item?.number}</h3>
                                 <p className='text-sm text-gray-500'>Expires {item.expires}</p>
