@@ -30,28 +30,30 @@ export default function Page(): JSX.Element {
   // useEffect(() => {
   //   userRef.current.focus()
   // }, []);
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const { email, name, department, doctor, phone, message } = inputs;
-    const data = { email, name, department, doctor, phone, message };
-    await signin(data).unwrap()
-      .then(() => {
-        setInputs({
-          name: '',
-          department: '',
-          doctor: '',
-          email: '',
-          phone: '',
-          message: '',
-        });
-      }).catch(err => {
-        console.log(err)
-      })
-  };
+  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   const { email, name, department, doctor, phone, message } = inputs;
+  //   const data = { email, name, department, doctor, phone, message };
+  //   await signin(data).unwrap()
+  //     .then(() => {
+  //       setInputs({
+  //         name: '',
+  //         department: '',
+  //         doctor: '',
+  //         email: '',
+  //         phone: '',
+  //         message: '',
+  //       });
+  //     }).catch(err => {
+  //       console.log(err)
+  //     })
+  // };
 
   return (
     <div>
-      <form className="flex flex-col" onSubmit={handleSubmit}>
+      <form className="flex flex-col"
+      // onSubmit={handleSubmit}
+      >
         <label className="text-sm text-gray-500 font-medium text-start my-1">
           Your Email
         </label>

@@ -83,31 +83,31 @@ const SideBar: React.FC = () => {
     const dispatch = useAppDispatch();
     const { DocSide } = useAppSelector(state => state.Features);
 
-    const LinkList = () => {
+    const LinkList: React.FC = ({ }) => {
         return (
+            <>
+                {linkListItems.map((item, index) => (
 
-            linkListItems.map((item, index) => (
-
-                <div
-                    key={index}
-                    onClick={() => { DocSide && dispatch(FeatureAction.setDocSide()) }}
-                    className={
-                        `text-lg font-medium px-5 w-full ${(pathname === item.Href) ?
-                            '!text-blue-600'
-                            : ' text-gray-600'}`
-                    }
-                >
-                    <Link href={item.Href} draggable={false}>
-                        <div className={`flex gap-4 py-2 items-center hover:text-blue-600 group-hover:text-blue-600 
+                    <div
+                        key={index}
+                        onClick={() => { DocSide && dispatch(FeatureAction.setDocSide()) }}
+                        className={
+                            `text-lg font-medium px-5 w-full ${(pathname === item.Href) ?
+                                '!text-blue-600'
+                                : ' text-gray-600'}`
+                        }
+                    >
+                        <Link href={item.Href} draggable={false}>
+                            <div className={`flex gap-4 py-2 items-center hover:text-blue-600 group-hover:text-blue-600 
                         dark:hover:text-blue-600 dark:group-hover:text-blue-600 
                             ${(pathname === item.Href) ? ' text-blue-600' : 'text-gray-600 dark:text-slate-400'}`}>
-                            {item.Icon}
-                            <p className='text-lg'>{item.Title}</p>
-                        </div>
-                    </Link>
-                </div>
-            ))
-
+                                {item.Icon}
+                                <p className='text-lg'>{item.Title}</p>
+                            </div>
+                        </Link>
+                    </div>
+                ))}
+            </>
 
         )
     }

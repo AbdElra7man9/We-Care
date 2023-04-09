@@ -56,7 +56,7 @@ export default function page() {
   }
   return (
     <div className='container px-0 md:pt-5 xl:pt-0 md:px-2 max-w-full py-24 mt-16'>
-      <HandleGridView />
+      {/* <HandleGridView /> */}
     </div>
   )
 }
