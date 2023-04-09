@@ -1,9 +1,9 @@
-import "../styles/globals.css";
+import "@styles/globals.css";
 import { Inter } from "next/font/google";
 import Providers from "@app/Providers";
 import Header from "@Components/app/Header";
 import Footer from "@Components/app/Footer";
-import ProgessBar from "@Components/Layouts/ProgessBar";
+// import ProgessBar from "@Components/Layouts/ProgessBar";
 
 export const metadata = {
   title: "Helth care",
@@ -20,13 +20,10 @@ export default function RootLayout({
       lang="en"
       className={`bg-whit text-slate-900 antialiased ${inter.className}`}
     >
-      <head>
-        <link rel="stylesheet" type="text/css" href="/nprogress.css" />
-      </head>
       <body className="dark:bg-slate-900">
         <Providers>
 
-          <ProgessBar />
+          {/* <ProgessBar /> */}
           <Header />
           {children}
           <Footer />
