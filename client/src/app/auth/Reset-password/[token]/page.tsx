@@ -10,7 +10,7 @@ export default function Page() {
                 <div className='container px-3 max-w-md py-32 md:py-0 md:mt-16'>
                     <div className='md:border rounded-lg border-gray-300 md:max-w-[90%] ss:px-5 md:px-12 items-center text-center md:bg-white 
                         dark:bg-slate-900 dark:text-slate-300 dark:border-slate-500 '>
-                        <Link href="/">
+                        <Link href="/" aria-label='home'>
                             <div className='flex items-center justify-center wfull gap-2 py-10 instalogo'>
                                 <Image
                                     height={200}

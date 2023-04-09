@@ -9,7 +9,7 @@ export default function page() {
                 <div className='container px-3 max-w-md md:mt-16'>
                     <div className='md:border rounded-lg md:py-10 dark:bg-slate-900 dark:border-slate-500 dark:text-white
                      border-gray-300 md:max-w-[90%] ss:px-5 md:px-10 items-center text-center md:bg-white '>
-                        <Link href="/">
+                        <Link href="/" aria-label='home'>
                             <div className='flex items-center justify-center wfull gap-2 py-10 instalogo'>
                                 <Image
                                     width={100}
@@ -28,6 +28,7 @@ export default function page() {
                         <p className="py-5 inline">have an account ?
                             <Link
                                 href="/auth/signin"
+                                aria-label='sign in'
                                 className='font-semibold text-blue-400'>
                                 Log in
                             </Link>

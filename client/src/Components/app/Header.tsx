@@ -70,13 +70,14 @@ export default function Header() {
             <div className="flex gap-3">
               {/* {drDash && ( */}
               <button
+                aria-label='side bar'
                 onClick={() => dispatch(FeatureAction.setDocSide())}
                 className="text-gray-500 dark:text-white lg:hidden text-lg lg:text-3xl"
               >
                 <BsJustifyLeft />
               </button>
               {/* )} */}
-              <Link href="/" className="flex gap-3">
+              <Link href="/" aria-label='logo' className="flex gap-3">
                 <Image
                   height={200}
                   width={200}
@@ -89,23 +90,23 @@ export default function Header() {
             </div>
             {!MobileView && (
               <div className="list-none flex gap-5 text-lg text-gray-800 dark:text-slate-400 font-medium uppercase">
-                <Link href="/" className="hover:text-blue-600">Home</Link>
-                <Link href="/doctor/doctor-dashboard">Doctor</Link>
-                <Link href="/patient/patient-dashboard">Patients</Link>
-                <Link href='/'>Pharmacy</Link>
-                <Link href="/admin/admin-dashboard">Admin</Link>
+                <Link aria-label='home' href="/" className="hover:text-blue-600">Home</Link>
+                <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link>
+                <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link>
+                <Link aria-label='pharmacy' href='/'>Pharmacy</Link>
+                <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
               </div>
             )}
           </div>
           <div className="flex gap-2 md:gap-4 items-center">
             <Themetoggle />
-            <button className="bg-blue-600 text-white rounded-full p-3">
+            <button aria-label='settings' className="bg-blue-600 text-white rounded-full p-3">
               <BsGear size={15} />
             </button>
-            <button className="bg-blue-600 text-white rounded-full p-3">
+            <button aria-label='search' className="bg-blue-600 text-white rounded-full p-3">
               <BsSearch size={15} />
             </button>
-            <Link href={`/profile/${userInfo.username}`}>
+            <Link aria-label='profile' href={`/profile/${userInfo.username}`}>
               <Image
                 height={200}
                 width={200}
@@ -115,6 +116,7 @@ export default function Header() {
               />
             </Link>
             <button
+              aria-label='show more'
               className="lg:hidden"
               onClick={() => setIsHeader(!isHeader)}
             >
@@ -124,11 +126,11 @@ export default function Header() {
         </div>
         {isHeader && (
           <div className="space-y-5 px-8 py-3 text-base text-gray-600 dark:text-slate-400 font-medium uppercase z-20">
-            <Link href="/" className="block hover:text-blue-600">Home</Link>
-            <Link href="/doctor/doctor-dashboard" className="block">Doctor</Link>
-            <Link href="/patient/dashboard" className="block">Patients</Link>
-            <Link href='/' className="block">Pharmacy</Link>
-            <Link href='/' className="block">Pages</Link>
+            <Link aria-label='home' href="/" className="block hover:text-blue-600">Home</Link>
+            <Link aria-label='doctor' href="/doctor/doctor-dashboard" className="block">Doctor</Link>
+            <Link aria-label='patients' href="/patient/dashboard" className="block">Patients</Link>
+            <Link aria-label='pharmacy' href='/' className="block">Pharmacy</Link>
+            <Link aria-label='pages' href='/' className="block">Pages</Link>
           </div>
         )}
       </header>

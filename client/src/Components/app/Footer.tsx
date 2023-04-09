@@ -106,7 +106,7 @@ export default function Footer() {
                         <h3 className='text-xl text-white space-y-3 font-semibold'>Company</h3>
                         <div className='space-y-3 py-3'>
                             {company.map(item => (
-                                <Link key={item?._id} href={item.LinkDir} className='flex gap-2 items-center'>
+                                <Link key={item?._id} href={item.LinkDir} aria-label='item' className='flex gap-2 items-center'>
                                     <BiChevronRight />
                                     <p>{item.title}</p>
                                 </Link>
@@ -117,7 +117,7 @@ export default function Footer() {
                         <h3 className='text-xl text-white font-semibold'>Department</h3>
                         <div className='space-y-3 py-3'>
                             {Department.map(item => (
-                                <Link key={item._id} href={item.LinkDir} className='flex gap-2 items-center'>
+                                <Link key={item._id} href={item.LinkDir} aria-label='item' className='flex gap-2 items-center'>
                                     <BiChevronRight />
                                     <p>{item.title}</p>
                                 </Link>
@@ -145,6 +145,7 @@ export default function Footer() {
                                 <Link
                                     key={index}
                                     href='/'
+                                    aria-label='home'
                                     className='w-10 h-10 rounded-full border border-gray-400 shadow-gray-600 
                                     drop-shadow-xl text-gray-500 hover:bg-gray-500 hover:text-white duration-150 
                                     flex justify-center items-center shadow-2xl'
@@ -158,10 +159,10 @@ export default function Footer() {
                 <div className='flex justify-between items-center text-gray-400 pt-8'>
                     <p>2023 © Doctris. Design with  by Shreethemes.</p>
                     <div className='flex gap-3'>
-                        <Link href='/'>Terms</Link>
-                        <Link href='/'>Privecy</Link>
-                        <Link href='/'>About</Link>
-                        <Link href='/'>Contact</Link>
+                        <Link href='/' aria-label='terms'>Terms</Link>
+                        <Link href='/' aria-label='privacy'>Privecy</Link>
+                        <Link href='/' aria-label='about'>About</Link>
+                        <Link href='/' aria-label='contact'>Contact</Link>
                     </div>
                 </div>
             </div>

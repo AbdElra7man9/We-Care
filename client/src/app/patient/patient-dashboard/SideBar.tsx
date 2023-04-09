@@ -5,25 +5,25 @@ const SidePatient = () => {
     const payment = [
         {
             _id: '1',
-            img: 'https://shreethemes.in/doctris/layouts/assets/images/payment/mastercard.png',
+            img: '/Images/Payments/mastercard.png',
             paymentName: 'Mastercard',
             number: '4584',
             expires: '12/22'
         }, {
             _id: '2',
-            img: 'https://shreethemes.in/doctris/layouts/assets/images/payment/discover.png',
+            img: '/Images/Payments/discover.png',
             paymentName: 'Discover',
             number: '5796',
             expires: '12/22'
         }, {
             _id: '3',
-            img: 'https://shreethemes.in/doctris/layouts/assets/images/payment/rupay.png',
+            img: '/Images/Payments/rupay.png',
             paymentName: 'Rupay',
             number: '4645',
             expires: '12/22'
         }, {
             _id: '4',
-            img: 'https://shreethemes.in/doctris/layouts/assets/images/payment/american.png',
+            img: '/Images/Payments/american.png',
             paymentName: 'American',
             number: '4875',
             expires: '12/22'
@@ -111,7 +111,7 @@ const SidePatient = () => {
                     ))}
                 </div>
             </div>
-            <button className='bg-sky-100 text-sky-400 w-full py-2 my-3 rounded-md shadow-blue-200 shadow-md border border-blue-200'>View Profile</button>
+            <button aria-label='view profile' className='bg-sky-100 text-sky-400 w-full py-2 my-3 rounded-md shadow-blue-200 shadow-md border border-blue-200'>View Profile</button>
         </div>
     )
 }

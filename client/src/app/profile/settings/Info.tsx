@@ -53,6 +53,7 @@ const Info: FC<InfoProps> = ({ }) => {
 
             </div>
             <button
+                aria-label='save changes'
                 className='bg-blue-600 active:bg-blue-700 text-white w-36 
                 font-medium py-2 my-3 rounded-md border border-blue-200 dark:border-none'>
                 Save Changes

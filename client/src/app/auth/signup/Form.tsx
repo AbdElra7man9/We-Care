@@ -87,18 +87,22 @@ const Form: FC = ({ }) => {
             />
             <p className='text-sm font-normal text-gray-500'>
                 People who use our service may have uploaded your contact information to Instagram.
-                <Link href='/more' className='font-semibold text-gray-500'>Learn More</Link>
+                <Link href='/more' aria-label='more' className='font-semibold text-gray-500'>Learn More</Link>
             </p>
             <p className='text-sm font-normal text-gray-500 mt-5'>By signing up, you agree to our Terms ,
-                <Link href='/privacy' className='font-semibold text-gray-500'>
+                <Link href='/privacy' aria-label='privacy' className='font-semibold text-gray-500'>
                     Privacy Policy
                 </Link>
                 and
-                <Link href='/cookies' className='font-semibold text-gray-500'>
+                <Link href='/cookies' aria-label='cookies' className='font-semibold text-gray-500'>
                     Cookies Policy .
                 </Link>
             </p>
-            <button type='submit' className='btn-primary mt-4 !mb-5' disabled={isLoading}>
+            <button
+                aria-label='submit'
+                type='submit'
+                className='btn-primary mt-4 !mb-5'
+                disabled={isLoading}>
                 {isLoading ?
                     <span className='flex items-center justify-center text-2xl py-1 animate-spin'>
                         <ImSpinner7 />
@@ -108,6 +112,7 @@ const Form: FC = ({ }) => {
                 }
             </button>
             <Link href='/auth/doctor/signup'
+                aria-label='sign up'
                 className='text-blue-800 dark:text-blue-400 focus:text-blue-300 md:mb-4 text-lg font-serif hover:underline'>
                 sign up as a doctor ?
             </Link>

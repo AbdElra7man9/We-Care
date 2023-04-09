@@ -17,7 +17,7 @@ export default function page() {
   const PatientList: PatientListProps[] = [
     {
       _id: '1',
-      img: 'https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg',
+      img: '/Images/Clients/09.jpg',
       name: 'Howard Tanner',
       age: '29',
       email: 'abdo@gmail.com',
@@ -28,7 +28,7 @@ export default function page() {
     },
     {
       _id: '2',
-      img: 'https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg',
+      img: '/Images/Clients/client/09.jpg',
       name: 'Howard Tanner',
       age: '29',
       email: 'abdo@gmail.com',
@@ -39,7 +39,7 @@ export default function page() {
     },
     {
       _id: '3',
-      img: 'https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg',
+      img: '/Images/Clients/client/09.jpg',
       name: 'Howard Tanner',
       age: '29',
       email: 'abdo@gmail.com',
@@ -50,7 +50,7 @@ export default function page() {
     },
     {
       _id: '4',
-      img: 'https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg',
+      img: '/Images/Clients/client/09.jpg',
       name: 'Howard Tanner',
       age: '29',
       email: 'abdo@gmail.com',
@@ -61,7 +61,7 @@ export default function page() {
     },
     {
       _id: '5',
-      img: 'https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg',
+      img: '/Images/Clients/client/09.jpg',
       name: 'Howard Tanner',
       age: '29',
       email: 'abdo@gmail.com',
@@ -72,7 +72,7 @@ export default function page() {
     },
     {
       _id: '6',
-      img: 'https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg',
+      img: '/Images/Clients/client/09.jpg',
       name: 'Howard Tanner',
       age: '29',
       email: 'abdo@gmail.com',
@@ -82,7 +82,7 @@ export default function page() {
       fees: '50'
     }, {
       _id: '7',
-      img: 'https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg',
+      img: '/Images/Clients/client/09.jpg',
       name: 'Howard Tanner',
       age: '29',
       email: 'abdo@gmail.com',
@@ -93,7 +93,7 @@ export default function page() {
     },
     {
       _id: '8',
-      img: 'https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg',
+      img: '/Images/Clients/client/09.jpg',
       name: 'Howard Tanner',
       age: '29',
       email: 'abdo@gmail.com',
@@ -104,7 +104,7 @@ export default function page() {
     },
     {
       _id: '9',
-      img: 'https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg',
+      img: '/Images/Clients/client/09.jpg',
       name: 'Howard Tanner',
       age: '29',
       email: 'abdo@gmail.com',
@@ -115,7 +115,7 @@ export default function page() {
     },
     {
       _id: '10',
-      img: 'https://shreethemes.in/doctris/layouts/assets/images/client/09.jpg',
+      img: '/Images/Clients/client/09.jpg',
       name: 'Howard Tanner',
       age: '29',
       email: 'abdo@gmail.com',
@@ -172,18 +172,36 @@ export default function page() {
                   <td className="px-6 py-4">{item?.phone}</td>
                   <td className="px-6 py-4">{item?.age}</td>
                   <td className="px-6 py-4">
-                    <button className="font-medium text-blue-600 hover:underline">{item?.gender}</button>
+                    <button
+                      aria-label='gender'
+                      className="font-medium text-blue-600 hover:underline">{item?.gender}</button>
                   </td>
                   <td className="px-6 py-4">
-                    <button className="font-medium text-blue-600 hover:underline">{item?.createdAt}</button>
+                    <button
+                      aria-label='createdAt'
+                      className="font-medium text-blue-600 hover:underline">{item?.createdAt}</button>
                   </td>
                   <td className="px-6 py-4">
-                    <button className="font-medium text-blue-600 hover:underline">{item?.fees}</button>
+                    <button
+                      aria-label='fees'
+                      className="font-medium text-blue-600 hover:underline">{item?.fees}</button>
                   </td>
                   <td className="space-x-2">
-                    <button className="bg-sky-100 active:bg-sky-200 active:shadow-blue-300 text-sky-400 rounded-full p-2 shadow-blue-200 shadow-md border border-blue-200"><AiOutlineEye size={15} /></button>
-                    <button className="bg-green-100 active:bg-green-200 active:shadow-green-300 text-green-400 rounded-full p-2 shadow-green-200 shadow-md border border-blue-200"><BsCheck size={15} /></button>
-                    <button className="bg-red-100 active:bg-red-200 active:shadow-red-300 text-red-400 rounded-full p-2 shadow-red-200 shadow-md border border-red-200"><BsX size={15} /></button>
+                    <button
+                      aria-label='view patient'
+                      className="bg-sky-100 active:bg-sky-200 active:shadow-blue-300 text-sky-400 
+                      rounded-full p-2 shadow-blue-200 shadow-md border border-blue-200"><AiOutlineEye size={15} />
+                    </button>
+                    <button
+                      aria-label='approve'
+                      className="bg-green-100 active:bg-green-200 active:shadow-green-300 text-green-400
+                       rounded-full p-2 shadow-green-200 shadow-md border border-blue-200"><BsCheck size={15} />
+                    </button>
+                    <button
+                      aria-label='cancel'
+                      className="bg-red-100 active:bg-red-200 active:shadow-red-300 text-red-400 
+                      rounded-full p-2 shadow-red-200 shadow-md border border-red-200"><BsX size={15} />
+                    </button>
                   </td>
                 </tr>
               </tbody>

@@ -31,8 +31,9 @@ const Password: FC<PasswordProps> = ({ }) => {
                 <input type='password' onChange={handleChange} name='confirmpassword' className='inputfield w-full' placeholder='Re-type New password' />
             </div>
             <button
+                aria-label='submit'
                 className='bg-blue-600 active:bg-blue-700 text-white
-              w-36 font-medium py-2 my-3 rounded-md border border-blue-200 dark:border-none'>
+                w-36 font-medium py-2 my-3 rounded-md border border-blue-200 dark:border-none'>
                 Save Changes
             </button>
         </form>

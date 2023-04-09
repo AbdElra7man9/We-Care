@@ -69,6 +69,7 @@ const Form: FC = ({ }) => {
             />
             <button
                 type='submit'
+                aria-label='submit'
                 className='btn-primary mt-4 !mb-8'
                 disabled={isLoading}>
                 {isLoading ?
@@ -84,6 +85,7 @@ const Form: FC = ({ }) => {
 
             <Link
                 href='/auth/signup'
+                aria-label='sign up'
                 className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm font-medium mt-3'>
                 Create New Account ?
             </Link>

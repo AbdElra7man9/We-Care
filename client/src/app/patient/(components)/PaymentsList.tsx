@@ -35,7 +35,7 @@ const PaymentsList: React.FC = () => {
               <p className='font-medium text-gray-700 dark:text-slate-300'>{spec?.method}</p>
               <p className='text-gray-500 text-sm'>{spec?.ispaid}</p>
             </div>
-            <button className='bg-blue-600 text-white p-2 rounded-lg '>
+            <button aria-label='more' className='bg-blue-600 text-white p-2 rounded-lg '>
               <FaClipboardList size={20} />
             </button>
           </div>

@@ -13,6 +13,7 @@ export default function page() {
            md:bg-white dark:bg-slate-900 dark:border-slate-500'>
             <Link
               href="/"
+              aria-label='home'
               draggable={false}
             >
               <div className='flex items-center justify-center wfull gap-2 py-10 instalogo'>
@@ -38,6 +39,7 @@ export default function page() {
            justify-center flex mt-5 md:bg-white dark:bg-slate-900 dark:border-slate-500'>
             <Link
               href="/auth/signin"
+              aria-label='sign in'
               className='font-semibold text-blue-400 py-4'>
               Back to login
             </Link>

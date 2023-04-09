@@ -18,6 +18,7 @@ export default function page() {
           <div className='flex gap-1 items-center'>
             <button
               // onClick={() => dispatch(FeatureAction.setDocSide())}
+              aria-label='sidebar'
               className='text-gray-500 lg:hidden text-lg lg:text-3xl'><BsJustifyLeft />
             </button>
             <h3 className='text-lg font-medium'>Chat Messages</h3>
@@ -29,6 +30,7 @@ export default function page() {
           {Users?.map(card => (
             <Link
               href='?chatId=6523&userId=2154651'
+              aria-label='chat'
               key={card}
               className='py-3 mx-2 flex justify-between px-3 rounded-xl hover:text-blue-500 hover:bg-blue-100'
             >

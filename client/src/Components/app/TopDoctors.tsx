@@ -79,6 +79,7 @@ const TopDoctors = () => {
                         alt=''
                     />
                     <button
+                        aria-label='save'
                         className='w-10 h-10 absolute top-0 m-3 right-0 rounded-full bg-red-100 shadow-red-600 drop-shadow-xl text-red-500
                       hover:bg-red-500 hover:text-white duration-150 flex justify-center items-center shadow-2xl'
                     >
@@ -119,6 +120,7 @@ const TopDoctors = () => {
                         {Icons?.map((item) => (
                             <Link
                                 href='/'
+                                aria-label='item'
                                 key={item.id}
                                 className='w-10 h-10 rounded-full bg-blue-100 shadow-blue-600 shadow-md drop-shadow-xl dark:bg-slate-800 dark:hover:bg-blue-800
                             text-blue-500 hover:bg-blue-500 hover:text-white duration-150 flex justify-center items-center'

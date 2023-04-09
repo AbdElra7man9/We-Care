@@ -62,6 +62,7 @@ const Form: FC = ({ }) => {
             />
             <button
                 type='submit'
+                aria-label='submit'
                 className='btn-primary mt-4 !mb-8'
                 disabled={isLoading}>
                 {isLoading ?
@@ -74,7 +75,9 @@ const Form: FC = ({ }) => {
                 <p className='mx-3 font-semibold text-gray-500'>OR</p>
                 <hr className='w-[40%] mt-3'></hr>
             </div>
-            <button className='flex mx-auto pt-5 mb-3 ' >
+            <button
+                aria-label='submit'
+                className='flex mx-auto pt-5 mb-3 ' >
                 <div className='mt-1 text-blue-700 focus:text-blue-300 text-xl'>
                     <AiFillFacebook />
                 </div>
@@ -83,7 +86,8 @@ const Form: FC = ({ }) => {
                 </p>
             </button>
             <Link
-                href='/forgetpassword'
+                href='/auth/forgetpassword'
+                aria-label='forget password'
                 className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm mt-2'>
                 Forgot password ?
             </Link>

@@ -30,6 +30,7 @@ const AboutTreatment: React.FC = () => {
                     </p>
 
                     <button
+                        aria-label='more'
                         className='bg-blue-500 text-white rounded-lg p-3 px-4 font-medium inline'>
                         <span className='flex gap-3 items-center'>
                             Read More

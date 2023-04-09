@@ -9,7 +9,7 @@ const SignUp = () => {
             <div className='container px-0 max-w-4xl flex place-content-center h-[80%] lg:mt-20 mb-5'>
                 <div className='max-w-md'>
                     <div className='lg:border border-gray-300 px-8 items-center text-center rounded-lg lg:bg-white dark:bg-slate-900 dark:border-slate-500'>
-                        <Link href="/">
+                        <Link href="/" aria-label='home'>
                             <div className='flex items-center justify-center wfull gap-2 py-10 instalogo'>
                                 <Image
                                     height={100}
@@ -31,7 +31,7 @@ const SignUp = () => {
                     <div className='lg:border border-gray-300 justify-center flex md:mt-5 rounded-lg lg:bg-white dark:bg-slate-900 dark:border-slate-500'>
                         <p className="py-5 inline">
                             {`Don't have an account? `}
-                            <Link href="/auth/signin" className='font-semibold text-blue-400'>
+                            <Link href="/auth/signin" aria-label='sign in' className='font-semibold text-blue-400'>
                                 Log In
                             </Link>
                         </p>

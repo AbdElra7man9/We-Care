@@ -1,4 +1,3 @@
-import Link from "next/link";
 import UpperPart from '@Components/app/upperpart'
 import AboutTreatment from '@Components/app/AboutTreatment'
 import MedicalService from '@Components/app/MedicalService'

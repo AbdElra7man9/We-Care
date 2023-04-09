@@ -12,7 +12,9 @@ export default function page() {
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <div className="flex items-center justify-between p-4 bg-white">
             <div>
-              <button className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5" type="button">
+              <button
+                aria-label='action'
+                className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5" type="button">
                 <span className="sr-only">Action button</span>
                 Action
                 <BiChevronDown size={18} />
@@ -55,7 +57,7 @@ export default function page() {
                     width={500}
                     draggable={false}
                     className="w-10 h-10 rounded-full"
-                    src="https://res.cloudinary.com/abdo9/image/upload/v1676229443/Instegram/User/gjqfae4jmyctjvkavwhy.png"
+                    src="/Images/Clients/09.jpg"
                     alt="" />
                   <div className="pl-3">
                     <div className="text-base font-semibold">Leslie Livingston</div>
@@ -71,13 +73,13 @@ export default function page() {
                   </div>
                 </td>
                 <td className="px-6 py-4">
-                  <button type="button" data-modal-show="editUserModal" className="font-medium text-blue-600 hover:underline">Edit user</button>
+                  <button aria-label='edit user' type="button" data-modal-show="editUserModal" className="font-medium text-blue-600 hover:underline">Edit user</button>
                 </td>
                 <td className="px-6 py-4">
-                  <button type="button" data-modal-show="editUserModal" className="font-medium text-blue-600 hover:underline">Edit user</button>
+                  <button aria-label='edit user' type="button" data-modal-show="editUserModal" className="font-medium text-blue-600 hover:underline">Edit user</button>
                 </td>
                 <td className="px-6 py-4">
-                  <button type="button" data-modal-show="editUserModal" className="font-medium text-blue-600 hover:underline">Edit user</button>
+                  <button aria-label='edit user' type="button" data-modal-show="editUserModal" className="font-medium text-blue-600 hover:underline">Edit user</button>
                 </td>
               </tr>
             </tbody>

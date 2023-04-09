@@ -28,11 +28,13 @@ const page: React.FC = () => {
                 </div>
                 <div className='flex gap-5'>
                     <button
+                        aria-label='upload'
                         className='bg-blue-600 active:bg-blue-700 text-white font-medium
                          w-full py-2 my-3 rounded-md border border-blue-200 dark:border-none'>
                         Upload
                     </button>
                     <button
+                        aria-label='remove'
                         className='bg-sky-100 active:bg-sky-200 active:shadow-blue-300
                          text-sky-400 w-full py-2 my-3 rounded-md 
                         shadow-blue-200 shadow-md border border-blue-200'>
@@ -51,6 +53,7 @@ const page: React.FC = () => {
                     {`Do you want to delete the account? Please press below "Delete" button`}
                 </p>
                 <button
+                    aria-label='save changes'
                     className='bg-orange-600 active:bg-orange-700 text-white w-36 font-medium py-2 my-3 
                     rounded-md border border-orange-200 dark:border-none'>
                     Save Changes

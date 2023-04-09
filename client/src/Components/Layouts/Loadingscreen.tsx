@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import Link from 'next/link';
 import { FC } from 'react'
 import { ImSpinner7 } from 'react-icons/im';
 

@@ -94,12 +94,14 @@ export default function ProfileWraper({ children }: { children: React.ReactNode 
               <div className='grid grid-cols-2 text-center text-lg border-b dark:border-slate-600'>
                 <Link
                   href={`/profile/${userInfo.username}`}
+                  aria-label='profile'
                   draggable={false}
                   className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${profile && '!bg-blue-500 text-white'}`}>
                   Profile
                 </Link>
                 <Link
                   href='/profile/settings'
+                  aria-label='settings'
                   draggable={false}
                   className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${profileSettings && '!bg-blue-500 text-white'}`}>
                   Profile Settings

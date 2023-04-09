@@ -55,6 +55,7 @@ const Form: FC<FormProps> = ({ }) => {
                 <span className='dark:text-slate-400'>Enter the confirmation code we sent to {email}
                     <button
                         // onClick={RequestOTP2Activate}
+                        aria-label='submit'
                         className='text-blue-500 font-semibold'>Resend Code
                     </button>
                 </span>
@@ -73,6 +74,7 @@ const Form: FC<FormProps> = ({ }) => {
                 </div>
                 <button
                     type='submit'
+                    aria-label='submit'
                     className='btn-primary mt-4 !mb-4'
                     disabled={isLoading}>
                     {isLoading ?
@@ -82,7 +84,8 @@ const Form: FC<FormProps> = ({ }) => {
                     }
                 </button>
                 <Link
-                    href='/signin'
+                    href='/auth/signin'
+                    aria-label='sign in'
                     className='font-medium text-blue-500 text-md focus:text-blue-300 '>
                     Go Back?
                 </Link>

@@ -97,7 +97,10 @@ const SideBar: React.FC = () => {
                                 : ' text-gray-600'}`
                         }
                     >
-                        <Link href={item.Href} draggable={false}>
+                        <Link
+                            href={item.Href}
+                            aria-label='side bar link'
+                            draggable={false}>
                             <div className={`flex gap-4 py-2 items-center hover:text-blue-600 group-hover:text-blue-600 
                         dark:hover:text-blue-600 dark:group-hover:text-blue-600 
                             ${(pathname === item.Href) ? ' text-blue-600' : 'text-gray-600 dark:text-slate-400'}`}>

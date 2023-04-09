@@ -27,12 +27,14 @@ export default function MainBookingWrapper({
                         <div className='flex gap-3 items-center justify-center'>
                             <Link
                                 href='/'
+                                aria-label='home'
                                 className='uppercase font-semibold hover:text-blue-500 hover:underline'>
                                 Doctris
                             </Link>
                             <BiChevronRight />
                             <Link
                                 href='/patient/booking-appointment/clinc'
+                                aria-label='booking appointment'
                                 className='uppercase font-medium text-blue-400 hover:text-blue-500 hover:underline'
                             >
                                 Appointment
@@ -45,12 +47,14 @@ export default function MainBookingWrapper({
                 <div className='grid grid-cols-2 text-center border-b dark:border-slate-500'>
                     <Link
                         href='/patient/booking-appointment/clinc'
+                        aria-label='booking appointment'
                         className={`bg-[#F8F9FA] py-3 font-medium dark:bg-slate-900 dark:text-white ${atClinc && '!bg-blue-500 text-white'}`}
                     >
                         Clinc Appointment
                     </Link>
                     <Link
                         href='/patient/booking-appointment/online'
+                        aria-label='booking appointment'
                         className={`bg-[#F8F9FA] py-3 dark:bg-slate-900 dark:text-white font-medium ${atOnline && '!bg-blue-500 text-white'}`}
                     >
                         Online Appointment

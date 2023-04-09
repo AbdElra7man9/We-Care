@@ -7,7 +7,7 @@ export default function Themetoggle() {
     const { theme, setTheme } = useTheme()
     return (
         <div>
-            <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="bg-blue-600 text-white rounded-full p-3">
+            <button aria-label='change mode' onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="bg-blue-600 text-white rounded-full p-3">
                 {theme === "light" ? (
                     <BsSunFill
                         fontSize={15}

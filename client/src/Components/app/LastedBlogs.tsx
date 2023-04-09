@@ -78,7 +78,7 @@ const LastedBlogs: React.FC = () => {
                 <p className='text-sm text-gray-500'>{doc?.numComments}</p>
               </div>
             </div>
-            <Link href='/' className='text-blue-600 flex gap-3 items-center whitespace-nowrap'>
+            <Link href='/' aria-label='more' className='text-blue-600 flex gap-3 items-center whitespace-nowrap'>
               <p>Read More</p>
               <BsArrowRight />
             </Link>
