@@ -16,6 +16,8 @@ const patientRouter = require('./routes/patientRouter');
 const userRouter = require('./routes/userRouter');
 const appointmentRouter = require('./routes/appointmentRouter');
 const reviewRouter = require('./routes/reviewRouter');
+const ChatRouter = require('./routes/ChatRouter');
+const MessageRouter = require('./routes/MessageRouter');
 const AppError = require('./utils/AppError');
 
 const app = express();
@@ -76,6 +78,13 @@ app.use('/api/v1/reviews', reviewRouter);
 
 //general user routs
 app.use('/api/v1/users', userRouter);
+
+//Chat
+app.use('/api/v1/chat', ChatRouter);
+
+//Message
+app.use('/api/v1/message', MessageRouter);
+
 
 //handeling wrong urls
 app.all('*', (req, res, next) => {

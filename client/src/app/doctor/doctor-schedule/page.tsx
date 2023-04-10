@@ -136,7 +136,11 @@ export default function page() {
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <BsSearch />
             </div>
-            <input type="text" className="block outline-none p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search for users" />
+            <input
+              type="text"
+              className="block outline-none p-2 pl-10 text-sm text-gray-900 border border-gray-300 
+                         rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Search for users" />
           </div>
         </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

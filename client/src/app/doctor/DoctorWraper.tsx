@@ -1,7 +1,7 @@
 import React from "react";
 import SideBar from "./SideBar";
 
-export default function MainBookingWrapper({
+export default function DoctorWraper({
     children
 }: {
     children: React.ReactNode;
