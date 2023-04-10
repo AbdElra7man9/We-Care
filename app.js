@@ -6,9 +6,9 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
-const cors = require('cors')
+const cors = require('cors');
 var cookieParser = require('cookie-parser');
-const AllowedOrigins = require('./Origins')
+const AllowedOrigins = require('./Origins');
 // local modules
 const errorController = require('./controllers/errorController');
 const doctorRouter = require('./routes/doctorRouter');
@@ -22,10 +22,12 @@ const app = express();
 // Set security HTTP headers
 app.use(cookieParser());
 app.use(helmet());
-app.use(cors({
-  origin: AllowedOrigins,
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: AllowedOrigins,
+    credentials: true,
+  })
+);
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {

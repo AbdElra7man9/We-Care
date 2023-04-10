@@ -43,7 +43,7 @@ const Doctor = User.discriminator(
         enum: ['refused', 'pending', 'accepted'],
       },
     },
-    { discriminatorKey: 'kind' }
+    { discriminatorKey: 'userType' }
   )
 );
 

@@ -34,7 +34,7 @@ function createSendToken(user, statusCode, res) {
   res.status(statusCode).json({
     status: 'success',
     token,
-    user
+    user,
   });
 }
 
@@ -67,7 +67,7 @@ function sendEmail(email, subject, text) {
 const sendCreatePIN = catchAsync(async function (id) {
   const user = await User.findById(id);
   const PIN = await user.createPIN();
-  console.log(PIN)
+  console.log(PIN);
   await user.save({ validateBeforeSave: false });
   try {
     sendEmail(
@@ -135,16 +135,16 @@ exports.userLogin = catchAsync(async function (req, res, next) {
 });
 
 exports.Refresh = catchAsync(async function (req, res, next) {
-  const token = req.cookies.jwt
+  const token = req.cookies.jwt;
   if (!token) {
     return next(new AppError('Not authorized!', 401));
   }
-  const auth = jwt.verify(token, process.env.JWT_SECRET)
+  const auth = jwt.verify(token, process.env.JWT_SECRET);
   if (!auth) {
     return next(new AppError('Authorization Failed, Please Log In Again', 401));
   }
-  const user = await User.findById(auth.id)
-  return res.json({ token, user })
+  const user = await User.findById(auth.id);
+  return res.json({ token, user });
 });
 
 exports.protect = catchAsync(async function (req, res, next) {
@@ -188,6 +188,18 @@ exports.protect = catchAsync(async function (req, res, next) {
   req.user = currentUser;
   next();
 });
+
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.__t)) {
+      return next(
+        new AppError('You do not have permission to perform this action', 403)
+      );
+    }
+
+    next();
+  };
+};
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on POSTed email
