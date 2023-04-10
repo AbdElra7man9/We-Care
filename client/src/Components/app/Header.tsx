@@ -10,13 +10,14 @@ import { usePathname } from "next/navigation";
 import Themetoggle from "../Layouts/Themetoggle";
 import { useAppDispatch, useAppSelector } from "@Hooks/useRedux";
 import { selectCurrentUser } from "@Redux/Slices/UserSlice";
+import { IoReorderThreeOutline } from "react-icons/io5";
 interface HeaderProps {
-  sideMargin: Boolean;
+  sideMargin?: string;
   setIsSideMargin: () => void;
   setIsSideWidth: () => void;
 }
 
-export default function Header() {
+export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: HeaderProps) {
   const [isHeader, setIsHeader] = useState<Boolean>(false);
   const { MobileView } = useBreakpoint();
   const dispatch = useAppDispatch();
@@ -77,6 +78,15 @@ export default function Header() {
                 <BsJustifyLeft />
               </button>
               {/* )} */}
+              {/* {admindash && <button
+                onClick={() => {
+                  setIsSideMargin((sideMargin !== '300px') ? '300px' : '0px');
+                  setIsSideWidth((sideMargin !== '300px') ? '300px' : '0px')
+                }}
+                className='rounded-full f-10 w-10 flex justify-center items-center active:scale-90 duration-200 bg-blue-500 text-white'>
+                <IoReorderThreeOutline size={25} />
+              </button>} */}
+
               <Link href="/" aria-label='logo' className="flex gap-3">
                 <Image
                   height={200}
