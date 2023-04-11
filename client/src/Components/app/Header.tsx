@@ -13,8 +13,8 @@ import { selectCurrentUser } from "@Redux/Slices/UserSlice";
 import { IoReorderThreeOutline } from "react-icons/io5";
 interface HeaderProps {
   sideMargin?: string;
-  setIsSideMargin: () => void;
-  setIsSideWidth: () => void;
+  setIsSideMargin?: () => void;
+  setIsSideWidth?: () => void;
 }
 
 export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: HeaderProps) {
