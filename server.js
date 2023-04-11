@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const { Server } = require("socket.io");
+const { Server } = require('socket.io');
 const http = require('http');
 const AllowedOrigins = require('./Origins');
 const SocketServer = require('./SocketServer');
@@ -28,8 +28,8 @@ mongoose
 const io = new Server(HttpServer, {
   cors: {
     origin: AllowedOrigins,
-    credentials: true
-  }
+    credentials: true,
+  },
 });
 io.on('connection', (socket) => {
   SocketServer(socket);

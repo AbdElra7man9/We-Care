@@ -18,7 +18,7 @@ const Patient = User.discriminator(
         },
       ],
     },
-    { discriminatorKey: 'kind' }
+    { discriminatorKey: 'userType' }
   )
 );
 
