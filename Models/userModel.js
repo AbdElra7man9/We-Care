@@ -3,6 +3,8 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
+const Appointment = require('./appointmentModel');
+
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -59,7 +61,6 @@ const userSchema = mongoose.Schema({
     type: String,
   },
 });
-
 userSchema.pre('save', function (next) {
   this.username =
     this.username || `${this.name.split(' ').join('-')}-${this._id}`;
@@ -131,6 +132,23 @@ userSchema.methods.createPIN = async function () {
   return PIN;
 };
 
+// doctor model midlewares
+userSchema.pre('save', async function (next) {
+  if (this.__t != 'Doctor') next();
+  this.ScheduleTiming.forEach(async (time) => {
+    let timeStep = time.start;
+    while (timeStep < time.end) {
+      const appointment = await Appointment.create({
+        status: 'available',
+        date: timeStep,
+        doctor: this._id,
+      });
+      this.appointments.push(appointment._id);
+      timeStep.setMinutes(timeStep.getMinutes() + this.timePerPatient);
+    }
+  });
+  next();
+});
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

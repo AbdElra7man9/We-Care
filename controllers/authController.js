@@ -112,7 +112,8 @@ exports.doctorSignUP = catchAsync(async function (req, res, next) {
     'password',
     'passwordConfirm',
     'specialization',
-    'address'
+    'address',
+    'ScheduleTiming'
   );
   const newDoctor = await Doctor.create(filteredInfo);
   await sendCreatePIN(newDoctor._id);

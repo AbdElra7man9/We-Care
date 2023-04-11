@@ -5,6 +5,7 @@ const appointmentSchema = mongoose.Schema({
     type: String,
     required: true,
     enum: ['video call', 'visit'],
+    default: 'video call',
   },
   status: {
     type: String,
