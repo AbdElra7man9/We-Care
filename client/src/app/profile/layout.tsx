@@ -1,3 +1,5 @@
+import Footer from "@Components/app/Footer";
+import Header from "@Components/app/Header";
 import ProfileWraper from "./ProfileWraper";
 
 export const metadata = {
@@ -9,7 +11,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-  <ProfileWraper>
-    {children}
-  </ProfileWraper>);
+    <ProfileWraper>
+      <Header />
+      {children}
+      <Footer />
+    </ProfileWraper>);
 }

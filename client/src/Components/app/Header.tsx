@@ -10,7 +10,6 @@ import { usePathname } from "next/navigation";
 import Themetoggle from "../Layouts/Themetoggle";
 import { useAppDispatch, useAppSelector } from "@Hooks/useRedux";
 import { selectCurrentUser } from "@Redux/Slices/UserSlice";
-import { IoReorderThreeOutline } from "react-icons/io5";
 interface HeaderProps {
   sideMargin?: string;
   setIsSideMargin?: () => void;

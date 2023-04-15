@@ -22,13 +22,8 @@ export default function RootLayout({
     >
       <body className="dark:bg-slate-900">
         <Providers>
-
-          {/* <ProgessBar /> */}
-          <Header />
           {children}
-          <Footer />
         </Providers>
-        {/* <div className="h-40 md:hidden"></div> */}
       </body>
     </html>
   );
