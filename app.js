@@ -18,6 +18,8 @@ const appointmentRouter = require('./routes/appointmentRouter');
 const reviewRouter = require('./routes/reviewRouter');
 const ChatRouter = require('./routes/ChatRouter');
 const MessageRouter = require('./routes/MessageRouter');
+const BlogRouter = require('./routes/BlogRouter');
+const CommentsRouter = require('./routes/CommentsRouter');
 const AppError = require('./utils/AppError');
 
 const app = express();
@@ -45,8 +47,8 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
-app.use(express.json({ limit: '10kb' }));
-
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
@@ -86,6 +88,12 @@ app.use('/api/v1/chat', ChatRouter);
 
 //Message
 app.use('/api/v1/message', MessageRouter);
+
+//Blogs
+app.use('/api/v1/blog', BlogRouter);
+
+//Comments and likes
+app.use('/api/v1/blog', CommentsRouter);
 
 
 //handeling wrong urls

@@ -4,6 +4,11 @@ import { BsArrowRight, BsChat, BsHeart } from 'react-icons/bs'
 import { IoCalendar, IoTimeOutline } from 'react-icons/io5'
 import Link from 'next/link';
 import Image from 'next/image';
+import ModalAddBlog from './ModalAddBlog';
+import { useAppDispatch, useAppSelector } from '@Hooks/useRedux';
+import { BiChevronRight } from 'react-icons/bi';
+import { FeatureAction } from '@Redux/Slices/FeaturesSlice';
+import { AnimatePresence } from 'framer-motion';
 
 interface BlogProps {
     _id: string;
@@ -15,6 +20,8 @@ interface BlogProps {
     numComments: number;
 }
 const Blogs: React.FC = () => {
+    const { isModalAddBlog } = useAppSelector(state => state.Features)
+    const dispatch = useAppDispatch()
 
     const BlogsDetails: BlogProps[] = [
         {
@@ -52,7 +59,9 @@ const Blogs: React.FC = () => {
         },
     ]
     const SingleBlog: React.FC<{ doc: BlogProps }> = ({ doc }) => {
+
         return (
+
             <div className='border dark:border-slate-700 overflow-hidden rounded-lg w-full select-none'>
                 <div className='w-full h-[20rem] overflow-hidden relative'>
                     <Image
@@ -96,15 +105,47 @@ const Blogs: React.FC = () => {
         )
     }
     return (
-        <div className='select-none py-5 dark:text-white'>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-8 py-5'>
-                {BlogsDetails?.map((doc) => (
-                    <div key={doc?._id}>
-                        <SingleBlog doc={doc} />
+        <>
+            <AnimatePresence>
+                {isModalAddBlog && <ModalAddBlog />}
+            </AnimatePresence>
+            <div className='flex justify-between items-center'>
+                <div>
+                    <p className='text-lg font-semibold my-3'>Blogs</p>
+                    <div className='flex gap-3 items-center justify-center'>
+                        <Link
+                            href='/'
+                            aria-label='home'
+                            className='uppercase hover:text-blue-500 hover:underline'>
+                            Doctris
+                        </Link>
+                        <BiChevronRight />
+                        <Link
+                            href='/patient/booking-appointment/clinc'
+                            aria-label='booking appointment'
+                            className='uppercase font-medium text-blue-400 hover:text-blue-500 hover:underline'
+                        >
+                            Blog
+                        </Link>
                     </div>
-                ))}
+                </div>
+                <button
+                    aria-label='Add BLOG'
+                    onClick={() => dispatch(FeatureAction.setModalAddBlog(true))}
+                    className='bg-blue-700 text-white font-semibold rounded-md p-3 px-5'>
+                    Add Blog
+                </button>
             </div>
-        </div>
+            <div className='select-none py-5 dark:text-white'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-8 py-5'>
+                    {BlogsDetails?.map((doc) => (
+                        <div key={doc?._id}>
+                            <SingleBlog doc={doc} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </>
     )
 }
 

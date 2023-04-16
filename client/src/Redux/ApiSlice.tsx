@@ -7,7 +7,7 @@ import type {
     FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
 import { RootState } from "./Store";
-import { AuthState, user } from "@lib/types";
+import { AuthState, user } from "@lib/types/user";
 
 const url: string = process.env.REACT_APP_API_KEY ?? 'http://localhost:5000';
 
@@ -59,6 +59,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
     keepUnusedDataFor: 500,
-    tagTypes: ["Auth", "Chat", "User", "Message"],
+    tagTypes: ["Auth", "Chat", "User", "Message", "Blog", "Comment"],
     endpoints: (builder) => ({}),
 });
