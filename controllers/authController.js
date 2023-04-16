@@ -67,7 +67,7 @@ function sendEmail(email, subject, text) {
 const sendCreatePIN = catchAsync(async function (id) {
   const user = await User.findById(id);
   const PIN = await user.createPIN();
-  console.log(PIN);
+  console.log(PIN); // now you don't have to write a real email and recive PIN code on it just copy it from consol
   await user.save({ validateBeforeSave: false });
   try {
     sendEmail(
@@ -173,6 +173,14 @@ exports.protect = catchAsync(async function (req, res, next) {
     return next(
       new AppError(
         'The user belonging to this token does no longer exist.',
+        401
+      )
+    );
+  }
+  if (!currentUser.confirmed) {
+    return next(
+      new AppError(
+        'Your Email is not confirmed yet, please check your email',
         401
       )
     );
