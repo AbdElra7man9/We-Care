@@ -1,3 +1,0 @@
-const restrictTo = (role) => {
-    if ()
-}
