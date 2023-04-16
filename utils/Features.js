@@ -36,6 +36,15 @@ class Features {
         this.query = this.query.limit(resultperpage).skip(skip);
         return this;
     }
+    Paginate(){
+        const page = this.queryStr.page * 1 || 1 ;
+        const limit = this.queryStr.limit * 1 || 10 ;
+        const skip = (page - 1) * limit;
+        
+        this.query = this.query.skip(skip).limit(limit);
+        
+        return this;
+    }
 }
 
 

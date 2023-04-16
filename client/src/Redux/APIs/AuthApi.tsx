@@ -3,7 +3,7 @@ import { LogOut, setCredentials } from '../Slices/UserSlice';
 import { apiSlice } from '../ApiSlice';
 import getSocket from '../SocketRTK';
 import { RootState } from '../Store';
-import { AuthState, user } from '@lib/types';
+import { AuthState, user } from '@lib/types/user';
 interface SignInData {
     email: string;
     password: string;

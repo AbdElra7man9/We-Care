@@ -36,9 +36,14 @@ doctorSchema = new mongoose.Schema(
         ref: 'Appointment',
       },
     ],
+    numberOfRating: {
+      type: Number,
+      default: 0,
+    },
     averageRating: {
       type: Number,
-      default: 4.5,
+      default: 0,
+      set: val => Math.round(val * 10 )/10,
     },
     status: {
       type: String,

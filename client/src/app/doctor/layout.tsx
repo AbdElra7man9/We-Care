@@ -12,5 +12,5 @@ export default function RootLayout({
     <DoctorWraper>
       {children}
     </DoctorWraper>
-    );
+  );
 }

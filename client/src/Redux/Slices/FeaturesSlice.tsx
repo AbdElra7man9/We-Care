@@ -2,9 +2,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 interface FeaturesProps {
     DocSide: Boolean;
+    isModalAddBlog: Boolean;
 }
 const initialState: FeaturesProps = {
     DocSide: false,
+    isModalAddBlog: false,
 }
 const FeaturesSlice = createSlice({
     name: 'Features',
@@ -12,6 +14,9 @@ const FeaturesSlice = createSlice({
     reducers: {
         setDocSide(state) {
             state.DocSide = !state.DocSide;
+        },
+        setModalAddBlog(state, action) {
+            state.isModalAddBlog = action.payload;
         },
     },
 });
