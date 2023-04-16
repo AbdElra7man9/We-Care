@@ -2,6 +2,8 @@ const Review = require('../Models/reviewModel');
 const Doctor = require('../Models/doctorModel');
 const AppError = require('../utils/AppError');
 const catchAsync = require('../utils/catchAsync');
+const Features = require("../utils/Features");
+
 
 
 exports.makeReview = catchAsync(async function (req, res, next) {
@@ -9,7 +11,6 @@ exports.makeReview = catchAsync(async function (req, res, next) {
     const doctor = req.params.id;
     const {rating , comment} = req.body;
     
-
     if(await Review.count( {patient : req.user.id , doctor : req.params.id} )>0)
     return next(new AppError("you already made a review for this doctor before",401));
     
@@ -51,7 +52,7 @@ exports.updateReview = catchAsync(async function (req, res, next) {
     if(req.body.comment.length>255)
     return next(new AppError("comment length shoud be less than 255 char",401));
 
-    const updateReview = await review.updateOne({rating : req.body.rating , comment : req.body.comment})
+    const updateReview = await Review.findByIdAndUpdate(review._id , {rating : req.body.rating , comment : req.body.comment})
     .then(()=>{return res.json({msg:"success"})})
     .catch((error)=>{return next(new AppError("internal server error", 500))})
 });
@@ -63,9 +64,40 @@ exports.deleteReview = catchAsync(async function(req, res, next){
     if(!review)
     return next(new AppError("u didnt give this doctor rate befor",401));
 
-
     await Review.findOneAndRemove({patient : req.user.id , doctor : req.params.id})
     .then(()=>{return res.json({msg:"success"})})
     .catch((error)=>{return next(new AppError("internal server error", 500))})
+});
 
+
+exports.patientReview = catchAsync(async function(req, res, next){
+    const features = new Features(Review.find({patient : req.user.id }) , req.query)
+        .Paginate()
+    const reviews = await features.query;
+
+    if(!reviews)
+    return next(new AppError("you didnt make reviews befor",401));
+
+    res.json({
+        status: 'success',
+        results: reviews.length,
+        reviews,
+    });
+});
+
+
+exports.doctorReview = catchAsync(async function(req, res, next){
+    const features = new Features(Review.find({doctor : req.params.id }) , req.query)
+        .Paginate()
+
+    const reviews = await features.query;
+
+    if(reviews.length == 0)
+    return next(new AppError("there is no reviews here",401));
+
+    res.json({
+        status: 'success',
+        results: reviews.length,
+        reviews,
+    });
 });
