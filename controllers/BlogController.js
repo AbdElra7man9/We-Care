@@ -75,12 +75,17 @@ exports.userBlogById = catchAsync(async (req, res, next) => {
     if (!userBLOGs) {
         return next(new AppError('No Posts For that user'), 400)
     }
-    return res.json(userBLOGs);
+    return res.json({
+        status: 'success',
+        Blogs: userBLOGs
+    });
 });
 
 exports.AllBlogs = catchAsync(async (req, res, next) => {
     const resultperpage = 4;
-    const features = new Features(BlogModel.find(), req.query).Pagination(resultperpage)
+    const features = new Features(BlogModel.find(), req.query)
+        .Pagination(resultperpage);
+
     const Blogs = await features.query
         .populate('user', 'username avatar')
         .sort("-createdAt");
@@ -89,7 +94,7 @@ exports.AllBlogs = catchAsync(async (req, res, next) => {
     }
     return res.json({
         status: 'success',
-        userBLOGs
+        Blogs
     });
 });
 
@@ -97,7 +102,7 @@ exports.GetBlogDetails = catchAsync(async (req, res, next) => {
     const BlogDetails = await BlogModel.findById(req.params.id)
         .populate('user', 'username avatar');
     if (!BlogDetails) {
-        return next(new AppError('Post not founded'), 400)
+        return next(new AppError('Blog not founded'), 400)
     }
     return res.json({
         status: 'success',

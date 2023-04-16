@@ -1,18 +1,23 @@
-const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
-const Features = require("../utils/Features");
+const CommentModel = require("../Models/CommentModel");
+const BlogModel = require('../Models/BlogModel');
+const AppError = require("../utils/AppError");
 
 exports.NewComment = catchAsync(async (req, res, next) => {
+    const { comment } = req.body;
+    if (!comment) {
+        return next(new AppError('Comment required!', 400));
+    }
     const Comment = await CommentModel.findByIdAndUpdate(req.params.id, {
         $push: {
-            comments: { user: req.user.id, comment: req.body.comment }
+            comments: { user: req.user.id, comment }
         },
         $inc: {
             numComments: 1
         }
     }, { new: true });
 
-    await BlogsModel.findByIdAndUpdate(req.params.id, {
+    await BlogModel.findByIdAndUpdate(req.params.id, {
         $inc: {
             numComments: 1
         }
@@ -35,7 +40,7 @@ exports.Like = catchAsync(async (req, res, next) => {
         }
     }, { new: true });
 
-    await BlogsModel.findByIdAndUpdate(req.params.id, {
+    await BlogModel.findByIdAndUpdate(req.params.id, {
         $inc: {
             numLikes: 1
         }
@@ -60,7 +65,7 @@ exports.UnLike = catchAsync(async (req, res, next) => {
         }
     }, { new: true });
 
-    await BlogsModel.findByIdAndUpdate(req.params.id, {
+    await BlogModel.findByIdAndUpdate(req.params.id, {
         $inc: {
             numLikes: -1
         }

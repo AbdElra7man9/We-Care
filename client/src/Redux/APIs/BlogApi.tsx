@@ -21,7 +21,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
                 };
             },
         }),
-        getUserBlogs: builder.query({
+        getUserBlogs: builder.query<{ Blogs: BlogType[], status: string }, { page: number }>({
             query: (page) => ({
                 url: `/api/v1/Blog/getuser?page=${page}`,
                 method: 'GET',
@@ -36,7 +36,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
                 };
             },
         }),
-        getMoreUserBlogs: builder.query<BlogType[], { page: 1 }>({
+        getMoreUserBlogs: builder.query<{ Blogs: BlogType[], status: string }, { page: number }>({
             query: (page) => ({
                 url: `/api/v1/Blog/getuser?page=${page}`,
                 method: 'GET',
@@ -62,7 +62,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        getUserBlogsById: builder.query<BlogType[], { page: 1 }>({
+        getUserBlogsById: builder.query<{ Blogs: BlogType[], status: string }, { id: string, page: number }>({
             query: (id) => ({
                 url: `/api/v1/Blog/get/all/${id}?page=${1}`,
                 method: 'GET',
@@ -77,7 +77,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
                 };
             },
         }),
-        getMoreUserBlogsById: builder.query<BlogType[], { page: 1 }>({
+        getMoreUserBlogsById: builder.query<{ Blogs: BlogType[], status: string }, { id: string, page: number }>({
             query: ({ id, page }) => ({
                 url: `/api/v1/Blog/get/all/${id}?page=${page}`,
                 method: 'GET',
@@ -102,7 +102,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        getAllBLOGs: builder.query<BlogType[], { page: 1 }>({
+        getAllBLOGs: builder.query<{ Blogs: BlogType[], status: string }, { page: number }>({
             query: (page) => ({
                 url: `/api/v1/Blog?page=${page}`,
                 method: 'GET',
@@ -117,9 +117,9 @@ export const BlogsApi = apiSlice.injectEndpoints({
                 };
             },
         }),
-        getMoreFollowersBlogs: builder.query({
+        getMoreAllBlogs: builder.query<{ Blogs: BlogType[], status: string }, { page: number }>({
             query: (page) => ({
-                url: `/api/v1/Blog/get/followers/Blogs?page=${page}`,
+                url: `/api/v1/Blog?page=${page}`,
                 method: 'GET',
             }),
             async onQueryStarted(args, { queryFulfilled, dispatch }) {

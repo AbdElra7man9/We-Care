@@ -3,7 +3,7 @@ const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 const Features = require("../utils/Features");
 
-exports.New_Chat = catchAsync(async (req, res, next) => {
+exports.NewChat = catchAsync(async (req, res, next) => {
     const isAlreadyinChat = await Chat.findOne({
         $and: [
             { members: { $elemMatch: { $eq: req.user.id } } },
@@ -18,14 +18,17 @@ exports.New_Chat = catchAsync(async (req, res, next) => {
         members: [req.user._id, req.params.id]
     }).save()
         .then((chat) => {
-            return res.json(chat._id);
+            return res.json({
+                status:'success',
+                chatId: chat._id
+            });
         })
         .catch((err) => {
             return next(new AppError(err.message, 404));
         })
 });
 
-exports.Get_ALL = catchAsync(async (req, res, next) => {
+exports.GetAll = catchAsync(async (req, res, next) => {
     const resultperpage = 10;
     const features = new Features(Chat.find(
         {
@@ -37,10 +40,16 @@ exports.Get_ALL = catchAsync(async (req, res, next) => {
     const Chats = await features.query
         .populate('members', 'username avatar fullname')
         .sort('-updatedAt')
-    return res.json(Chats)
+    return res.json({
+        status:'success',
+        Chats
+    })
 });
 
-exports.Get_Single_Chat = catchAsync(async (req, res, next) => {
+exports.getSingleChat = catchAsync(async (req, res, next) => {
     const SingleChat = await Chat.findById(req.params.id)
-    return res.json(SingleChat)
+    return res.json({
+        status:'success',
+        chat:SingleChat
+    })
 });

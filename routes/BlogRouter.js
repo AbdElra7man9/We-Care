@@ -16,5 +16,5 @@ router.delete('/', protect, DeleteBLOG);
 router.get('/user', protect, userBLOG);
 router.get('/:id', protect, userBlogById);
 router.get('/', protect, AllBlogs);
-router.get('/:id', protect, GetBlogDetails);
+router.get('/details/:id', protect, GetBlogDetails);
 module.exports = router

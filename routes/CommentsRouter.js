@@ -5,7 +5,7 @@ const { protect } = require('../controllers/authController');
 const router = express.Router();
 
 
-router.post('/like', protect, Like);
-router.post('/unlike', protect, UnLike);
-router.post('/add-comment', protect, NewComment);
+router.post('/like/:id', protect, Like);
+router.post('/unlike/:id', protect, UnLike);
+router.post('/add-comment/:id', protect, NewComment);
 module.exports = router
