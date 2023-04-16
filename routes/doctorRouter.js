@@ -5,11 +5,10 @@ const {
   getDoctor,
   updateDoctorStatus,
 } = require('.././controllers/doctorController');
-const {
-  doctorSignUP,
-  protect,
-} = require('../controllers/authController');
-const { restrictTo } = require('../Middlewares/doctor');
+const { doctorSignUP } = require('../controllers/authController');
+
+const { restrictTo } = require('../Middlewares/authorization');
+const { protect } = require('../Middlewares/authentication');
 
 const router = express.Router();
 

@@ -1,15 +1,16 @@
 const express = require('express');
 const {
-    NewChat,
-    GetAll,
-    getSingleChat
+  NewChat,
+  GetAll,
+  getSingleChat,
 } = require('../Controllers/ChatController');
-const { protect } = require('../controllers/authController');
+const { protect } = require('../Middlewares/authentication');
 
 const router = express.Router();
 
-router.get('/all', protect, GetAll);
-router.get('/:id', protect, getSingleChat);
-router.post('/:id', protect, NewChat);
+router.use(protect);
+router.get('/all', GetAll);
+router.get('/:id', getSingleChat);
+router.post('/:id', NewChat);
 
 module.exports = router;

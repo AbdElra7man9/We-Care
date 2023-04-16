@@ -2,7 +2,6 @@ const express = require('express');
 
 const {
   userLogin,
-  protect,
   updatePassword,
   forgotPassword,
   resetPassword,
@@ -10,6 +9,7 @@ const {
   Refresh,
 } = require('../controllers/authController');
 const { updateInfo, deleteMe } = require('../controllers/userController');
+const { protect } = require('../Middlewares/authentication');
 
 const router = express.Router();
 
