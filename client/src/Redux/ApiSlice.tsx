@@ -9,7 +9,7 @@ import type {
 import { RootState } from "./Store";
 import { AuthState, user } from "@lib/types/user";
 
-const url: string = process.env.REACT_APP_API_KEY ?? 'http://localhost:5000';
+const url = process.env.API_KEY;
 
 const baseQuery = fetchBaseQuery({
     baseUrl: url,
