@@ -3,7 +3,7 @@ const catchAsync = require('../utils/catchAsync');
 
 // exports.isDoctor = catchAsync((req, res, next) => {});
 
-exports.restrictTo = (...roles) => {
+module.exports = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.__t)) {
       return next(

@@ -4,7 +4,7 @@ const {
   NewComment,
   UnLike,
 } = require('../controllers/CommentsController');
-const { protect } = require('../Middlewares/authentication');
+const protect = require('../Middlewares/protect');
 
 const router = express.Router();
 

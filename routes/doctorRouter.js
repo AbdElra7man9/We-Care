@@ -7,8 +7,8 @@ const {
 } = require('.././controllers/doctorController');
 const { doctorSignUP } = require('../controllers/authController');
 
-const { restrictTo } = require('../Middlewares/authorization');
-const { protect } = require('../Middlewares/authentication');
+const restrictTo = require('../Middlewares/restrictTo');
+const protect = require('../Middlewares/protect');
 
 const router = express.Router();
 

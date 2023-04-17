@@ -4,7 +4,7 @@ const {
   GetAll,
   getSingleChat,
 } = require('../Controllers/ChatController');
-const { protect } = require('../Middlewares/authentication');
+const protect = require('../Middlewares/protect');
 
 const router = express.Router();
 

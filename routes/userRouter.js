@@ -9,7 +9,8 @@ const {
   Refresh,
 } = require('../controllers/authController');
 const { updateInfo, deleteMe } = require('../controllers/userController');
-const { protect } = require('../Middlewares/authentication');
+const protect = require('../Middlewares/protect');
+const mustConfirmed = require('../Middlewares/mustConfirmed');
 
 const router = express.Router();
 
@@ -18,8 +19,9 @@ router.get('/refresh', Refresh);
 router.post('/forgotPassword', forgotPassword);
 // routes need to authentication
 router.use(protect);
-router.patch('/resetPassword/:token', resetPassword);
 router.post('/emailConfirmation', emailConfirmation);
+router.use(mustConfirmed);
+router.patch('/resetPassword/:token', resetPassword);
 router.patch('/updateInfo', updateInfo);
 router.patch('/updatePassword', updatePassword);
 router.delete('/deleteMe', deleteMe);

@@ -1,5 +1,5 @@
 const express = require('express');
-const { protect } = require('../Middlewares/authentication');
+const protect = require('../Middlewares/protect');
 
 const reviewController = require('../controllers/reviewController');
 

@@ -4,7 +4,7 @@ const {
   get_MSGs,
   DeleteAllMSGs,
 } = require('../Controllers/MessageController');
-const { protect } = require('../Middlewares/authentication');
+const protect = require('../Middlewares/protect');
 
 const router = express.Router();
 
