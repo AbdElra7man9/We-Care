@@ -3,7 +3,6 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
-
 const catchAsync = require('../utils/catchAsync');
 const User = require('../Models/userModel');
 const Patient = require('../Models/patientModel');
@@ -235,6 +234,16 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // 5) Log user in, send JWT
   createSendToken(user, 200, res);
 });
+
+exports.resendPIN = (req, res, next) => {
+  if (req.user.confirmed)
+    return next(new AppError('you email is already confirmed!'), 400);
+  sendCreatePIN(req.user._id);
+  res.status(200).json({
+    status: 'success',
+    message: `PIN was sent to ${req.user.email}!`,
+  });
+};
 
 exports.emailConfirmation = catchAsync(async function (req, res, next) {
   //console.log(req.user);

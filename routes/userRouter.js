@@ -7,6 +7,7 @@ const {
   resetPassword,
   emailConfirmation,
   Refresh,
+  resendPIN,
 } = require('../controllers/authController');
 const { updateInfo, deleteMe } = require('../controllers/userController');
 const protect = require('../Middlewares/protect');
@@ -22,6 +23,7 @@ router.post('/forgotPassword', forgotPassword);
 // routes need to authentication
 router.use(protect);
 router.post('/emailConfirmation', emailConfirmation);
+router.post('/resendPin', resendPIN);
 router.use(mustConfirmed);
 router.patch('/resetPassword/:token', resetPassword);
 router.patch(
