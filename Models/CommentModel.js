@@ -6,7 +6,7 @@ const CommentsSchema = new mongoose.Schema(
             ref: 'User',
             required: true
         },
-        user: {
+        blog: {
             type: mongoose.Schema.ObjectId,
             ref: 'Blog',
             required: true

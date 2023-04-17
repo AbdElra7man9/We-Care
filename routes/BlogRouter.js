@@ -14,8 +14,8 @@ const router = express.Router();
 
 router.post('/', protect, restrictTo('Doctor'), NewBlog);
 router.delete('/', protect, restrictTo('Doctor'), DeleteBLOG);
-router.get('/user', protect, restrictTo('Doctor'), userBLOG);
-router.get('/:id', protect, restrictTo('Doctor'), userBlogById);
+router.get('/user', protect, userBLOG);
+router.get('/:id', protect, userBlogById);
 router.get('/', protect, restrictTo('Doctor'), AllBlogs);
-router.get('/details/:id', protect, restrictTo('Doctor'), GetBlogDetails);
+router.get('/details/:id', protect, GetBlogDetails);
 module.exports = router

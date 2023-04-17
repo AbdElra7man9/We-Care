@@ -4,7 +4,10 @@ import { useSignupMutation } from '@Redux/APIs/AuthApi';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useRef, useState } from 'react'
+import { AiFillFacebook } from 'react-icons/ai';
+import { BsGoogle } from 'react-icons/bs';
 import { ImSpinner7 } from 'react-icons/im';
+import { signIn } from "next-auth/react"
 
 interface InpupProps {
     email: string;
@@ -116,8 +119,40 @@ const Form: FC = ({ }) => {
                 className='text-blue-800 dark:text-blue-400 focus:text-blue-300 md:mb-4 text-lg font-serif hover:underline'>
                 sign up as a doctor ?
             </Link>
+            <div>
+                <div className='flex gap-5'>
+                    <button
+                        type='button'
+                        aria-label='Sign In with Facebook'
+                        onClick={() => signIn('facebook')}
+                        className='bg-sky-100 text-blue-400 w-full py-2 my-3 rounded-md shadow-blue-200 shadow-md border border-blue-200'>
+                        <span className='w-full flex justify-center items-center gap-3'>
+                            <AiFillFacebook />
+                            <p>Facebook</p>
+                        </span>
+                    </button>
+                    <button
+                        type='button'
+                        aria-label='Sign In with Google'
+                        onClick={() => signIn('google')}
+                        className='bg-sky-100 text-sky-400 w-full py-2 my-3 rounded-md shadow-blue-200 shadow-md border border-blue-200'>
+                        <span className='w-full flex justify-center items-center gap-3'>
+                            <BsGoogle />
+                            <p>Google</p>
+                        </span>
+                    </button>
+                </div>
+                <p className="my-5 text-sm inline">{`Don't have an account? `}
+                    <Link
+                        href="/auth/signup"
+                        aria-label='sign up'
+                        className='font-semibold text-black'>
+                        Sign In
+                    </Link>
+                </p>
+            </div>
             {isError && <GetError error={error} />}
-        </form>
+        </form >
 
     )
 }

@@ -4,8 +4,10 @@ import { AiFillFacebook } from 'react-icons/ai';
 import { useSigninMutation } from '@Redux/APIs/AuthApi';
 import { ImSpinner7 } from 'react-icons/im';
 import { useRouter } from 'next/navigation';
+import { signIn } from "next-auth/react"
 import Link from 'next/link';
 import GetError from '@lib/GetError';
+import { BsGoogle } from 'react-icons/bs';
 interface Inputs {
     email: string;
     password: string;
@@ -70,30 +72,51 @@ const Form: FC = ({ }) => {
                         <ImSpinner7 />
                     </span> : 'Sign In'}
             </button>
+
+            <Link
+                href='/auth/forgetpassword'
+                aria-label='forget password'
+                className='text-blue-800 focus:text-blue-300 text-sm'>
+                Forgot password ?
+            </Link>
             <div className='flex justify-center mt-4'>
                 <hr className='w-[40%] mt-3'></hr>
                 <p className='mx-3 font-semibold text-gray-500'>OR</p>
                 <hr className='w-[40%] mt-3'></hr>
             </div>
-            <button
-                aria-label='submit'
-                className='flex mx-auto pt-5 mb-3 ' >
-                <div className='mt-1 text-blue-700 focus:text-blue-300 text-xl'>
-                    <AiFillFacebook />
-                </div>
-                <p className=' focus:text-blue-300 ml-2 text-base text-blue-900 font-medium'>
-                    Log in with facebook
-                </p>
-            </button>
-            <Link
-                href='/auth/forgetpassword'
-                aria-label='forget password'
-                className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm mt-2'>
-                Forgot password ?
-            </Link>
+            <div className='flex gap-5'>
+                <button
+                    type='button'
+                    aria-label='Sign In with Facebook'
+                    onClick={() => signIn()}
+                    className='bg-sky-100 text-blue-400 w-full py-2 my-3 rounded-md shadow-blue-200 shadow-md border border-blue-200'>
+                    <span className='w-full flex justify-center items-center gap-3'>
+                        <AiFillFacebook />
+                        <p>Facebook</p>
+                    </span>
+                </button>
+                <button
+                    type='button'
+                    aria-label='Sign In with Google'
+                    onClick={() => signIn()}
+                    className='bg-sky-100 text-sky-400 w-full py-2 my-3 rounded-md shadow-blue-200 shadow-md border border-blue-200'>
+                    <span className='w-full flex justify-center items-center gap-3'>
+                        <BsGoogle />
+                        <p>Google</p>
+                    </span>
+                </button>
+            </div>
+            <p className="py-5 text-sm inline">{`Don't have an account? `}
+                <Link
+                    href="/auth/signup"
+                    aria-label='sign up'
+                    className='font-semibold text-black'>
+                    Sign up
+                </Link>
+            </p>
             {isError && <GetError error={error} />}
 
-        </form>
+        </form >
     )
 }
 

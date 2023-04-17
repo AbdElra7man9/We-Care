@@ -111,7 +111,11 @@ const SidePatient = () => {
                     ))}
                 </div>
             </div>
-            <button aria-label='view profile' className='bg-sky-100 text-sky-400 w-full py-2 my-3 rounded-md shadow-blue-200 shadow-md border border-blue-200'>View Profile</button>
+            <button
+                aria-label='view profile'
+                className='bg-sky-100 text-sky-400 w-full py-2 my-3 rounded-md shadow-blue-200 shadow-md border border-blue-200'>
+                View Profile
+            </button>
         </div>
     )
 }

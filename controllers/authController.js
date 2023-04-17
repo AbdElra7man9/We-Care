@@ -177,14 +177,14 @@ exports.protect = catchAsync(async function (req, res, next) {
       )
     );
   }
-  if (!currentUser.confirmed) {
-    return next(
-      new AppError(
-        'Your Email is not confirmed yet, please check your email',
-        401
-      )
-    );
-  }
+  // if (!currentUser.confirmed) {
+  //   return next(
+  //     new AppError(
+  //       'Your Email is not confirmed yet, please check your email',
+  //       401
+  //     )
+  //   );
+  // }
 
   // 4) Check if user changed password after the token was issued
   if (currentUser.changedPasswordAfter(decoded.iat)) {

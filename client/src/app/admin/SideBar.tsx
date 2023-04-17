@@ -28,7 +28,7 @@ const AdminSidebar: React.FC<WidthProps> = ({ sideWidth }) => {
                             'text-gray-600 hover:text-blue-500'}`}>
                             {Icon}
                         </div>
-                        <p className='text-black font-light'>{Title}</p>
+                        <p className='text-black font-light dark:text-slate-200'>{Title}</p>
                     </div>
                 </Link>
             </div>
@@ -43,13 +43,13 @@ const AdminSidebar: React.FC<WidthProps> = ({ sideWidth }) => {
                 <Link href='/' className='flex gap-3'>
                     <Image height={100} width={100} className='w-10 h-10 rounded-xl'
                         src='/Images/logo-icon.png' alt='' />
-                    <p className={`text-2xl font-bold text-black`}>Doctris</p>
+                    <p className={`text-2xl font-bold text-black  dark:text-white`}>Doctris</p>
                 </Link>
             </div>
             <div className='whitespace-nowrap py-3 space-y-2'>
                 <LinkList Icon={<BsGrid size={17} />} Title='Dashboard' Href='/admin/admin-dashboard' />
-                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Appointment ' Href='/admin/admin-appointment' />
-                <LinkList Icon={<GiAlarmClock size={20} />} Title='Schedule Timing' Href='/admin/admin-schedule' />
+                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Appointment ' Href='/admin/appointment' />
+                <LinkList Icon={<GiAlarmClock size={20} />} Title='Doctors' Href='/admin/doctors-list' />
                 <LinkList Icon={<IoNewspaperOutline size={20} />} Title='Invoices' Href='/admin/invoices' />
                 <LinkList Icon={<BsChatText size={20} />} Title='Blogs' Href='/admin/blogs' />
                 <LinkList Icon={<BsPeople size={20} />} Title='Patient List' Href='/admin/patient-list' />

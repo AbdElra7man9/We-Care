@@ -3,7 +3,19 @@ const catchAsync = require("../utils/catchAsync");
 const Features = require("../utils/Features");
 const cloudinary = require('../utils/cloudinary')
 const BlogModel = require('../Models/BlogModel')
+const CommentModel = require("../Models/CommentModel");
 
+// async function checkLike(req, res, next) {
+//     let isLiked;
+//     const post = await CommentModel.findOne({
+//         blog: req.params.id,
+//         $and: [
+//             { likes: { $elemMatch: { $eq: req.user.id } } },
+//         ],
+//     });
+//     if (post) isLiked = true;
+//     isLiked: false
+// }
 exports.NewBlog = catchAsync(async (req, res, next) => {
     const { des, title } = req.body
     let received = req.body.image;
