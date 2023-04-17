@@ -1,4 +1,6 @@
 'use client';
+import { useGetAllReviewsQuery, useGetDoctorReviewsQuery } from '@Redux/APIs/ReviewsApi';
+import Image from 'next/image';
 import { FC } from 'react'
 import { BsSearch } from 'react-icons/bs';
 
@@ -14,17 +16,10 @@ interface AppontementProps {
         name: string;
     }
 }
-const Appointements: AppontementProps[] = [
-    {
-        doctor: {
-            name: 'Ahmed'
-        },
-        pateint: {
-            name: 'hi'
-        }
-    }
-]
+
 const Table: FC<TableProps> = ({ }) => {
+    const { data } = useGetAllReviewsQuery({ page: 1, limit: 5 });
+    const { reviews, status, results } = data || {}
     return (
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -46,30 +41,32 @@ const Table: FC<TableProps> = ({ }) => {
                         <th scope="col" className="p-4">#</th>
                         <th scope="col" className="px-6 py-3">Name</th>
                         <th scope="col" className="px-6 py-3">Email</th>
-                        <th scope="col" className="px-6 py-3">Age</th>
-                        <th scope="col" className="px-6 py-3">Gender</th>
-                        <th scope="col" className="px-6 py-3">Department</th>
+                        <th scope="col" className="px-6 py-3">stars</th>
+                        <th scope="col" className="px-6 py-3">comments</th>
+                        <th scope="col" className="px-6 py-3">doctor</th>
                         <th scope="col" className="px-6 py-3">Date</th>
-                        <th scope="col" className="px-6 py-3">Time</th>
-                        <th scope="col" className="px-6 py-3">Doctor</th>
-                        <th scope="col" className="px-6 py-3">Fees</th>
-                        <th scope="col" className="px-6 py-3"></th>
+                        <th scope="col" className="px-6 py-3">action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {Appointements?.map((item, index) => (
+                    {reviews?.map((item, index) => (
                         <>
                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td className="w-4 p-4">{index}</td>
                                 <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Jese image" />
+                                    <Image
+                                        height={100}
+                                        width={100}
+                                        className="w-10 h-10 rounded-full"
+                                        src={item.patient?.image.url as string}
+                                        alt={item.patient?.name as string} />
                                     <div className="pl-3">
-                                        <div className="text-base font-semibold">Neil Sims</div>
-                                        <div className="font-normal text-gray-500">neil.sims@flowbite.com</div>
+                                        <div className="text-base font-semibold">{item.patient?.name}</div>
+                                        <div className="font-normal text-gray-500">{item.patient?.email}</div>
                                     </div>
                                 </th>
                                 <td className="px-6 py-4">
-                                    React Developer
+                                    {item.patient?.email}
                                 </td>
                                 <td className="px-6 py-4">
                                     <div className="flex items-center">

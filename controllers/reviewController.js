@@ -101,3 +101,18 @@ exports.doctorReview = catchAsync(async function(req, res, next){
         reviews,
     });
 });
+exports.AllReview = catchAsync(async function (req, res, next) {
+    const features = new Features(Review.find(), req.query)
+        .Paginate()
+
+    const reviews = await features.query;
+
+    if (reviews.length == 0)
+        return next(new AppError("there is no reviews here", 401));
+
+    res.json({
+        status: 'success',
+        results: reviews.length,
+        reviews,
+    });
+});

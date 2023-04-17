@@ -6,11 +6,12 @@ const reviewController = require('../controllers/reviewController');
 const router = express.Router({ mergeParams: true });
 
 
-router.post('/makereview/:id', protect, reviewController.makeReview);
-router.patch('/updatereview/:id', protect, reviewController.updateReview);
-router.delete('/deletereview/:id', protect, reviewController.deleteReview);
-router.get('/patientreviews', protect, reviewController.patientReview);
-router.get('/doctorreviews/:id', reviewController.doctorReview);
+router.post('/:id', protect, reviewController.makeReview);
+router.get('/', protect, reviewController.AllReview);
+router.patch('/:id', protect, reviewController.updateReview);
+router.delete('/:id', protect, reviewController.deleteReview);
+router.get('/patient', protect, reviewController.patientReview);
+router.get('/:id', reviewController.doctorReview);
 
 
 module.exports = router;

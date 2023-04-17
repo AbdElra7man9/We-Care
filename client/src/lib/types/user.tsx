@@ -1,4 +1,6 @@
 
+import { ImageType } from "./Feature";
+
 export type appointments = {
     _id: string;
 };
@@ -14,6 +16,7 @@ export type user = {
     __v?: number;
     createdAt?: Date;
     updatedAt?: Date;
+    image: ImageType
 };
 
 export interface AuthState {
