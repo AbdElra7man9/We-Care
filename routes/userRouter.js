@@ -11,6 +11,8 @@ const {
 const { updateInfo, deleteMe } = require('../controllers/userController');
 const protect = require('../Middlewares/protect');
 const mustConfirmed = require('../Middlewares/mustConfirmed');
+const uploadUserPhoto = require('../Middlewares/uploadUserPhoto');
+const resizeImage = require('../Middlewares/resizeImage');
 
 const router = express.Router();
 
@@ -22,7 +24,12 @@ router.use(protect);
 router.post('/emailConfirmation', emailConfirmation);
 router.use(mustConfirmed);
 router.patch('/resetPassword/:token', resetPassword);
-router.patch('/updateInfo', updateInfo);
+router.patch(
+  '/updateInfo',
+  uploadUserPhoto,
+  resizeImage(500, 500, 'users', 'user'),
+  updateInfo
+);
 router.patch('/updatePassword', updatePassword);
 router.delete('/deleteMe', deleteMe);
 

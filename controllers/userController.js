@@ -11,12 +11,8 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
       )
     );
   }
-  const filteredInfo = filterObject(
-    req.body,
-    'name',
-    'username',
-    'profilePicture'
-  );
+  const filteredInfo = filterObject(req.body, 'name', 'username');
+  if (req.file) filteredInfo.profilePicture = req.file.filename;
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredInfo, {
     new: true,
     runValidators: true,

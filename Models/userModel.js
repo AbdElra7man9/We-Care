@@ -43,7 +43,10 @@ const userSchema = mongoose.Schema({
       return this.password === el;
     },
   },
-  profilePicture: String,
+  profilePicture: {
+    type: String,
+    default: 'default.png',
+  },
   account: Number,
   confirmed: {
     type: Boolean,
