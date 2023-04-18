@@ -72,7 +72,7 @@ exports.deleteReview = catchAsync(async function (req, res, next) {
 
 exports.patientReview = catchAsync(async function (req, res, next) {
     const features = new Features(Review.find({ patient: req.user.id }), req.query)
-        .Paginate()
+        .Paginate();
     const reviews = await features.query;
 
     if (!reviews)
@@ -87,8 +87,7 @@ exports.patientReview = catchAsync(async function (req, res, next) {
 
 exports.doctorReview = catchAsync(async function (req, res, next) {
     const features = new Features(Review.find({ doctor: req.params.id }), req.query)
-        .Paginate()
-
+        .Paginate();
     const reviews = await features.query;
 
     if (reviews.length == 0)
