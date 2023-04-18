@@ -65,14 +65,16 @@ const BlogDetailsPage: FC<BlogType> = ({ }) => {
             </div>
             <div className='grid grid-cols-3 gap-3 my-5'>
                 <div className='col-span-2 border rounded-md'>
-                    <Image
-                        height={600}
-                        width={600}
-                        draggable={false}
-                        src={BlogDetails?.image?.url ?? ''}
-                        alt={BlogDetails?.title ?? ''}
-                        className='w-full h-[30rem] object-cover'
-                    />
+                    {BlogDetails?.image?.url &&
+                        <Image
+                            height={600}
+                            width={600}
+                            draggable={false}
+                            src={BlogDetails?.image?.url}
+                            alt={BlogDetails?.title ?? ''}
+                            className='w-full h-[30rem] object-cover'
+                        />
+                    }
                     <div className='p-5'>
                         <p className='text-gray-500'>{BlogDetails?.des}</p>
                         <div className='my-5'>
@@ -80,14 +82,16 @@ const BlogDetailsPage: FC<BlogType> = ({ }) => {
                             {Comments?.map(comment => (
                                 <div key={comment._id}>
                                     <div className='flex items-center gap-3'>
-                                        <Image
-                                            height={100}
-                                            width={100}
-                                            draggable={false}
-                                            src={comment?.user?.profilePicture ?? '/'}
-                                            alt={comment?.user?.name ?? ''}
-                                            className='w-14 h-14 rounded-full object-cover'
-                                        />
+                                        {comment?.user?.profilePicture &&
+                                            <Image
+                                                height={100}
+                                                width={100}
+                                                draggable={false}
+                                                src={comment?.user?.profilePicture ?? '/'}
+                                                alt={comment?.user?.name ?? ''}
+                                                className='w-14 h-14 rounded-full object-cover'
+                                            />
+                                        }
                                         <span>
                                             <p className='font-medium text-lg text-gray-600'>{comment.user?.name}</p>
                                             <p className='text-slate-500 text-sm'>{comment.createdAt}</p>
@@ -107,14 +111,17 @@ const BlogDetailsPage: FC<BlogType> = ({ }) => {
                     <h2 className='py-3 font-medium text-lg'>Recent Blogs</h2>
                     {Blogs?.map((doc) => (
                         <div key={doc?._id} className='flex gap-3 my-4'>
-                            <Image
-                                height={200}
-                                width={200}
-                                draggable={false}
-                                src={doc.image?.url ?? ''}
-                                alt={doc.title ?? ''}
-                                className='w-52 h-24 rounded-lg object-cover'
-                            />
+                            
+                            {doc?.image?.url &&
+                                <Image
+                                    height={200}
+                                    width={200}
+                                    draggable={false}
+                                    src={doc.image?.url ?? ''}
+                                    alt={doc.title ?? ''}
+                                    className='w-52 h-24 rounded-lg object-cover'
+                                />
+                            }
                             <span>
                                 <p className='font-medium text-lg text-gray-600'>{doc.des}</p>
                                 <p className='text-slate-500 text-sm'>{moment(doc.createdAt).calendar()}</p>

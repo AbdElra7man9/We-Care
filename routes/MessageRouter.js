@@ -3,7 +3,7 @@ const {
   new_MSG,
   get_MSGs,
   DeleteAllMSGs,
-} = require('../Controllers/MessageController');
+} = require('../Controllers/MessageCTRL');
 const protect = require('../Middlewares/protect');
 
 const router = express.Router();
