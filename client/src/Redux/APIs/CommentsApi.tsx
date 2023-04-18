@@ -9,31 +9,31 @@ interface CommentsResponse {
 }
 export const CommentsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        GetComments: builder.query<CommentsResponse, { id: string }>({
-            query: ({ id }) => ({
-                url: `/api/v1/blog/comments/${id}`,
+        GetComments: builder.query<CommentsResponse, { blogId: string }>({
+            query: ({ blogId }) => ({
+                url: `/api/v1/blog/comments/${blogId}`,
                 method: 'GET',
             }),
             // providesTags: ['Comment'],
         }),
-        createComment: builder.mutation<{ status: string; Comment: CommentType }, { content: string, id: string }>({
-            query: ({ content, id }) => ({
-                url: `/api/v1/blog/add-comment/${id}`,
+        createComment: builder.mutation<{ status: string; Comment: CommentType }, { content: string, blogId: string }>({
+            query: ({ content, blogId }) => ({
+                url: `/api/v1/blog/add-comment/${blogId}`,
                 method: 'Post',
                 body: content,
             }),
-            async onQueryStarted({ id }, { queryFulfilled, dispatch }) {
+            async onQueryStarted({ blogId }, { queryFulfilled, dispatch }) {
                 try {
 
                     const { data } = await queryFulfilled;
 
                     dispatch(
-                        BlogsApi.util.updateQueryData("getBlogDetails", { id }, (draft) => {
-                            draft.numComments = +1
+                        BlogsApi.util.updateQueryData("getBlogDetails", { blogId }, (draft) => {
+                            draft.BlogDetails.numComments = +1
                         })
                     )
                     dispatch(
-                        CommentsApi.util.updateQueryData("GetComments", { id }, (draft) => {
+                        CommentsApi.util.updateQueryData("GetComments", { blogId }, (draft) => {
                             return {
                                 Comments: [
                                     ...draft.Comments,
@@ -47,19 +47,19 @@ export const CommentsApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        Like: builder.mutation<{ status: string; message: string }, { id: string }>({
-            query: ({ id }) => ({
-                url: `/api/v1/blog/like/${id}`,
+        Like: builder.mutation<{ status: string; message: string }, { blogId: string }>({
+            query: ({ blogId }) => ({
+                url: `/api/v1/blog/like/${blogId}`,
                 method: 'PUT',
             }),
-            async onQueryStarted({ id }, { queryFulfilled, dispatch, getState }) {
+            async onQueryStarted({ blogId }, { queryFulfilled, dispatch, getState }) {
                 try {
                     // const userInfo = getState().auth.user
                     const { data } = await queryFulfilled;
 
                     dispatch(
-                        BlogsApi.util.updateQueryData("getBlogDetails", { id }, (draft) => {
-                            draft.numLikes = +1
+                        BlogsApi.util.updateQueryData("getBlogDetails", { blogId }, (draft) => {
+                            draft.BlogDetails.numLikes = +1
                         })
                     )
                 } catch (err) {
@@ -67,19 +67,19 @@ export const CommentsApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        UnLike: builder.mutation<{ status: string; message: string }, { id: string }>({
-            query: ({ id }) => ({
-                url: `/api/v1/blog/unlike/${id}`,
+        UnLike: builder.mutation<{ status: string; message: string }, { blogId: string }>({
+            query: ({ blogId }) => ({
+                url: `/api/v1/blog/unlike/${blogId}`,
                 method: 'PUT',
             }),
-            async onQueryStarted({ id }, { queryFulfilled, dispatch, getState }) {
+            async onQueryStarted({ blogId }, { queryFulfilled, dispatch, getState }) {
                 try {
                     // const userInfo = getState().auth.user
                     const { data } = await queryFulfilled;
                     // replace the likes array inside followers posts array with the new array of likes 
                     dispatch(
-                        BlogsApi.util.updateQueryData("getBlogDetails", { id }, (draft) => {
-                            draft.numLikes = -1
+                        BlogsApi.util.updateQueryData("getBlogDetails", { blogId }, (draft) => {
+                            draft.BlogDetails.numLikes = -1
 
 
                         })
@@ -90,16 +90,16 @@ export const CommentsApi = apiSlice.injectEndpoints({
             },
         }),
         updateComment: builder.mutation({
-            query: ({ data, id }) => ({
-                url: `/api/comment/update/${id}`,
+            query: ({ data, blogId }) => ({
+                url: `/api/comment/update/${blogId}`,
                 method: 'PUT',
                 body: data,
             }),
             invalidatesTags: ['Comment'],
         }),
         deleteComment: builder.mutation({
-            query: ({ id }) => ({
-                url: `/api/comment/delete/${id}`,
+            query: ({ blogId }) => ({
+                url: `/api/comment/delete/${blogId}`,
                 method: 'DELETE',
             }),
             // invalidatesTags: (result, error, arg) => [{ type: 'Comments', id: arg.id }],
@@ -113,4 +113,5 @@ export const {
     useDeleteCommentMutation,
     useLikeMutation,
     useUnLikeMutation,
+    useGetCommentsQuery,
 } = CommentsApi;

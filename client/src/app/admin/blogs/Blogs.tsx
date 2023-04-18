@@ -9,56 +9,17 @@ import { useAppDispatch, useAppSelector } from '@Hooks/useRedux';
 import { BiChevronRight } from 'react-icons/bi';
 import { FeatureAction } from '@Redux/Slices/FeaturesSlice';
 import { AnimatePresence } from 'framer-motion';
+import { useGetAllBLOGsQuery } from '@Redux/APIs/BlogApi';
+import { BlogType } from '@lib/types/blog';
 
-interface BlogProps {
-    _id: string;
-    ImgSrc: string;
-    des: string;
-    time: string;
-    since: string;
-    numLikes: number;
-    numComments: number;
-}
+
 const Blogs: React.FC = () => {
     const { isModalAddBlog } = useAppSelector(state => state.Features)
     const dispatch = useAppDispatch()
+    const { data } = useGetAllBLOGsQuery({ page: 1 });
+    const { Blogs } = data || {}
 
-    const BlogsDetails: BlogProps[] = [
-        {
-            _id: '1',
-            ImgSrc: '/Images/Blogs/01.jpg',
-            des: 'You can easily connect to doctor and make a treatment',
-            time: '20th November, 2020',
-            since: '5 min read',
-            numLikes: 44,
-            numComments: 5
-        }, {
-            _id: '2',
-            ImgSrc: '/Images/Blogs/02.jpg',
-            des: 'Lockdowns lead to fewer people seeking medical care',
-            time: '20th November, 2020',
-            since: '5 min read',
-            numLikes: 44,
-            numComments: 5,
-        }, {
-            _id: '3',
-            ImgSrc: '/Images/Blogs/03.jpg',
-            des: 'Emergency medicine research course for the doctors',
-            time: '20th November, 2020',
-            since: '5 min read',
-            numLikes: 44,
-            numComments: 5
-        }, {
-            _id: '4',
-            ImgSrc: '/Images/Blogs/03.jpg',
-            des: 'Emergency medicine research course for the doctors',
-            time: '20th November, 2020',
-            since: '5 min read',
-            numLikes: 44,
-            numComments: 5
-        },
-    ]
-    const SingleBlog: React.FC<{ doc: BlogProps }> = ({ doc }) => {
+    const SingleBlog: React.FC<{ doc: BlogType }> = ({ doc }) => {
 
         return (
 
@@ -68,19 +29,19 @@ const Blogs: React.FC = () => {
                         draggable={false}
                         height={300}
                         width={300}
-                        src={doc?.ImgSrc}
+                        src={doc?.image.url}
                         className='w-full object-cover h-full hover:scale-[1.1] duration-200'
-                        alt='' />
+                        alt={doc.user.name as string} />
                 </div>
                 <div className='space-y-3 p-5 overflow-hidden'>
                     <div className='flex gap-5 items-center whitespace-nowrap'>
                         <div className='flex gap-2 items-center'>
                             <IoCalendar />
-                            <p className='text-sm text-gray-500'>{doc?.time}</p>
+                            <p className='text-sm text-gray-500'>{doc?.createdAt}</p>
                         </div>
                         <div className='flex gap-2 items-center'>
                             <IoTimeOutline />
-                            <p className='text-sm text-gray-500'>{doc?.since}</p>
+                            <p className='text-sm text-gray-500'>{doc?.createdAt}</p>
                         </div>
                     </div>
                     <Link href={`/admin/blogs/${doc?._id}`} className='text-lg font-medium ellipse-2 hover:text-blue-500 dark:text-slate-400'>{doc?.des}</Link>
@@ -138,7 +99,7 @@ const Blogs: React.FC = () => {
             </div>
             <div className='select-none py-5 dark:text-white'>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-8 py-5'>
-                    {BlogsDetails?.map((doc) => (
+                    {Blogs?.map((doc) => (
                         <div key={doc?._id}>
                             <SingleBlog doc={doc} />
                         </div>

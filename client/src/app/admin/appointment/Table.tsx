@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { FC } from 'react'
 import { BsSearch } from 'react-icons/bs';
 
@@ -57,135 +58,51 @@ const Table: FC<TableProps> = ({ }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {Appointements?.map((item, index) => (
-                        <>
-                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td className="w-4 p-4">{index}</td>
-                                <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Jese image" />
-                                    <div className="pl-3">
-                                        <div className="text-base font-semibold">Neil Sims</div>
-                                        <div className="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                                    </div>
-                                </th>
-                                <td className="px-6 py-4">
-                                    React Developer
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center">
-                                        <div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Online
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
-                                </td>
-                            </tr>
-                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td className="w-4 p-4">
-                                    <div className="flex items-center">
-                                        <input id="checkbox-table-search-2" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                        <label className="sr-only">checkbox</label>
-                                    </div>
-                                </td>
-                                <th scope="row" className="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="Jese image" />
-                                    <div className="pl-3">
-                                        <div className="text-base font-semibold">Bonnie Green</div>
-                                        <div className="font-normal text-gray-500">bonnie@flowbite.com</div>
-                                    </div>
-                                </th>
-                                <td className="px-6 py-4">
-                                    Designer
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center">
-                                        <div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Online
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
-                                </td>
-                            </tr>
-                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td className="w-4 p-4">
-                                    <div className="flex items-center">
-                                        <input id="checkbox-table-search-2" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                        <label className="sr-only">checkbox</label>
-                                    </div>
-                                </td>
-                                <th scope="row" className="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-2.jpg" alt="Jese image" />
-                                    <div className="pl-3">
-                                        <div className="text-base font-semibold">Jese Leos</div>
-                                        <div className="font-normal text-gray-500">jese@flowbite.com</div>
-                                    </div>
-                                </th>
-                                <td className="px-6 py-4">
-                                    Vue JS Developer
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center">
-                                        <div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Online
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
-                                </td>
-                            </tr>
-                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td className="w-4 p-4">
-                                    <div className="flex items-center">
-                                        <input id="checkbox-table-search-2" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                        <label className="sr-only">checkbox</label>
-                                    </div>
-                                </td>
-                                <th scope="row" className="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Jese image" />
-                                    <div className="pl-3">
-                                        <div className="text-base font-semibold">Thomas Lean</div>
-                                        <div className="font-normal text-gray-500">thomes@flowbite.com</div>
-                                    </div>
-                                </th>
-                                <td className="px-6 py-4">
-                                    UI/UX Engineer
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center">
-                                        <div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Online
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
-                                </td>
-                            </tr>
-                            <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td className="w-4 p-4">
-                                    <div className="flex items-center">
-                                        <input id="checkbox-table-search-3" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                        <label className="sr-only">checkbox</label>
-                                    </div>
-                                </td>
-                                <th scope="row" className="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-4.jpg" alt="Jese image" />
-                                    <div className="pl-3">
-                                        <div className="text-base font-semibold">Leslie Livingston</div>
-                                        <div className="font-normal text-gray-500">leslie@flowbite.com</div>
-                                    </div>
-                                </th>
-                                <td className="px-6 py-4">
-                                    SEO Specialist
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center">
-                                        <div className="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Offline
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
-                                </td>
-                            </tr>
-                        </>
-                    ))}
+                    {/* {Appointements?.map((item, index) => (
+                        <tr key={item._id} className="bg-white border-b dark:bg-slate-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 whitespace-nowrap">
+                            <td className="w-4 p-4">{index}</td>
+                            <th scope="row" className="flex items-center px-6 py-4 text-gray-900 dark:text-white">
+                                <Image
+                                    height={100}
+                                    width={100}
+                                    className="w-10 h-10 rounded-full"
+                                    src={item.patient?.image?.url ?? process.env.NEXT_PUBLIC_ICON as string}
+                                    alt={item.patient?.name ?? ' ' as string} />
+                                <div className="pl-3">
+                                    <div className="text-base font-semibold">{item.patient?.name}</div>
+                                    <div className="font-normal text-gray-500">{item.patient?.email}</div>
+                                </div>
+                            </th>
+                            <td className="px-6 py-4">
+                                {item.patient?.email}
+                            </td>
+                            <td className="px-6 py-4">
+                                <Rating rating={item.rating as number} />
+                            </td>
+                            <td className="px-6 py-4">
+                                <p className='ellipse-2'>{item.comment}</p>
+                            </td>
+                            <td className="px-6 py-4">
+                                <p>{item.doctor?.name}</p>
+                            </td>
+                            <td className="px-6 py-4">
+                                <p>{moment(item.createdAt).fromNow()}</p>
+                            </td>
+                            <td className="px-6 py-4">
+                                <button
+                                    type='button'
+                                    aria-label='Delete Review'
+                                    onClick={() => DeleteReviewHandler(item._id as string)}
+                                    className='bg-orange-100 text-orange-400 px-7 py-1 rounded-md shadow-orange-200 shadow-md border border-orange-200
+                                        duration-200 active:bg-orange-200 active:scale-95'>
+                                    <span className='w-full flex justify-center items-center gap-2'>
+                                        <MdDelete size={22} />
+                                        <p className='font-semibold'>Delete</p>
+                                    </span>
+                                </button>
+                            </td>
+                        </tr>
+                    ))} */}
                 </tbody>
             </table>
         </div>

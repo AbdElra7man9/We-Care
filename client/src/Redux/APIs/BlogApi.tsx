@@ -1,3 +1,4 @@
+'use client';
 import { BlogType } from '@lib/types/blog';
 import { apiSlice } from '../ApiSlice';
 interface BlogArgs {
@@ -86,7 +87,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
             },
         }),
         getAllBLOGs: builder.query<BlogResponse, { page: number }>({
-            query: (page) => ({
+            query: ({ page }) => ({
                 url: `/api/v1/Blog?page=${page}`,
                 method: 'GET',
             }),
@@ -121,9 +122,9 @@ export const BlogsApi = apiSlice.injectEndpoints({
             },
         }),
 
-        getBlogDetails: builder.query<BlogType, { id: string }>({
-            query: ({ id }) => ({
-                url: `/api/v1/Blog/${id}`,
+        getBlogDetails: builder.query<{ status: string; BlogDetails: BlogType }, { blogId: string }>({
+            query: ({ blogId }) => ({
+                url: `/api/v1/Blog/details/${blogId}`,
                 method: 'GET',
             }),
             providesTags: ['Blog'],
@@ -167,16 +168,16 @@ export const BlogsApi = apiSlice.injectEndpoints({
             invalidatesTags: ['Blog'],
         }),
 
-        deleteBlogs: builder.mutation<{ msg: string }, { id: string }>({
-            query: ({ id }) => ({
-                url: `/api/Blog/delete/${id}`,
+        deleteBlogs: builder.mutation<{ msg: string }, { blogId: string }>({
+            query: ({ blogId }) => ({
+                url: `/api/Blog/delete/${blogId}`,
                 method: 'DELETE',
             }),
-            async onQueryStarted({ id }, { queryFulfilled, dispatch }) {
+            async onQueryStarted({ blogId }, { queryFulfilled, dispatch }) {
                 try {
                     dispatch(
                         BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1 }, (draft) => {
-                            const Blogs = draft?.Blogs?.filter((item) => item?._id !== id)
+                            const Blogs = draft?.Blogs?.filter((item) => item?._id !== blogId)
                             return {
                                 Blogs: [
                                     ...Blogs

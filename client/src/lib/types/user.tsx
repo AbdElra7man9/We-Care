@@ -22,7 +22,7 @@ export type userType = {
     appointments?: appointmentsType | null;
 
     _id?: string;
-    __t?: 'Doctor' | 'Patient';
+    __t?: 'Doctor' | 'Patient' | 'Coordinator';
     __v?: number;
     createdAt?: Date;
     updatedAt?: Date;
