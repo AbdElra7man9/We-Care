@@ -2,6 +2,7 @@ const express = require('express');
 
 const {
   getAllDoctors,
+  getAllPendingDoctors,
   getDoctor,
   updateDoctorStatus,
 } = require('.././controllers/doctorController');
@@ -14,6 +15,7 @@ const router = express.Router();
 
 router.post('/signup', doctorSignUP);
 router.route('/').get(getAllDoctors);
+router.route('/pending', protect, restrictTo('Coordinator')).get(getAllPendingDoctors);
 
 router.route('/:id').get(getDoctor);
 router.patch('/:id', protect, restrictTo('Coordinator'), updateDoctorStatus);

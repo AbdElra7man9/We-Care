@@ -5,12 +5,12 @@ const reviewController = require('../controllers/reviewController');
 
 const router = express.Router({ mergeParams: true });
 
+router.get('/:id', reviewController.doctorReview);
 router.use(protect);
 router.post('/:id', reviewController.makeReview);
 router.patch('/:id', reviewController.updateReview);
 router.delete('/:id', reviewController.deleteReview);
 router.get('/patient', reviewController.patientReview);
-router.get('/:id', reviewController.doctorReview);
 
 
 module.exports = router;
