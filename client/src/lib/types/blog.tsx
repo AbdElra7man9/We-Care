@@ -9,5 +9,7 @@ export interface BlogType {
     createdAt?: string;
     updatedAt: string;
     image: ImageType;
+    numComments:number;
+    numLikes:number;
     user:user;
 }

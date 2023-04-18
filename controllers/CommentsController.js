@@ -2,53 +2,59 @@ const catchAsync = require("../utils/catchAsync");
 const CommentModel = require("../Models/CommentModel");
 const BlogModel = require('../Models/BlogModel');
 const AppError = require("../utils/AppError");
+const LikeModel = require("../Models/LikeModel");
 
 exports.NewComment = catchAsync(async (req, res, next) => {
-    const { comment } = req.body;
-    if (!comment) {
+    const { content } = req.body;
+    if (!content) {
         return next(new AppError('Comment required!', 400));
-    }
-    const Comment = await CommentModel.findByIdAndUpdate(req.params.id, {
-        $push: {
-            comments: { user: req.user.id, comment }
-        },
-        $inc: {
-            numComments: 1
-        }
-    }, { new: true });
+    };
+    
+    const Comment = await new CommentModel({
+        content,
+        user: req.user.id,
+        blog: req.params.id
+    }).save()
 
-    await BlogModel.findByIdAndUpdate(req.params.id, {
-        $inc: {
-            numComments: 1
-        }
-    }, { new: true })
+    if (Comment) {
+        await BlogModel.findByIdAndUpdate(req.params.id, {
+            $inc: {
+                numComments: 1
+            }
+        }, { new: true })
+    };
 
-    // .populate('comments.user', 'username avatar');
     return res.json({
         status: 'success',
         Comment
     });
 });
 
+exports.GetComments = catchAsync(async (req, res, next) => {
+    const Comments = await CommentModel.find({ blog: req.params.id })
+    if (Comments == []) {
+        return next(new AppError('Be the first to comment', 404));
+    }
+    return res.json({
+        status: 'success',
+        Comments
+    })
+});
+
 exports.Like = catchAsync(async (req, res, next) => {
-    await CommentModel.findByIdAndUpdate(req.params.id, {
-        $push: {
-            likes: req.user._id
-        },
-        $inc: {
-            numLikes: 1
-        }
-    }, { new: true });
+    const like = await new LikeModel({
+        user: req.user.id,
+        blog: req.params.id
+    }).save()
 
-    await BlogModel.findByIdAndUpdate(req.params.id, {
-        $inc: {
-            numLikes: 1
-        }
-    }, { new: true });
+    if (like) {
+        await BlogModel.findByIdAndUpdate(req.params.id, {
+            $inc: {
+                numLikes: 1
+            }
+        }, { new: true });
 
-    // .populate('comments.user', 'username avatar')
-    // .populate('user', 'username avatar');
-
+    }
     return res.json({
         status: 'success',
         message: 'Liked !'
@@ -56,23 +62,13 @@ exports.Like = catchAsync(async (req, res, next) => {
 });
 
 exports.UnLike = catchAsync(async (req, res, next) => {
-    await CommentModel.findByIdAndUpdate(req.params.id, {
-        $pull: {
-            likes: req.user._id
-        },
-        $inc: {
-            numLikes: 1
-        }
-    }, { new: true });
+    await LikeModel.deleteOne({ _id: req.params.id })
 
     await BlogModel.findByIdAndUpdate(req.params.id, {
         $inc: {
             numLikes: -1
         }
     }, { new: true });
-    // .populate('comments.user', 'username avatar')
-    // .populate('user', 'username avatar');
-
     return res.json({
         status: 'success',
         message: 'UnLiked !'

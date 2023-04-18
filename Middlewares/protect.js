@@ -17,7 +17,7 @@ module.exports = catchAsync(async function (req, res, next) {
 
   if (!token) {
     return next(
-      new AppError('You are not logged in! Please log in to get access.', 401)
+      new AppError('You are not logged in! Please log in to get access.', 403)
     );
   }
 

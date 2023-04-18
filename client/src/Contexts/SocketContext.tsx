@@ -2,7 +2,7 @@
 import { io } from 'socket.io-client';
 import { createContext, FC, useEffect, useRef, ReactNode } from 'react';
 
-const url: string | undefined = process.env.REACT_APP_API_KEY ?? 'http://localhost:5000';
+const url= process.env.server as string;
 const SocketContext = createContext({});
 
 export const SocketProvider: FC<{ children: ReactNode }> = ({ children }) => {

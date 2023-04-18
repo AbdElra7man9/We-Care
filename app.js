@@ -20,6 +20,7 @@ const ChatRouter = require('./routes/ChatRouter');
 const MessageRouter = require('./routes/MessageRouter');
 const BlogRouter = require('./routes/BlogRouter');
 const CommentsRouter = require('./routes/CommentsRouter');
+const CoordinatorRouter = require('./routes/CoordinatorRouter');
 const AppError = require('./utils/AppError');
 
 const app = express();
@@ -94,6 +95,9 @@ app.use('/api/v1/blog', BlogRouter);
 
 //Comments and likes
 app.use('/api/v1/blog', CommentsRouter);
+
+//Comments and likes
+app.use('/api/v1/coordinator', CoordinatorRouter);
 
 
 //handeling wrong urls

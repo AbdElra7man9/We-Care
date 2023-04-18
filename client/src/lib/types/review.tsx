@@ -8,5 +8,5 @@ export interface ReviewType {
     createdAt?: string;
     updatedAt: string;
     rating?: number;
-    comment?: user;
+    comment?: string;
 }

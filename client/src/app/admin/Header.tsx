@@ -55,7 +55,8 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
                 </button>
                 <input
                   type='search'
-                  className="w-96 rounded-full outline-none border focus:border-black py-3 px-5 hidden md:block"
+                  className="w-96 rounded-full outline-none border focus:border-black py-3 px-5 hidden md:block duration-300
+                   dark:bg-slate-900 dark:outline-none dark:border-slate-600 dark:focus:border-slate-200"
                   placeholder="search ..."
                 />
               </div>

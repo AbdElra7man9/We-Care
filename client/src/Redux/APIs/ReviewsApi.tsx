@@ -8,20 +8,6 @@ interface ReviewArgs {
 }
 export const ReviewsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        GetAllReviews: builder.query<{ status: string; results: number; reviews: ReviewType[] }, { page: number; limit: Number }>({
-            query: ({ page, limit }) => ({
-                url: `/api/v1/reviews?page=${page}&limit=${limit}`,
-                method: 'GET',
-            }),
-            // transformResponse(apiResponse: { status: string; results: number; reviews: ReviewType[] }, meta: {}): ReviewType[] {
-            //     // const totalCount = Number(meta.response.headers.get('X-Total-Count'));
-
-            //     return {
-            //         DoctorReviews: apiResponse.reviews as ReviewType[],
-            //         totalCount: Number(apiResponse.length as number)
-            //     };
-            // },
-        }),
         GetDoctorReviews: builder.query<{ status: string; results: number; reviews: ReviewType[] }, { page: number; limit: Number; id: string }>({
             query: ({ page, limit, id }) => ({
                 url: `/api/v1/reviews/${id}?page=${page}&limit=${limit}`,
@@ -165,13 +151,14 @@ export const ReviewsApi = apiSlice.injectEndpoints({
 
                     const { data } = await queryFulfilled;
                     dispatch(
-                        apiSlice.util.updateQueryData("getFollowersReviews", 1, (draft) => {
+                        ReviewsApi.util.updateQueryData("getFollowersReviews", 1, (draft: { status: string; results: number; reviews: ReviewType[] }) => {
                             return {
-                                followersReviews: [
+                                reviews: [
                                     data.Review,
-                                    ...draft.followersReviews,
+                                    ...draft.reviews
                                 ],
-                                totalCount: Number(4),
+                                results: draft.results,
+                                status: draft.status,
                             };
                         })
                     )
@@ -189,22 +176,23 @@ export const ReviewsApi = apiSlice.injectEndpoints({
             invalidatesTags: ['Review'],
         }),
 
-        deleteReviews: builder.mutation<{ msg: string }, { id: string }>({
-            query: (id) => ({
-                url: `/api/v1/reviews/${id}`,
+        DeleteReview: builder.mutation<{ msg: string }, { id: string }>({
+            query: ({ id }) => ({
+                url: `/api/v1/reviews/delete-review/${id}`,
                 method: 'DELETE',
             }),
             async onQueryStarted(id, { queryFulfilled, dispatch }) {
                 console.log(id)
                 try {
                     dispatch(
-                        apiSlice.util.updateQueryData("getFollowersReviews", 1, (draft) => {
-                            const Reviews = draft?.followersReviews?.filter((item) => item?._id !== id)
+                        ReviewsApi.util.updateQueryData("getFollowersReviews", 1, (draft: { status: string; results: number; reviews: ReviewType[] }) => {
+                            const Reviews = draft?.reviews?.filter((item) => item?._id !== id)
                             return {
-                                followersReviews: [
+                                reviews: [
                                     ...Reviews
                                 ],
-                                totalCount: Number(4),
+                                results: draft.results,
+                                status: draft.status,
                             };
                         })
                     )
@@ -220,7 +208,6 @@ export const {
     useCreateReviewMutation,
     useGetDoctorReviewsByIdQuery,
     useGetDoctorReviewsQuery,
-    useGetAllReviewsQuery,
     useUpdateReviewsMutation,
-    useDeleteReviewsMutation,
+    useDeleteReviewMutation,
 } = ReviewsApi;

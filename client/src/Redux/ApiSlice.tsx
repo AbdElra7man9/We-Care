@@ -8,8 +8,7 @@ import type {
 } from "@reduxjs/toolkit/query";
 import { RootState } from "./Store";
 import { AuthState, user } from "@lib/types/user";
-
-const url = process.env.API_KEY;
+const url = process.env.server as string ?? 'http://localhost:5000';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: url,
@@ -30,10 +29,10 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, extraOptions) => {
 
     let result = await baseQuery(args, api, extraOptions);
-    if (result?.error?.status === 403 || result?.error?.status === 500) {
+    if (result?.error?.status === 403) {
         // send refresh token to get new access token
         const refreshResult = await baseQuery(
-            "/api/auth/refresh",
+            "/api/v1/users/refresh",
             api,
             extraOptions
         );

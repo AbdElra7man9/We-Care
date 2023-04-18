@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const CommentsSchema = new mongoose.Schema(
+const LikeSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.ObjectId,
@@ -11,13 +11,8 @@ const CommentsSchema = new mongoose.Schema(
             ref: 'Blog',
             required: true
         },
-        content: {
-            type: String,
-            required: true,
-            max: 2200
-        },
     },
     { timestamps: true }
 );
-const CommentModel = mongoose.model('comment', CommentsSchema);
-module.exports = CommentModel;
+const LikeModel = mongoose.model('Like', LikeSchema);
+module.exports = LikeModel;

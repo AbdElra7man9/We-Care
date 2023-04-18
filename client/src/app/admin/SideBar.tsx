@@ -21,15 +21,23 @@ const AdminSidebar: React.FC<WidthProps> = ({ sideWidth }) => {
     const LinkList: React.FC<LinkListProps> = ({ Icon, Title, Href, onClose }) => {
         return (
             <div className={`text-lg font-medium px-7 w-full ${(pathname === Href) ? '!text-blue-600' : ' text-gray-600'}`}>
-                <Link href={Href}>
+                <Link href={Href} className='dark:hover:text-blue-500'>
                     <div className='flex gap-4 py-2 items-center hover:text-blue-600 group-hover:text-blue-600'>
-                        <div className={`bg-gray-100 w-10 h-10 flex justify-center items-center rounded-lg group ${(pathname === Href) ?
-                            'text-blue-600 bg-blue-200' :
-                            'text-gray-600 hover:text-blue-500'}`}>
+
+                        <div className={`bg-gray-100 w-10 h-10 flex justify-center items-center rounded-lg group
+                          ${(pathname === Href) ?
+                                'text-blue-600 bg-blue-200 dark:text-white dark:bg-blue-800' :
+                                'text-gray-600 hover:text-blue-500 dark:text-slate-400 dark:bg-slate-800'}`}>
                             {Icon}
                         </div>
-                        <p className='text-black font-light dark:text-slate-200'>{Title}</p>
+                        <p className={`font-light  
+                        ${(pathname === Href) ?
+                                'text-blue-600 dark:text-blue-400' :
+                                'text-gray-600 hover:text-blue-500 dark:text-slate-400'} `}>
+                            {Title}
+                        </p>
                     </div>
+
                 </Link>
             </div>
         )
@@ -37,7 +45,7 @@ const AdminSidebar: React.FC<WidthProps> = ({ sideWidth }) => {
 
     return (
         <div
-            className='fixed top-0 left-0 z-10 border-r overflow-hidden duration-300 h-full'
+            className='fixed top-0 left-0 z-10 border-r overflow-hidden duration-300 h-full dark:border-slate-700'
             style={{ width: `${sideWidth}` }}>
             <div className="p-5">
                 <Link href='/' className='flex gap-3'>

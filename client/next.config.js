@@ -4,6 +4,16 @@ const nextConfig = {
     appDir: true,
     // esmExternals: true
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/abdo9/image/**',
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig
