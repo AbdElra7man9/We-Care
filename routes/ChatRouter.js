@@ -3,7 +3,7 @@ const {
   NewChat,
   GetAll,
   getSingleChat,
-} = require('../Controllers/ChatController');
+} = require('../controllers/ChatCTRL');
 const protect = require('../Middlewares/protect');
 
 const router = express.Router();

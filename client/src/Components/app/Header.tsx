@@ -21,7 +21,7 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
   const { MobileView } = useBreakpoint();
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(selectCurrentUser)
-  const key = usePathname();
+  const key = usePathname() as string;
   const dash = key.includes("patient");
   const drDash = key.includes("doctor");
   const admindash = key.includes("admin");
