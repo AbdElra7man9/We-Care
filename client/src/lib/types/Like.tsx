@@ -1,7 +1,7 @@
-import { user } from "./user";
+import { userType } from "./user";
 
 export interface LikeType {
-    user: user;
+    user: userType;
     blog: string;
     createdAt?: string;
     updatedAt: string;

@@ -1,74 +1,48 @@
 'use client';
-import { RadialBarChart, RadialBar, Legend, ResponsiveContainer } from 'recharts';
+import { Doughnut } from 'react-chartjs-2';
+import { ChartData, ChartOptions } from 'chart.js';
+import React from 'react';
+import { Chart as ChartJS, registerables } from 'chart.js';
+import { Chart } from 'react-chartjs-2'
+ChartJS.register(...registerables);
 
-const data = [
-    {
-        name: '18-24',
-        uv: 31.47,
-        pv: 2400,
-        fill: '#8884d8',
-    },
-    {
-        name: '25-29',
-        uv: 26.69,
-        pv: 4567,
-        fill: '#83a6ed',
-    },
-    {
-        name: '30-34',
-        uv: 15.69,
-        pv: 1398,
-        fill: '#8dd1e1',
-    },
-    {
-        name: '35-39',
-        uv: 8.22,
-        pv: 9800,
-        fill: '#82ca9d',
-    },
-    {
-        name: '40-49',
-        uv: 8.63,
-        pv: 3908,
-        fill: '#a4de6c',
-    },
-    {
-        name: '50+',
-        uv: 2.63,
-        pv: 4800,
-        fill: '#d0ed57',
-    },
-    {
-        name: 'unknow',
-        uv: 6.67,
-        pv: 4800,
-        fill: '#ffc658',
-    },
-];
+const RadialPiePlot: React.FC = () => {
+    const data: ChartData = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+            {
+                label: 'Sales',
+                data: [10, 20, 30, 40, 50, 60, 70],
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#37d6c6',
+                    '#f7786b',
+                    '#9b59b6',
+                    '#2ecc71'
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
 
-const style = {
-    top: '50%',
-    right: 0,
-    transform: 'translate(0, -50%)',
-    lineHeight: '24px',
+    const options: ChartOptions = {
+        cutout: '60%',
+        rotation: -90,
+        circumference: 360,
+        plugins: {
+            legend: {
+                position: 'bottom',
+            },
+            title: {
+                display: true,
+                text: 'Sales by Month',
+            },
+        },
+    };
+
+    return <Doughnut data={data} options={options} />;
 };
 
-export default function RaduilPiePlot() {
-
-    return (
-        <div style={{ width: '100%', height: 350 }}>
-            <ResponsiveContainer>
-                <RadialBarChart cx="50%" cy="50%" innerRadius="10%" outerRadius="80%" barSize={10} data={data}>
-                    <RadialBar
-                        // minAngle={15}
-                        label={{ position: 'insideStart', fill: '#fff' }}
-                        background
-                        clockWise
-                        dataKey="uv"
-                    />
-                    <Legend iconSize={10} layout="vertical" verticalAlign="middle" wrapperStyle={style} />
-                </RadialBarChart>
-            </ResponsiveContainer>
-        </div>
-    );
-}
+export default RadialPiePlot;

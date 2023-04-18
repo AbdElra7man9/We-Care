@@ -1,7 +1,7 @@
-import { user } from "./user";
+import { userType } from "./user";
 
 export interface CommentType {
-    user: user;
+    user: userType;
     blog: string;
     content: string;
     createdAt?: string;

@@ -1,48 +1,44 @@
-'use client';
-import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
+'use client'; import { Pie } from 'react-chartjs-2';
+import { ChartData, ChartOptions } from 'chart.js';
+import React from 'react';
+import { Chart as ChartJS, registerables } from 'chart.js';
+import { Chart } from 'react-chartjs-2'
+ChartJS.register(...registerables);
 
 const DonutPlot: React.FC = () => {
-    const data = [
-        {
-            value: 15,
-            type: 'Hemoglobin',
+    const data: ChartData = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+            {
+                label: 'Sales',
+                data: [10, 20, 30, 40, 50, 60, 70],
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#37d6c6',
+                    '#f7786b',
+                    '#9b59b6',
+                    '#2ecc71'
+                ],
+            },
+        ],
+    };
+
+    const options: ChartOptions = {
+        scales: {
+            yAxes: [
+                {
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                },
+            ],
         },
-        {
-            value: 30,
-            type: 'Suger',
-        },
-        {
-            value: 50,
-            type: 'Heartbeat',
-        },
-    ];
-    const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
-    return (
-        <PieChart width={300} height={280}>
-            <Pie
-                data={data}
-                dataKey="value"
-                nameKey="type"
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={80}
-                fill="#8884d8"
-                // label={{
-                //     position: 'inside',
-                //     content: '{value}',
-                //     fontSize: 14,
-                //     fill: '#fff',
-                // }}
-            >
-                {data.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-            </Pie>
-            <Legend />
-            <Tooltip />
-        </PieChart>
-    );
+    };
+
+    return <Pie data={data} options={options} />;
 };
 
 export default DonutPlot;
+

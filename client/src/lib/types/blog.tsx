@@ -1,5 +1,5 @@
 import { ImageType } from "./Feature";
-import { user } from "./user";
+import { userType } from "./user";
 
 export interface BlogType {
     _id?: string;
@@ -11,5 +11,5 @@ export interface BlogType {
     image: ImageType;
     numComments:number;
     numLikes:number;
-    user:user;
+    user: userType;
 }

@@ -7,7 +7,7 @@ import { store } from '@Redux/Store';
 import { AuthProvider } from '@Contexts/AuthContext';
 import { UserProvider } from '@Contexts/UserContextProps';
 import Router from 'next/router';
-import NProgress from 'nprogress';
+// import NProgress from 'nprogress';
 
 type providersProps = {
   children: React.ReactNode;
@@ -15,11 +15,11 @@ type providersProps = {
 };
 export default function Providers({ children, session }: providersProps) {
 
-  Router.events.on('routeChangeStart', () => NProgress.start());
-  Router.events.on('routeChangeComplete', () => NProgress.done());
-  Router.events.on('routeChangeError', () => NProgress.done());
+  // Router.events.on('routeChangeStart', () => NProgress.start());
+  // Router.events.on('routeChangeComplete', () => NProgress.done());
+  // Router.events.on('routeChangeError', () => NProgress.done());
 
-  Router.events.on('routeChangeComplete', () => { window.scrollTo(0, 0); });
+  // Router.events.on('routeChangeComplete', () => { window.scrollTo(0, 0); });
 
 
   return (
