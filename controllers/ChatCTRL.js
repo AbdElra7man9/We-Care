@@ -46,7 +46,7 @@ exports.GetAll = catchAsync(async (req, res, next) => {
     })
 });
 
-exports.getSingleChat = catchAsync(async (req, res, next) => {
+exports.GetSignleChat = catchAsync(async (req, res, next) => {
     const SingleChat = await Chat.findById(req.params.id)
     return res.json({
         status:'success',

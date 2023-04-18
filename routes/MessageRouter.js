@@ -1,15 +1,12 @@
 const express = require('express');
-const {
-  new_MSG,
-  get_MSGs,
-  DeleteAllMSGs,
-} = require('../Controllers/MessageCTRL');
+const { NewMSG, GetMSGs, DeleteAllMSGs } = require('../Controllers/MessageCTRL');
+
 const protect = require('../Middlewares/protect');
 
 const router = express.Router();
 
 router.use(protect);
-router.post('/:id', new_MSG);
-router.get('/:id', get_MSGs);
+router.post('/:id', NewMSG);
+router.get('/:id', GetMSGs);
 router.delete('/deleteall/:id', DeleteAllMSGs);
 module.exports = router;

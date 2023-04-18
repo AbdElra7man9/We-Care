@@ -31,7 +31,7 @@ const Blogs: React.FC = () => {
                         width={300}
                         src={doc?.image.url}
                         className='w-full object-cover h-full hover:scale-[1.1] duration-200'
-                        alt={doc.user.name as string} />
+                        alt={doc.user?.name ?? ' '} />
                 </div>
                 <div className='space-y-3 p-5 overflow-hidden'>
                     <div className='flex gap-5 items-center whitespace-nowrap'>

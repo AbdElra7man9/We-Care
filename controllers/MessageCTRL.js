@@ -4,7 +4,7 @@ const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 const Features = require("../utils/Features");
 
-exports.new_MSG = catchAsync(async (req, res, next) => {
+exports.NewMSG = catchAsync(async (req, res, next) => {
     const { msg, image } = req.body;
     let result = {}
     // if (image) {
@@ -30,7 +30,7 @@ exports.new_MSG = catchAsync(async (req, res, next) => {
     return next(new AppError(err.message, 404));
 });
 
-exports.get_MSGs = catchAsync(async (req, res, next) => {
+exports.GetMSGs = catchAsync(async (req, res, next) => {
     const resultperpage = 20;
     const features = new Features(Message.find({ chatId: req.params.id }), req.query)
         .Pagination(resultperpage)
