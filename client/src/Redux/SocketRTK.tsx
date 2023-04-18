@@ -1,7 +1,7 @@
 'use client';
 import { io, Socket } from 'socket.io-client';
 
-const url = process.env.server as string;
+const url = process.env.NEXT_PUBLIC_API_KEY as string;
 let socket: Socket;
 
 const getSocket = (): Socket => {

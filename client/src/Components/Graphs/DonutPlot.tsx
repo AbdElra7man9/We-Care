@@ -1,12 +1,12 @@
-'use client'; import { Pie } from 'react-chartjs-2';
-import { ChartData, ChartOptions } from 'chart.js';
+'use client';
 import React from 'react';
-import { Chart as ChartJS, registerables } from 'chart.js';
-import { Chart } from 'react-chartjs-2'
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ChartData, registerables, ChartOptions } from 'chart.js';
+
 ChartJS.register(...registerables);
 
 const DonutPlot: React.FC = () => {
-    const data: ChartData = {
+    const data: ChartData<'pie'> = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
@@ -25,20 +25,19 @@ const DonutPlot: React.FC = () => {
         ],
     };
 
-    const options: ChartOptions = {
-        scales: {
-            yAxes: [
-                {
-                    ticks: {
-                        beginAtZero: true,
-                    },
-                },
-            ],
-        },
+    const options: ChartOptions<'pie'> = {
+        // scales: {
+        //   yAxes: [
+        //     {
+        //       ticks: {
+        //         beginAtZero: true,
+        //       },
+        //     },
+        //   ],
+        // },
     };
 
     return <Pie data={data} options={options} />;
 };
 
 export default DonutPlot;
-

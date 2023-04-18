@@ -8,7 +8,7 @@ ChartJS.register(...registerables);
 
 
 const ColumnPlot: React.FC = () => {
-    const data: ChartData = {
+    const data: ChartData<'bar'> = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
@@ -21,18 +21,17 @@ const ColumnPlot: React.FC = () => {
         ],
     };
 
-    const options: ChartOptions = {
-        scales: {
-            yAxes: [
-                {
-                    ticks: {
-                        beginAtZero: true,
-                    },
-                },
-            ],
-        },
+    const options: ChartOptions<'bar'> = {
+        // scales: {
+        //     yAxes: [
+        //         {
+        //             ticks: {
+        //                 beginAtZero: true,
+        //             },
+        //         },
+        //     ],
+        // },
     };
-
     return <Bar data={data} options={options} />;
 };
 

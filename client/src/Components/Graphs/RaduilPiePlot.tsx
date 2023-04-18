@@ -1,13 +1,12 @@
 'use client';
-import { Doughnut } from 'react-chartjs-2';
-import { ChartData, ChartOptions } from 'chart.js';
 import React from 'react';
-import { Chart as ChartJS, registerables } from 'chart.js';
-import { Chart } from 'react-chartjs-2'
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, registerables, ChartData, ChartOptions } from 'chart.js';
+
 ChartJS.register(...registerables);
 
 const RadialPiePlot: React.FC = () => {
-    const data: ChartData = {
+    const data: ChartData<'doughnut'> = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
@@ -27,7 +26,7 @@ const RadialPiePlot: React.FC = () => {
         ],
     };
 
-    const options: ChartOptions = {
+    const options: ChartOptions<'doughnut'> = {
         cutout: '60%',
         rotation: -90,
         circumference: 360,
@@ -46,3 +45,4 @@ const RadialPiePlot: React.FC = () => {
 };
 
 export default RadialPiePlot;
+

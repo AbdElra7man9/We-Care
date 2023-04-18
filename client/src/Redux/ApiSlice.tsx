@@ -8,7 +8,7 @@ import type {
 } from "@reduxjs/toolkit/query";
 import { RootState } from "./Store";
 import { AuthState, userType } from "@lib/types/user";
-const url = process.env.server as string ?? 'http://localhost:5000';
+const url = process.env.NEXT_PUBLIC_API_KEY;
 
 const baseQuery = fetchBaseQuery({
     baseUrl: url,
