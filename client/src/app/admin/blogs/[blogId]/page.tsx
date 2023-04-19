@@ -1,4 +1,4 @@
-import BlogDetailsPage from "./BlogDetails";
+import BlogDetailsPage from "./BlogDetailsPage";
 
 
 

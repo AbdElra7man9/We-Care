@@ -8,7 +8,7 @@ export interface BlogType {
     des?: string;
     createdAt?: string;
     updatedAt?: string;
-    image: ImageType;
+    image?: ImageType;
     numComments?:number;
     numLikes?:number;
     user?: userType;

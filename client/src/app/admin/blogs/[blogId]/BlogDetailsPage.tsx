@@ -14,7 +14,8 @@ import { useParams } from 'next/navigation';
 import moment from 'moment';
 
 const BlogDetailsPage: FC<BlogType> = ({ }) => {
-    const { blogId } = useParams()
+    const params = useParams() 
+    const blogId = params?.blogId as string
     const { data: BlogQuery } = useGetBlogDetailsQuery({ blogId });
     const { data: CommentQuery } = useGetCommentsQuery({ blogId });
     const { data } = useGetAllBLOGsQuery({ page: 1 });
@@ -111,7 +112,7 @@ const BlogDetailsPage: FC<BlogType> = ({ }) => {
                     <h2 className='py-3 font-medium text-lg'>Recent Blogs</h2>
                     {Blogs?.map((doc) => (
                         <div key={doc?._id} className='flex gap-3 my-4'>
-                            
+
                             {doc?.image?.url &&
                                 <Image
                                     height={200}
