@@ -25,13 +25,16 @@ const Blogs: React.FC = () => {
 
             <div className='border dark:border-slate-700 overflow-hidden rounded-lg w-full select-none'>
                 <div className='w-full h-[20rem] overflow-hidden relative'>
-                    <Image
-                        draggable={false}
-                        height={300}
-                        width={300}
-                        src={doc?.image.url}
-                        className='w-full object-cover h-full hover:scale-[1.1] duration-200'
-                        alt={doc.user?.name ?? ' '} />
+                    {doc?.image?.url &&
+                        <Image
+                            draggable={false}
+                            height={300}
+                            width={300}
+                            src={doc?.image.url}
+                            className='w-full object-cover h-full hover:scale-[1.1] duration-200'
+                            alt={doc.user?.name ?? ' '}
+                        />
+                    }
                 </div>
                 <div className='space-y-3 p-5 overflow-hidden'>
                     <div className='flex gap-5 items-center whitespace-nowrap'>

@@ -22,11 +22,10 @@ const ModalAddBlog: FC<ModalAddBlogProps> = ({ }) => {
         des: "",
     });
     const [image, setImage] = useState<string>('')
-    const handleChange = ({
-        currentTarget: input,
-    }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setInputs({ ...inputs, [input.name]: input.value });
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setInputs({ ...inputs, [event.target.name]: event.target.value });
     };
+
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
@@ -117,6 +116,7 @@ const ModalAddBlog: FC<ModalAddBlogProps> = ({ }) => {
                             <textarea
                                 placeholder="content..."
                                 onChange={handleChange}
+                                value={inputs.des}
                                 name='des'
                                 cols={60}
                                 rows={5}

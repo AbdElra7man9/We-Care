@@ -9,7 +9,7 @@ interface handleGridViewProps {
 
 const HandleGridView = ({ children }: { children: React.ReactNode }) => {
     const SearchQuery = useSearchParams();
-    const chatId = SearchQuery.get('chatId')
+    const chatId = SearchQuery?.get('chatId')
     const { breakpoint, MobileView } = useBreakpoint();
     const xl = (breakpoint === 'xl')
     const mobile = MobileView || xl

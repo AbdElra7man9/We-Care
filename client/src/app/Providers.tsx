@@ -11,7 +11,7 @@ import Router from 'next/router';
 
 type providersProps = {
   children: React.ReactNode;
-  session: any;
+  session?: any;
 };
 export default function Providers({ children, session }: providersProps) {
 

@@ -10,8 +10,8 @@ export default function MainBookingWrapper({
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
-    const atClinc = (pathname.includes('clinc'));
-    const atOnline = (pathname.includes('online'));
+    const atClinc = (pathname?.includes('clinc'));
+    const atOnline = (pathname?.includes('online'));
     return (
         <div className="dark:bg-slate-900 pb-20 select-none">
             <div className='py-20 md:py-32 mb-10 bg-[#F8F9FA] dark:bg-slate-800 dark:text-white'>

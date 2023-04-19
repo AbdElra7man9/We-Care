@@ -35,6 +35,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
                     //Error here
                 });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (isLoading) {
