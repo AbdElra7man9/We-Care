@@ -8,14 +8,16 @@ import { BiChevronRight } from 'react-icons/bi'
 import { BsPerson } from 'react-icons/bs'
 import { MdAccessTimeFilled } from 'react-icons/md'
 import AddComment from './AddComment'
-import { BlogType } from '@lib/types/blog'
 import { useGetCommentsQuery } from '@Redux/APIs/CommentsApi'
-import { useParams } from 'next/navigation';
 import moment from 'moment';
 
-const BlogDetailsPage: FC<BlogType> = ({ }) => {
-    const params = useParams() 
-    const blogId = params?.blogId as string
+interface BlogProps {
+    blogId: string;
+}
+
+const BlogDetailsPage: FC<BlogProps> = ({ blogId }) => {
+    // const params = useParams() 
+    // const blogId = params?.blogId as string
     const { data: BlogQuery } = useGetBlogDetailsQuery({ blogId });
     const { data: CommentQuery } = useGetCommentsQuery({ blogId });
     const { data } = useGetAllBLOGsQuery({ page: 1 });

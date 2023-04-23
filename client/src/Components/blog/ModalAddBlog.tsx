@@ -21,7 +21,7 @@ const ModalAddBlog: FC<ModalAddBlogProps> = ({ }) => {
         title: "",
         des: "",
     });
-    const [image, setImage] = useState<string>('')
+    const [image, setImage] = useState<string>('');
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setInputs({ ...inputs, [event.target.name]: event.target.value });
     };

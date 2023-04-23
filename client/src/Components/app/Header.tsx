@@ -1,14 +1,11 @@
 "use client";
 import { BsSearch, BsGear, BsList, BsJustifyLeft } from "react-icons/bs";
 import { useState, useEffect } from "react";
-
-import { FeatureAction } from "../../Redux/Slices/FeaturesSlice";
 import Link from "next/link";
 import Image from "next/image";
-import useBreakpoint from "../../Hooks/useBreakpoint";
 import { usePathname } from "next/navigation";
 import Themetoggle from "../Layouts/Themetoggle";
-import { useAppDispatch, useAppSelector } from "@Hooks/useRedux";
+import { useAppSelector } from "@Hooks/useRedux";
 import { selectCurrentUser } from "@Redux/Slices/UserSlice";
 interface HeaderProps {
   sideMargin?: string;
@@ -18,17 +15,12 @@ interface HeaderProps {
 
 export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: HeaderProps) {
   const [isHeader, setIsHeader] = useState<Boolean>(false);
-  const { MobileView } = useBreakpoint();
-  const dispatch = useAppDispatch();
   const userInfo = useAppSelector(selectCurrentUser)
   const key = usePathname() as string;
   const dash = key.includes("patient");
   const drDash = key.includes("doctor");
-  const admindash = key.includes("admin");
-  const pathname = usePathname();
   const [pos, setPos] = useState<string>("top");
 
-  const isHome = pathname === "/";
   // Check the top position of the navigation in the window
   useEffect(() => {
     const handleScrollTop = () => {
@@ -45,47 +37,23 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
 
   return (
     <>
-      {isHeader && (
-        <div
-          onClick={() => setIsHeader(false)}
-          className="fixed inset-0 z-10"
-        ></div>
-      )}
       <header
-        className={`top-0 z-10 flex flex-wrap container max-w-full duration-300 inset-x-0 select-none bg-white dark:bg-slate-900
-        ${key === "/" && pos === "top"
-            ? "bg-transparent absolute"
-            : pos === "top"
-              ? "absolute bg-white dark:bg-slate-900 "
-              : "fixed shadow-b-2xl bg-white dark:bg-slate-900"
-          }}`}>
+        className={`top-0 z-10 container max-w-full duration-300 inset-x-0 select-none bg-transparent absolute
+        ${(pos === "top")
+            ? "absolute "
+            : "!fixed shadow-b-2xl bg-white dark:!bg-slate-900"
+          }}
+           ${isHeader && 'bg-white'}`
+        }>
         <div
-          className={`container border-b lg:border-none flex justify-between items-center p-3 whitespace-nowrap
-                ${dash || drDash || admindash
+          className={`container flex justify-between items-center p-3 whitespace-nowrap
+                ${dash || drDash
               ? "max-w-full"
               : " max-w-[28rem] sm:max-w-[35rem] md:max-w-[50rem] lg:max-w-[60rem] xl:max-w-[80rem]"
             }`}
         >
           <div className="flex items-center gap-10">
             <div className="flex gap-3">
-              {/* {drDash && ( */}
-              <button
-                aria-label='side bar'
-                onClick={() => dispatch(FeatureAction.setDocSide())}
-                className="text-gray-500 dark:text-white lg:hidden text-lg lg:text-3xl"
-              >
-                <BsJustifyLeft />
-              </button>
-              {/* )} */}
-              {/* {admindash && <button
-                onClick={() => {
-                  setIsSideMargin((sideMargin !== '300px') ? '300px' : '0px');
-                  setIsSideWidth((sideMargin !== '300px') ? '300px' : '0px')
-                }}
-                className='rounded-full f-10 w-10 flex justify-center items-center active:scale-90 duration-200 bg-blue-500 text-white'>
-                <IoReorderThreeOutline size={25} />
-              </button>} */}
-
               <Link href="/" aria-label='logo' className="flex gap-3">
                 <Image
                   height={200}
@@ -97,15 +65,14 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
                 <p className={`text-2xl font-bold dark:text-slate-100 ${(dash || drDash) && "text-black dark:text-slate-100"}`}>Doctris</p>
               </Link>
             </div>
-            {!MobileView && (
-              <div className="list-none flex gap-5 text-lg text-gray-800 dark:text-slate-400 font-medium uppercase">
-                <Link aria-label='home' href="/" className="hover:text-blue-600">Home</Link>
-                <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link>
-                <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link>
-                <Link aria-label='pharmacy' href='/'>Pharmacy</Link>
-                <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
-              </div>
-            )}
+            <div className="list-none gap-5 text-lg text-gray-800 dark:text-slate-400 font-medium uppercase hidden lg:flex">
+              <Link aria-label='home' href="/" className="hover:text-blue-600">Home</Link>
+              <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link>
+              <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link>
+              <Link aria-label='pharmacy' href='/'>Pharmacy</Link>
+              <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
+              <Link aria-label='contact us' href="/contact">Contact Us</Link>
+            </div>
           </div>
           <div className="flex gap-2 md:gap-4 items-center">
             <Themetoggle />

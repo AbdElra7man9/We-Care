@@ -3,11 +3,9 @@ import { SessionProvider } from "next-auth/react"
 import { ThemeProvider } from 'next-themes'
 import React from "react";
 import { Provider } from 'react-redux';
-import { store } from '@Redux/Store';
+import { store, wrapper } from '@Redux/Store';
 import { AuthProvider } from '@Contexts/AuthContext';
 import { UserProvider } from '@Contexts/UserContextProps';
-import Router from 'next/router';
-// import NProgress from 'nprogress';
 
 type providersProps = {
   children: React.ReactNode;
@@ -15,13 +13,8 @@ type providersProps = {
 };
 export default function Providers({ children, session }: providersProps) {
 
-  // Router.events.on('routeChangeStart', () => NProgress.start());
-  // Router.events.on('routeChangeComplete', () => NProgress.done());
-  // Router.events.on('routeChangeError', () => NProgress.done());
 
-  // Router.events.on('routeChangeComplete', () => { window.scrollTo(0, 0); });
-
-
+  // const { store } = wrapper.useWrappedStore({ initialState: { fo: "bar" } })
   return (
     <SessionProvider session={session}>
       <Provider store={store}>
