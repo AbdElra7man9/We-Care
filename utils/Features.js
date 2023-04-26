@@ -30,7 +30,6 @@ class Features {
 
             }
         this.query = this.query.find({ ...keyword });
-        console.log(keyword);
         return this;
     }
     Filter() {
