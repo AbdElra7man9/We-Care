@@ -5,19 +5,32 @@ class Features {
     };
     Search() {
         const keyword = this.queryStr.keyword ? {
-            username: {
-                $regex: this.queryStr.keyword,
-                $options: 'i'
-            },
-            fullname: {
-                $regex: this.queryStr.keyword,
-                $options: 'i'
-            },
+            $or: [
+                {
+                    name: {
+                        $regex: this.queryStr.keyword,
+                        $options: 'i'
+                    }
+                },
+                {
+                    username: {
+                        $regex: this.queryStr.keyword,
+                        $options: 'i'
+                    }
+                },
+                {
+                    email: {
+                        $regex: this.queryStr.keyword,
+                        $options: 'i'
+                    }
+                }
+            ]
         }
             : {
 
             }
         this.query = this.query.find({ ...keyword });
+        console.log(keyword);
         return this;
     }
     Filter() {

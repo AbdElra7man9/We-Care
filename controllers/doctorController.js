@@ -45,3 +45,16 @@ exports.updateDoctorStatus = catchAsync(async (req, res, next) => {
   });
   res.json(doctor);
 });
+
+exports.searchForDoctors = catchAsync(async (req, res, next) => {
+      const features = new Features(Doctor.find(), req.query).Search().Paginate()
+      const doc = await features.query;
+      if (doc.length==0) {
+        return next(new AppError('No doctors match your search!', 404));
+      }
+      res.status(200).json({
+        status: 'success',
+        results: doc.length,
+        doc,
+      });
+});
