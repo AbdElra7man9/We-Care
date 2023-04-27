@@ -5,6 +5,14 @@ const crypto = require('crypto');
 
 const Appointment = require('./appointmentModel');
 
+
+const addressSchema = new mongoose.Schema({
+  governorate : String,
+  city : String,
+  street : String,
+  flat : String,
+});
+
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -17,7 +25,7 @@ const userSchema = mongoose.Schema({
     enum: ['male', 'female'],
   },
   phoneNumber: String,
-  address: String,
+  address: [addressSchema] ,
   username: {
     type: String,
     trim: true,

@@ -38,6 +38,20 @@ class Features {
         removeFields.forEach((key) =>
             delete queryCopy[key]
         );
+        if (queryCopy.minFees || queryCopy.maxFees) {
+            const minFees = this.queryStr.minFees * 1 || 0 ;
+            const maxFees = this.queryStr.maxFees * 1 || 1000000 ;
+            queryCopy.fees = {$gte: minFees , $lte: maxFees };
+            const removeFees = ['minFees', 'maxFees'];
+            removeFees.forEach((key) =>delete queryCopy[key]);
+        };
+        Object.keys(queryCopy).forEach((key) => {
+            if (key.includes('-')) {
+                const newKey = key.replace(/-/g, '.');
+                queryCopy[newKey] = queryCopy[key];
+                delete queryCopy[key];
+            }
+        });
         this.query = this.query.find(queryCopy);
         return this;
     }

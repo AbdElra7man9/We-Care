@@ -47,7 +47,7 @@ exports.updateDoctorStatus = catchAsync(async (req, res, next) => {
 });
 
 exports.searchForDoctors = catchAsync(async (req, res, next) => {
-      const features = new Features(Doctor.find(), req.query).Search().Paginate()
+      const features = new Features(Doctor.find(), req.query).Search().Paginate().Filter();
       const doc = await features.query;
       if (doc.length==0) {
         return next(new AppError('No doctors match your search!', 404));
