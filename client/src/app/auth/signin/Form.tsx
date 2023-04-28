@@ -44,7 +44,7 @@ const Form: FC = ({ }) => {
 
 
     return (
-        <form className='flex flex-col'>
+        <form className='flex flex-col' onSubmit={handleSubmit}>
             <label className='text-sm text-gray-500 font-medium text-start my-1'>Your Email</label>
             <input
                 type='email'
@@ -66,9 +66,9 @@ const Form: FC = ({ }) => {
                 type='submit'
                 aria-label='submit'
                 className='btn-primary mt-4 !mb-8'
-                onClick={() => {
-                    signIn('credentials')
-                }}
+                // onClick={() => {
+                //     signIn('credentials')
+                // }}
                 disabled={isLoading}>
                 {isLoading ?
                     <span className='flex items-center justify-center text-2xl py-1 animate-spin'>

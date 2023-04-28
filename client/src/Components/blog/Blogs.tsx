@@ -13,12 +13,13 @@ import { useGetAllBLOGsQuery } from '@Redux/APIs/BlogApi';
 import { BlogType } from '@lib/types/blog';
 import moment from 'moment';
 
-
-const Blogs: React.FC = () => {
+interface BlogsProps {
+    Blogs: BlogType[]
+}
+const Blogs: React.FC<BlogsProps> = ({ Blogs }) => {
     const { isModalAddBlog } = useAppSelector(state => state.Features)
     const dispatch = useAppDispatch()
-    const { data } = useGetAllBLOGsQuery({ page: 1 });
-    const { Blogs } = data || {}
+
 
     const SingleBlog: React.FC<{ doc: BlogType }> = ({ doc }) => {
 
@@ -48,7 +49,7 @@ const Blogs: React.FC = () => {
                             <p className='text-sm text-gray-500 bg-[#1466fa]'>{moment(doc?.createdAt).calendar()}</p>
                         </div>
                     </div>
-                    <Link href={`/admin/blogs/${doc?._id}`} className='text-lg font-medium ellipse-2 hover:text-blue-500 dark:text-slate-400'>{doc?.des}</Link>
+                    <Link href={`/admin/blogs/${doc?._id}`} className='text-lg font-medium ellipse-2 h-16 hover:text-blue-500 dark:text-slate-400'>{doc?.des}</Link>
                     <div className='flex justify-between items-center py-3'>
                         <div className='flex items-center gap-3'>
                             <div className='flex gap-2 items-center'>

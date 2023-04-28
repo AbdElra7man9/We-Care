@@ -64,15 +64,15 @@ exports.userBLOG = catchAsync(async (req, res, next) => {
     const features = new Features(BlogModel.find({ user: req.user.id, }), req.query)
         .Pagination(resultperpage);
 
-    const userBLOGs = await features.query
+    const Blogs = await features.query
         .populate('user', 'username avatar')
         .sort("-createdAt");
-    if (!userBLOGs) {
+    if (!Blogs) {
         return next(new AppError('No Posts For that user'), 400)
     }
     return res.json({
         status: 'success',
-        userBLOGs
+        Blogs
     });
 });
 

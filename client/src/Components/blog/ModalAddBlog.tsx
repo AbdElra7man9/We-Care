@@ -63,18 +63,18 @@ const ModalAddBlog: FC<ModalAddBlogProps> = ({ }) => {
                 initial='initial'
                 animate='animate'
                 exit='exit'
-                className='fixed inset-x-0 z-20 container lg:h-[45rem] max-w-xs sm:max-w-lg lg:max-w-5xl duration-300 rounded-lg bg-white'
+                className='fixed inset-x-0 z-20 container lg:h-[45rem] max-w-xs sm:max-w-lg lg:max-w-5xl duration-300 rounded-lg bg-white dark:bg-slate-900'
             >
                 <div className='flex justify-between items-center p-5 py-2'>
                     <p>Add Blog</p>
                     <button
                         aria-label='Cancel add blog'
-                        className='h-10 w-10 bg-gray-100 flex justify-center items-center rounded-md active:bg-gray-200 active:scale-95'
+                        className='h-10 w-10 bg-gray-100 dark:bg-slate-800 flex justify-center items-center rounded-md active:bg-gray-200 active:scale-95'
                         onClick={() => dispatch(FeatureAction.setModalAddBlog(false))}
                     >
                         <BsX />
                     </button>
-                </div><hr />
+                </div><hr className='dark:border-slate-500'/>
                 <div className='p-5 grid grid-cols-1 lg:grid-cols-3 gap-5'>
                     <div className='col-span-1'>
                         <p className='text-gray-400 text-sm mb-5'>{`Upload your blog image here, Please click "Upload Image" Button.`}</p>

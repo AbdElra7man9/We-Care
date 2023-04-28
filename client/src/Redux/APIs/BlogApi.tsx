@@ -21,14 +21,14 @@ export const BlogsApi = apiSlice.injectEndpoints({
         }),
         getUserBlogs: builder.query<BlogResponse, { page: number }>({
             query: ({ page }) => ({
-                url: `/api/v1/Blog/getuser?page=${page}`,
+                url: `/api/v1/Blog/user?page=${page}`,
                 method: 'GET',
             }),
             providesTags: ['Blog'],
         }),
         getMoreUserBlogs: builder.query<BlogResponse, { page: number }>({
             query: (page) => ({
-                url: `/api/v1/Blog/getuser?page=${page}`,
+                url: `/api/v1/Blog/user?page=${page}`,
                 method: 'GET',
             }),
             async onQueryStarted(args, { queryFulfilled, dispatch }) {

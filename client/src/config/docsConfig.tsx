@@ -1,4 +1,7 @@
-import { AiFillEye } from "react-icons/ai";
+import { AiFillEye, AiOutlineAlipay } from "react-icons/ai";
+import { BsChat, BsChatSquareText, BsChatText, BsGear, BsGrid, BsPeople, BsPersonLinesFill } from "react-icons/bs";
+import { GiAlarmClock } from "react-icons/gi";
+import { IoCalendarNumberOutline, IoNewspaperOutline } from "react-icons/io5";
 import { SlSocialFacebook, SlSocialGithub, SlSocialLinkedin, SlSocialTwitter } from "react-icons/sl";
 export interface Company {
     _id: string;
@@ -16,10 +19,18 @@ export interface MedicalProps {
     Title: string;
     Des: string
 }
-
+interface DocSideBarProps {
+    Icon: React.ReactNode;
+    Title: string;
+    Href: string;
+    // onClose?: () => void;
+}
 export interface docsConfigProps {
     SocialIcons: React.ReactNode[],
     Services: MedicalProps[],
+    SideBar: {
+        Doc: DocSideBarProps[],
+    }
     Footer: {
         Company: Company[]
         Department: Department[]
@@ -75,6 +86,71 @@ export const docsConfig: docsConfigProps = {
         },
 
     ],
+    SideBar: {
+        Doc: [
+            {
+                Icon: <BsGrid size={17} />,
+                Title: 'Dashboard',
+                Href: '/doctor/doctor-dashboard'
+            },
+            {
+                Icon: <IoCalendarNumberOutline size={20} />,
+                Title: 'Appointment',
+                Href: '/doctor/doctor-appointment'
+            },
+            {
+                Icon: <GiAlarmClock size={20} />,
+                Title: 'Schedule Timing',
+                Href: '/doctor/doctor-schedule'
+            },
+            {
+                Icon: <IoNewspaperOutline size={20} />,
+                Title: 'Invoices',
+                Href: '/doctor/invoices'
+            },
+            {
+                Icon: <BsChatText size={20} />,
+                Title: 'Messages',
+                Href: '/doctor/doctor-messages'
+            },
+            {
+                Icon: <BsChatText size={20} />,
+                Title: 'Blog',
+                Href: '/doctor/doctor-blog'
+            },
+            {
+                Icon: <BsPeople size={20} />,
+                Title: 'Patient List',
+                Href: '/doctor/patient-list'
+            },
+            {
+                Icon: <BsChatSquareText size={20} />,
+                Title: 'Patients Review',
+                Href: '/doctor/patient-review'
+            },
+            {
+                Icon: <BsChat size={20} />,
+                Title: 'Chat',
+                Href: '/doctor/doctor-chat'
+            },
+            {
+                Icon: <AiOutlineAlipay size={20} />,
+                Title: 'Payment Information',
+                Href: '/doctor/payment'
+            },
+            {
+                Icon: <BsGear size={20} />,
+                Title: 'Profile',
+                Href: '/doctor/doctor-profile'
+            },
+            {
+                Icon: <BsPersonLinesFill size={20} />,
+                Title: 'Profile Settings',
+                Href: '/doctor/settings'
+            }
+        ],
+    },
+
     Footer: {
         Company: [
             {

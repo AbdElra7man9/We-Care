@@ -3,15 +3,16 @@ import { BsSearch, BsGear, BsList, BsJustifyLeft } from "react-icons/bs";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import Themetoggle from "../Layouts/Themetoggle";
-import { useAppSelector } from "@Hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@Hooks/useRedux";
 import { selectCurrentUser } from "@Redux/Slices/UserSlice";
+import { FeatureAction } from "@Redux/Slices/FeaturesSlice";
 
 
-export default function Header({ isFull }: { isFull: Boolean }) {
+export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: Boolean }) {
   const [isHeader, setIsHeader] = useState<Boolean>(false);
-  const userInfo = useAppSelector(selectCurrentUser)
+  const userInfo = useAppSelector(selectCurrentUser);
+  const dispatch = useAppDispatch();
   const [pos, setPos] = useState<string>("top");
   // Check the top position of the navigation in the window
   useEffect(() => {
@@ -57,6 +58,12 @@ export default function Header({ isFull }: { isFull: Boolean }) {
         >
           <div className="flex items-center gap-10">
             <div className="flex gap-3">
+              {
+                drDash && <button
+                  onClick={() => dispatch(FeatureAction.setDocSide())}
+                  className='text-gray-500 md:hidden text-lg lg:text-3xl'><BsJustifyLeft />
+                </button>
+              }
               <Link href="/" aria-label='logo' className="flex gap-3">
                 <Image
                   height={200}
