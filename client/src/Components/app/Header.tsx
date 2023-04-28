@@ -7,20 +7,12 @@ import { usePathname } from "next/navigation";
 import Themetoggle from "../Layouts/Themetoggle";
 import { useAppSelector } from "@Hooks/useRedux";
 import { selectCurrentUser } from "@Redux/Slices/UserSlice";
-interface HeaderProps {
-  sideMargin?: string;
-  setIsSideMargin?: () => void;
-  setIsSideWidth?: () => void;
-}
 
-export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: HeaderProps) {
+
+export default function Header({ isFull }: { isFull: Boolean }) {
   const [isHeader, setIsHeader] = useState<Boolean>(false);
   const userInfo = useAppSelector(selectCurrentUser)
-  const key = usePathname() as string;
-  const dash = key.includes("patient");
-  const drDash = key.includes("doctor");
   const [pos, setPos] = useState<string>("top");
-
   // Check the top position of the navigation in the window
   useEffect(() => {
     const handleScrollTop = () => {
@@ -34,20 +26,31 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
     document.addEventListener("scroll", handleScrollTop);
     return () => document.removeEventListener("scroll", handleScrollTop);
   }, []);
-
+  const NavLinks = () => {
+    return (
+      <>
+        <Link aria-label='home' href="/" className="hover:text-blue-600">Home</Link>
+        <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link>
+        <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link>
+        <Link aria-label='pharmacy' href='/'>Pharmacy</Link>
+        <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
+        <Link aria-label='contact us' href="/contact">Contact Us</Link>
+      </>
+    )
+  }
   return (
     <>
       <header
         className={`top-0 z-10 container max-w-full duration-300 inset-x-0 select-none bg-transparent absolute
         ${(pos === "top")
-            ? "absolute "
-            : "!fixed shadow-b-2xl bg-white dark:!bg-slate-900"
-          }}
+            ? "absolute"
+            : "!fixed shadow-b-2xl dark:!bg-slate-900 bg-white "
+          }
            ${isHeader && 'bg-white'}`
         }>
         <div
           className={`container flex justify-between items-center p-3 whitespace-nowrap
-                ${dash || drDash
+                ${isFull
               ? "max-w-full"
               : " max-w-[28rem] sm:max-w-[35rem] md:max-w-[50rem] lg:max-w-[60rem] xl:max-w-[80rem]"
             }`}
@@ -62,16 +65,11 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
                   src="/Images/logo-icon.png"
                   alt=""
                 />
-                <p className={`text-2xl font-bold dark:text-slate-100 ${(dash || drDash) && "text-black dark:text-slate-100"}`}>Doctris</p>
+                <p className={`text-2xl font-bold ${(pos !== "top" || isFull) && "dark:!text-slate-100 !text-black"}`}>Doctris</p>
               </Link>
             </div>
             <div className="list-none gap-5 text-lg text-gray-800 dark:text-slate-400 font-medium uppercase hidden lg:flex">
-              <Link aria-label='home' href="/" className="hover:text-blue-600">Home</Link>
-              <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link>
-              <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link>
-              <Link aria-label='pharmacy' href='/'>Pharmacy</Link>
-              <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
-              <Link aria-label='contact us' href="/contact">Contact Us</Link>
+              <NavLinks />
             </div>
           </div>
           <div className="flex gap-2 md:gap-4 items-center">
@@ -101,12 +99,10 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
           </div>
         </div>
         {isHeader && (
-          <div className="space-y-5 px-8 py-3 text-base text-gray-600 dark:text-slate-400 font-medium uppercase z-20">
-            <Link aria-label='home' href="/" className="block hover:text-blue-600">Home</Link>
-            <Link aria-label='doctor' href="/doctor/doctor-dashboard" className="block">Doctor</Link>
-            <Link aria-label='patients' href="/patient/dashboard" className="block">Patients</Link>
-            <Link aria-label='pharmacy' href='/' className="block">Pharmacy</Link>
-            <Link aria-label='pages' href='/' className="block">Pages</Link>
+          <div className="space-y-5 px-8 py-3 text-base
+           text-gray-600 dark:text-slate-400
+            font-medium uppercase z-20">
+            <NavLinks />
           </div>
         )}
       </header>

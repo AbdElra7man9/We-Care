@@ -2,7 +2,7 @@ import Footer from "@Components/app/Footer";
 import Header from "@Components/app/Header";
 
 export const metadata = {
-  title: "Doctor Dashboard",
+  title: "Helth Care",
 };
 export default function RootLayout({
   children,
@@ -11,8 +11,10 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <Header isFull={true} />
-      {children}
+      <div className="h-16 bg-[#F8F9FA] dark:bg-[#1E293B]">
+        <Header isFull={false} />
+      </div>
+        {children}
       <Footer />
     </>
   );

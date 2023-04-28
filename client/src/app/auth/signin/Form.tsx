@@ -44,7 +44,7 @@ const Form: FC = ({ }) => {
 
 
     return (
-        <form className='flex flex-col' onSubmit={handleSubmit}>
+        <form className='flex flex-col'>
             <label className='text-sm text-gray-500 font-medium text-start my-1'>Your Email</label>
             <input
                 type='email'
@@ -66,6 +66,9 @@ const Form: FC = ({ }) => {
                 type='submit'
                 aria-label='submit'
                 className='btn-primary mt-4 !mb-8'
+                onClick={() => {
+                    signIn('credentials')
+                }}
                 disabled={isLoading}>
                 {isLoading ?
                     <span className='flex items-center justify-center text-2xl py-1 animate-spin'>
@@ -88,7 +91,7 @@ const Form: FC = ({ }) => {
                 <button
                     type='button'
                     aria-label='Sign In with Facebook'
-                    onClick={() => signIn()}
+                    onClick={() => signIn('facebook')}
                     className='bg-sky-100 text-blue-400 w-full py-2 my-3 rounded-md shadow-blue-200 shadow-md border border-blue-200'>
                     <span className='w-full flex justify-center items-center gap-3'>
                         <AiFillFacebook />
@@ -98,7 +101,7 @@ const Form: FC = ({ }) => {
                 <button
                     type='button'
                     aria-label='Sign In with Google'
-                    onClick={() => signIn()}
+                    onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000' })}
                     className='bg-sky-100 text-sky-400 w-full py-2 my-3 rounded-md shadow-blue-200 shadow-md border border-blue-200'>
                     <span className='w-full flex justify-center items-center gap-3'>
                         <BsGoogle />

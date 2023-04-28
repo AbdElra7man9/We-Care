@@ -8,7 +8,7 @@ export default function notFounded() {
             <Image
                 height={500}
                 width={500}
-                src='Images/error.svg'
+                src='/Images/error.svg'
                 className='flex justify-center mx-auto'
                 alt='Error'
             />

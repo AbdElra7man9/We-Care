@@ -124,7 +124,7 @@ export const AuthApi = apiSlice.injectEndpoints({
                     const { token, user } = data
                     dispatch(setCredentials({ token, user }))
                 } catch (err) {
-                    console.log(err)
+                    // console.log(err)
                 }
             },
             invalidatesTags: ['Auth'],

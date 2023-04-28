@@ -12,6 +12,12 @@ const nextConfig = {
         port: '',
         pathname: '/abdo9/image/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'shreethemes.in',
+        port: '',
+        pathname: '/doctris/layouts/assets/images/**',
+      },
     ],
   },
 }

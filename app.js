@@ -22,6 +22,7 @@ const BlogRouter = require('./routes/BlogRouter');
 const CommentsRouter = require('./routes/CommentsRouter');
 const CoordinatorRouter = require('./routes/CoordinatorRouter');
 const AppError = require('./utils/AppError');
+const Doctor = require('./Models/doctorModel');
 
 const app = express();
 // Set security HTTP headers
@@ -69,6 +70,21 @@ app.use(
     ],
   })
 );
+// async function update() {
+//   try {
+//     const user = await Doctor.updateMany({}, { $set: { profilePicture: 'https://localhost.com:5000/public/img/users/default.jpg' } })
+//     if (user) {
+//       console.log('updated')
+//     }
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+// update()
+
+
+//Access Images from server side by http://localhost:5000/images/default.png
+app.use('/images', express.static('public/img/users'));
 
 // doctors routs
 app.use('/api/v1/doctors', doctorRouter);

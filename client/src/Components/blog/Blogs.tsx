@@ -11,6 +11,7 @@ import { FeatureAction } from '@Redux/Slices/FeaturesSlice';
 import { AnimatePresence } from 'framer-motion';
 import { useGetAllBLOGsQuery } from '@Redux/APIs/BlogApi';
 import { BlogType } from '@lib/types/blog';
+import moment from 'moment';
 
 
 const Blogs: React.FC = () => {
@@ -40,11 +41,11 @@ const Blogs: React.FC = () => {
                     <div className='flex gap-5 items-center whitespace-nowrap'>
                         <div className='flex gap-2 items-center'>
                             <IoCalendar />
-                            <p className='text-sm text-gray-500'>{doc?.createdAt}</p>
+                            <p className='text-sm text-gray-500'>{moment(doc?.createdAt).calendar()}</p>
                         </div>
                         <div className='flex gap-2 items-center'>
                             <IoTimeOutline />
-                            <p className='text-sm text-gray-500'>{doc?.createdAt}</p>
+                            <p className='text-sm text-gray-500 bg-[#1466fa]'>{moment(doc?.createdAt).calendar()}</p>
                         </div>
                     </div>
                     <Link href={`/admin/blogs/${doc?._id}`} className='text-lg font-medium ellipse-2 hover:text-blue-500 dark:text-slate-400'>{doc?.des}</Link>
@@ -59,7 +60,7 @@ const Blogs: React.FC = () => {
                                 <p className='text-sm text-gray-500'>{doc?.numComments}</p>
                             </div>
                         </div>
-                        <Link href={`/admin/blogs/${doc?._id}`} aria-label='more' className='text-blue-600 flex gap-3 items-center whitespace-nowrap'>
+                        <Link href={`/blogs/${doc?._id}`} aria-label='more' className='text-blue-600 flex gap-3 items-center whitespace-nowrap'>
                             <p>Read More</p>
                             <BsArrowRight />
                         </Link>

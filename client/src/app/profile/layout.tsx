@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <ProfileWraper>
-      <Header />
+      <Header isFull={false} />
       {children}
       <Footer />
     </ProfileWraper>);

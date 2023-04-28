@@ -24,7 +24,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
 
     useEffect(() => {
         if (persist && !token) {
-            console.log('refreshing ...')
+            // console.log('refreshing ...')
             refresh()
                 .unwrap()
                 .then(({ token, user }) => {

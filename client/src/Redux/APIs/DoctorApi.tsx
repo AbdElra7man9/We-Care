@@ -31,7 +31,7 @@ export const DoctorsApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
             async onQueryStarted(args, { queryFulfilled, dispatch }) {
-
+                
                 try {
 
                     const { data } = await queryFulfilled;

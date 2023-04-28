@@ -1,7 +1,7 @@
 export const siteConfig = {
     name: "Helth Care",
     url: "http://health-care-red.vercel.app/",
-    ogImage: "https://ui.shadcn.com/og.jpg",
+    ogImage: "/Images/logo-icon.png",
     description:
         "Beautifully designed components built with Radix UI and Tailwind CSS.",
     links: {

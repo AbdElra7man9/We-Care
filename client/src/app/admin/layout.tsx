@@ -1,5 +1,3 @@
-import Footer from "@Components/app/Footer";
-import Header from "@Components/app/Header";
 import DoctorWraper from "./AdminWraper";
 
 export const metadata = {

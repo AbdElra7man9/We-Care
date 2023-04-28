@@ -5,10 +5,6 @@
 html {
     -webkit-tap-highlight-color:transparent;
 }
-*{
-    @apply
-    outline-1 outline-blue-500 dark:outline-black
-}
 .hideScroll::-webkit-scrollbar {
     display: none;
 }
@@ -49,7 +45,7 @@ html {
     @apply
     !text-blue-500 !font-medium
 }
-.fc-theme-standard td, .fc-theme-standard th,.fc-theme-standard .fc-scrollgrid{
+.fc-theme-standard td, .fc-theme-standard th, .fc-theme-standard .fc-scrollgrid{
     @apply
     dark:border-slate-500
 }
@@ -60,4 +56,16 @@ html {
 .fc-col-header-cell-cushion{
     @apply
     !text-blue-600 !font-medium
+}
+[disabled] {
+  @apply
+  !line-through
+}
+.loading{
+    opacity: 0;
+    transition: all 0.2s ease-in;
+}
+.loaded{
+    opacity: 1;
+    transition: all 0.2s ease-in;
 }
