@@ -1,4 +1,5 @@
-'use client'; import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip } from 'chart.js';
+'use client';
+import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip } from 'chart.js';
 import { useRef, useEffect } from 'react';
 
 interface Data {
@@ -38,7 +39,7 @@ const AreaPlot: React.FC<AreaPlotProps> = ({ color, data }) => {
                                 backgroundColor: gradientFill,
                                 fill: true,
                                 tension: 0.4,
-                                borderWidth: 2.5,
+                                borderWidth: 2,
                                 pointRadius: 0,
                             },
                         ],
@@ -46,11 +47,13 @@ const AreaPlot: React.FC<AreaPlotProps> = ({ color, data }) => {
                     options: {
                         scales: {
                             x: {
+                                display: false,
                                 grid: {
                                     display: false,
                                 },
                             },
                             y: {
+                                display: false,
                                 grid: {
                                     display: false,
                                 },
@@ -76,8 +79,8 @@ const AreaPlot: React.FC<AreaPlotProps> = ({ color, data }) => {
     }, [canvasRef, color, data]);
 
     return (
-        <div style={{ height: '80%', width: '100%' }}>
-            <canvas ref={canvasRef} />
+        <div style={{ height: '70%', width: '100%' }}>
+            <canvas ref={canvasRef} className='!w-full'/>
         </div>
     );
 };
