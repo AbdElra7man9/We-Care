@@ -23,6 +23,7 @@ const CommentsRouter = require('./routes/CommentsRouter');
 const CoordinatorRouter = require('./routes/CoordinatorRouter');
 const AppError = require('./utils/AppError');
 const Doctor = require('./Models/doctorModel');
+const Patient = require('./Models/patientModel');
 
 const app = express();
 // Set security HTTP headers
@@ -41,12 +42,12 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Limit requests from same API
-const limiter = rateLimit({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: 'Too many requests from this IP, please try again in an hour!',
-});
-app.use('/api', limiter);
+// const limiter = rateLimit({
+//   max: 100,
+//   windowMs: 60 * 60 * 1000,
+//   message: 'Too many requests from this IP, please try again in an hour!',
+// });
+// app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '50mb' }));
@@ -72,7 +73,7 @@ app.use(
 );
 // async function update() {
 //   try {
-//     const user = await Doctor.updateMany({}, { $set: { profilePicture: 'https://localhost.com:5000/public/img/users/default.jpg' } })
+//     const user = await Patient.updateMany({}, { $set: { profilePicture: 'http://localhost:5000/images/default.png' } })
 //     if (user) {
 //       console.log('updated')
 //     }

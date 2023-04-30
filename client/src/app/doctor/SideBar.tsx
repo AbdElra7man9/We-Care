@@ -60,6 +60,7 @@ const SideBar: React.FC = () => {
                     height={400}
                     width={400}
                     draggable={false}
+                    priority
                     src='/Images/profile-bg.jpg'
                     alt=''
                 />
@@ -67,6 +68,7 @@ const SideBar: React.FC = () => {
                     className='w-24 h-24 rounded-full absolute flex inset-x-0 !left-[40%] -bottom-10 shadow-lg'
                     height={200}
                     width={200}
+                    priority
                     draggable={false}
                     src='/Images/Clients/09.jpg'
                     alt=''
@@ -78,7 +80,7 @@ const SideBar: React.FC = () => {
     return (
         <>
             {!MobileView &&
-                <div className='shadow-[.2px_.2px_3px_1px] shadow-gray-100 dark:shadow-slate-700 hidden md:block px-0 overflow-hidden rounded-lg'>
+                <div className='shadow-[.2px_.2px_3px_1px] sticky top-[80px] duration-300 shadow-gray-100 dark:shadow-slate-700 hidden md:block px-0 overflow-hidden rounded-lg'>
                     <BackGroundImage />
                     <div className='text-center w-full mt-12 mb-3'>
                         <p className='font-medium text-lg'>Dr. Calvin Carlo</p>

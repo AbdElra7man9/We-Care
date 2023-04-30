@@ -1,5 +1,5 @@
 import { AiFillEye, AiOutlineAlipay } from "react-icons/ai";
-import { BsChat, BsChatSquareText, BsChatText, BsGear, BsGrid, BsPeople, BsPersonLinesFill } from "react-icons/bs";
+import { BsChat, BsChatSquareText, BsChatText, BsGear, BsGrid, BsPeople, BsPersonLinesFill, BsReverseLayoutTextWindowReverse } from "react-icons/bs";
 import { GiAlarmClock } from "react-icons/gi";
 import { IoCalendarNumberOutline, IoNewspaperOutline } from "react-icons/io5";
 import { SlSocialFacebook, SlSocialGithub, SlSocialLinkedin, SlSocialTwitter } from "react-icons/sl";
@@ -114,7 +114,7 @@ export const docsConfig: docsConfigProps = {
                 Href: '/doctor/doctor-messages'
             },
             {
-                Icon: <BsChatText size={20} />,
+                Icon: <BsReverseLayoutTextWindowReverse size={20} />,
                 Title: 'Blog',
                 Href: '/doctor/doctor-blog'
             },
@@ -127,11 +127,6 @@ export const docsConfig: docsConfigProps = {
                 Icon: <BsChatSquareText size={20} />,
                 Title: 'Patients Review',
                 Href: '/doctor/patient-review'
-            },
-            {
-                Icon: <BsChat size={20} />,
-                Title: 'Chat',
-                Href: '/doctor/doctor-chat'
             },
             {
                 Icon: <AiOutlineAlipay size={20} />,

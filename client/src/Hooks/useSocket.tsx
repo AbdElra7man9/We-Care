@@ -5,6 +5,6 @@ import { useContext } from "react";
 const useSocket = () => {
     const socket = useContext(SocketContext);
 
-    return socket;
+    return socket as any;
 };
 export default useSocket

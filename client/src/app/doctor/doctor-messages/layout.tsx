@@ -1,4 +1,4 @@
-import HandleGridView from "./HandleGridView";
+import ChatWrapper from "./ChatWrapper";
 
 export const metadata = {
   title: "Make appointment",
@@ -8,7 +8,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <HandleGridView>
+  return (
+    <ChatWrapper>
       {children}
-  </HandleGridView>;
+    </ChatWrapper>
+  );
 }

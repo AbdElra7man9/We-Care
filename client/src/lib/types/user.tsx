@@ -15,7 +15,8 @@ export type userType = {
     status?: string;
     emailConfirm?: string;
     numberOfRating?: string;
-
+    gender?: string;
+    age?:string;
     timeTable?: string;
     patients?: string;
     ScheduleTiming?: string;

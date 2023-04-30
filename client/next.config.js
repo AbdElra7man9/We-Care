@@ -18,6 +18,12 @@ const nextConfig = {
         port: '',
         pathname: '/doctris/layouts/assets/images/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '5000',
+        pathname: '/images/**',
+      },
     ],
   },
 }

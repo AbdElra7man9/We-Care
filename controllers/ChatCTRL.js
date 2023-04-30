@@ -19,7 +19,7 @@ exports.NewChat = catchAsync(async (req, res, next) => {
     }).save()
         .then((chat) => {
             return res.json({
-                status:'success',
+                status: 'success',
                 chatId: chat._id
             });
         })
@@ -37,19 +37,21 @@ exports.GetAll = catchAsync(async (req, res, next) => {
         }), req.query)
         .Pagination(resultperpage)
 
-    const Chats = await features.query
+    const chats = await features.query
         .populate('members', 'username avatar fullname')
         .sort('-updatedAt')
     return res.json({
-        status:'success',
-        Chats
+        status: 'success',
+        results: chats.length,
+        chats
     })
 });
 
 exports.GetSignleChat = catchAsync(async (req, res, next) => {
     const SingleChat = await Chat.findById(req.params.id)
     return res.json({
-        status:'success',
-        chat:SingleChat
+        status: 'success',
+        results: SingleChat.length,
+        chat: SingleChat
     })
 });
