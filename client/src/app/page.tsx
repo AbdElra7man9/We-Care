@@ -5,6 +5,7 @@ import LastedBlogs from '@Components/app/LastedBlogs'
 import Header from '@Components/app/Header'
 import Footer from '@Components/app/Footer'
 import DoctorsList from '@Components/Parts/DoctorsList'
+import Session from '@Components/app/Session'
 const Doctors = [
   {
     _id: '1',
@@ -52,8 +53,9 @@ const Doctors = [
 export default function Home() {
   return (
     <div className="dark:bg-slate-900">
-      <Header isFull={false}/>
+      <Header isFull={false} />
       <UpperPart />
+      <Session />
       <AboutTreatment />
       <MedicalService />
       <div className='container px-5 max-w-7xl py-16'>

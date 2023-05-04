@@ -1,13 +1,12 @@
 'use client';
 import React, { useEffect, useRef, FC, useState } from 'react'
 import { AiFillFacebook } from 'react-icons/ai';
-import { useSigninMutation } from '@Redux/APIs/AuthApi';
 import { ImSpinner7 } from 'react-icons/im';
-import { useRouter } from 'next/navigation';
 import { signIn } from "next-auth/react"
 import Link from 'next/link';
 import GetError from '@lib/GetError';
 import { BsGoogle } from 'react-icons/bs';
+import { useSigninUserMutation } from '@Redux/APIs/AuthApi';
 interface Inputs {
     email: string;
     password: string;
@@ -19,32 +18,35 @@ const Form: FC = ({ }) => {
         email: '',
         password: ''
     });
-    const router = useRouter();
+
     const handleChange = ({
         currentTarget: input,
     }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setInputs({ ...inputs, [input.name]: input.value });
     };
-    const [signin, { isLoading, isError, error }] = useSigninMutation();
+    const [SigninUser, { isLoading, isError, error }] = useSigninUserMutation();
     useEffect(() => {
         userRef.current?.focus()
     }, []);
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+
+    const SubmitSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const { email, password } = inputs;
-        const data = { email, password }
-        await signin(data).unwrap()
+        await SigninUser({ email, password }).unwrap()
             .then(() => {
-                router.push('/')
-                setInputs({ email: '', password: '' });
-            }).catch((err: any) => {
-                console.log(err)
+                signIn("credentials", {
+                    email,
+                    password,
+                    redirect: false,
+                })
             })
     }
 
 
+
+
     return (
-        <form className='flex flex-col' onSubmit={handleSubmit}>
+        <form className='flex flex-col' onSubmit={SubmitSignIn}>
             <label className='text-sm text-gray-500 font-medium text-start my-1'>Your Email</label>
             <input
                 type='email'
@@ -66,10 +68,8 @@ const Form: FC = ({ }) => {
                 type='submit'
                 aria-label='submit'
                 className='btn-primary mt-4 !mb-8'
-                // onClick={() => {
-                //     signIn('credentials')
-                // }}
-                disabled={isLoading}>
+            disabled={isLoading}
+            >
                 {isLoading ?
                     <span className='flex items-center justify-center text-2xl py-1 animate-spin'>
                         <ImSpinner7 />
@@ -117,7 +117,7 @@ const Form: FC = ({ }) => {
                     Sign up
                 </Link>
             </p>
-            {isError && <GetError error={error} />}
+            {isError && <GetError error={error}/>}
 
         </form >
     )

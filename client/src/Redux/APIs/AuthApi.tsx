@@ -23,11 +23,11 @@ interface SignUpDoctorData {
 }
 export const AuthApi = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        signin: builder.mutation<AuthState, SignInData>({
-            query: (data) => ({
+        SigninUser: builder.mutation<AuthState, SignInData>({
+            query: ({ email, password }) => ({
                 url: '/api/v1/users/login',
                 method: 'POST',
-                body: data,
+                body: { email, password },
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch, getState }) {
                 try {
@@ -189,7 +189,7 @@ export const AuthApi = apiSlice.injectEndpoints({
 export const {
     useLogOutMutation,
     useRefreshMutation,
-    useSigninMutation,
+    useSigninUserMutation,
     useSignupMutation,
     useSignupDoctorMutation,
     useVerifyEmailMutation,

@@ -33,5 +33,6 @@ export type userType = {
 export interface AuthState {
     status?: string;
     token?: string;
+    expires?:string;
     user?: userType
 }

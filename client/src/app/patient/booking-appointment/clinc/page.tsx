@@ -1,5 +1,5 @@
 "use client";
-import { useSigninMutation } from "@Redux/APIs/AuthApi";
+import { useSigninUserMutation } from "@Redux/APIs/AuthApi";
 import React, { useState, useRef, useEffect } from "react";
 import { ImSpinner7 } from "react-icons/im";
 interface Inputs {
@@ -26,7 +26,7 @@ export default function Page(): JSX.Element {
   ) => {
     setInputs({ ...inputs, [event.target.name]: event.target.value });
   };
-  const [signin, { isLoading, isError, error }] = useSigninMutation();
+  const [signin, { isLoading, isError, error }] = useSigninUserMutation();
   // useEffect(() => {
   //   userRef.current.focus()
   // }, []);

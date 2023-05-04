@@ -1,6 +1,6 @@
 "use client";
 import GetError from "@lib/GetError";
-import { useSigninMutation } from "@Redux/APIs/AuthApi";
+import { useSigninUserMutation } from "@Redux/APIs/AuthApi";
 import React, { useState, useRef, useEffect } from "react";
 import { ImSpinner7 } from "react-icons/im";
 
@@ -28,7 +28,7 @@ export default function AddComment(): JSX.Element {
     }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setInputs({ ...inputs, [input.name]: input.value });
     };
-    const [signin, { isLoading, isError, error }] = useSigninMutation();
+    const [signin, { isLoading, isError, error }] = useSigninUserMutation();
     // useEffect(() => {
     //   userRef.current.focus()
     // }, []);

@@ -24,6 +24,12 @@ const nextConfig = {
         port: '5000',
         pathname: '/images/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'lh3.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 }
