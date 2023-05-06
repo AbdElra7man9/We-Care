@@ -27,13 +27,13 @@ exports.getAllPendingDoctors = catchAsync(async (req, res, next) => {
 });
 
 exports.getDoctor = catchAsync(async (req, res, next) => {
-  const newDoctor = await Doctor.findById(req.params.id);
-  if (!newDoctor) {
+  const doctor = await Doctor.findById(req.params.id);
+  if (!doctor) {
     return next(new AppError('there is no doctor by this ID', 404));
   }
   res.json({
     status: 'success',
-    newDoctor,
+    doctor,
   });
 });
 

@@ -4,10 +4,11 @@ import { cn } from '@/lib/utils'
 import { MessagesContext } from '@Contexts/MessagesContext'
 import { Message } from '@lib/validators/message'
 import { useMutation } from '@tanstack/react-query'
-import { CornerDownLeft, Loader2 } from 'lucide-react'
 import { nanoid } from 'nanoid'
 import { FC, HTMLAttributes, useContext, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { BiChevronDown } from 'react-icons/bi'
+import { ImSpinner2 } from 'react-icons/im'
 import TextareaAutosize from 'react-textarea-autosize'
 
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> { }
@@ -113,9 +114,9 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
                 <div className='absolute inset-y-0 right-0 flex py-1.5 pr-1.5'>
                     <kbd className='inline-flex items-center rounded border bg-white border-gray-200 px-1 font-sans text-xs text-gray-400'>
                         {isLoading ? (
-                            <Loader2 className='w-3 h-3 animate-spin' />
+                            <ImSpinner2 className='w-3 h-3 animate-spin' />
                         ) : (
-                            <CornerDownLeft className='w-3 h-3' />
+                            <BiChevronDown className='w-3 h-3' />
                         )}
                     </kbd>
                 </div>

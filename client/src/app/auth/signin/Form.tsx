@@ -37,7 +37,7 @@ const Form: FC = ({ }) => {
                 signIn("credentials", {
                     email,
                     password,
-                    redirect: false,
+                    // redirect: false,
                 })
             })
     }

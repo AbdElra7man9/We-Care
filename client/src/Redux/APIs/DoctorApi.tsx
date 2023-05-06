@@ -24,6 +24,13 @@ export const DoctorsApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        GetDoctorById: builder.query<{ status: string; results: number; doctor: userType }, { doctorId: string }>({
+
+            query: ({ doctorId }) => ({
+                url: `/api/v1/doctors/${doctorId}`,
+                method: 'GET',
+            }),
+        }),
         GetMoreDoctors: builder.query<DoctorResponse, { page: number, limit: number }>({
 
             query: ({ page, limit }) => ({
@@ -31,7 +38,7 @@ export const DoctorsApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
             async onQueryStarted(args, { queryFulfilled, dispatch }) {
-                
+
                 try {
 
                     const { data } = await queryFulfilled;
@@ -85,4 +92,5 @@ export const DoctorsApi = apiSlice.injectEndpoints({
 export const {
     useSignUpDoctorMutation,
     useGetDoctorsQuery,
+    useGetDoctorByIdQuery,
 } = DoctorsApi;

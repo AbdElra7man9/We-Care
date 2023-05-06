@@ -2,7 +2,7 @@
 import { io } from 'socket.io-client';
 import { createContext, FC, useEffect, useRef, ReactNode } from 'react';
 
-const url = process.env.NEXT_PUBLIC_API_KEY as string;
+const url = process.env.NEXT_PUBLIC_API_KEY;
 const SocketContext = createContext({});
 
 export const SocketProvider: FC<{ children: ReactNode }> = ({ children }) => {

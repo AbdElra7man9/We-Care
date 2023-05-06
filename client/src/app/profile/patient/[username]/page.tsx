@@ -11,7 +11,7 @@ const page: FC<pageProps> = ({ }) => {
     return (
 
         <div className='space-y-5'>
-            <h3 className='text-lg font-medium'>Introduction</h3>
+            <h3 className='text-lg font-medium'>Introduction for patient</h3>
             <p className='text-gray-400 leading-loose'>
                 {`Web designers to occupy the space which will later be filled with 'real' content. This is required when,
                 for example, the final text is not yet available. Dummy text is also known as 'fill text'.

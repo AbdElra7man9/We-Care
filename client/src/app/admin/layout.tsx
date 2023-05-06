@@ -11,7 +11,7 @@ export const metadata = {
 };
 const Layout = async ({ children }: LayoutProps) => {
   const session = await getServerSession(authOptions)
-  // console.log(session)
+  // console.log(session?.role)
   if (!session) notFound()
   return (
     <DoctorWraper>

@@ -30,13 +30,13 @@ const page: React.FC = () => {
                     <button
                         aria-label='upload'
                         className='bg-blue-600 active:bg-blue-700 text-white font-medium
-                         w-full py-2 my-3 rounded-md border border-blue-200 dark:border-none'>
+                        w-full py-2 my-3 rounded-md border border-blue-200 dark:border-none'>
                         Upload
                     </button>
                     <button
                         aria-label='remove'
                         className='bg-sky-100 active:bg-sky-200 active:shadow-blue-300
-                         text-sky-400 w-full py-2 my-3 rounded-md 
+                        text-sky-400 w-full py-2 my-3 rounded-md 
                         shadow-blue-200 shadow-md border border-blue-200'>
                         Remove
                     </button>

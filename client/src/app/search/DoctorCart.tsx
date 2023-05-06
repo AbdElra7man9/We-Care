@@ -5,7 +5,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Image from 'next/image';
 import { FC } from 'react'
-import { userType } from '@lib/types/user';
+import Link from 'next/link';
 
 interface DoctorCartProps { }
 
@@ -41,11 +41,15 @@ const DoctorCart: FC<DoctorCartProps> = () => {
                             src={doc.profilePicture as string}
                             alt={doc.name as string}
                         />
-                        <div>
+                        <div className='flex flex-col gap-y-5'>
                             <p className='text-blue-500 text-xl font-medium'>{doc.name}</p>
                             <p className='font-medium text-gray-400'>{doc.specialization}</p>
                             <p>{doc.averageRating}</p>
                             <p>{doc.name}</p>
+                            <Link href={`patient/booking-appointment/${doc._id}/clinc`}
+                                className='bg-blue-600 text-white rounded-md p-2 px-5 my-5'>
+                                Make oppountment
+                            </Link>
                         </div>
                     </div>
                     <Calendar

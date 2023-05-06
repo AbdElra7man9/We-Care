@@ -1,4 +1,3 @@
-'use client';
 import NextAuth, { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github"
@@ -117,16 +116,11 @@ export const authOptions: NextAuthOptions = {
             token.role 
      * }
      * Some form decripting JWT
-     * {
-     *      iat,
-     *      exp,
-     *      jti
-     * }
+     * {iat,exp,jti}
      */
 
     callbacks: {
         async jwt({ token, user, account }) {
-            console.log(account)
             if (user) {
                 token.token = user.token
                 token.user = user.user
@@ -150,7 +144,4 @@ export const authOptions: NextAuthOptions = {
     },
 }
 
-// export default (req: NextApiRequest, res: NextApiResponse) => {
-//   return NextAuth(req, res, authOptions(req, res))
-// }
 export default NextAuth(authOptions)

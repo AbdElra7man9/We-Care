@@ -7,6 +7,7 @@ import Themetoggle from "../Layouts/Themetoggle";
 import { useAppDispatch, useAppSelector } from "@Hooks/useRedux";
 import { selectCurrentUser } from "@Redux/Slices/UserSlice";
 import { FeatureAction } from "@Redux/Slices/FeaturesSlice";
+import { useSession } from "next-auth/react";
 
 
 export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: Boolean }) {
@@ -27,14 +28,24 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
     document.addEventListener("scroll", handleScrollTop);
     return () => document.removeEventListener("scroll", handleScrollTop);
   }, []);
+  const { data: session } = useSession();
+  const doctor = session?.role === 'Doctor';
+  const patient = session?.role === 'Patient';
+  const admin = session?.role === 'Coodinator';
   const NavLinks = () => {
     return (
       <>
         <Link aria-label='home' href="/" className="hover:text-blue-600">Home</Link>
-        <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link>
-        <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link>
-        <Link aria-label='pharmacy' href='/'>Pharmacy</Link>
-        <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
+        {doctor ?
+          <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link> : patient ?
+            <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link> : admin &&
+            <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
+
+        }
+        {/* <Link aria-label='pharmacy' href='/'>Pharmacy</Link> */}
+        <Link aria-label='contact us' href="/contact">Blog</Link>
+        <Link aria-label='contact us' href="/privacy">Privacy & Security</Link>
+        <Link aria-label='contact us' href="/terms">Terms & Condition</Link>
         <Link aria-label='contact us' href="/contact">Contact Us</Link>
       </>
     )
@@ -47,7 +58,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
             ? "absolute"
             : "!fixed shadow-b-2xl dark:!bg-slate-900 bg-white "
           }
-           ${isHeader && 'bg-white'}`
+           ${isHeader && 'bg-white dark:bg-slate-900'}`
         }>
         <div
           className={`container flex justify-between items-center p-3 whitespace-nowrap
@@ -87,15 +98,25 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
             <button aria-label='search' className="bg-blue-600 text-white rounded-full p-3">
               <BsSearch size={15} />
             </button>
-            <Link aria-label='profile' href={`/profile/${userInfo.username}`}>
-              <Image
-                height={200}
-                width={200}
-                className="h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
-                src="/Images/doctors/01.jpg"
-                alt=""
-              />
-            </Link>
+            {!session ?
+              <Link
+                aria-label='signin'
+                href='/auth/signin'
+                draggable={false}
+                className="bg-blue-600 text-white rounded-md font-medium active:scale-95 duration-300 p-2 px-4">
+                Sign In
+              </Link>
+              :
+              <Link aria-label='profile' href={`${doctor ? `/profile/doctor/${userInfo.username}` : patient && `/profile/patient/${userInfo.username}`}`}>
+                <Image
+                  height={200}
+                  width={200}
+                  className="h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
+                  src="/Images/doctors/01.jpg"
+                  alt=""
+                />
+              </Link>
+            }
             <button
               aria-label='show more'
               className="lg:hidden"
@@ -106,8 +127,8 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
           </div>
         </div>
         {isHeader && (
-          <div className="space-y-5 px-8 py-3 text-base
-           text-gray-600 dark:text-slate-400
+          <div className="flex flex-col gap-y-5 px-8 py-3 text-base
+           text-gray-600 dark:text-slate-400 dark:bg-slate-900
             font-medium uppercase z-20">
             <NavLinks />
           </div>
