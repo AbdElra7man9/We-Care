@@ -6,7 +6,7 @@ const {
   userBlogById,
   AllBlogs,
   GetBlogDetails,
-} = require('../Controllers/BlogController');
+} = require('../controllers/BlogController');
 
 const restrictTo = require('../Middlewares/restrictTo');
 const protect = require('../Middlewares/protect');

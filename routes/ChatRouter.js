@@ -1,5 +1,5 @@
 const express = require('express');
-const { GetSignleChat, GetAll, NewChat } = require('../controllers/ChatCTRL');
+const { GetSignleChat, GetAll, NewChat } = require('../controllers/ChatController');
 
 const protect = require('../Middlewares/protect');
 

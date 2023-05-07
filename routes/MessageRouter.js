@@ -1,5 +1,5 @@
 const express = require('express');
-const { NewMSG, GetMSGs, DeleteAllMSGs } = require('../Controllers/MessageCTRL');
+const { NewMSG, GetMSGs, DeleteAllMSGs } = require('../controllers/MessageController');
 
 const protect = require('../Middlewares/protect');
 
