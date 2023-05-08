@@ -1,6 +1,6 @@
 'use client';
 import React from 'react'
-import Blogs from '@Components/blog/Blogs'
+import Blogs from '@Components/blog/SingleBlog'
 
 import { FC } from 'react'
 import { useGetAllBLOGsQuery } from '@Redux/APIs/BlogApi';

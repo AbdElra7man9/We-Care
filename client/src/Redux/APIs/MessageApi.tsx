@@ -163,8 +163,10 @@ export const MessageApi = apiSlice.injectEndpoints({
             },
         }),
         GetMoreMessages: builder.query<MessageResponse, { chatId: string; page: number }>({
-            query: ({ chatId, page }) =>
-                `/api/message/${chatId}?page=${page}`,
+            query: ({ chatId, page }) => ({
+                url: `/api/v1/message/${chatId}?page=${page}`,
+                method: 'Get',
+            }),
             async onQueryStarted({ chatId }, { queryFulfilled, dispatch }) {
                 try {
 

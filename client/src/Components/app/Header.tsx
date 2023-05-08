@@ -66,16 +66,18 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
       <>
         <Link aria-label='home' href="/" className="hover:text-blue-600">Home</Link>
         {doctor ?
-          <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link> : patient ?
-            <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link> : admin &&
+          <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link>
+          : patient ?
+            <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link>
+            : admin &&
             <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
 
         }
         {/* <Link aria-label='pharmacy' href='/'>Pharmacy</Link> */}
-        <Link aria-label='contact us' href="/contact">Blog</Link>
-        <Link aria-label='contact us' href="/privacy">Privacy & Security</Link>
-        <Link aria-label='contact us' href="/terms">Terms & Condition</Link>
-        <Link aria-label='contact us' href="/contact">Contact Us</Link>
+        <Link aria-label='Blogs' href="/blogs">Blog</Link>
+        <Link aria-label='Privacy' href="/privacy">Privacy & Security</Link>
+        <Link aria-label='Terms' href="/terms">Terms & Condition</Link>
+        <Link aria-label='Contact us' href="/contact">Contact Us</Link>
       </>
     )
   }
@@ -115,7 +117,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
                 <p className={`text-2xl font-bold ${(pos !== "top" || isFull) && "dark:!text-slate-100 !text-black"}`}>Doctris</p>
               </Link>
             </div>
-            <div className="list-none gap-5 text-gray-800 dark:text-slate-400 font-medium uppercase hidden lg:flex">
+            <div className="list-none gap-5 text-gray-800 text-sm dark:text-slate-400 font-medium uppercase hidden lg:flex">
               <NavLinks />
             </div>
           </div>
@@ -156,7 +158,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
           </div>
         </div>
         {isHeader && (
-          <div className="flex flex-col gap-y-5 px-8 py-3 text-base
+          <div className="flex lg:hidden flex-col gap-y-5 px-8 py-3 text-sm
            text-gray-600 dark:text-slate-400 dark:bg-slate-900
             font-medium uppercase z-20">
             <FormSearch />
