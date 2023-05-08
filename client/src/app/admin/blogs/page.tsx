@@ -1,12 +1,12 @@
 import React from 'react'
 import Blogs from '@Components/blog/SingleBlog'
-import GetData from './GetData'
+import BlogsData from './BlogsData'
 
 export default function page() {
 
     return (
         <>
-            <GetData />
+            <BlogsData />
         </>
     )
 }
