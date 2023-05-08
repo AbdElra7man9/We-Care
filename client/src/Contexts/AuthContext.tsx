@@ -16,14 +16,14 @@ const AuthContext = createContext<AuthContextProps>({});
 
 export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
 
-    const [persist] = usePersist();
+    // const [persist] = usePersist();
     const token = useAppSelector(selectCurrentToken);
     const [authState, setAuthState] = useState<AuthContextProps>({});
     const dispatch = useAppDispatch();
     const [refresh, { isUninitialized, isLoading, isSuccess, isError }] = useRefreshMutation();
 
     useEffect(() => {
-        if (persist && !token) {
+        if (!token) {
             // console.log('refreshing ...')
             refresh()
                 .unwrap()

@@ -8,7 +8,7 @@ interface EmojiProps {
 }
 
 const Emoji: React.FC<EmojiProps> = ({ setComment, comment }) => {
-    const handleEmojiSelect = (e: React.MouseEvent | React.TouMapPinent) => {
+    const handleEmojiSelect = (e: React.MouseEvent | React.TouchEvent) => {
         if ('native' in e) {
             setComment(comment + e.native);
         }

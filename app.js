@@ -22,8 +22,7 @@ const BlogRouter = require('./routes/BlogRouter');
 const CommentsRouter = require('./routes/CommentsRouter');
 const CoordinatorRouter = require('./routes/CoordinatorRouter');
 const AppError = require('./utils/AppError');
-const Doctor = require('./Models/doctorModel');
-const Patient = require('./Models/patientModel');
+const User = require('./Models/userModel');
 
 const app = express();
 // Set security HTTP headers
@@ -35,6 +34,8 @@ app.use(
     credentials: true,
   })
 );
+app.use(morgan("common"));
+// app.use(helmet());
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -73,7 +74,7 @@ app.use(
 );
 // async function update() {
 //   try {
-//     const user = await Patient.updateMany({}, { $set: { profilePicture: 'http://localhost:5000/images/default.png' } })
+//     const user = await User.updateMany({}, { $set: { profilePicture: 'http://localhost:5000/images/default.png' } })
 //     if (user) {
 //       console.log('updated')
 //     }

@@ -52,11 +52,12 @@ const DoctorCart: FC<DoctorCartProps> = () => {
                             </Link>
                         </div>
                     </div>
-                    <Calendar
+                    {/* <Calendar
                         className=''
                         tileDisabled={isDateDisabled}
                         onChange={onChange}
-                        value={value} />
+                        value={value}
+                    /> */}
                 </div>
             ))}
 

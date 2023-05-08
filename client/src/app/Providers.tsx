@@ -9,6 +9,7 @@ import { UserProvider } from '@Contexts/UserContextProps';
 import ClientOnly from "./ClientOnly";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
+import SocketProvider from "@Contexts/SocketContext";
 
 type providersProps = {
   children: React.ReactNode;
@@ -25,12 +26,14 @@ export default function Providers({ children, session }: providersProps) {
           <ThemeProvider attribute="class" defaultTheme="system">
             <AuthProvider>
               <UserProvider>
-                <ClientOnly>
-                  <div className=" dark:text-gray-500 text-gray-700 transition-colors duration-300 min-h-screen select-none">
-                    <Toaster position='top-center' reverseOrder={false} />
-                    {children}
-                  </div>
-                </ClientOnly>
+                <SocketProvider>
+                  <ClientOnly>
+                    <div className=" dark:text-gray-500 text-gray-700 transition-colors duration-300 min-h-screen select-none">
+                      <Toaster position='top-center' reverseOrder={false} />
+                      {children}
+                    </div>
+                  </ClientOnly>
+                </SocketProvider>
               </UserProvider>
             </AuthProvider>
           </ThemeProvider>

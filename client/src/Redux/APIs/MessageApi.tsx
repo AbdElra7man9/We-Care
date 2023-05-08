@@ -13,14 +13,14 @@ interface MessageResponse {
 }
 export const MessageApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        NewMessage: builder.mutation<{ status: string; message: MessageType }, { msg: string; chatId: string }>({
-            query: ({ msg, chatId }) => ({
+        NewMessage: builder.mutation<{ status: string; message: MessageType }, { data: { msg: string }; chatId: string }>({
+            query: ({ data, chatId }) => ({
                 url: `/api/v1/message/${chatId}`,
                 method: 'Post',
-                body: msg,
+                body: data,
             }),
- 
-            async onQueryStarted({ chatId, msg }, { queryFulfilled, dispatch }) {
+
+            async onQueryStarted({ chatId, data }, { queryFulfilled, dispatch }) {
                 try {
                     const { data } = await queryFulfilled;
                     const socket = getSocket()
@@ -44,7 +44,7 @@ export const MessageApi = apiSlice.injectEndpoints({
                         })
                     );
                     dispatch(
-                        ChatApi.util.updateQueryData("UserChats", { page: 1 }, (draft) => {
+                        ChatApi.util.updateQueryData("GetUserChats", { page: 1 }, (draft) => {
                             // UPDATE LAST MASSAGE IN CHATS WNEN NEW MESSAGE SEND OR RECIEVED 
                             const userChat = draft?.chats?.find((item) => item?._id === data?.message.chatId)
                             if (userChat) {
@@ -99,7 +99,6 @@ export const MessageApi = apiSlice.injectEndpoints({
                 // });
                 try {
                     socket.on("MessagetoClient", ({ image, sender, receiver, createdAt, chatId, msg }) => {
-                        const id = chatId
                         dispatch(
                             MessageApi.util.updateQueryData("GetMessages", { page: 1, chatId }, (draft) => {
                                 return {
@@ -115,7 +114,7 @@ export const MessageApi = apiSlice.injectEndpoints({
                         dispatch(setSingleMSGNotify({ image, sender, receiver, chatId, createdAt, msg }))
 
                         dispatch(
-                            ChatApi.util.updateQueryData("UserChats", { page: 1 }, (draft) => {
+                            ChatApi.util.updateQueryData("GetUserChats", { page: 1 }, (draft) => {
                                 // UPDATE LAST MASSAGE IN CHATS WNEN NEW MESSAGE SEND OR RECIEVED 
                                 const userChat = draft?.chats?.find((item) => item?._id === chatId)
                                 if (userChat) {

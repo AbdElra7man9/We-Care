@@ -19,9 +19,9 @@ export const ChatApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Chat', 'User'],
         }),
-        UserChats: builder.query<ChatResponse, { page: 1 }>({
+        GetUserChats: builder.query<ChatResponse, { page: 1 }>({
             query: ({ page }) => ({
-                url: `/api/chat/all?page=${page}`,
+                url: `/api/v1/chat/all?page=${page}`,
                 method: 'GET',
             }),
             // transformResponse(apiResponse, meta) {
@@ -76,7 +76,7 @@ export const ChatApi = apiSlice.injectEndpoints({
                         const { data } = await queryFulfilled;
 
                         dispatch(
-                            ChatApi.util.updateQueryData("UserChats", { page: 1 }, (draft) => {
+                            ChatApi.util.updateQueryData("GetUserChats", { page: 1 }, (draft) => {
                                 return {
                                     chats: [
                                         ...draft.chats,
@@ -106,6 +106,6 @@ export const ChatApi = apiSlice.injectEndpoints({
 
     export const {
         useNewChatMutation,
-        useUserChatsQuery,
+        useGetUserChatsQuery,
         // useSingleChatQuery,
     } = ChatApi;

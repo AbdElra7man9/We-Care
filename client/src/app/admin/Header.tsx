@@ -72,7 +72,7 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
                   height={200}
                   width={200}
                   className="h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
-                  src="/Images/doctors/01.jpg"
+                  src="/Images/Doctors/01.jpg"
                   alt=""
                 />
               </Link>

@@ -14,10 +14,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
-  const doctor = session?.role === 'Doctor'
-  if (!session || !doctor) {
-    return notFound()
-  }
+  // const doctor = session?.role === 'Doctor'
+  // if (!session || !doctor) {
+  //   return notFound()
+  // }
   return (
     <>
       <Header isFull={false} />

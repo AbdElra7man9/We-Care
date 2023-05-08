@@ -1,4 +1,6 @@
+'use client';
 import Header from "@Components/app/Header";
+import { useGetDoctorsQuery } from "@Redux/APIs/DoctorApi";
 import React from "react";
 import Footer from "./Footer";
 import SideBar from "./SideBar";
@@ -8,6 +10,8 @@ export default function DoctorWraper({
 }: {
     children: React.ReactNode;
 }) {
+    const { data } = useGetDoctorsQuery({ page: 1, limit: 10 });
+    const { doctors } = data || {};
     return (
         <>
             <div className="h-24">

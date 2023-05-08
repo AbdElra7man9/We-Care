@@ -86,7 +86,7 @@ const InfinteScrollableChat: React.FC<InfinteScrollableChatProps> = ({ userById,
                             <div className='flex justify-center my-5 text-lg font-semibold'>
                                 <p>You see it all</p>
                             </div>}
-                        height={MobileView ? (window.innerHeight - 80) : (window.innerHeight - 110)}
+                        height={MobileView ? (window.innerHeight - 80) : (window.innerHeight - 270)}
                         className='hideScrollBare flex flex-col-reverse'
                         scrollableTarget="scrollableDiv"
                     >

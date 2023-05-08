@@ -1,8 +1,46 @@
+'use client';
+import { useAppSelector } from "@Hooks/useRedux";
+import { ChatType } from "@lib/types/chat";
+import { useGetUserChatsQuery } from "@Redux/APIs/ChatApi";
+import { selectCurrentUser } from "@Redux/Slices/UserSlice";
 import Link from "next/link"
+import { useParams } from "next/navigation";
 import { BsJustifyLeft, BsThreeDotsVertical } from "react-icons/bs"
 
 const Conversations = () => {
-    const Users = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    const { data, isLoading, isError, error } = useGetUserChatsQuery({ page: 1 });
+    const { chats } = data || {};
+    const params: any = useParams()
+    const username = params.username;
+    const ChatCart = ({ cart }: { cart: ChatType }) => {
+        const userInfo = useAppSelector(selectCurrentUser)
+        const patientChat = cart?.members?.find(p => p._id != userInfo._id)
+        return (
+            <div key={cart._id}>
+                <Link
+                    href={`/doctor/doctor-messages/${patientChat?.username}/${cart._id}`}
+                    aria-label='chat'
+
+                    className={`py-3 mx-2 flex justify-between px-3 rounded-xl hover:text-blue-500 hover:bg-blue-100 ${(patientChat?.username == username) && 'bg-gray-200'}`}
+                >
+                    <div className='flex'>
+                        <div>
+                            <span
+                                className='w-16 h-16 bg-red-800 rounded-full flex items-center justify-center text-white font-bold'>
+                                BG
+                            </span>
+                        </div>
+                        <div className='w-full px-3'>
+                            <p className='font-[500] text-sm'>{patientChat?.name}</p>
+                            <p className='text-xs text-gray-400 ellipse-2'>{cart?.lastMSG}</p>
+                        </div>
+                    </div>
+                    <p>2h</p>
+                </Link>
+            </div>
+        )
+    }
+
     return (
         <div className='h-full overflow-hidden'>
             <div className='p-5 px-2 flex justify-between items-center'>
@@ -18,30 +56,8 @@ const Conversations = () => {
             </div>
             <hr className='mb-2' />
             <div className='overflow-y-scroll hideScroll h-full'>
-                {Users?.map(card => (
-                    <Link
-                        href='/doctor/doctor-messages/abdo/65232154521'
-                        aria-label='chat'
-                        key={card}
-                        className='py-3 mx-2 flex justify-between px-3 rounded-xl hover:text-blue-500 hover:bg-blue-100'
-                    >
-                        <div className='flex'>
-                            <div>
-                                <span
-                                    className='w-16 h-16 bg-red-800 rounded-full flex items-center justify-center text-white font-bold'>
-                                    BG
-                                </span>
-                            </div>
-                            <div className='w-full px-3'>
-                                <p className='font-[500] text-sm'>Derpy MAX3</p>
-                                <p className='text-xs text-gray-400 ellipse-2'>
-                                    Excepteur sint occaecat cupidatat non proident,
-                                    sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                </p>
-                            </div>
-                        </div>
-                        <p>2h</p>
-                    </Link>
+                {chats?.map(cart => (
+                    <ChatCart cart={cart} />
                 ))}
             </div>
         </div>

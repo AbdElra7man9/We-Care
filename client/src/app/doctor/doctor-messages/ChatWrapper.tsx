@@ -3,9 +3,15 @@ import useBreakpoint from '@Hooks/useBreakpoint';
 import { useParams } from 'next/navigation';
 import Conversations from './Conversations';
 
+interface Params {
+    [key: string]: string | string[];
+    chatId: string;
+}
+
 
 const ChatWrapper = ({ children }: { children: React.ReactNode }) => {
-    const { chatId } = useParams()
+    const params: any = useParams()
+    const chatId = params.chatId;
     const { breakpoint, MobileView } = useBreakpoint();
     const xl = (breakpoint === 'xl')
     const mobile = MobileView || xl;

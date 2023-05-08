@@ -1,8 +1,6 @@
 import "@styles/globals.css";
 import { Inter } from "next/font/google";
 import Providers from "@app/Providers";
-import Chat from "@Components/GPT3.5/Chat";
-// import ProgessBar from "@Components/Layouts/ProgessBar";
 
 export const metadata = {
   title: "Helth care",
@@ -21,7 +19,6 @@ export default function RootLayout({
     >
       <body className="dark:bg-slate-900">
         <Providers>
-          <Chat />
           {children}
         </Providers>
       </body>

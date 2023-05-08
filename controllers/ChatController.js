@@ -38,7 +38,7 @@ exports.GetAll = catchAsync(async (req, res, next) => {
         .Pagination(resultperpage)
 
     const chats = await features.query
-        .populate('members', 'username avatar fullname')
+        .populate('members', 'username name avatar fullname')
         .sort('-updatedAt')
     return res.json({
         status: 'success',

@@ -3,11 +3,12 @@ import DoctorWraper from "./DoctorWraper";
 export const metadata = {
   title: "Doctor Dashboard",
 };
-export default function RootLayout({
+export default function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <DoctorWraper>
       {children}

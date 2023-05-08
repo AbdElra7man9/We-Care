@@ -5,6 +5,7 @@ import LastedBlogs from '@Components/app/LastedBlogs'
 import Header from '@Components/app/Header'
 import Footer from '@Components/app/Footer'
 import DoctorsList from '@Components/Parts/DoctorsList'
+import Chat from '@Components/GPT3.5/Chat'
 const Doctors = [
   {
     _id: '1',
@@ -53,6 +54,7 @@ export default function Home() {
   return (
     <div className="dark:bg-slate-900">
       <Header isFull={false} />
+      <Chat />
       <UpperPart />
       <AboutTreatment />
       <MedicalService />
