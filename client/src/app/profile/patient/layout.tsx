@@ -1,5 +1,6 @@
 import Footer from "@Components/app/Footer";
 import Header from "@Components/app/Header";
+import Chat from "@Components/GPT3.5/Chat";
 import { authOptions } from "@lib/auth";
 import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
@@ -21,6 +22,7 @@ export default async function Layout({
   return (
     <>
       <Header isFull={false} />
+      <Chat />
       <ProfileWraper>
         {children}
       </ProfileWraper>

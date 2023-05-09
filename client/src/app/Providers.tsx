@@ -10,6 +10,7 @@ import ClientOnly from "./ClientOnly";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import SocketProvider from "@Contexts/SocketContext";
+import { MessagesProvider } from "@Contexts/MessagesContext";
 
 type providersProps = {
   children: React.ReactNode;
@@ -27,12 +28,12 @@ export default function Providers({ children, session }: providersProps) {
             <AuthProvider>
               <UserProvider>
                 <SocketProvider>
-                  <ClientOnly>
-                    <div className=" dark:text-gray-500 text-gray-700 transition-colors duration-300 min-h-screen select-none">
+                  <MessagesProvider>
+                    <div className=" dark:text-gray-500 text-gray-700 transition-colors duration-300 min-h-screen">
                       <Toaster position='top-center' reverseOrder={false} />
                       {children}
                     </div>
-                  </ClientOnly>
+                  </MessagesProvider>
                 </SocketProvider>
               </UserProvider>
             </AuthProvider>

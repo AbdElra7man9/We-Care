@@ -11,5 +11,6 @@ declare namespace NodeJS {
         GOOGLE_SECRET: string;
         FACEBOOK_ID: string;
         FACEBOOK_SECRET: string;
+        OPENAI_API_KEY: string;
     }
 }

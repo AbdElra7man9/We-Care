@@ -8,6 +8,7 @@ import { BiChevronRight } from 'react-icons/bi'
 import { BsTelephonePlus } from 'react-icons/bs'
 import { HiOutlineMail } from 'react-icons/hi'
 import Form from './Form'
+import Chat from '@Components/GPT3.5/Chat'
 
 interface conatctProps {
     Icon: React.ReactNode;
@@ -55,6 +56,7 @@ export default function page() {
     return (
         <div className="dark:bg-slate-900">
             <Header isFull={false} />
+            <Chat />
             <div className='h-[30rem] md:h-[40rem] duration-200 container max-w-full px-0 relative select-none'>
                 <Image
                     height={800}
