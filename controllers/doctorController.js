@@ -18,7 +18,8 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
 });
 
 exports.getTopDoctors = catchAsync(async (req, res, next) => {
-  const features = new Features(Doctor.find({ status: 'accepted' }).sort({ averageRating: -1, numberOfRating: -1 }) , req.query)
+  const features = new Features(Doctor.find({ status: 'accepted' , numberOfRating: { $gte: 10}})
+      .sort({ averageRating: -1, numberOfRating: -1 }) , req.query)
       .Paginate();
   const doctors = await features.query;
   res.json({
