@@ -1,16 +1,19 @@
 const express = require('express');
 const protect = require('../Middlewares/protect');
 
-const reviewController = require('../controllers/reviewController');
+const {
+  makeReview,
+  updateReview,
+  deleteReview,
+  patientReview,
+  doctorReview,
+} = require('../controllers/reviewController');
 
 const router = express.Router({ mergeParams: true });
 
-router.get('/:id', reviewController.doctorReview);
+router.get('/:id', doctorReview);
 router.use(protect);
-router.post('/:id', reviewController.makeReview);
-router.patch('/:id', reviewController.updateReview);
-router.delete('/:id', reviewController.deleteReview);
-router.get('/patient', reviewController.patientReview);
-
+router.get('/patient', patientReview);
+router.route('/:id').post(makeReview).patch(updateReview).delete(deleteReview);
 
 module.exports = router;
