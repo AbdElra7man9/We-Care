@@ -17,6 +17,30 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getTopDoctors = catchAsync(async (req, res, next) => {
+  const features = new Features(Doctor.find({ status: 'accepted' }).sort({ averageRating: -1, numberOfRating: -1 }) , req.query)
+      .Paginate();
+  const doctors = await features.query;
+  res.json({
+    status: 'success',
+    results: doctors.length,
+    doctors,
+  });
+});
+
+exports.getSpecializedDoctors = catchAsync(async (req, res, next) => {
+  const doctorsNum = await Doctor.count({ status: 'accepted' , specialization: req.params.specialization });
+  const features = new Features(Doctor.find({ status: 'accepted' , specialization: req.params.specialization }) , req.query)
+      .Paginate();
+  const doctors = await features.query;
+  res.json({
+    status: 'success',
+    doctorsNum: doctorsNum,
+    results: doctors.length,
+    doctors,
+  });
+});
+
 exports.getAllPendingDoctors = catchAsync(async (req, res, next) => {
   const features = new Features(
     Doctor.find({ status: 'pending' }),
