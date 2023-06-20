@@ -11,7 +11,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <Header />
+      <Header isFull={true} />
       {children}
       <Footer />
     </>

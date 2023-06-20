@@ -9,7 +9,7 @@ const {
   Refresh,
   resendPIN,
 } = require('../controllers/authController');
-const { updateInfo, deleteMe } = require('../controllers/userController');
+const { updateInfo, deleteMe, getUser } = require('../controllers/userController');
 const protect = require('../Middlewares/protect');
 const mustConfirmed = require('../Middlewares/mustConfirmed');
 const uploadUserPhoto = require('../Middlewares/uploadUserPhoto');
@@ -34,5 +34,6 @@ router.patch(
 );
 router.patch('/updatePassword', updatePassword);
 router.delete('/deleteMe', deleteMe);
+router.get('/:username', getUser);
 
 module.exports = router;

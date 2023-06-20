@@ -1,5 +1,6 @@
 'use client';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip } from 'chart.js';
+import { useRef, useEffect } from 'react';
 
 interface Data {
     timePeriod: string;
@@ -12,32 +13,75 @@ interface AreaPlotProps {
 }
 
 const AreaPlot: React.FC<AreaPlotProps> = ({ color, data }) => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
     const gradientFillId = `gradient-fill-${color}`;
-    const gradientStrokeId = `gradient-stroke-${color}`;
+
+    useEffect(() => {
+        if (canvasRef.current) {
+            Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip);
+
+            const ctx = canvasRef.current.getContext('2d');
+
+            if (ctx) {
+                const gradientFill = ctx.createLinearGradient(0, 0, 0, 150);
+                gradientFill.addColorStop(0, color);
+                gradientFill.addColorStop(0.7, 'rgba(255, 255, 255, 0)');
+                gradientFill.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+                const chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.map((d) => d.timePeriod),
+                        datasets: [
+                            {
+                                data: data.map((d) => d.value),
+                                borderColor: color,
+                                backgroundColor: gradientFill,
+                                fill: true,
+                                tension: 0.4,
+                                borderWidth: 2,
+                                pointRadius: 0,
+                            },
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                display: false,
+                                grid: {
+                                    display: false,
+                                },
+                            },
+                            y: {
+                                display: false,
+                                grid: {
+                                    display: false,
+                                },
+                            },
+                        },
+                        plugins: {
+                            tooltip: {
+                                mode: 'nearest',
+                                intersect: false,
+                            },
+                            legend: {
+                                display: false,
+                            },
+                        },
+                    },
+                });
+
+                return () => {
+                    chart.destroy();
+                };
+            }
+        }
+    }, [canvasRef, color, data]);
 
     return (
-        <ResponsiveContainer width="100%" height="80%" className="m-0 p-0">
-            <AreaChart width={100} height={200} data={data} className="w-full h-full">
-                <defs>
-                    <linearGradient id={gradientFillId} x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="10%" stopColor={color} stopOpacity={.8} />
-                        <stop offset="70%" stopColor="#fff" stopOpacity={0} />
-                        <stop offset="100%" stopColor="#fff" stopOpacity={0} />
-                        <stop offset="50%" stopColor={color} stopOpacity={0} />
-
-                    </linearGradient>
-              
-                </defs>
-                <Tooltip />
-                <Area
-                    type="monotone"
-                    dataKey="value"
-                    stroke={color}
-                    strokeWidth={2.5}
-                    fill={`url(#${gradientFillId})`}
-                />
-            </AreaChart>
-        </ResponsiveContainer>
+        <div style={{ height: '70%', width: '100%' }}>
+            <canvas ref={canvasRef} className='!w-full'/>
+        </div>
     );
 };
 

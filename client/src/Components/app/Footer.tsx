@@ -3,85 +3,12 @@ import React from 'react'
 import { BiChevronRight } from 'react-icons/bi';
 import { BsFillTelephoneFill, BsTelephoneForward } from 'react-icons/bs';
 import { CiLocationOn } from 'react-icons/ci';
-import { SlSocialLinkedin, SlSocialFacebook, SlSocialGithub, SlSocialTwitter } from 'react-icons/sl';
 import Image from 'next/image';
 import Link from 'next/link';
-interface Company {
-    _id: string;
-    title: string;
-    LinkDir: string;
-}
+import { docsConfig } from '@config/docsConfig';
 
-interface Department {
-    _id: string;
-    title: string;
-    LinkDir: string;
-}
 export default function Footer() {
-    const company: Company[] = [
-        {
-            _id: '1',
-            title: 'About us',
-            LinkDir: '/'
-        }, {
-            _id: '2',
-            title: 'Sevices',
-            LinkDir: '/'
-        }, {
-            _id: '3',
-            title: 'Team',
-            LinkDir: '/'
-        }, {
-            _id: '4',
-            title: 'Project',
-            LinkDir: '/'
-        }, {
-            _id: '5',
-            title: 'Blog',
-            LinkDir: '/'
-        }, {
-            _id: '6',
-            title: 'Login',
-            LinkDir: '/'
-        },
-    ]
-    const Department: Department[] = [
-        {
-            _id: '1',
-            title: 'Eye Care',
-            LinkDir: '/'
-        }, {
-            _id: '2',
-            title: 'Psychotherapy',
-            LinkDir: '/'
-        }, {
-            _id: '3',
-            title: 'Dental Care',
-            LinkDir: '/'
-        }, {
-            _id: '4',
-            title: 'Orthopedic',
-            LinkDir: '/'
-        }, {
-            _id: '5',
-            title: 'Cardiology',
-            LinkDir: '/'
-        }, {
-            _id: '6',
-            title: 'Gynecology',
-            LinkDir: '/'
-        }, {
-            _id: '7',
-            title: 'Neurology',
-            LinkDir: '/'
-        },
-    ]
-    const Icons = [
-        <SlSocialFacebook key={0} size={23} />,
-        <SlSocialLinkedin key={1} size={20} />,
-        <SlSocialGithub key={2} size={20} />,
-        <SlSocialTwitter key={3} size={20} />
-    ]
+
 
     return (
         <footer className='bg-[#202942] duration-200 conatiner max-w-full mt-16'>
@@ -105,7 +32,7 @@ export default function Footer() {
                     <div className='text-gray-400'>
                         <h3 className='text-xl text-white space-y-3 font-semibold'>Company</h3>
                         <div className='space-y-3 py-3'>
-                            {company.map(item => (
+                            {docsConfig.Footer.Company.map(item => (
                                 <Link key={item?._id} href={item.LinkDir} aria-label='item' className='flex gap-2 items-center'>
                                     <BiChevronRight />
                                     <p>{item.title}</p>
@@ -116,7 +43,7 @@ export default function Footer() {
                     <div className='text-gray-400'>
                         <h3 className='text-xl text-white font-semibold'>Department</h3>
                         <div className='space-y-3 py-3'>
-                            {Department.map(item => (
+                            {docsConfig.Footer.Department.map(item => (
                                 <Link key={item._id} href={item.LinkDir} aria-label='item' className='flex gap-2 items-center'>
                                     <BiChevronRight />
                                     <p>{item.title}</p>
@@ -141,7 +68,7 @@ export default function Footer() {
                             </div>
                         </div>
                         <div className='flex items-center gap-3 py-5'>
-                            {Icons?.map((icon, index) => (
+                            {docsConfig.SocialIcons?.map((icon, index) => (
                                 <Link
                                     key={index}
                                     href='/'

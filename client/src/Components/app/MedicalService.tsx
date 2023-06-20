@@ -1,55 +1,7 @@
 'use client';
+import { docsConfig, MedicalProps } from '@config/docsConfig';
 import React from 'react'
-import { AiFillEye } from 'react-icons/ai'
 
-interface MedicalProps {
-    Icon: React.ReactNode;
-    Title: string;
-    Des: string
-}
-const services: MedicalProps[] = [
-    {
-        Icon: <AiFillEye size={25} />,
-        Title: ' Eye Care',
-        Des: 'There is now an abundance of readable dummy texts required purely to fill a space.',
-    },
-    {
-        Icon: <AiFillEye size={25} />,
-        Title: 'Psychotherapy',
-        Des: 'There is now an abundance of readable dummy texts required purely to fill a space.',
-    },
-    {
-        Icon: <AiFillEye size={25} />,
-        Title: 'Primary Care',
-        Des: 'There is now an abundance of readable dummy texts required purely to fill a space.',
-    },
-    {
-        Icon: <AiFillEye size={25} />,
-        Title: 'Dental Care',
-        Des: 'There is now an abundance of readable dummy texts required purely to fill a space.',
-    },
-    {
-        Icon: <AiFillEye size={25} />,
-        Title: 'Orthopedic',
-        Des: 'There is now an abundance of readable dummy texts required purely to fill a space.',
-    },
-    {
-        Icon: <AiFillEye size={25} />,
-        Title: 'Cardiology',
-        Des: 'There is now an abundance of readable dummy texts required purely to fill a space.',
-    },
-    {
-        Icon: <AiFillEye size={25} />,
-        Title: 'Gynecology',
-        Des: 'There is now an abundance of readable dummy texts required purely to fill a space.',
-    },
-    {
-        Icon: <AiFillEye size={25} />,
-        Title: 'Pediatrics',
-        Des: 'There is now an abundance of readable dummy texts required purely to fill a space.',
-    },
-
-]
 const MedicalService: React.FC = () => {
     const Spici = ({ Icon, Title, Des }: MedicalProps) => {
         return (
@@ -75,7 +27,7 @@ const MedicalService: React.FC = () => {
                 </p>
             </div>
             <div className='grid grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-8 py-12'>
-                {services.map((item, index) => (
+                {docsConfig.Services.map((item, index) => (
                     <div key={index}>
                         <Spici Icon={item.Icon} Title={item.Title} Des={item.Des} />
                     </div>

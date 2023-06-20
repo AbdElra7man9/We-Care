@@ -1,7 +1,7 @@
 'use client';
 import { io, Socket } from 'socket.io-client';
 
-const url: string = process.env.REACT_APP_API_KEY ?? 'http://localhost:5000';
+const url = process.env.NEXT_PUBLIC_API_KEY as string;
 let socket: Socket;
 
 const getSocket = (): Socket => {

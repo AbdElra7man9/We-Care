@@ -21,7 +21,9 @@ const ChatRouter = require('./routes/ChatRouter');
 const MessageRouter = require('./routes/MessageRouter');
 const BlogRouter = require('./routes/BlogRouter');
 const CommentsRouter = require('./routes/CommentsRouter');
+const CoordinatorRouter = require('./routes/CoordinatorRouter');
 const AppError = require('./utils/AppError');
+const User = require('./Models/userModel');
 
 const app = express();
 // Set security HTTP headers
@@ -33,6 +35,8 @@ app.use(
     credentials: true,
   })
 );
+app.use(morgan('common'));
+// app.use(helmet());
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -40,12 +44,12 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Limit requests from same API
-const limiter = rateLimit({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: 'Too many requests from this IP, please try again in an hour!',
-});
-app.use('/api', limiter);
+// const limiter = rateLimit({
+//   max: 100,
+//   windowMs: 60 * 60 * 1000,
+//   message: 'Too many requests from this IP, please try again in an hour!',
+// });
+// app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '50mb' }));
@@ -69,6 +73,20 @@ app.use(
     ],
   })
 );
+// async function update() {
+//   try {
+//     const user = await User.updateMany({}, { $set: { profilePicture: 'http://localhost:5000/images/default.png' } })
+//     if (user) {
+//       console.log('updated')
+//     }
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+// update()
+
+//Access Images from server side by http://localhost:5000/images/default.png
+app.use('/images', express.static('public/img/users'));
 
 // doctors routs
 app.use('/api/v1/doctors', doctorRouter);
@@ -99,7 +117,8 @@ app.use('/api/v1/blog', BlogRouter);
 
 //Comments and likes
 app.use('/api/v1/blog', CommentsRouter);
-
+//Comments and likes
+app.use('/api/v1/coordinator', CoordinatorRouter);
 //handeling wrong urls
 app.all('*', (req, res, next) => {
   next(new AppError(`can't find ${req.originalUrl} on this server`, 404));

@@ -5,14 +5,26 @@ class Features {
     };
     Search() {
         const keyword = this.queryStr.keyword ? {
-            username: {
-                $regex: this.queryStr.keyword,
-                $options: 'i'
-            },
-            fullname: {
-                $regex: this.queryStr.keyword,
-                $options: 'i'
-            },
+            $or: [
+                {
+                    name: {
+                        $regex: this.queryStr.keyword,
+                        $options: 'i'
+                    }
+                },
+                {
+                    username: {
+                        $regex: this.queryStr.keyword,
+                        $options: 'i'
+                    }
+                },
+                {
+                    email: {
+                        $regex: this.queryStr.keyword,
+                        $options: 'i'
+                    }
+                }
+            ]
         }
             : {
 
@@ -26,6 +38,20 @@ class Features {
         removeFields.forEach((key) =>
             delete queryCopy[key]
         );
+        if (queryCopy.minFees || queryCopy.maxFees) {
+            const minFees = this.queryStr.minFees * 1 || 0 ;
+            const maxFees = this.queryStr.maxFees * 1 || 1000000 ;
+            queryCopy.fees = {$gte: minFees , $lte: maxFees };
+            const removeFees = ['minFees', 'maxFees'];
+            removeFees.forEach((key) =>delete queryCopy[key]);
+        };
+        Object.keys(queryCopy).forEach((key) => {
+            if (key.includes('-')) {
+                const newKey = key.replace(/-/g, '.');
+                queryCopy[newKey] = queryCopy[key];
+                delete queryCopy[key];
+            }
+        });
         this.query = this.query.find(queryCopy);
         return this;
     }

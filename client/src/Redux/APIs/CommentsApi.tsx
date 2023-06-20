@@ -1,29 +1,45 @@
+import { CommentType } from '@lib/types/comment';
+import { LikeType } from '@lib/types/Like';
 import { apiSlice } from '../ApiSlice';
+import { BlogsApi } from './BlogApi';
+interface CommentsResponse {
+    status?: string;
+    totalCounts?: number;
+    Comments: CommentType[];
+}
 export const CommentsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        createComment: builder.mutation({
-            query: ({ data, id }) => ({
-                url: `/api/comment/new/${id}`,
-                method: 'Post',
-                body: data,
+        GetComments: builder.query<CommentsResponse, { blogId: string }>({
+            query: ({ blogId }) => ({
+                url: `/api/v1/blog/comments/${blogId}`,
+                method: 'GET',
             }),
-            async onQueryStarted({ id }, { queryFulfilled, dispatch }) {
+            // providesTags: ['Comment'],
+        }),
+        createComment: builder.mutation<{ status: string; Comment: CommentType }, { content: string, blogId: string }>({
+            query: ({ content, blogId }) => ({
+                url: `/api/v1/blog/add-comment/${blogId}`,
+                method: 'Post',
+                body: content,
+            }),
+            async onQueryStarted({ blogId }, { queryFulfilled, dispatch }) {
                 try {
 
-                    const { data: updatedPost } = await queryFulfilled;
-                    // const lastcomment = data.slice(-1)[0]
-                    dispatch(
-                        apiSlice.util.updateQueryData("getFollowersPosts", 1, (draft) => {
-                            const post = draft?.followersposts?.find((item) => item?._id === id);
-                            post.comments = updatedPost?.comments
-                            post.numComments = updatedPost?.numComments
+                    const { data } = await queryFulfilled;
 
+                    dispatch(
+                        BlogsApi.util.updateQueryData("getBlogDetails", { blogId }, (draft) => {
+                            draft.BlogDetails.numComments = +1
                         })
                     )
                     dispatch(
-                        apiSlice.util.updateQueryData("getPostDetails", id, (draft) => {
-                            draft.comments = updatedPost?.comments
-                            draft.numComments = updatedPost?.numComments
+                        CommentsApi.util.updateQueryData("GetComments", { blogId }, (draft) => {
+                            return {
+                                Comments: [
+                                    ...draft.Comments,
+                                    data.Comment
+                                ]
+                            }
                         })
                     )
                 } catch (err) {
@@ -31,46 +47,19 @@ export const CommentsApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        Like: builder.mutation({
-            query: (id) => ({
-                url: `/api/comment/like/${id}`,
+        Like: builder.mutation<{ status: string; message: string }, { blogId: string }>({
+            query: ({ blogId }) => ({
+                url: `/api/v1/blog/like/${blogId}`,
                 method: 'PUT',
             }),
-            async onQueryStarted(id, { queryFulfilled, dispatch, getState }) {
+            async onQueryStarted({ blogId }, { queryFulfilled, dispatch, getState }) {
                 try {
                     // const userInfo = getState().auth.user
-                    const { data: updatedPost } = await queryFulfilled;
-                    const userIdOfReel = updatedPost?.user
-                    // replace the likes array inside followers posts array with the new array of likes 
+                    const { data } = await queryFulfilled;
+
                     dispatch(
-                        apiSlice.util.updateQueryData("getFollowersPosts", 1, (draft) => {
-                            const post = draft?.followersposts?.find((item) => item?._id === id);
-                            if (post) {
-                                post.likes = updatedPost.likes
-                                post.numLikes = updatedPost.numLikes
-                            }
-                        })
-                    )
-                    dispatch(
-                        apiSlice.util.updateQueryData("getPostDetails", id, (draft) => {
-                            draft.likes = updatedPost.likes
-                            draft.numLikes = updatedPost.numLikes
-                        })
-                    )
-                    dispatch(
-                        apiSlice.util.updateQueryData("GetAllReels", 1, (draft) => {
-                            const Reel = draft?.AllReels?.find((item) => item?._id === id);
-                            Reel.likes = updatedPost.likes
-                            Reel.numLikes = updatedPost.numLikes
-                        })
-                    )
-                    dispatch(
-                        apiSlice.util.updateQueryData("GetUserByIdReels", userIdOfReel, (draft) => {
-                            const Reel = draft?.userReels?.find((item) => item?._id === id);
-                            if (Reel) {
-                                Reel.likes = updatedPost.likes
-                                Reel.numLikes = updatedPost.numLikes
-                            }
+                        BlogsApi.util.updateQueryData("getBlogDetails", { blogId }, (draft) => {
+                            draft.BlogDetails.numLikes = +1
                         })
                     )
                 } catch (err) {
@@ -78,75 +67,42 @@ export const CommentsApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        UnLike: builder.mutation({
-            query: (id) => ({
-                url: `/api/comment/unlike/${id}`,
+        UnLike: builder.mutation<{ status: string; message: string }, { blogId: string }>({
+            query: ({ blogId }) => ({
+                url: `/api/v1/blog/unlike/${blogId}`,
                 method: 'PUT',
             }),
-            async onQueryStarted(id, { queryFulfilled, dispatch, getState }) {
+            async onQueryStarted({ blogId }, { queryFulfilled, dispatch, getState }) {
                 try {
                     // const userInfo = getState().auth.user
-                    const { data: updatedPost } = await queryFulfilled;
-                    const userIdOfReel = updatedPost?.user
+                    const { data } = await queryFulfilled;
                     // replace the likes array inside followers posts array with the new array of likes 
                     dispatch(
-                        apiSlice.util.updateQueryData("getFollowersPosts", 1, (draft) => {
-                            const post = draft?.followersposts?.find((item) => item?._id === id);
-                            if (post) {
-                                post.likes = updatedPost.likes
-                                post.numLikes = updatedPost.numLikes
-                            }
+                        BlogsApi.util.updateQueryData("getBlogDetails", { blogId }, (draft) => {
+                            draft.BlogDetails.numLikes = -1
+
 
                         })
                     )
-                    dispatch(
-                        apiSlice.util.updateQueryData("getPostDetails", id, (draft) => {
-                            draft.likes = updatedPost.likes
-                            draft.numLikes = updatedPost.numLikes
-                        })
-                    )
-                    dispatch(
-                        apiSlice.util.updateQueryData("GetAllReels", 1, (draft) => {
-                            const Reel = draft?.AllReels?.find((item) => item?._id === id);
-                            Reel.likes = updatedPost.likes
-                            Reel.numLikes = updatedPost.numLikes
-                        })
-                    )
-                    dispatch(
-                        apiSlice.util.updateQueryData("GetUserByIdReels", userIdOfReel, (draft) => {
-                            const Reel = draft?.userReels?.find((item) => item?._id === id);
-                            if (Reel) {
-                                Reel.likes = updatedPost.likes
-                                Reel.numLikes = updatedPost.numLikes
-                            }
-                        })
-                    )
                 } catch (err) {
                     console.log(err)
                 }
             },
-        }),
-        getCounter: builder.query({
-            query: (id) => ({
-                url: `/api/comment/length/${id}`,
-                method: 'Post',
-            }),
-            providesTags: ['Comments'],
         }),
         updateComment: builder.mutation({
-            query: ({ data, id }) => ({
-                url: `/api/comment/update/${id}`,
+            query: ({ data, blogId }) => ({
+                url: `/api/comment/update/${blogId}`,
                 method: 'PUT',
                 body: data,
             }),
-            invalidatesTags: ['Comments'],
+            invalidatesTags: ['Comment'],
         }),
         deleteComment: builder.mutation({
-            query: (id) => ({
-                url: `/api/comment/delete/${id}`,
+            query: ({ blogId }) => ({
+                url: `/api/comment/delete/${blogId}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: (result, error, arg) => [{ type: 'Comments', id: arg.id }],
+            // invalidatesTags: (result, error, arg) => [{ type: 'Comments', id: arg.id }],
         }),
     }),
 });
@@ -155,7 +111,7 @@ export const {
     useCreateCommentMutation,
     useUpdateCommentMutation,
     useDeleteCommentMutation,
-    useGetCounterQuery,
     useLikeMutation,
     useUnLikeMutation,
+    useGetCommentsQuery,
 } = CommentsApi;

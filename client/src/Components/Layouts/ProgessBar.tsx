@@ -1,8 +1,8 @@
 'use client';
 import { FC, useState } from 'react'
-import NextNProgress from 'nextjs-progressbar';
+// import NextNProgress from 'nextjs-progressbar';
 import { Router } from 'next/router';
-import NProgress from 'nprogress';
+// import NProgress from 'nprogress';
 
 // @import 'node_modules/nprogress/nprogress.css';
 
@@ -17,10 +17,12 @@ const ProgessBar: FC = ({ }) => {
     //     setLoading(false);
     // })
 
-
     return (
-        <NextNProgress />
+        <></>
     )
+    // return (
+    //     <NextNProgress />
+    // )
 
 }
 

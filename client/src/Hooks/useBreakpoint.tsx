@@ -58,7 +58,7 @@ const useBreakpoint = () => {
             setBreakPoint(breakpoints[1500]);
         }
         return () => window.removeEventListener('resize', handleResize);
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [windowSize.width]);
 
     const MobileView = (breakpoint === 'xs') || (breakpoint === 'sm') || (breakpoint === 'md') || (breakpoint === 'lg');

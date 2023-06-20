@@ -6,14 +6,14 @@ const {
   userBlogById,
   AllBlogs,
   GetBlogDetails,
-} = require('../Controllers/BlogController');
+} = require('../controllers/BlogController');
 
 const restrictTo = require('../Middlewares/restrictTo');
 const protect = require('../Middlewares/protect');
 
 const router = express.Router();
 
-router.use(protect, restrictTo('Doctor')); // for best practice you can add router only one :)
+router.use(protect); // for best practice you can add router only one :)
 router.post('/', NewBlog);
 router.delete('/', DeleteBLOG);
 router.get('/user', userBLOG);

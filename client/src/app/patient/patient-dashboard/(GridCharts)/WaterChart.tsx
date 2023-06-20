@@ -1,8 +1,9 @@
+'use client';
 import React from 'react'
 import { MdWaterDrop } from 'react-icons/md'
 import DonutPlot from '@Components/Graphs/DonutPlot'
 
-const WaterChart = () => {
+const WaterChart: React.FC = () => {
     return (
         <div className='shadow-[.2px_.2px_3px_1px] dark:shadow-slate-700 h-96 shadow-gray-100 rounded-lg p-5'>
             <div className='flex justify-between'>

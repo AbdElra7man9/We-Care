@@ -6,37 +6,40 @@ import { Provider } from 'react-redux';
 import { store } from '@Redux/Store';
 import { AuthProvider } from '@Contexts/AuthContext';
 import { UserProvider } from '@Contexts/UserContextProps';
-import Router from 'next/router';
-import NProgress from 'nprogress';
+import ClientOnly from "./ClientOnly";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+import SocketProvider from "@Contexts/SocketContext";
+import { MessagesProvider } from "@Contexts/MessagesContext";
 
 type providersProps = {
   children: React.ReactNode;
-  session: any;
+  session?: any;
 };
 export default function Providers({ children, session }: providersProps) {
-
-  Router.events.on('routeChangeStart', () => NProgress.start());
-  Router.events.on('routeChangeComplete', () => NProgress.done());
-  Router.events.on('routeChangeError', () => NProgress.done());
-
-  Router.events.on('routeChangeComplete', () => { window.scrollTo(0, 0); });
-
+  // const { store } = wrapper.useWrappedStore({ initialState: { fo: "bar" } })
+  const queryClient = new QueryClient()
 
   return (
     <SessionProvider session={session}>
       <Provider store={store}>
-        <ThemeProvider attribute="class" defaultTheme="system">
-          <AuthProvider>
-            <UserProvider>
-
-              <div className=" dark:text-gray-500 text-gray-700 transition-colors duration-300 min-h-screen select-none">
-                {children}
-              </div>
-
-            </UserProvider>
-          </AuthProvider>
-        </ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider attribute="class" defaultTheme="system">
+            <AuthProvider>
+              <UserProvider>
+                <SocketProvider>
+                  <MessagesProvider>
+                    <div className=" dark:text-gray-500 text-gray-700 transition-colors duration-300 min-h-screen">
+                      <Toaster position='top-center' reverseOrder={false} />
+                      {children}
+                    </div>
+                  </MessagesProvider>
+                </SocketProvider>
+              </UserProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </QueryClientProvider>
       </Provider>
-    </SessionProvider>
+    </SessionProvider >
   );
 }

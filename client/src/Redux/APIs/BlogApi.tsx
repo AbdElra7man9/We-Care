@@ -1,9 +1,15 @@
+'use client';
 import { BlogType } from '@lib/types/blog';
 import { apiSlice } from '../ApiSlice';
 interface BlogArgs {
     title: string;
     image: string;
     des: string;
+}
+interface BlogResponse {
+    Blogs: BlogType[];
+    totalCount: number;
+    status: string
 }
 export const BlogsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -12,33 +18,17 @@ export const BlogsApi = apiSlice.injectEndpoints({
                 url: `/api/v1/blog?page=${page}`,
                 method: 'GET',
             }),
-            transformResponse(apiResponse: BlogType[], meta: {}): BlogType[] {
-                // const totalCount = Number(meta.response.headers.get('X-Total-Count'));
-
-                return {
-                    userBlogs: apiResponse,
-                    totalCount: Number(apiResponse.length)
-                };
-            },
         }),
-        getUserBlogs: builder.query<{ Blogs: BlogType[], status: string }, { page: number }>({
-            query: (page) => ({
-                url: `/api/v1/Blog/getuser?page=${page}`,
+        getUserBlogs: builder.query<BlogResponse, { page: number }>({
+            query: ({ page }) => ({
+                url: `/api/v1/Blog/user?page=${page}`,
                 method: 'GET',
             }),
             providesTags: ['Blog'],
-            transformResponse(apiResponse: BlogType[], meta) {
-                // const totalCount = Number(meta.response.headers.get('X-Total-Count'));
-
-                return {
-                    userBlogs: apiResponse,
-                    totalCount: Number(apiResponse.length)
-                };
-            },
         }),
-        getMoreUserBlogs: builder.query<{ Blogs: BlogType[], status: string }, { page: number }>({
+        getMoreUserBlogs: builder.query<BlogResponse, { page: number }>({
             query: (page) => ({
-                url: `/api/v1/Blog/getuser?page=${page}`,
+                url: `/api/v1/Blog/user?page=${page}`,
                 method: 'GET',
             }),
             async onQueryStarted(args, { queryFulfilled, dispatch }) {
@@ -47,13 +37,14 @@ export const BlogsApi = apiSlice.injectEndpoints({
 
                     const { data } = await queryFulfilled;
                     dispatch(
-                        apiSlice.util.updateQueryData("getUserBlogs", 1, (draft) => {
+                        BlogsApi.util.updateQueryData("getUserBlogs", { page: 1 }, (draft) => {
                             return {
-                                userBlogs: [
-                                    ...draft.userBlogs,
-                                    ...data,
+                                Blogs: [
+                                    ...draft.Blogs,
+                                    ...data.Blogs,
                                 ],
-                                totalCount: Number(data.length),
+                                totalCount: data.totalCount,
+                                status: data.status,
                             };
                         })
                     )
@@ -62,22 +53,14 @@ export const BlogsApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        getUserBlogsById: builder.query<{ Blogs: BlogType[], status: string }, { id: string, page: number }>({
+        getUserBlogsById: builder.query<BlogResponse, { id: string, page: number }>({
             query: (id) => ({
                 url: `/api/v1/Blog/get/all/${id}?page=${1}`,
                 method: 'GET',
             }),
             providesTags: ['Blog'],
-            transformResponse(apiResponse, meta) {
-                // const totalCount = Number(meta.response.headers.get('X-Total-Count'));
-
-                return {
-                    userBlogsById: apiResponse,
-                    totalCount: Number(apiResponse.length)
-                };
-            },
         }),
-        getMoreUserBlogsById: builder.query<{ Blogs: BlogType[], status: string }, { id: string, page: number }>({
+        getMoreUserBlogsById: builder.query<BlogResponse, { id: string, page: number }>({
             query: ({ id, page }) => ({
                 url: `/api/v1/Blog/get/all/${id}?page=${page}`,
                 method: 'GET',
@@ -87,13 +70,14 @@ export const BlogsApi = apiSlice.injectEndpoints({
 
                     const { data } = await queryFulfilled;
                     dispatch(
-                        apiSlice.util.updateQueryData("getUserBlogsById", args.id, (draft) => {
+                        BlogsApi.util.updateQueryData("getUserBlogsById", args, (draft) => {
                             return {
-                                userBlogsById: [
-                                    ...draft.userBlogsById,
-                                    ...data,
+                                Blogs: [
+                                    ...draft.Blogs,
+                                    ...data.Blogs,
                                 ],
-                                totalCount: Number(data.length),
+                                totalCount: data.totalCount,
+                                status: data.status,
                             };
                         })
                     )
@@ -102,23 +86,16 @@ export const BlogsApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        getAllBLOGs: builder.query<{ Blogs: BlogType[], status: string }, { page: number }>({
-            query: (page) => ({
+        getAllBLOGs: builder.query<BlogResponse, { page: number }>({
+            query: ({ page }) => ({
                 url: `/api/v1/Blog?page=${page}`,
                 method: 'GET',
             }),
             providesTags: ['Blog'],
-            transformResponse(apiResponse, meta) {
-                // const totalCount = Number(meta.response.headers.get('X-Total-Count'));
-
-                return {
-                    followersBlogs: apiResponse,
-                    totalCount: Number(apiResponse.length)
-                };
-            },
         }),
-        getMoreAllBlogs: builder.query<{ Blogs: BlogType[], status: string }, { page: number }>({
-            query: (page) => ({
+
+        getMoreAllBlogs: builder.query<BlogResponse, { page: number }>({
+            query: ({ page }) => ({
                 url: `/api/v1/Blog?page=${page}`,
                 method: 'GET',
             }),
@@ -128,13 +105,14 @@ export const BlogsApi = apiSlice.injectEndpoints({
 
                     const { data } = await queryFulfilled;
                     dispatch(
-                        apiSlice.util.updateQueryData("getFollowersBlogs", 1, (draft) => {
+                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1 }, (draft) => {
                             return {
-                                followersBlogs: [
-                                    ...draft.followersBlogs,
-                                    ...data,
+                                Blogs: [
+                                    ...draft.Blogs,
+                                    ...data.Blogs,
                                 ],
-                                totalCount: Number(data.length),
+                                totalCount: data.totalCount,
+                                status: data.status,
                             };
                         })
                     )
@@ -144,9 +122,9 @@ export const BlogsApi = apiSlice.injectEndpoints({
             },
         }),
 
-        getBlogDetails: builder.query<BlogType, { id: string }>({
-            query: (id) => ({
-                url: `/api/v1/Blog/${id}`,
+        getBlogDetails: builder.query<{ status: string; BlogDetails: BlogType }, { blogId: string }>({
+            query: ({ blogId }) => ({
+                url: `/api/v1/Blog/details/${blogId}`,
                 method: 'GET',
             }),
             providesTags: ['Blog'],
@@ -164,14 +142,16 @@ export const BlogsApi = apiSlice.injectEndpoints({
 
                     const { data } = await queryFulfilled;
                     dispatch(
-                        apiSlice.util.updateQueryData("getFollowersBlogs", 1, (draft) => {
+                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1 }, (draft) => {
                             return {
-                                followersBlogs: [
+                                Blogs: [
                                     data.Blog,
-                                    ...draft.followersBlogs,
+                                    ...draft.Blogs,
                                 ],
-                                totalCount: Number(4),
+                                totalCount: draft.totalCount,
+                                status: draft.status,
                             };
+
                         })
                     )
                 } catch (err) {
@@ -188,22 +168,22 @@ export const BlogsApi = apiSlice.injectEndpoints({
             invalidatesTags: ['Blog'],
         }),
 
-        deleteBlogs: builder.mutation<{ msg: string }, { id: string }>({
-            query: (id) => ({
-                url: `/api/Blog/delete/${id}`,
+        deleteBlogs: builder.mutation<{ msg: string }, { blogId: string }>({
+            query: ({ blogId }) => ({
+                url: `/api/Blog/delete/${blogId}`,
                 method: 'DELETE',
             }),
-            async onQueryStarted(id, { queryFulfilled, dispatch }) {
-                console.log(id)
+            async onQueryStarted({ blogId }, { queryFulfilled, dispatch }) {
                 try {
                     dispatch(
-                        apiSlice.util.updateQueryData("getFollowersBlogs", 1, (draft) => {
-                            const Blogs = draft?.followersBlogs?.filter((item) => item?._id !== id)
+                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1 }, (draft) => {
+                            const Blogs = draft?.Blogs?.filter((item) => item?._id !== blogId)
                             return {
-                                followersBlogs: [
+                                Blogs: [
                                     ...Blogs
                                 ],
-                                totalCount: Number(4),
+                                totalCount: draft.totalCount,
+                                status: draft.status,
                             };
                         })
                     )
@@ -224,5 +204,4 @@ export const {
     useGetBlogDetailsQuery,
     useUpdateBlogsMutation,
     useDeleteBlogsMutation,
-    useGetMoreFollowersBlogsQuery,
 } = BlogsApi;

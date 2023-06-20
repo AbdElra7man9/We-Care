@@ -11,27 +11,11 @@ const CommentsSchema = new mongoose.Schema(
             ref: 'Blog',
             required: true
         },
-        likes: [
-            {
-                type: mongoose.Schema.ObjectId,
-                ref: 'Users',
-                required: true,
-            },
-        ],
-        comments: [
-            {
-                user: {
-                    type: mongoose.Schema.ObjectId,
-                    ref: 'Users',
-                    required: true
-                }, comment: {
-                    type: String,
-                }, time: {
-                    type: Date,
-                    default: Date.now()
-                },
-            },
-        ],
+        content: {
+            type: String,
+            required: true,
+            max: 2200
+        },
     },
     { timestamps: true }
 );

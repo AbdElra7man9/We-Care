@@ -1,4 +1,5 @@
 'use client';
+import { userType } from '@lib/types/user';
 import { apiSlice } from '../ApiSlice';
 export const UserApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -10,10 +11,10 @@ export const UserApi = apiSlice.injectEndpoints({
             }),
             providesTags: ['Auth'],
         }),
-        getUserById: builder.query({
-            query: (username) => ({
-                url: `/api/user/get/${username}`,
-                credentials: 'include',
+        getUserById: builder.query<{ status: string; user: userType }, { username: string }>({
+            query: ({ username }) => ({
+                url: `/api/v1/users/${username}`,
+                method:'GET'
             }),
             providesTags: ['Auth'],
         }),

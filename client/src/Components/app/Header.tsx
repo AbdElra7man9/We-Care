@@ -1,34 +1,21 @@
 "use client";
 import { BsSearch, BsGear, BsList, BsJustifyLeft } from "react-icons/bs";
 import { useState, useEffect } from "react";
-
-import { FeatureAction } from "../../Redux/Slices/FeaturesSlice";
 import Link from "next/link";
 import Image from "next/image";
-import useBreakpoint from "../../Hooks/useBreakpoint";
-import { usePathname } from "next/navigation";
 import Themetoggle from "../Layouts/Themetoggle";
 import { useAppDispatch, useAppSelector } from "@Hooks/useRedux";
 import { selectCurrentUser } from "@Redux/Slices/UserSlice";
-interface HeaderProps {
-  sideMargin?: string;
-  setIsSideMargin?: () => void;
-  setIsSideWidth?: () => void;
-}
+import { FeatureAction } from "@Redux/Slices/FeaturesSlice";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: HeaderProps) {
+
+export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: Boolean }) {
   const [isHeader, setIsHeader] = useState<Boolean>(false);
-  const { MobileView } = useBreakpoint();
+  const userInfo = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
-  const userInfo = useAppSelector(selectCurrentUser)
-  const key = usePathname();
-  const dash = key.includes("patient");
-  const drDash = key.includes("doctor");
-  const admindash = key.includes("admin");
-  const pathname = usePathname();
   const [pos, setPos] = useState<string>("top");
-
-  const isHome = pathname === "/";
   // Check the top position of the navigation in the window
   useEffect(() => {
     const handleScrollTop = () => {
@@ -42,51 +29,84 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
     document.addEventListener("scroll", handleScrollTop);
     return () => document.removeEventListener("scroll", handleScrollTop);
   }, []);
+  const [keyword, setKeyword] = useState<string>('');
+  const router = useRouter();
+  const handlesearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push(`/search?keyword=${keyword}`);
+  }
 
+  const FormSearch = ({ className }: { className?: string }) => {
+    return (
+      <form onSubmit={handlesearch} className={`${className} justify-center select-none`}>
+
+        <div className="relative w-full flex gap-5">
+          <input
+            type="search"
+            onChange={(e) => setKeyword(e.target.value)}
+            value={keyword}
+            className="py-2 px-8 w-full text-sm rounded-lg text-gray-900 bg-gray-50 border outline-none border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Search for product "
+          />
+          <span className='absolute inset-y-0 left-0 px-2 text-gray-600 flex items-center justify-center'>
+            <BsSearch size={18} />
+          </span>
+        </div>
+
+      </form >
+    )
+  }
+
+  const { data: session } = useSession();
+  const doctor = session?.role === 'Doctor';
+  const patient = session?.role === 'Patient';
+  const admin = session?.role === 'Coodinator';
+  const NavLinks = () => {
+    return (
+      <>
+        <Link aria-label='home' href="/" className="hover:text-blue-600">Home</Link>
+        {doctor ?
+          <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link>
+          : patient ?
+            <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link>
+            : admin &&
+            <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
+
+        }
+        {/* <Link aria-label='pharmacy' href='/'>Pharmacy</Link> */}
+        <Link aria-label='Blogs' href="/blogs">Blog</Link>
+        <Link aria-label='Privacy' href="/privacy">Privacy & Security</Link>
+        <Link aria-label='Terms' href="/terms">Terms & Condition</Link>
+        <Link aria-label='Contact us' href="/contact">Contact Us</Link>
+      </>
+    )
+  }
   return (
     <>
-      {isHeader && (
-        <div
-          onClick={() => setIsHeader(false)}
-          className="fixed inset-0 z-10"
-        ></div>
-      )}
       <header
-        className={`top-0 z-10 flex flex-wrap container max-w-full duration-300 inset-x-0 select-none bg-white dark:bg-slate-900
-        ${key === "/" && pos === "top"
-            ? "bg-transparent absolute"
-            : pos === "top"
-              ? "absolute bg-white dark:bg-slate-900 "
-              : "fixed shadow-b-2xl bg-white dark:bg-slate-900"
-          }}`}>
+        className={`top-0 z-10 container max-w-full duration-300 inset-x-0 select-none bg-transparent absolute
+        ${(pos === "top")
+            ? "absolute"
+            : "!fixed shadow-b-2xl dark:!bg-slate-900 bg-white "
+          }
+           ${isHeader && 'bg-white dark:bg-slate-900'}`
+        }>
         <div
-          className={`container border-b lg:border-none flex justify-between items-center p-3 whitespace-nowrap
-                ${dash || drDash || admindash
+          className={`container flex justify-between items-center p-3 whitespace-nowrap
+                ${isFull
               ? "max-w-full"
               : " max-w-[28rem] sm:max-w-[35rem] md:max-w-[50rem] lg:max-w-[60rem] xl:max-w-[80rem]"
             }`}
         >
           <div className="flex items-center gap-10">
-            <div className="flex gap-3">
-              {/* {drDash && ( */}
-              <button
-                aria-label='side bar'
-                onClick={() => dispatch(FeatureAction.setDocSide())}
-                className="text-gray-500 dark:text-white lg:hidden text-lg lg:text-3xl"
-              >
-                <BsJustifyLeft />
-              </button>
-              {/* )} */}
-              {/* {admindash && <button
-                onClick={() => {
-                  setIsSideMargin((sideMargin !== '300px') ? '300px' : '0px');
-                  setIsSideWidth((sideMargin !== '300px') ? '300px' : '0px')
-                }}
-                className='rounded-full f-10 w-10 flex justify-center items-center active:scale-90 duration-200 bg-blue-500 text-white'>
-                <IoReorderThreeOutline size={25} />
-              </button>} */}
-
-              <Link href="/" aria-label='logo' className="flex gap-3">
+            <div className="flex items-center gap-3">
+              {
+                drDash && <button
+                  onClick={() => dispatch(FeatureAction.setDocSide())}
+                  className='text-gray-500 md:hidden text-lg lg:text-3xl'><BsJustifyLeft />
+                </button>
+              }
+              <Link href="/" aria-label='logo' className="flex items-center gap-3">
                 <Image
                   height={200}
                   width={200}
@@ -94,18 +114,12 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
                   src="/Images/logo-icon.png"
                   alt=""
                 />
-                <p className={`text-2xl font-bold dark:text-slate-100 ${(dash || drDash) && "text-black dark:text-slate-100"}`}>Doctris</p>
+                <p className={`text-2xl font-bold ${(pos !== "top" || isFull) && "dark:!text-slate-100 !text-black"}`}>Doctris</p>
               </Link>
             </div>
-            {!MobileView && (
-              <div className="list-none flex gap-5 text-lg text-gray-800 dark:text-slate-400 font-medium uppercase">
-                <Link aria-label='home' href="/" className="hover:text-blue-600">Home</Link>
-                <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link>
-                <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link>
-                <Link aria-label='pharmacy' href='/'>Pharmacy</Link>
-                <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
-              </div>
-            )}
+            <div className="list-none gap-5 text-gray-800 text-sm dark:text-slate-400 font-medium uppercase hidden lg:flex">
+              <NavLinks />
+            </div>
           </div>
           <div className="flex gap-2 md:gap-4 items-center">
             <Themetoggle />
@@ -115,15 +129,25 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
             <button aria-label='search' className="bg-blue-600 text-white rounded-full p-3">
               <BsSearch size={15} />
             </button>
-            <Link aria-label='profile' href={`/profile/${userInfo.username}`}>
-              <Image
-                height={200}
-                width={200}
-                className="h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
-                src="/Images/doctors/01.jpg"
-                alt=""
-              />
-            </Link>
+            {!session ?
+              <Link
+                aria-label='signin'
+                href='/auth/signin'
+                draggable={false}
+                className="bg-blue-600 text-white rounded-md font-medium active:scale-95 duration-300 p-2 px-4">
+                Sign In
+              </Link>
+              :
+              <Link aria-label='profile' href={`${doctor ? `/profile/doctor/${userInfo.username}` : patient && `/profile/patient/${userInfo.username}`}`}>
+                <Image
+                  height={200}
+                  width={200}
+                  className="h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
+                  src="/Images/Doctors/01.jpg"
+                  alt=""
+                />
+              </Link>
+            }
             <button
               aria-label='show more'
               className="lg:hidden"
@@ -134,12 +158,11 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
           </div>
         </div>
         {isHeader && (
-          <div className="space-y-5 px-8 py-3 text-base text-gray-600 dark:text-slate-400 font-medium uppercase z-20">
-            <Link aria-label='home' href="/" className="block hover:text-blue-600">Home</Link>
-            <Link aria-label='doctor' href="/doctor/doctor-dashboard" className="block">Doctor</Link>
-            <Link aria-label='patients' href="/patient/dashboard" className="block">Patients</Link>
-            <Link aria-label='pharmacy' href='/' className="block">Pharmacy</Link>
-            <Link aria-label='pages' href='/' className="block">Pages</Link>
+          <div className="flex lg:hidden flex-col gap-y-5 px-8 py-3 text-sm
+           text-gray-600 dark:text-slate-400 dark:bg-slate-900
+            font-medium uppercase z-20">
+            <FormSearch />
+            <NavLinks />
           </div>
         )}
       </header>

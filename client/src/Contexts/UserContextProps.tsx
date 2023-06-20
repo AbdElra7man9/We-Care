@@ -26,7 +26,7 @@ export const UserProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
         if (authState.user?.__t === 'Doctor') {
             setIsDoctor(true)
         }
-        if (authState.user?.__t === 'Admin') {
+        if (authState.user?.__t === 'Coordinator') {
             setIsAdmin(true)
         }
     }, [authState]);

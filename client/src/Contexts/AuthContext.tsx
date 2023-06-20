@@ -4,11 +4,11 @@ import { selectCurrentToken, setCredentials } from '@Redux/Slices/UserSlice';
 import usePersist from '@Hooks/usePersist';
 import { useAppDispatch, useAppSelector } from '@Hooks/useRedux';
 import Loadingscreen from '@Components/Layouts/Loadingscreen';
-import { user } from '@lib/types/user';
+import { userType } from '@lib/types/user';
 
 interface AuthContextProps {
     token?: string;
-    user?: user
+    user?: userType
 }
 
 
@@ -16,15 +16,15 @@ const AuthContext = createContext<AuthContextProps>({});
 
 export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
 
-    const [persist] = usePersist();
+    // const [persist] = usePersist();
     const token = useAppSelector(selectCurrentToken);
     const [authState, setAuthState] = useState<AuthContextProps>({});
     const dispatch = useAppDispatch();
     const [refresh, { isUninitialized, isLoading, isSuccess, isError }] = useRefreshMutation();
 
     useEffect(() => {
-        if (persist && !token) {
-            console.log('refreshing ...')
+        if (!token) {
+            // console.log('refreshing ...')
             refresh()
                 .unwrap()
                 .then(({ token, user }) => {
@@ -35,6 +35,7 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
                     //Error here
                 });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (isLoading) {

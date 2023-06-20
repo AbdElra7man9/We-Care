@@ -1,6 +1,7 @@
 const User = require('../Models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const filterObject = require('../utils/filterObject');
+const AppError = require("../utils/AppError");
 
 exports.updateInfo = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
@@ -32,5 +33,15 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   res.status(204).json({
     status: 'success',
     data: null,
+  });
+});
+exports.getUser = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ username: req.params.username });
+  if (!user) {
+    return next(new AppError('there is no user by this ID', 404));
+  }
+  res.json({
+    status: 'success',
+    user,
   });
 });

@@ -22,7 +22,7 @@ const Form: FC<FormProps> = ({ }) => {
     // }, []);
     const route = useRouter();
     const SearchQuery = useSearchParams();
-    const email = SearchQuery.get('email');
+    const email = SearchQuery?.get('email');
 
     const [VerifyEmail, { isLoading, isError, error }] = useVerifyEmailMutation();
     const [RequestOTP2, { isError: isErrorReq2opt, error: errorReq2opt }] = useRequestOTP2Mutation();

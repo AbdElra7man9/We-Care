@@ -1,15 +1,12 @@
-import { useAppDispatch } from '@Hooks/useRedux'
-import { FeatureAction } from '@Redux/Slices/FeaturesSlice'
-import Link from 'next/link'
 import React from 'react'
-import { BiChevronRight } from 'react-icons/bi'
-import Blogs from './Blogs'
+import Blogs from '@Components/blog/SingleBlog'
+import BlogsData from './BlogsData'
 
 export default function page() {
 
     return (
         <>
-            <Blogs />
+            <BlogsData />
         </>
     )
 }

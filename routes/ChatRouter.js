@@ -1,16 +1,13 @@
 const express = require('express');
-const {
-  NewChat,
-  GetAll,
-  getSingleChat,
-} = require('../Controllers/ChatController');
+const { GetSignleChat, GetAll, NewChat } = require('../controllers/ChatController');
+
 const protect = require('../Middlewares/protect');
 
 const router = express.Router();
 
 router.use(protect);
 router.get('/all', GetAll);
-router.get('/:id', getSingleChat);
+router.get('/:id', GetSignleChat);
 router.post('/:id', NewChat);
 
 module.exports = router;

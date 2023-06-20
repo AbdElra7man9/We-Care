@@ -1,14 +1,20 @@
-import HandleGridView from "./HandleGridView";
+import ChatWrapper from "./ChatWrapper";
 
 export const metadata = {
   title: "Make appointment",
 };
-export default function RootLayout({
-  children,
+export default function Layout({
+  children, params,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode; params: {
+    foo: string;
+  };
 }) {
-  return <HandleGridView>
+
+  params.foo = "bar";
+  return (
+    <ChatWrapper>
       {children}
-  </HandleGridView>;
+    </ChatWrapper>
+  );
 }

@@ -12,73 +12,11 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@Hooks/useRedux';
 import Image from 'next/image';
-
-interface LinkListProps {
-    Icon: React.ReactNode;
-    Title: string;
-    Href: string;
-    // onClose?: () => void;
-}
-const linkListItems: LinkListProps[] = [
-    {
-        Icon: <BsGrid size={17} />,
-        Title: 'Dashboard',
-        Href: '/doctor/doctor-dashboard'
-    },
-    {
-        Icon: <IoCalendarNumberOutline size={20} />,
-        Title: 'Appointment',
-        Href: '/doctor/doctor-appointment'
-    },
-    {
-        Icon: <GiAlarmClock size={20} />,
-        Title: 'Schedule Timing',
-        Href: '/doctor/doctor-schedule'
-    },
-    {
-        Icon: <IoNewspaperOutline size={20} />,
-        Title: 'Invoices',
-        Href: '/doctor/invoices'
-    },
-    {
-        Icon: <BsChatText size={20} />,
-        Title: 'Messages',
-        Href: '/doctor/doctor-messages'
-    },
-    {
-        Icon: <BsPeople size={20} />,
-        Title: 'Patient List',
-        Href: '/doctor/patient-list'
-    },
-    {
-        Icon: <BsChatSquareText size={20} />,
-        Title: 'Patients Review',
-        Href: '/doctor/patient-review'
-    },
-    {
-        Icon: <BsChat size={20} />,
-        Title: 'Chat',
-        Href: '/doctor/doctor-chat'
-    },
-    {
-        Icon: <AiOutlineAlipay size={20} />,
-        Title: 'Payment Information',
-        Href: '/doctor/payment'
-    },
-    {
-        Icon: <BsGear size={20} />,
-        Title: 'Profile',
-        Href: '/doctor/doctor-profile'
-    },
-    {
-        Icon: <BsPersonLinesFill size={20} />,
-        Title: 'Profile Settings',
-        Href: '/doctor/settings'
-    }
-];
+import { docsConfig } from '@config/docsConfig';
 
 const SideBar: React.FC = () => {
-    const { MobileView } = useBreakpoint();
+    const { breakpoint } = useBreakpoint();
+    const MobileView = (breakpoint == 'sm') || (breakpoint == 'xs')
     const pathname = usePathname();
     const dispatch = useAppDispatch();
     const { DocSide } = useAppSelector(state => state.Features);
@@ -86,7 +24,7 @@ const SideBar: React.FC = () => {
     const LinkList: React.FC = ({ }) => {
         return (
             <>
-                {linkListItems.map((item, index) => (
+                {docsConfig.SideBar.Doc.map((item, index) => (
 
                     <div
                         key={index}
@@ -114,29 +52,36 @@ const SideBar: React.FC = () => {
 
         )
     }
+    const BackGroundImage = () => {
+        return (
+            <div className='relative'>
+                <Image
+                    className='w-full relative'
+                    height={400}
+                    width={400}
+                    draggable={false}
+                    priority
+                    src='/Images/profile-bg.jpg'
+                    alt=''
+                />
+                <Image
+                    className='w-24 h-24 rounded-full absolute flex inset-x-0 !left-[40%] -bottom-10 shadow-lg'
+                    height={200}
+                    width={200}
+                    priority
+                    draggable={false}
+                    src='/Images/Clients/09.jpg'
+                    alt=''
+                />
+            </div>
+        )
+    }
 
     return (
         <>
             {!MobileView &&
-                <div className='shadow-[.2px_.2px_3px_1px] shadow-gray-100 dark:shadow-slate-700 hidden md:block px-0 overflow-hidden rounded-lg'>
-                    <div className='relative'>
-                        <Image
-                            className='w-full relative'
-                            height={400}
-                            width={400}
-                            draggable={false}
-                            src='/Images/profile-bg.jpg'
-                            alt=''
-                        />
-                        <Image
-                            className='w-24 h-24 rounded-full absolute flex inset-x-0 !left-[40%] -bottom-10 shadow-lg'
-                            height={200}
-                            width={200}
-                            draggable={false}
-                            src='/Images/Clients/09.jpg'
-                            alt=''
-                        />
-                    </div>
+                <div className='shadow-[.2px_.2px_3px_1px] sticky top-[80px] duration-300 shadow-gray-100 dark:shadow-slate-700 hidden md:block px-0 overflow-hidden rounded-lg'>
+                    <BackGroundImage />
                     <div className='text-center w-full mt-12 mb-3'>
                         <p className='font-medium text-lg'>Dr. Calvin Carlo</p>
                         <p className='text-gray-500'>Orthopedic</p>
@@ -156,24 +101,7 @@ const SideBar: React.FC = () => {
                             animate='animate'
                             exit='exit'
                             className='fixed top-0 left-0 w-80 z-20 bg-white h-screen overflow-hidden'>
-                            <div className='relative'>
-                                <Image
-                                    className='w-full relative'
-                                    height={400}
-                                    width={400}
-                                    draggable={false}
-                                    src='/Images/profile-bg.jpg'
-                                    alt=''
-                                />
-                                <Image
-                                    className='w-24 h-24 rounded-full absolute flex inset-x-0 !left-[40%] -bottom-10 shadow-lg'
-                                    height={200}
-                                    width={200}
-                                    draggable={false}
-                                    src='/Images/Clients/09.jpg'
-                                    alt=''
-                                />
-                            </div>
+                            <BackGroundImage />
                             <div className='text-center w-full mt-12 mb-3'>
                                 <p className='font-medium text-lg'>Dr. Calvin Carlo</p>
                                 <p className='text-gray-500'>Orthopedic</p>

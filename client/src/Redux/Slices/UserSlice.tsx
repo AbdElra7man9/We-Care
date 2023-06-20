@@ -1,30 +1,40 @@
 'use client';
+import { userType } from "@lib/types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+// import { HYDRATE } from "next-redux-wrapper";
 
 interface UserState {
-    user: { [key: string]: any };
-    token: string | null;
+    user: userType;
+    token: string;
 }
 
 const initialState: UserState = {
     user: {},
-    token: null,
+    token: '',
 };
 
 const UserSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setCredentials(state, action: PayloadAction<{ user: { [key: string]: any }, token: string }>) {
+        setCredentials(state, action: PayloadAction<{ user: userType, token: string }>) {
             const { user, token } = action.payload;
             state.user = user;
             state.token = token;
         },
         LogOut(state) {
             state.user = {};
-            state.token = null;
+            state.token = '';
         },
     },
+    // extraReducers: {
+    //     [HYDRATE]: (state, action) => {
+    //         return {
+    //             ...state,
+    //             ...action.payload.auth,
+    //         };
+    //     },
+    // },
 });
 
 export const { setCredentials, LogOut } = UserSlice.actions;

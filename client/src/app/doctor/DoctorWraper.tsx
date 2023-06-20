@@ -1,6 +1,8 @@
-import Footer from "@Components/app/Footer";
+'use client';
 import Header from "@Components/app/Header";
+import { useGetDoctorsQuery } from "@Redux/APIs/DoctorApi";
 import React from "react";
+import Footer from "./Footer";
 import SideBar from "./SideBar";
 
 export default function DoctorWraper({
@@ -8,17 +10,19 @@ export default function DoctorWraper({
 }: {
     children: React.ReactNode;
 }) {
+    const { data } = useGetDoctorsQuery({ page: 1, limit: 10 });
+    const { doctors } = data || {};
     return (
         <>
-            <Header />
-            <div className='grid grid-cols-1 md:grid-cols-4 gap-1 dark:bg-slate-900 select-none container max-w-[140rem] px-5'>
-                <div className='md:mt-10 md:col-span-2 xxl:col-span-1 px-3 py-16'>
+            <div className="h-24">
+                <Header isFull={true} drDash={true} />
+            </div>
+            <div className='grid grid-cols-1 md:grid-cols-8 gap-1 dark:bg-slate-900 select-none container max-w-[140rem] px-3'>
+                <div className='md:col-span-3 xxl:col-span-2 px-3 mt-3'>
                     <SideBar />
                 </div>
-                <div className='w-full md:col-span-2 xxl:col-span-3'>
-                    <div className='xl:pt-5'>
-                        {children}
-                    </div>
+                <div className='w-full md:col-span-5 xxl:col-span-6'>
+                    {children}
                 </div>
             </div>
             <Footer />
