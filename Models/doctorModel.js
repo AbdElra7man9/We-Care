@@ -14,10 +14,6 @@ doctorSchema = new mongoose.Schema(
       type: Number,
       default: 300,
     },
-    timePerPatient: {
-      type: Number,
-      default: 15,
-    },
     ScheduleTiming: [
       {
         start: Date,
@@ -43,7 +39,7 @@ doctorSchema = new mongoose.Schema(
     averageRating: {
       type: Number,
       default: 0,
-      set: val => Math.round(val * 10 )/10,
+      set: (val) => Math.round(val * 10) / 10,
     },
     status: {
       type: String,

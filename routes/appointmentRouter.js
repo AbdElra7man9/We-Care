@@ -1,7 +1,8 @@
 const express = require('express');
+const protect = require('../Middlewares/protect');
 
 const router = express.Router();
 
-router.route('/');
+router.use(protect);
 
 module.exports = router;

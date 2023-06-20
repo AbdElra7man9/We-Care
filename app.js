@@ -13,6 +13,7 @@ const AllowedOrigins = require('./Origins');
 const errorController = require('./controllers/errorController');
 const doctorRouter = require('./routes/doctorRouter');
 const patientRouter = require('./routes/patientRouter');
+const timeBlockRouter = require('./routes/timeBlockRouter');
 const userRouter = require('./routes/userRouter');
 const appointmentRouter = require('./routes/appointmentRouter');
 const reviewRouter = require('./routes/reviewRouter');
@@ -75,9 +76,13 @@ app.use('/api/v1/doctors', doctorRouter);
 //patient routs
 app.use('/api/v1/patients', patientRouter);
 
+//time blocks routs
+app.use('/api/v1/timeBlocks', timeBlockRouter);
+
 //appointment routs
 app.use('/api/v1/appointments', appointmentRouter);
 
+//review routs
 app.use('/api/v1/reviews', reviewRouter);
 
 //general user routs
@@ -94,7 +99,6 @@ app.use('/api/v1/blog', BlogRouter);
 
 //Comments and likes
 app.use('/api/v1/blog', CommentsRouter);
-
 
 //handeling wrong urls
 app.all('*', (req, res, next) => {
