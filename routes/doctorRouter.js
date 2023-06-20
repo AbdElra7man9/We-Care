@@ -6,6 +6,8 @@ const {
   getDoctor,
   updateDoctorStatus,
   searchForDoctors,
+  getTopDoctors,
+  getSpecializedDoctors,
 } = require('.././controllers/doctorController');
 const { doctorSignUP } = require('../controllers/authController');
 
@@ -16,6 +18,8 @@ const router = express.Router();
 
 router.post('/signup', doctorSignUP);
 router.route('/').get(getAllDoctors);
+router.route('/topdoctors').get(getTopDoctors);
+router.route('/:specialization').get(getSpecializedDoctors);
 router.route('/pending', protect, restrictTo('Coordinator')).get(getAllPendingDoctors);
 
 router.route('/search').get(searchForDoctors);
