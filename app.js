@@ -60,31 +60,6 @@ app.use(mongoSanitize());
 // Data sanitization against XSS
 app.use(xss());
 
-// Prevent parameter pollution
-app.use(
-  hpp({
-    whitelist: [
-      'duration',
-      'ratingsQuantity',
-      'ratingsAverage',
-      'maxGroupSize',
-      'difficulty',
-      'price',
-    ],
-  })
-);
-// async function update() {
-//   try {
-//     const user = await User.updateMany({}, { $set: { profilePicture: 'http://localhost:5000/images/default.png' } })
-//     if (user) {
-//       console.log('updated')
-//     }
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-// update()
-
 //Access Images from server side by http://localhost:5000/images/default.png
 app.use('/images', express.static('public/img/users'));
 

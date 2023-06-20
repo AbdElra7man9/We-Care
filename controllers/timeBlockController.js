@@ -5,18 +5,20 @@ const catchAsync = require('../utils/catchAsync');
 
 exports.addTimeBlock = catchAsync(async (req, res, next) => {
   const newTimeBlock = new TimeBlock(req.body);
-  newTimeBlock.doctor = req.user._id;
-  const numberOfpatients = newTimeBlock.period / newTimeBlock.timePerPatient;
+  const doctor = req.user;
+  newTimeBlock.doctor = doctor._id;
+  const numberOfpatients = newTimeBlock.period / doctor.timePerPatient;
   let startTimeCopy = newTimeBlock.startTime;
   for (let i = 0; i < numberOfpatients; i++) {
     const newAppointment = await Appointment.create({
       date: startTimeCopy,
       type: newTimeBlock.type,
-      doctor: req.user._id,
+      doctor: doctor._id,
     });
-    req.user.appointments.push(newAppointment);
+    console.log(newAppointment);
+    doctor.appointments.push(newAppointment);
     startTimeCopy.setMinutes(
-      startTimeCopy.getMinutes() + newTimeBlock.timePerPatient * 60
+      startTimeCopy.getMinutes() + doctor.timePerPatient * 60
     );
   }
   await newTimeBlock.save();
