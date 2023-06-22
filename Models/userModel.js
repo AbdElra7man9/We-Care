@@ -5,12 +5,11 @@ const crypto = require('crypto');
 
 const Appointment = require('./appointmentModel');
 
-
 const addressSchema = new mongoose.Schema({
-  governorate : String,
-  city : String,
-  street : String,
-  flat : String,
+  governorate: String,
+  city: String,
+  street: String,
+  flat: String,
 });
 
 const userSchema = mongoose.Schema({
@@ -25,7 +24,7 @@ const userSchema = mongoose.Schema({
     enum: ['male', 'female'],
   },
   phoneNumber: String,
-  address: [addressSchema] ,
+  address: [addressSchema],
   username: {
     type: String,
     trim: true,
@@ -143,23 +142,6 @@ userSchema.methods.createPIN = async function () {
   return PIN;
 };
 
-// doctor model midlewares
-userSchema.pre('save', async function (next) {
-  if (this.__t != 'Doctor') next();
-  this.ScheduleTiming.forEach(async (time) => {
-    let timeStep = time.start;
-    while (timeStep < time.end) {
-      const appointment = await Appointment.create({
-        status: 'available',
-        date: timeStep,
-        doctor: this._id,
-      });
-      this.appointments.push(appointment._id);
-      timeStep.setMinutes(timeStep.getMinutes() + this.timePerPatient);
-    }
-  });
-  next();
-});
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

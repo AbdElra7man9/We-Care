@@ -56,7 +56,7 @@ exports.getAllPendingDoctors = catchAsync(async (req, res, next) => {
 });
 
 exports.getDoctor = catchAsync(async (req, res, next) => {
-  const doctor = await Doctor.findById(req.params.id).populate('appointments');
+  const doctor = await Doctor.findById(req.params.id);
   if (!doctor) {
     return next(new AppError('there is no doctor by this ID', 404));
   }

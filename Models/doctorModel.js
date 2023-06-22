@@ -14,12 +14,6 @@ doctorSchema = new mongoose.Schema(
       type: Number,
       default: 300,
     },
-    ScheduleTiming: [
-      {
-        start: Date,
-        end: Date,
-      },
-    ],
     patients: [
       {
         type: mongoose.Schema.ObjectId,
@@ -32,6 +26,13 @@ doctorSchema = new mongoose.Schema(
         ref: 'Appointment',
       },
     ],
+    timePerPatient: {
+      type: Number,
+      required: true,
+      max: [1, 'the max time per patient you can add is 1 hour'],
+      min: [0.25, 'the min time per patien you can add is .25 hour'],
+      default: 0.5,
+    },
     numberOfRating: {
       type: Number,
       default: 0,
