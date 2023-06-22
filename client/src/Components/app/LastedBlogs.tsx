@@ -1,9 +1,8 @@
-'use client';
 import React from 'react'
 import { BsArrowRight, BsChat, BsHeart } from 'react-icons/bs'
 import { IoCalendar, IoTimeOutline } from 'react-icons/io5'
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface BlogProps {
   _id: string;
@@ -98,7 +97,7 @@ const LastedBlogs: React.FC = () => {
           treatment or a simple consultation.
         </p>
       </div>
-      
+
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-5'>
         {Blogs?.map((doc) => (
           <div key={doc?._id}>

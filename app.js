@@ -35,7 +35,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(morgan('common'));
+app.use(morgan('dev'));
 // app.use(helmet());
 
 // Development logging

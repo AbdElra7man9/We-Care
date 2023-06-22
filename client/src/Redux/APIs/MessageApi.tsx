@@ -88,6 +88,7 @@ export const MessageApi = apiSlice.injectEndpoints({
             ) {
 
                 let userId = (getState() as RootState).auth?.user?._id;
+                console.log(userId)
                 // await cacheDataLoaded;
                 const socket = getSocket()
                 socket.on("connect", () => {
@@ -96,9 +97,11 @@ export const MessageApi = apiSlice.injectEndpoints({
                 });
                 // socket.on("getusers", (data) => {
                 //     console.log(`goined ${data.length}`)
+                //     console.log(data)
                 // });
                 try {
                     socket.on("MessagetoClient", ({ image, sender, receiver, createdAt, chatId, msg }) => {
+                        console.log(msg)
                         dispatch(
                             MessageApi.util.updateQueryData("GetMessages", { page: 1, chatId }, (draft) => {
                                 return {

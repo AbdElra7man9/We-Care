@@ -1,8 +1,7 @@
 import { createContext, FC, useContext, useEffect, useState } from 'react';
 import { useRefreshMutation } from '@Redux/APIs/AuthApi';
-import { selectCurrentToken, setCredentials } from '@Redux/Slices/UserSlice';
-import usePersist from '@Hooks/usePersist';
-import { useAppDispatch, useAppSelector } from '@Hooks/useRedux';
+import { setCredentials } from '@Redux/Slices/UserSlice';
+import { useAppDispatch } from '@Hooks/useRedux';
 import Loadingscreen from '@Components/Layouts/Loadingscreen';
 import { userType } from '@lib/types/user';
 
@@ -11,30 +10,24 @@ interface AuthContextProps {
     user?: userType
 }
 
-
 const AuthContext = createContext<AuthContextProps>({});
 
 export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
 
-    // const [persist] = usePersist();
-    const token = useAppSelector(selectCurrentToken);
     const [authState, setAuthState] = useState<AuthContextProps>({});
     const dispatch = useAppDispatch();
     const [refresh, { isUninitialized, isLoading, isSuccess, isError }] = useRefreshMutation();
 
     useEffect(() => {
-        if (!token) {
-            // console.log('refreshing ...')
-            refresh()
-                .unwrap()
-                .then(({ token, user }) => {
-                    dispatch(setCredentials({ token, user }));
-                    setAuthState({ token, user })
-                })
-                .catch((err) => {
-                    //Error here
-                });
-        }
+        refresh()
+            .unwrap()
+            .then(({ token, user }) => {
+                dispatch(setCredentials({ token, user }));
+                setAuthState({ token, user })
+            })
+            .catch((err) => {
+                //Error here
+            });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

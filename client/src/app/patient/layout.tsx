@@ -13,7 +13,6 @@ export default function RootLayout({
     <>
       <Header isFull={true} />
       {children}
-      <Footer />
     </>
   );
 }

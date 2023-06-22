@@ -16,11 +16,12 @@ export default function page() {
                                     height={100}
                                     className='w-10 h-10 rounded-xl'
                                     src='/Images/logo-icon.png'
-                                    alt='' />
+                                    alt='Logo Icon'
+                                />
                                 <p className='text-2xl font-bold'>Doctris</p>
                             </div>
                         </Link>
-                       
+
                         <Form />
                     </div>
                     <div className='md:border rounded-lg max-w-[90%] border-gray-300 justify-center flex mt-5 md:bg-white

@@ -1,3 +1,4 @@
+'use client';
 import React from 'react'
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { FaHeartbeat, FaVirus } from 'react-icons/fa';

@@ -1,4 +1,3 @@
-'use client';
 import React from 'react'
 import { BsArrowRight } from 'react-icons/bs'
 import Image from 'next/image';

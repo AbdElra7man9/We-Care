@@ -1,4 +1,3 @@
-'use client';
 import React from 'react'
 import { BsHeart, BsStarFill } from 'react-icons/bs'
 import { CiLocationOn, CiTimer } from 'react-icons/ci'
@@ -16,7 +15,6 @@ interface DoctorsProps {
 }
 
 const DoctorsList: React.FC<{ Doctors: DoctorsProps[] }> = ({ Doctors }) => {
-    const session = useSession()
     const Icons = [
         { id: 'facebook', icon: <SlSocialFacebook size={23} /> },
         { id: 'linkedin', icon: <SlSocialLinkedin size={23} /> },

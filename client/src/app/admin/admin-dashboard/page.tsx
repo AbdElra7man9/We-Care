@@ -1,7 +1,7 @@
 import ColumnPlot from '@Components/Graphs/ColumnPlot';
 import RaduilPiePlot from '@Components/Graphs/RaduilPiePlot';
 import React from 'react'
-import { BiBed, BiDownArrow } from 'react-icons/bi';
+import { BiBed, BiChevronDown, BiDownArrow } from 'react-icons/bi';
 interface GridStateProps {
   Value: number;
   Title: string;
@@ -61,20 +61,22 @@ export default function page() {
       <div className='space-y-5'>
         <GridState />
         <div className='grid grid-cols-3 gap-5'>
-          <div className='border rounded-md shadow col-span-2 pb-4'>
+          <div className='border rounded-md shadow col-span-2 pb-4 max-h-[33rem]'>
             <div className='flex items-center justify-between p-5'>
-              <p className='font-medium text-lg'>Patients visit by Gender</p>
+              <p className='font-medium'>Patients visit by Gender</p>
               <div className='flex items-center gap-3 border rounded-md p-2 px-3'>
-                2020 <BiDownArrow />
+                2020 <BiChevronDown size={20} />
               </div>
             </div>
-            <ColumnPlot />
+            <div className='p-5'>
+              <ColumnPlot />
+            </div>
           </div>
-          <div className='border rounded-md shadow col-span-1 pb-4'>
+          <div className='border rounded-md shadow col-span-1 pb-4 max-h-[30rem]'>
             <div className='flex items-center justify-between p-5'>
               <p className='font-medium text-lg'>Patients visit by Gender</p>
               <div className='flex items-center gap-3 border rounded-md p-2 px-3'>
-                2020 <BiDownArrow />
+                2020 <BiChevronDown size={20} />
               </div>
             </div>
             <RaduilPiePlot />

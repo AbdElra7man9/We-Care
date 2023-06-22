@@ -1,48 +1,83 @@
 'use client';
-import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, registerables, ChartData, ChartOptions } from 'chart.js';
+import React from "react";
+import ReactApexChart from "react-apexcharts";
 
-ChartJS.register(...registerables);
 
-const RadialPiePlot: React.FC = () => {
-    const data: ChartData<'doughnut'> = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
-            {
-                label: 'Sales',
-                data: [10, 20, 30, 40, 50, 60, 70],
-                backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56',
-                    '#37d6c6',
-                    '#f7786b',
-                    '#9b59b6',
-                    '#2ecc71'
-                ],
-                borderWidth: 1,
-            },
-        ],
+interface RaduilPiePlotState {
+    series: number[];
+    options: {
+        chart: {
+            height: number;
+            type: "radialBar";
+        };
+        plotOptions: {
+            radialBar: {
+                dataLabels: {
+                    name: {
+                        fontSize: string;
+                    };
+                    value: {
+                        fontSize: string;
+                    };
+                    total: {
+                        show: boolean;
+                        label: string;
+                        formatter: (w: any) => string; // Updated type to string
+                    };
+                };
+            };
+        };
+        labels: string[];
     };
+}
 
-    const options: ChartOptions<'doughnut'> = {
-        cutout: '60%',
-        rotation: -90,
-        circumference: 360,
-        plugins: {
-            legend: {
-                position: 'bottom',
+class RaduilPiePlot extends React.Component<{}, RaduilPiePlotState> {
+    constructor(props: {}) {
+        super(props);
+
+        this.state = {
+            series: [44, 55, 67, 83],
+            options: {
+                chart: {
+                    height: 350,
+                    type: "radialBar",
+                },
+                plotOptions: {
+                    radialBar: {
+                        dataLabels: {
+                            name: {
+                                fontSize: "22px",
+                            },
+                            value: {
+                                fontSize: "16px",
+                            },
+                            total: {
+                                show: true,
+                                label: "Total",
+                                formatter: (w: any) => {
+                                    return w.globals.seriesTotals.reduce((a: number, b: number) => a + b, 0).toString();
+                                },
+                            },
+                        },
+                    },
+                },
+                labels: ["Cardilogram", "Gynecology", "Dental Care", "Neurology"],
             },
-            title: {
-                display: true,
-                text: 'Sales by Month',
-            },
-        },
-    };
+        };
+    }
 
-    return <Doughnut data={data} options={options} />;
-};
+    render() {
+        return (
+            <div id="chart">
+                <ReactApexChart
+                    options={this.state.options}
+                    series={this.state.series}
+                    type="radialBar"
+                    height={350}
+                />
+            </div>
+        );
+    }
+}
 
-export default RadialPiePlot;
-
+export default RaduilPiePlot;

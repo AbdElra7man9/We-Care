@@ -1,3 +1,4 @@
+import Footer from "@Components/app/Footer";
 import MainBookingWrapper from "./MainBookingWrapper";
 
 export const metadata = {
@@ -8,7 +9,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <MainBookingWrapper>
-      {children}
-    </MainBookingWrapper>;
+  return (
+    <>
+      <MainBookingWrapper>
+        {children}
+      </MainBookingWrapper>
+      <Footer />
+    </>
+  )
 }

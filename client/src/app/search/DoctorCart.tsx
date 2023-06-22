@@ -6,12 +6,19 @@ import 'react-calendar/dist/Calendar.css';
 import Image from 'next/image';
 import { FC } from 'react'
 import Link from 'next/link';
+import { useNewChatMutation } from '@Redux/APIs/ChatApi';
+import { useRouter } from 'next/navigation';
 
 interface DoctorCartProps { }
+interface MessageProps {
+    id: string;
+    username: string
+}
 
 const DoctorCart: FC<DoctorCartProps> = () => {
     const { data } = useGetDoctorsQuery({ page: 1, limit: 10 });
     const doctors = data?.doctors;
+    const Router = useRouter();
     const [value, onChange] = useState(new Date());
     const allowedDates = [
         new Date('2022-01-01'),
@@ -26,6 +33,10 @@ const DoctorCart: FC<DoctorCartProps> = () => {
         return !allowedDates.some((allowedDate) =>
             allowedDate.toDateString() === date.toDateString()
         );
+    }
+    const [NewChat, { isLoading }] = useNewChatMutation()
+    const HandleMessage = ({ id, username }: MessageProps) => {
+
     }
     if (!data) return null;
 
@@ -50,6 +61,13 @@ const DoctorCart: FC<DoctorCartProps> = () => {
                                 className='bg-blue-600 text-white rounded-md p-2 px-5 my-5'>
                                 Make oppountment
                             </Link>
+                            {/* <button onClick={() => {
+                                const id = doc?._id as string | undefined;
+                                NewChat({ id }).unwrap()
+                                    .then((payload) => {
+                                        Router.push(`/patient/dashboard/messages/${doc?.username as string}/${payload.chatId}`)
+                                    })
+                            }} className='text-orange-500 font-semibold truncate'>Message</button> */}
                         </div>
                     </div>
                     {/* <Calendar
@@ -59,9 +77,10 @@ const DoctorCart: FC<DoctorCartProps> = () => {
                         value={value}
                     /> */}
                 </div>
-            ))}
+            ))
+            }
 
-        </div>
+        </div >
     );
 };
 

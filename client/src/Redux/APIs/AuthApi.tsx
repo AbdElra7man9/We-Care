@@ -44,6 +44,10 @@ export const AuthApi = apiSlice.injectEndpoints({
                     socket.on("connect", () => {
                         socket.emit("join", userId);
                     });
+                    socket.on("getusers", (data) => {
+                        console.log(`goined ${data.length}`)
+                        console.log(data)
+                    });
                 } catch (err) {
                     // do nothing
                 }
@@ -123,6 +127,11 @@ export const AuthApi = apiSlice.injectEndpoints({
                     const { data } = await queryFulfilled
                     const { token, user } = data
                     dispatch(setCredentials({ token, user }))
+                    let userId = user?._id;
+                    const socket = getSocket()
+                    socket.on("connect", () => {
+                        socket.emit("join", userId);
+                    });
                 } catch (err) {
                     // console.log(err)
                 }

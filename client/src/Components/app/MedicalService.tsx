@@ -1,4 +1,3 @@
-'use client';
 import { docsConfig, MedicalProps } from '@config/docsConfig';
 import React from 'react'
 

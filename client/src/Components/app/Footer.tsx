@@ -1,4 +1,3 @@
-'use client';
 import React from 'react'
 import { BiChevronRight } from 'react-icons/bi';
 import { BsFillTelephoneFill, BsTelephoneForward } from 'react-icons/bs';
