@@ -1,7 +1,8 @@
+path = require('path');
 const User = require('../Models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const filterObject = require('../utils/filterObject');
-const AppError = require("../utils/AppError");
+const AppError = require('../utils/AppError');
 
 exports.updateInfo = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
@@ -13,7 +14,15 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
     );
   }
   const filteredInfo = filterObject(req.body, 'name', 'username');
-  if (req.file) filteredInfo.profilePicture = req.file.filename;
+  if (req.file)
+    filteredInfo.profilePicture = path.join(
+      __dirname,
+      '..',
+      'public',
+      'img',
+      'users',
+      req.file.filename
+    );
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredInfo, {
     new: true,
     runValidators: true,
