@@ -12,6 +12,10 @@ const appointmentSchema = mongoose.Schema({
     default: 'available',
     enum: ['available', 'booked', 'done'],
   },
+  paid: {
+    type: Boolean,
+    default: false,
+  },
   patient: {
     type: mongoose.Schema.ObjectId,
     ref: 'Patient',
@@ -22,7 +26,11 @@ const appointmentSchema = mongoose.Schema({
   },
   date: {
     type: Date,
-    required: true,
+    required: [true, 'appointment must have a date'],
+  },
+  price: {
+    type: Number,
+    required: [true, 'appoint ment must have a price'],
   },
 });
 
