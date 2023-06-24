@@ -72,6 +72,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   const appointment = await Appointment.findById(req.body.AppointmentID);
   const doctor = await Doctor.findById(appointment.doctor._id);
   appointment.status = 'booked';
+  appointment.price = doctor.fees;
   appointment.patient = patient.id;
   doctor.patients.push(patient._id);
   await doctor.save({ validateBeforeSave: false });
