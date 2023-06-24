@@ -11,7 +11,7 @@ export type userType = {
     specialization?: string;
     fees?: string;
     timePerPatient?: string;
-    averageRating?: string;
+    averageRating?: number;
     status?: string;
     emailConfirm?: string;
     numberOfRating?: string;

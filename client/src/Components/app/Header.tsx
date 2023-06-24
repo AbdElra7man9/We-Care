@@ -9,6 +9,8 @@ import { selectCurrentUser } from "@Redux/Slices/UserSlice";
 import { FeatureAction } from "@Redux/Slices/FeaturesSlice";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import SearchPanel from "./SearchPanel";
+import { AnimatePresence } from "framer-motion";
 
 
 export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: Boolean }) {
@@ -16,6 +18,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
   const userInfo = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
   const [pos, setPos] = useState<string>("top");
+  const [isSearchPanel, setIsSearchPanel] = useState<boolean>(false);
   // Check the top position of the navigation in the window
   useEffect(() => {
     const handleScrollTop = () => {
@@ -83,6 +86,11 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
   }
   return (
     <>
+      <AnimatePresence>
+        {isSearchPanel &&
+          <SearchPanel onClose={() => { setIsSearchPanel(false) }} />
+        }
+      </AnimatePresence>
       <header
         className={`top-0 z-10 container max-w-full duration-300 inset-x-0 select-none bg-transparent absolute
         ${(pos === "top")
@@ -126,7 +134,10 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
             <button aria-label='settings' className="bg-blue-600 text-white rounded-full p-3">
               <BsGear size={15} />
             </button>
-            <button aria-label='search' className="bg-blue-600 text-white rounded-full p-3">
+            <button
+              aria-label='search'
+              className="bg-blue-600 text-white rounded-full p-3"
+              onClick={() => { setIsSearchPanel(true) }}>
               <BsSearch size={15} />
             </button>
             {!session ?
