@@ -9,11 +9,11 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
     Doctor.find({ status: 'accepted' }),
     req.query
   ).Paginate();
-  const doctors = await features.query;
+  const allDoctors = await features.query;
   res.json({
     status: 'success',
-    results: doctors.length,
-    doctors,
+    results: allDoctors.length,
+    allDoctors,
   });
 });
 
@@ -21,11 +21,11 @@ exports.getTopDoctors = catchAsync(async (req, res, next) => {
   const features = new Features(Doctor.find({ status: 'accepted' , numberOfRating: { $gte: 10}})
       .sort({ averageRating: -1, numberOfRating: -1 }) , req.query)
       .Paginate().Filter();
-  const doctors = await features.query;
+  const topDoctors = await features.query;
   res.json({
     status: 'success',
-    results: doctors.length,
-    doctors,
+    results: topDoctors.length,
+    topDoctors,
   });
 });
 
@@ -33,12 +33,12 @@ exports.getSpecializedDoctors = catchAsync(async (req, res, next) => {
   const doctorsNum = await Doctor.count({ status: 'accepted' , specialization: req.params.specialization });
   const features = new Features(Doctor.find({ status: 'accepted' , specialization: req.params.specialization }) , req.query)
       .Paginate();
-  const doctors = await features.query;
+  const specializedDoctors = await features.query;
   res.json({
     status: 'success',
     doctorsNum: doctorsNum,
-    results: doctors.length,
-    doctors,
+    results: specializedDoctors.length,
+    specializedDoctors,
   });
 });
 
@@ -47,11 +47,11 @@ exports.getAllPendingDoctors = catchAsync(async (req, res, next) => {
     Doctor.find({ status: 'pending' }),
     req.query
   ).Paginate();
-  const doctors = await features.query;
+  const pendingDoctors = await features.query;
   res.json({
     status: 'success',
-    results: doctors.length,
-    doctors,
+    results: pendingDoctors.length,
+    pendingDoctors,
   });
 });
 
@@ -80,13 +80,13 @@ exports.searchForDoctors = catchAsync(async (req, res, next) => {
     .Search()
     .Paginate()
     .Filter();
-  const doc = await features.query;
-  if (doc.length == 0) {
+  const searchedDoctors = await features.query;
+  if (searchedDoctors.length == 0) {
     return next(new AppError('No doctors match your search!', 404));
   }
   res.status(200).json({
     status: 'success',
-    results: doc.length,
-    doc,
+    results: searchedDoctors.length,
+    searchedDoctors,
   });
 });
