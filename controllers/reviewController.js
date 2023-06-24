@@ -11,6 +11,9 @@ exports.makeReview = catchAsync(async function (req, res, next) {
     const doctor = req.params.id;
     const { rating, comment } = req.body;
 
+    if (!((await Doctor.findById(doctor)).patients).includes(patient))
+    return next(new AppError("You must have been examined by this doctor previously to be able to rate him", 401));
+
     if (await Review.count({ patient: req.user.id, doctor: req.params.id }) > 0)
         return next(new AppError("you already made a review for this doctor before", 401));
 
@@ -71,6 +74,7 @@ exports.deleteReview = catchAsync(async function (req, res, next) {
 
 
 exports.patientReview = catchAsync(async function (req, res, next) {
+    const reviewsNum = await Review.count({ patient: req.user.id });
     const features = new Features(Review.find({ patient: req.user.id }), req.query)
         .Paginate();
     const reviews = await features.query;
@@ -80,12 +84,14 @@ exports.patientReview = catchAsync(async function (req, res, next) {
 
     res.json({
         status: 'success',
+        reviewsNum : reviewsNum,
         results: reviews.length,
         reviews,
     });
 });
 
 exports.doctorReview = catchAsync(async function (req, res, next) {
+    const reviewsNum = await Review.count({ doctor: req.params.id });
     const features = new Features(Review.find({ doctor: req.params.id }), req.query)
         .Paginate();
     const reviews = await features.query;
@@ -95,6 +101,7 @@ exports.doctorReview = catchAsync(async function (req, res, next) {
 
     res.json({
         status: 'success',
+        reviewsNum : reviewsNum,
         results: reviews.length,
         reviews,
     });

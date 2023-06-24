@@ -1,5 +1,6 @@
 const express = require('express');
 const protect = require('../Middlewares/protect');
+const restrictTo = require('../Middlewares/restrictTo');
 
 const {
   makeReview,
@@ -11,9 +12,10 @@ const {
 
 const router = express.Router({ mergeParams: true });
 
-router.get('/:id', doctorReview);
+router.get('/doctor/:id', doctorReview);
 router.use(protect);
 router.get('/patient', patientReview);
+router.use(restrictTo('Patient'));
 router.route('/:id').post(makeReview).patch(updateReview).delete(deleteReview);
 
 module.exports = router;
