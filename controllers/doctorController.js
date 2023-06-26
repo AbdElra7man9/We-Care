@@ -17,31 +17,6 @@ exports.getAllDoctors = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getTopDoctors = catchAsync(async (req, res, next) => {
-  const features = new Features(Doctor.find({ status: 'accepted' , numberOfRating: { $gte: 10}})
-      .sort({ averageRating: -1, numberOfRating: -1 }) , req.query)
-      .Paginate().Filter();
-  const topDoctors = await features.query;
-  res.json({
-    status: 'success',
-    results: topDoctors.length,
-    topDoctors,
-  });
-});
-
-exports.getSpecializedDoctors = catchAsync(async (req, res, next) => {
-  const doctorsNum = await Doctor.count({ status: 'accepted' , specialization: req.params.specialization });
-  const features = new Features(Doctor.find({ status: 'accepted' , specialization: req.params.specialization }) , req.query)
-      .Paginate();
-  const specializedDoctors = await features.query;
-  res.json({
-    status: 'success',
-    doctorsNum: doctorsNum,
-    results: specializedDoctors.length,
-    specializedDoctors,
-  });
-});
-
 exports.getAllPendingDoctors = catchAsync(async (req, res, next) => {
   const features = new Features(
     Doctor.find({ status: 'pending' }),
@@ -55,7 +30,7 @@ exports.getAllPendingDoctors = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getDoctor = catchAsync(async (req, res, next) => {
+exports.getDoctorById = catchAsync(async (req, res, next) => {
   const doctor = await Doctor.findById(req.params.id);
   if (!doctor) {
     return next(new AppError('there is no doctor by this ID', 404));
@@ -63,6 +38,45 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
   res.json({
     status: 'success',
     doctor,
+  });
+});
+
+exports.getTopDoctors = catchAsync(async (req, res, next) => {
+  const features = new Features(
+    Doctor.find({ status: 'accepted', numberOfRating: { $gte: 10 } }).sort({
+      averageRating: -1,
+      numberOfRating: -1,
+    }),
+    req.query
+  )
+    .Paginate()
+    .Filter();
+  const topDoctors = await features.query;
+  res.json({
+    status: 'success',
+    results: topDoctors.length,
+    topDoctors,
+  });
+});
+
+exports.getSpecializedDoctors = catchAsync(async (req, res, next) => {
+  const doctorsNum = await Doctor.count({
+    status: 'accepted',
+    specialization: req.params.specialization,
+  });
+  const features = new Features(
+    Doctor.find({
+      status: 'accepted',
+      specialization: req.params.specialization,
+    }),
+    req.query
+  ).Paginate();
+  const specializedDoctors = await features.query;
+  res.json({
+    status: 'success',
+    doctorsNum: doctorsNum,
+    results: specializedDoctors.length,
+    specializedDoctors,
   });
 });
 
