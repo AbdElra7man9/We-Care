@@ -30,7 +30,7 @@ const appointmentSchema = mongoose.Schema({
   },
   price: {
     type: Number,
-    required: [true, 'appoint ment must have a price'],
+    required: [true, 'appointment must have a price'],
   },
 });
 

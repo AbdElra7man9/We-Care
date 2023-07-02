@@ -1,6 +1,5 @@
 const Appointment = require('../Models/appointmentModel');
 const TimeBlock = require('../Models/timeBlockModel');
-const User = require('../Models/userModel');
 const catchAsync = require('../utils/catchAsync');
 
 exports.addTimeBlock = catchAsync(async (req, res, next) => {
@@ -14,8 +13,8 @@ exports.addTimeBlock = catchAsync(async (req, res, next) => {
       date: startTimeCopy,
       type: newTimeBlock.type,
       doctor: doctor._id,
+      price: doctor.fees,
     });
-    console.log(newAppointment);
     doctor.appointments.push(newAppointment);
     startTimeCopy.setMinutes(
       startTimeCopy.getMinutes() + doctor.timePerPatient * 60
