@@ -17,9 +17,9 @@ const SocketServer = require('./SocketServer');
 // });
 // ////////////////////////
 
+dotenv.config({ path: './config.env' });
 const app = require('./app');
 const HttpServer = http.createServer(app);
-dotenv.config({ path: './config.env' });
 mongoose.set('strictQuery', false);
 mongoose
   .connect(process.env.CONNECTION_STRING)

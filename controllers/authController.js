@@ -2,7 +2,9 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
 
+const createSendToken = require('../utils/sendToken');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../Models/userModel');
 const Patient = require('../Models/patientModel');
@@ -10,43 +12,19 @@ const Doctor = require('../Models/doctorModel');
 const AppError = require('../utils/AppError');
 const filterObject = require('../utils/filterObject');
 
-function getToken(id) {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-}
-
-function createSendToken(user, statusCode, res) {
-  const token = getToken(user._id);
-  const cookieOptions = {
-    expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
-    httpOnly: true,
-  };
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-
-  res.cookie('jwt', token, cookieOptions);
-
-  // Remove password and pin from output
-  user.password = undefined;
-  user.emailConfirm = undefined;
-  res.status(statusCode).json({
-    status: 'success',
-    token,
-    user,
-  });
-}
+dotenv.config({ path: '../config.env' });
 
 function sendEmail(email, subject, text) {
   const transporter = nodemailer.createTransport({
     service: 'outlook',
     auth: {
-      user: 're00zq@outlook.com',
-      pass: 'mahmoud1Q2W3E#',
+      user: process.env.EMAIL_TO_SEND,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
   var mailOptions = {
-    from: 're00zq@outlook.com',
+    from: process.env.EMAIL_TO_SEND,
     to: email,
     subject,
     text,
@@ -97,7 +75,7 @@ exports.patientSignUP = catchAsync(async function (req, res, next) {
     'address'
   );
   const newPatient = await Patient.create(filteredInfo);
-  await sendCreatePIN(newPatient._id);
+  sendCreatePIN(newPatient._id);
   createSendToken(newPatient, 200, res);
 });
 
@@ -113,10 +91,10 @@ exports.doctorSignUP = catchAsync(async function (req, res, next) {
     'address',
     'ScheduleTiming',
     'phoneNumber',
-    'gender',
-    );
+    'gender'
+  );
   const newDoctor = await Doctor.create(filteredInfo);
-  await sendCreatePIN(newDoctor._id);
+  sendCreatePIN(newDoctor._id);
   createSendToken(newDoctor, 200, res);
 });
 
@@ -168,7 +146,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const subject = 'Your password reset token (valid for 10 min)';
 
   try {
-    await sendEmail(user.email, subject, message);
+    sendEmail(user.email, subject, message);
     res.status(200).json({
       status: 'success',
       message: 'Token sent to email!',

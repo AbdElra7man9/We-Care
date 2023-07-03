@@ -1,4 +1,5 @@
 //third party packages
+const dotenv = require('dotenv');
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
@@ -15,6 +16,7 @@ const doctorRouter = require('./routes/doctorRouter');
 const patientRouter = require('./routes/patientRouter');
 const timeBlockRouter = require('./routes/timeBlockRouter');
 const userRouter = require('./routes/userRouter');
+const googleAuthRouter = require('./routes/googleAuthRouter');
 const appointmentRouter = require('./routes/appointmentRouter');
 const reviewRouter = require('./routes/reviewRouter');
 const ChatRouter = require('./routes/ChatRouter');
@@ -25,6 +27,7 @@ const CoordinatorRouter = require('./routes/CoordinatorRouter');
 const AppError = require('./utils/AppError');
 const User = require('./Models/userModel');
 
+dotenv.config({ path: './config.env' });
 const app = express();
 // Set security HTTP headers
 app.use(cookieParser());
@@ -69,6 +72,10 @@ app.use('/api/v1/doctors', doctorRouter);
 //patient routs
 app.use('/api/v1/patients', patientRouter);
 
+//general user routs
+app.use('/api/v1/users', userRouter);
+app.use('/auth/google', googleAuthRouter);
+
 //time blocks routs
 app.use('/api/v1/timeBlocks', timeBlockRouter);
 
@@ -77,9 +84,6 @@ app.use('/api/v1/appointments', appointmentRouter);
 
 //review routs
 app.use('/api/v1/reviews', reviewRouter);
-
-//general user routs
-app.use('/api/v1/users', userRouter);
 
 //Chat
 app.use('/api/v1/chat', ChatRouter);
