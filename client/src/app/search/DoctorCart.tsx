@@ -1,26 +1,26 @@
 'use client';
-import { useGetDoctorsQuery } from '@Redux/APIs/DoctorApi'
+import { useSearchQuery } from '@Redux/APIs/DoctorApi'
 import React, { useState, FC } from 'react';
 // import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useNewChatMutation } from '@Redux/APIs/ChatApi';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { BsFillCameraVideoFill, BsFillFileEarmarkRuledFill, BsHeart } from 'react-icons/bs';
 import { CiLocationOn, CiTimer } from 'react-icons/ci';
 import { HiOutlineCurrencyDollar } from 'react-icons/hi';
-import { SlSocialFacebook, SlSocialGithub, SlSocialLinkedin, SlSocialTwitter } from 'react-icons/sl';
 import ShowRating from '@Components/Parts/ShowRating';
+import { useAppSelector } from '@Hooks/useRedux';
+import { docsConfig } from '@config/docsConfig';
 
 interface DoctorCartProps { }
-interface MessageProps {
-    id: string;
-    username: string
-}
 
 const DoctorCart: FC<DoctorCartProps> = () => {
-    const { data } = useGetDoctorsQuery({ page: 1, limit: 10 });
+    const query = useSearchParams();
+    const keyword = query?.get('keyword') as string;
+    const { rangeValues, gender, specialization } = useAppSelector(state => state.Features);
+    console.log({ rangeValues, gender, specialization })
+    const { data } = useSearchQuery({ page: 1, limit: 10, keyword, gender, maxFees: rangeValues[0], minFees: rangeValues[1], specialization });
     const doctors = data?.doctors;
     const Router = useRouter();
     const [value, onChange] = useState(new Date());
@@ -37,17 +37,8 @@ const DoctorCart: FC<DoctorCartProps> = () => {
         return !allowedDates.some((allowedDate) =>
             allowedDate.toDateString() === date.toDateString()
         );
-    }
-    const [NewChat, { isLoading }] = useNewChatMutation()
-    const HandleMessage = ({ id, username }: MessageProps) => {
+    };
 
-    }
-    const Icons = [
-        { id: 'facebook', icon: <SlSocialFacebook size={23} /> },
-        { id: 'linkedin', icon: <SlSocialLinkedin size={23} /> },
-        { id: 'github', icon: <SlSocialGithub size={23} /> },
-        { id: 'twitter', icon: <SlSocialTwitter size={23} /> },
-    ];
     if (!data) return null;
 
     return (
@@ -98,15 +89,15 @@ const DoctorCart: FC<DoctorCartProps> = () => {
                                     </div>
                                 </div>
                                 <div className='flex items-center gap-3'>
-                                    {Icons?.map((item) => (
+                                    {docsConfig.SocialIcons?.map((item, index) => (
                                         <Link
                                             href='/'
                                             aria-label='item'
-                                            key={item.id}
+                                            key={index}
                                             className='w-10 h-10 rounded-full bg-blue-100 shadow-blue-600 shadow-md drop-shadow-xl dark:bg-slate-800 dark:hover:bg-blue-800
                                         text-blue-500 hover:bg-blue-500 hover:text-white duration-150 flex justify-center items-center'
                                         >
-                                            {item.icon}
+                                            {item}
                                         </Link>
                                     ))}
                                 </div>
