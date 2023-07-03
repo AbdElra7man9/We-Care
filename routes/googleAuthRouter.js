@@ -12,16 +12,16 @@ const jwtSecret = process.env.JWT_SECRET;
 // Initialize Express app
 const router = express.Router();
 
-async function createUser(name, profilePicture, email) {
-  newUser = new User({
-    name,
-    email,
-    profilePicture,
-    confirmed: true,
-    active: true,
-  });
-  await newUser.save({ validateBeforeSave: false });
-}
+// async function createUser(name, profilePicture, email) {
+//   newUser = new User({
+//     name,
+//     email,
+//     profilePicture,
+//     confirmed: true,
+//     active: true,
+//   });
+//   await newUser.save({ validateBeforeSave: false });
+// }
 
 // Configure passport with GoogleStrategy
 passport.use(
