@@ -40,6 +40,7 @@ passport.use(
       };
       //createUser(user.name, user.picture, user.email);
       const token = jwt.sign(user.email, jwtSecret);
+
       done(null, token);
     }
   )

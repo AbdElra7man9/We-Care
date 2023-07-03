@@ -4,7 +4,7 @@ const appointmentSchema = mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['video call', 'visit'],
+    enum: ['video call', 'visit', 'chat'],
     default: 'video call',
   },
   status: {
