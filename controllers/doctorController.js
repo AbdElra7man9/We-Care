@@ -3,6 +3,14 @@ const AppError = require('../utils/AppError');
 const catchAsync = require('../utils/catchAsync');
 const filterObject = require('../utils/filterObject');
 const Features = require('../utils/Features');
+const { specialists } = require('../data');
+exports.getAllSpecialists = (req, res, next) => {
+  res.json({
+    status: 'success',
+    reults: specialists.length,
+    specialists,
+  });
+};
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const features = new Features(

@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 
 const User = require('./userModel');
-const Appointment = require('./appointmentModel');
+const { specialists } = require('../data');
 doctorSchema = new mongoose.Schema(
   {
     specialization: {
       type: String,
       required: [true, 'A doctor must have a specialization'],
       trim: true,
+      enum: specialists,
     },
     experience: Number,
     fees: {

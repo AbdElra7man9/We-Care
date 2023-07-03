@@ -8,6 +8,7 @@ const {
   getTopDoctors,
   getSpecializedDoctors,
   getDoctorById,
+  getAllSpecialists,
 } = require('.././controllers/doctorController');
 const { doctorSignUP } = require('../controllers/authController');
 
@@ -15,7 +16,7 @@ const restrictTo = require('../Middlewares/restrictTo');
 const protect = require('../Middlewares/protect');
 
 const router = express.Router();
-
+router.get('/specialists', getAllSpecialists);
 router.post('/signup', doctorSignUP);
 router.route('/').get(getAllDoctors);
 router.route('/topdoctors').get(getTopDoctors);
