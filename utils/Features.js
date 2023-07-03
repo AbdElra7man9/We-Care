@@ -46,9 +46,15 @@ class Features {
             removeFees.forEach((key) =>delete queryCopy[key]);
         };
         Object.keys(queryCopy).forEach((key) => {
-            if (key.includes('-')) {
-                const newKey = key.replace(/-/g, '.');
+            if (key.includes('_')) {
+                const newKey = key.replace(/_/g, '.');
                 queryCopy[newKey] = queryCopy[key];
+                delete queryCopy[key];
+            }
+        });
+        const fields = ['specialization','minFees','maxFees','gender','address.governorate','address.city'];
+        fields.forEach((key) => {
+            if (queryCopy[key] === '') {
                 delete queryCopy[key];
             }
         });
