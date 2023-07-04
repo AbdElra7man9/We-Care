@@ -17,7 +17,9 @@ exports.getAllApointmentsForPatient = catchAsync(async (req, res, next) => {
   const pastAppointment = [];
   const upcomingApointments = [];
   const patient = req.user;
-  const allAppointments = await Appointment.find({ patient: patient._id });
+  const allAppointments = await Appointment.find({
+    patient: patient._id,
+  }).populate({ path: 'doctor', select: ['name', 'profilePicture'] });
   allAppointments.forEach((appointment) => {
     if (appointment.date > Date.now()) upcomingApointments.push(appointment);
     if (appointment.date < Date.now() || appointment.date === Date.now())
