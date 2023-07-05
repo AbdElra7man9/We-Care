@@ -72,7 +72,8 @@ exports.patientSignUP = catchAsync(async function (req, res, next) {
     'passwordConfirm',
     'diagnosis',
     'bloodType',
-    'address'
+    'address',
+    'gender'
   );
   const newPatient = await Patient.create(filteredInfo);
   sendCreatePIN(newPatient._id);
@@ -89,7 +90,6 @@ exports.doctorSignUP = catchAsync(async function (req, res, next) {
     'passwordConfirm',
     'specialization',
     'address',
-    'ScheduleTiming',
     'phoneNumber',
     'gender'
   );

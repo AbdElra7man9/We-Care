@@ -86,7 +86,7 @@ app.use('/api/v1/appointments', appointmentRouter);
 app.use('/api/v1/reviews', reviewRouter);
 
 //Chat
-app.use('/api/v1/chat', ChatRouter);
+app.use('/api/v1/chats', ChatRouter);
 
 //Message
 app.use('/api/v1/message', MessageRouter);
