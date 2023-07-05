@@ -65,7 +65,7 @@ export const authOptions: NextAuthOptions = {
                 }
 
                 const { email, password } = credentials;
-
+                
                 const res = await fetch(url + "/api/v1/users/login", {
                     method: "POST",
                     headers: {

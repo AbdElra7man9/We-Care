@@ -23,6 +23,14 @@ const Filter: FC = () => {
         { value: 'Gynecologist', label: 'Gynecologist' },
         { value: 'female', label: 'Female' },
     ];
+    const GovernmentOptions = [
+        { value: 'Gynecologist', label: 'Gynecologist' },
+        { value: 'female', label: 'Female' },
+    ];
+    const CityOption = [
+        { value: 'Gynecologist', label: 'Gynecologist' },
+        { value: 'female', label: 'Female' },
+    ];
     return (
         <div>
             <p>Filter By</p>
@@ -47,11 +55,19 @@ const Filter: FC = () => {
                 />
                 <div>
                     <label className="text-sm text-gray-500 font-medium text-start my-3">Gender</label>
-                    <Select options={GenderOptions} />
+                    <Select options={GenderOptions} onChange={(data) => dispatch(FeatureAction.setGender(data?.value))} />
                 </div>
                 <div>
                     <label className="text-sm text-gray-500 font-medium text-start my-3">Specialization</label>
-                    <Select options={SpecialzationOptions} />
+                    <Select options={SpecialzationOptions} onChange={(data) => dispatch(FeatureAction.setSpecialization(data?.value))} />
+                </div>
+                <div>
+                    <label className="text-sm text-gray-500 font-medium text-start my-3">Government</label>
+                    <Select options={GovernmentOptions} onChange={(data) => dispatch(FeatureAction.setGovernmant(data?.value))} />
+                </div>
+                <div>
+                    <label className="text-sm text-gray-500 font-medium text-start my-3">City</label>
+                    <Select options={CityOption} onChange={(data) => dispatch(FeatureAction.setCity(data?.value))} />
                 </div>
             </div>
         </div>

@@ -7,18 +7,18 @@ const Features = require("../utils/Features");
 exports.NewMSG = catchAsync(async (req, res, next) => {
     const { msg, image } = req.body;
     let result = {}
-    // if (image) {
-    //     const newIMG = await cloudinary.uploader.upload(image, {
-    //         folder: "Instegram/MesssgesMedia",
-    //     });
-    //     result = newIMG;
-    // }
+    if (image) {
+        const newIMG = await cloudinary.uploader.upload(image, {
+            folder: "Instegram/MesssgesMedia",
+        });
+        result = newIMG;
+    }
     const message = await new Message({
         chatId: req.params.id, sender: req.user.id, msg,
-        // image: {
-        //     public_id: result.public_id,
-        //     url: result.secure_url,
-        // }
+        image: {
+            public_id: result.public_id,
+            url: result.secure_url,
+        }
     }).save()
 
     if (message) {

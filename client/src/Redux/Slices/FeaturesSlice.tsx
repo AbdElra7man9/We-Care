@@ -5,7 +5,9 @@ interface FeaturesProps {
     isModalAddBlog: Boolean;
     rangeValues: number[];
     gender: string;
-    specialization: '',
+    specialization: string,
+    address_city: string,
+    address_governorate: string
 }
 const initialState: FeaturesProps = {
     DocSide: false,
@@ -13,6 +15,9 @@ const initialState: FeaturesProps = {
     rangeValues: [0, 100],
     gender: '',
     specialization: '',
+    address_city: '',
+    address_governorate: '',
+
 }
 const FeaturesSlice = createSlice({
     name: 'Features',
@@ -25,13 +30,19 @@ const FeaturesSlice = createSlice({
             state.isModalAddBlog = action.payload;
         },
         setRangeValues(state, action) {
-            state.rangeValues = action.payload
+            state.rangeValues = action.payload;
         },
         setGender(state, action) {
-            state.gender = action.payload
+            state.gender = action.payload;
         },
         setSpecialization(state, action) {
-            state.specialization = action.payload
+            state.specialization = action.payload;
+        },
+        setGovernmant(state, action) {
+            state.address_governorate = action.payload;
+        },
+        setCity(state, action) {
+            state.address_city = action.payload;
         }
     },
 });

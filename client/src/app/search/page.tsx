@@ -18,7 +18,7 @@ export default function page() {
                     <Filter />
                     <div className='col-span-3'>
                         <SearchPL />
-                        <div className='border rounded-xl dark:border-slate-600 w-full '>
+                        <div className='w-full '>
                             <DoctorCart />
                         </div>
                     </div>

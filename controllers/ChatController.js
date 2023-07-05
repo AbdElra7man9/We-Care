@@ -11,14 +11,17 @@ exports.NewChat = catchAsync(async (req, res, next) => {
     ],
   }).populate('members');
   if (isAlreadyinChat) {
-    // const ChatID = isAlreadyinChat.members.find(p => p.id !== req.user.id)
-    return res.json(isAlreadyinChat._id);
+    return res.json({
+      status: 'success',
+      chatId: isAlreadyinChat._id,
+    });
   }
   await new Chat({
     members: [req.user._id, req.params.id],
   })
     .save()
     .then((chat) => {
+      console.log(chat)
       return res.json({
         status: 'success',
         chatId: chat._id,
@@ -40,7 +43,7 @@ exports.GetAll = catchAsync(async (req, res, next) => {
   ).Pagination(resultperpage);
 
   const chats = await features.query
-    .populate('members', 'username name avatar fullname')
+    .populate('members', 'name profilePicture')
     .sort('-updatedAt');
   return res.json({
     status: 'success',

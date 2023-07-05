@@ -31,13 +31,14 @@ export const DoctorsApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-        search: builder.query<DoctorResponse, { page: number, limit: number, keyword: string, specialization: string, minFees: number, maxFees: number, gender: string }>({
-
-            query: ({ page, limit, keyword, specialization, minFees, maxFees, gender }) => ({
-                url: `/api/v1/doctors/search?page=${page}&limit=${limit}&keyword=${keyword}&specialization=${specialization}&minFees=${minFees}&maxFees=${maxFees}&gender=${gender}`,
-                method: 'GET',
+        search: builder.query<{ status: string; results: number; searchedDoctors: userType[] },
+            { page: number, limit: number, keyword: string, specialization: string, minFees: number, maxFees: number, gender: string, address_governorate: string, address_city: string }>
+            ({
+                query: ({ page, limit, keyword, specialization, minFees, maxFees, gender, address_governorate, address_city }) => ({
+                    url: `/api/v1/doctors/search?page=${page}&limit=${limit}&keyword=${keyword}&specialization=${specialization}&minFees=${minFees}&maxFees=${maxFees}&gender=${gender}&address_governorate=${address_governorate}&address_city=${address_city}`,
+                    method: 'GET',
+                }),
             }),
-        }),
         GetMoreDoctors: builder.query<DoctorResponse, { page: number, limit: number }>({
 
             query: ({ page, limit }) => ({
