@@ -6,12 +6,14 @@ const {
   bookAppointment,
   getAvailableDoctorAppointmentsByDay,
   getAvailableDoctorDays,
+  getMyAppointments,
 } = require('../controllers/appointmentController');
 const restrictTo = require('../Middlewares/restrictTo');
 
 const router = express.Router();
 
 router.use(protect);
+router.get('/', getMyAppointments);
 router.get('/:doctorID', getAllDoctorAppointments);
 router.get('/available/:doctorID', getAvailableDoctorAppointments);
 router.get('/availableByday/:doctorID', getAvailableDoctorAppointmentsByDay);

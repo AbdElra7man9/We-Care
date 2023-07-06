@@ -114,3 +114,31 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
     appointment,
   });
 });
+
+exports.getMyAppointments = catchAsync(async (req, res, next) => {
+  const pastAppointment = [];
+  const upcomingApointments = [];
+  const user = req.user;
+  let allAppointments = [];
+  if (user.__t == 'Patient') {
+     allAppointments = await Appointment.find({
+      patient: user._id,
+    }).populate({ path: 'doctor', select: ['name', 'profilePicture'] });
+  }
+  if(user.__t == "Doctor") {
+    allAppointments = await Appointment.find({
+     doctor: user._id,
+   }).populate({ path: 'patient', select: ['name', 'profilePicture'] });
+ }
+  allAppointments.forEach((appointment) => {
+    if (appointment.date > Date.now()) upcomingApointments.push(appointment);
+    if (appointment.date < Date.now() || appointment.date === Date.now())
+      pastAppointment.push(appointment);
+  });
+  res.status(200).json({
+    status: 'success',
+    results: allAppointments.length,
+    pastAppointment,
+    upcomingApointments,
+  });
+});
