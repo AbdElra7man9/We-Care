@@ -79,7 +79,7 @@ export default function Upperpart() {
                         </h5>
                         <div className='py-3'>
                             <Link
-                                href='/patient/booking-appointment/clinc'
+                                href='/search'
                                 aria-label='booking an appointment'
                                 className='bg-blue-500 rounded-lg p-3 px-4 font-medium'>
                                 Take Appointment

@@ -15,7 +15,7 @@ interface DoctorCartProps { }
 
 const DoctorCart: FC<DoctorCartProps> = () => {
     const query = useSearchParams();
-    const keyword = query?.get('keyword') as string;
+    const keyword = query?.get('keyword') || '' as string;
     const { rangeValues, gender, specialization, address_city, address_governorate } = useAppSelector(state => state.Features);
     const { data } = useSearchQuery({ page: 1, limit: 10, keyword, gender, maxFees: rangeValues[0], minFees: rangeValues[1], specialization, address_city, address_governorate });
     const doctors = data?.searchedDoctors;

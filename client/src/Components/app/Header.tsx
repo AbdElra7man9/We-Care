@@ -71,7 +71,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
         {doctor ?
           <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link>
           : patient ?
-            <Link aria-label='patients' href="/patient/patient-dashboard">Patients</Link>
+            <Link aria-label='patients' href="/patient/dashboard/overflow">Patients</Link>
             : admin &&
             <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
 

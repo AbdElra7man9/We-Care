@@ -58,6 +58,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
     keepUnusedDataFor: 500,
-    tagTypes: ["Auth", "Chat", "User", "Message", "Blog", "Comment", "Review"],
+    tagTypes: ["Auth", "Chat", "User", "Message", "Blog", "Comment", "Review","Appointments"],
     endpoints: (builder) => ({}),
 });
