@@ -14,27 +14,27 @@ interface CallingInfo {
     signal: any;
 }
 
-interface PeerContextProps {
-    callingInfo: CallingInfo;
-    callAccepted: boolean;
-    myVideo: React.RefObject<HTMLVideoElement>;
-    userVideo: React.RefObject<HTMLVideoElement>;
-    stream: MediaStream | undefined;
-    acceptorName: string;
-    callUser: (params: { id: string; acceptorName: string }) => void;
-    setCallingInfo: React.Dispatch<React.SetStateAction<CallingInfo>>;
-    callEnded: boolean;
-    leaveCall: () => void;
-    answerCall: () => void;
-    isVideoCalling: boolean;
-    setIsVideoCalling: React.Dispatch<React.SetStateAction<boolean>>;
-    setIsMyCam: React.Dispatch<React.SetStateAction<boolean>>;
-    isMyCam: boolean;
-}
+// interface PeerContextProps {
+//     callingInfo: CallingInfo;
+//     callAccepted: boolean;
+//     myVideo: React.RefObject<HTMLVideoElement>;
+//     userVideo: React.RefObject<HTMLVideoElement>;
+//     stream: MediaStream | undefined;
+//     acceptorName: string;
+//     callUser: (params: { id: string; acceptorName: string }) => void;
+//     setCallingInfo: React.Dispatch<React.SetStateAction<CallingInfo>>;
+//     callEnded: boolean;
+//     leaveCall: () => void;
+//     answerCall: () => void;
+//     isVideoCalling: boolean;
+//     setIsVideoCalling: React.Dispatch<React.SetStateAction<boolean>>;
+//     setIsMyCam: React.Dispatch<React.SetStateAction<boolean>>;
+//     isMyCam: boolean;
+// }
 
-const PeerContext = createContext<PeerContextProps>({});
+const PeerContext = createContext({});
 
-export const PeerProvider: React.FC = ({ children }) => {
+export const PeerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const socket = getSocket();
     const userInfo = useSelector(selectCurrentUser) as userType;
     const [callAccepted, setCallAccepted] = useState(false);
@@ -121,7 +121,7 @@ export const PeerProvider: React.FC = ({ children }) => {
         window.location.reload();
     };
 
-    const value: PeerContextProps = {
+    const value = {
         callingInfo,
         callAccepted,
         myVideo,

@@ -1,5 +1,5 @@
 
-import { appointmentsType } from "./appointment";
+import { iAppointments } from "./appointment";
 import { ImageType } from "./Feature";
 
 export type userType = {
@@ -20,7 +20,7 @@ export type userType = {
     timeTable?: string;
     patients?: string;
     ScheduleTiming?: string;
-    appointments?: appointmentsType | null;
+    appointments?: iAppointments | null;
 
     _id?: string;
     __t?: 'Doctor' | 'Patient' | 'Coordinator';

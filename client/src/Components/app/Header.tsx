@@ -7,10 +7,13 @@ import Themetoggle from "../Layouts/Themetoggle";
 import { useAppDispatch, useAppSelector } from "@Hooks/useRedux";
 import { selectCurrentUser } from "@Redux/Slices/UserSlice";
 import { FeatureAction } from "@Redux/Slices/FeaturesSlice";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import SearchPanel from "./SearchPanel";
 import { AnimatePresence } from "framer-motion";
+import { AiOutlineLogin } from "react-icons/ai";
+import { useLogOutMutation } from "@Redux/APIs/AuthApi";
+import { toast } from "react-hot-toast";
 
 
 export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: Boolean }) {
@@ -33,10 +36,21 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
     return () => document.removeEventListener("scroll", handleScrollTop);
   }, []);
   const [keyword, setKeyword] = useState<string>('');
+  const [LogOut] = useLogOutMutation();
   const router = useRouter();
   const handlesearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.push(`/search?keyword=${keyword}`);
+  }
+  const handleLogot = () => {
+    LogOut().unwrap()
+    .then(() => {
+        signOut()
+        router.push('/auth/signin');
+      })
+      .then(() => {
+        toast.error('can not logout')
+      })
   }
 
   const FormSearch = ({ className }: { className?: string }) => {
@@ -131,14 +145,16 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
           </div>
           <div className="flex gap-2 md:gap-4 items-center">
             <Themetoggle />
-            <button aria-label='settings' className="bg-blue-600 text-white rounded-full p-3">
-              <BsGear size={15} />
-            </button>
             <button
               aria-label='search'
               className="bg-blue-600 text-white rounded-full p-3"
               onClick={() => { setIsSearchPanel(true) }}>
               <BsSearch size={15} />
+            </button>
+            <button aria-label='settings'
+              onClick={handleLogot}
+              className="bg-blue-600 text-white rounded-full p-3">
+              <AiOutlineLogin size={15} />
             </button>
             {!session ?
               <Link
