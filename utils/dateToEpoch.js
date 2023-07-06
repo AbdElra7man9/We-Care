@@ -1,5 +1,5 @@
 function dateToEpoch(thedate) {
-  var time = thedate.getTime();
+  let time = thedate.getTime();
   return time - (time % 86400000);
 }
 

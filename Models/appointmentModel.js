@@ -32,6 +32,7 @@ const appointmentSchema = mongoose.Schema({
     type: Number,
     required: [true, 'appointment must have a price'],
   },
+  comment: String,
 });
 
 const Appointment = mongoose.model('Appointment', appointmentSchema);

@@ -10,7 +10,7 @@ exports.addTimeBlock = catchAsync(async (req, res, next) => {
   //Creat a time block without saving into database
   const newTimeBlock = new TimeBlock(req.body);
   newTimeBlock.doctor = doctor._id;
-
+  let availableTimeToAddTB = true;
   //validate time block (doctor can't add more than time block in same time)
   allDoctorTimeblocks.forEach((TB) => {
     if (
@@ -20,12 +20,12 @@ exports.addTimeBlock = catchAsync(async (req, res, next) => {
       (newTimeBlock.startTime >= TB.startTime &&
         TB.period * 60 * 60 * 1000 > newTimeBlock.startTime - TB.startTime)
     ) {
-      return next(
-        new AppError('You have appointments in this time block', 400)
-      );
+      availableTimeToAddTB = false;
+      return;
     }
   });
-
+  if (!availableTimeToAddTB)
+    return next(new AppError('You have appointments in this time block', 400));
   // save time block in database after validation
   await newTimeBlock.save();
 
