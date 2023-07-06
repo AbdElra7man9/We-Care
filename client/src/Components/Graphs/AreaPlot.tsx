@@ -1,4 +1,3 @@
-'use client';
 import React, { useRef, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
@@ -16,7 +15,7 @@ const AreaPlot: React.FC<AreaPlotProps> = ({ color, data }) => {
     const chartRef = useRef<any>(null);
 
     useEffect(() => {
-        if (chartRef.current) {
+        if (chartRef.current && chartRef.current.updateOptions) { // Check if updateOptions method is available
             const gradientFill = {
                 type: 'gradient',
                 gradient: {
@@ -83,7 +82,7 @@ const AreaPlot: React.FC<AreaPlotProps> = ({ color, data }) => {
                 },
             };
 
-            chartRef?.current?.updateOptions(chartOptions);
+            chartRef.current.updateOptions(chartOptions);
         }
     }, [color, data]);
 

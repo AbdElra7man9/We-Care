@@ -15,8 +15,8 @@ export default function page() {
         {/* <div className='space-y-5'>
           <WaterChart />
           <HemoglobinChart />
-        </div> */}
-        {/* <div className='space-y-5'>
+        </div>
+        <div className='space-y-5'>
           <HeartbeatChart />
           <SugarChart />
         </div> */}
