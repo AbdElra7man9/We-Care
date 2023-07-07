@@ -8,11 +8,14 @@ const {
   deleteReview,
   patientReview,
   doctorReview,
+  doctorLogedReviews,
 } = require('../controllers/reviewController');
 
 const router = express.Router({ mergeParams: true });
 
 router.get('/doctor/:id', doctorReview);
+router.get('/doctor',protect, doctorLogedReviews);
+
 router.use(protect);
 router.get('/patient', patientReview);
 router.use(restrictTo('Patient'));

@@ -30,7 +30,7 @@ const DoctorCart: FC<DoctorCartProps> = () => {
         <div className='w-full col-span-3 flex flex-col gap-5'>
             {doctors?.map((doc) => (
                 <div key={doc?._id}>
-                    <div className='border dark:border-slate-700 overflow-hidden rounded-lg w-full select-none flex gap-5 relative'>
+                    <div className='border dark:border-slate-700 overflow-hidden rounded-lg w-full  flex gap-5 relative'>
                         <div className='h-[20rem] overflow-hidden relative'>
                             {doc.profilePicture &&
                                 <Image

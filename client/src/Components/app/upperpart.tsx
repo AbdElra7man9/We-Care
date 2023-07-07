@@ -55,7 +55,7 @@ export default function Upperpart() {
 
     return (
         <>
-            <div className='h-[50rem] md:h-[60rem] duration-200 container max-w-full px-0 relative select-none'>
+            <div className='h-[50rem] md:h-[60rem] duration-200 container max-w-full px-0 relative '>
                 <Image
                     height={800}
                     width={800}

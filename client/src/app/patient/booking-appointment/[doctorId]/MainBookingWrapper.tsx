@@ -13,7 +13,7 @@ export default function MainBookingWrapper({
     const atClinc = (pathname?.includes('clinc'));
     const atOnline = (pathname?.includes('online'));
     return (
-        <div className="dark:bg-slate-900 pb-20 select-none">
+        <div className="dark:bg-slate-900 pb-20 ">
             <div className='py-20 md:py-32 mb-10 bg-[#F8F9FA] dark:bg-slate-800 dark:text-white'>
                 <div className='text-center space-y-5'>
                     <p className='font-semibold text-2xl'>Book an appointment</p>

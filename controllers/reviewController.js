@@ -106,3 +106,19 @@ exports.doctorReview = catchAsync(async function (req, res, next) {
         reviews,
     });
 });
+exports.doctorLogedReviews = catchAsync(async function (req, res, next) {
+    const reviewsNum = await Review.count({ doctor: req.params.id });
+    const features = new Features(Review.find({ doctor: req.user.id }), req.query)
+        .Paginate();
+    const reviews = await features.query;
+
+    if (reviews.length == 0)
+        return next(new AppError("there is no reviews here", 401));
+
+    res.json({
+        status: 'success',
+        reviewsNum: reviewsNum,
+        results: reviews.length,
+        reviews,
+    });
+});

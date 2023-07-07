@@ -20,7 +20,7 @@ const BlogDetailsPage: FC<BlogProps> = ({ blogId }) => {
     // const blogId = params?.blogId as string
     const { data: BlogQuery } = useGetBlogDetailsQuery({ blogId });
     const { data: CommentQuery } = useGetCommentsQuery({ blogId });
-    const { data } = useGetAllBLOGsQuery({ page: 1 });
+    const { data } = useGetAllBLOGsQuery({ page: 1, limit: 4 });
     const { Blogs } = data || {}
 
     const { BlogDetails } = BlogQuery || {}
@@ -50,7 +50,7 @@ const BlogDetailsPage: FC<BlogProps> = ({ blogId }) => {
                     </Link>
                     <BiChevronRight />
                     <Link
-                        href='/patient/booking-appointment/clinc'
+                        href='/blogs'
                         aria-label='booking appointment'
                         className='uppercase font-medium hover:text-blue-500 hover:underline'
                     >
@@ -58,7 +58,7 @@ const BlogDetailsPage: FC<BlogProps> = ({ blogId }) => {
                     </Link>
                     <BiChevronRight />
                     <Link
-                        href='/patient/booking-appointment/clinc'
+                        href={`/blogs/${BlogDetails?._id}`}
                         aria-label='booking appointment'
                         className='uppercase font-medium text-blue-400 hover:text-blue-500 hover:underline'
                     >
@@ -67,7 +67,7 @@ const BlogDetailsPage: FC<BlogProps> = ({ blogId }) => {
                 </div>
             </div>
             <div className='grid grid-cols-3 gap-3 my-5'>
-                <div className='col-span-2 border rounded-md'>
+                <div className='col-span-2 border dark:border-slate-500 rounded-md'>
                     {BlogDetails?.image?.url &&
                         <Image
                             height={600}
@@ -96,21 +96,21 @@ const BlogDetailsPage: FC<BlogProps> = ({ blogId }) => {
                                             />
                                         }
                                         <span>
-                                            <p className='font-medium text-lg text-gray-600'>{comment.user?.name}</p>
-                                            <p className='text-slate-500 text-sm'>{comment.createdAt}</p>
+                                            <p className='font-medium text-lg text-gray-600 dark:text-slate-300'>{comment.user?.name}</p>
+                                            <p className='text-slate-500 dark:text-slate-400 text-sm'>{(moment(comment.createdAt).fromNow())}</p>
                                         </span>
                                     </div>
-                                    <div className='bg-sky-50 p-5 w-full rounded-md my-2'>{comment.content}</div>
+                                    <div className='bg-sky-50 dark:bg-slate-800 p-5 w-full rounded-md my-2'>{comment.content}</div>
                                 </div>
                             ))}
                         </div>
                         <div className='my-5'>
                             <h2 className='py-3 font-medium text-lg'>Leave A Comment :</h2>
-                            <AddComment />
+                            <AddComment blogId={BlogDetails?._id as string} />
                         </div>
                     </div>
                 </div>
-                <div className='col-span-1 border rounded-md p-5'>
+                <div className='col-span-1 border dark:border-slate-500 rounded-md p-5 overflow-hidden'>
                     <h2 className='py-3 font-medium text-lg'>Recent Blogs</h2>
                     {Blogs?.map((doc) => (
                         <div key={doc?._id} className='flex gap-3 my-4'>
@@ -122,7 +122,7 @@ const BlogDetailsPage: FC<BlogProps> = ({ blogId }) => {
                                     draggable={false}
                                     src={doc.image?.url ?? ''}
                                     alt={doc.title ?? ''}
-                                    className='w-52 h-24 rounded-lg object-cover'
+                                    className='w-32 h-24 rounded-lg object-cover'
                                 />
                             }
                             <span>

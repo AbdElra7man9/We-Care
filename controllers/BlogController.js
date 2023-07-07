@@ -3,7 +3,6 @@ const catchAsync = require('../utils/catchAsync');
 const Features = require('../utils/Features');
 const cloudinary = require('../utils/cloudinary');
 const BlogModel = require('../Models/BlogModel');
-const CommentModel = require('../Models/CommentModel');
 
 // async function checkLike(req, res, next) {
 //     let isLiked;
@@ -41,7 +40,7 @@ exports.NewBlog = catchAsync(async (req, res, next) => {
     .save()
     .then((Blog) => {
       return res.json({
-        message: 'post added successfully',
+        message: 'blog added successfully',
         Blog,
       });
     })
@@ -97,7 +96,7 @@ exports.userBlogById = catchAsync(async (req, res, next) => {
 });
 
 exports.AllBlogs = catchAsync(async (req, res, next) => {
-  const resultperpage = 4;
+  const resultperpage = req.body.limit;
   const features = new Features(BlogModel.find(), req.query).Pagination(
     resultperpage
   );
@@ -115,10 +114,8 @@ exports.AllBlogs = catchAsync(async (req, res, next) => {
 });
 
 exports.GetBlogDetails = catchAsync(async (req, res, next) => {
-  const BlogDetails = await BlogModel.findById(req.params.id).populate(
-    'user',
-    'username avatar'
-  );
+  const BlogDetails = await BlogModel.findById(req.params.id)
+  .populate({ path: 'user', select: ['name', 'profilePicture'] });
   if (!BlogDetails) {
     return next(new AppError('Blog not founded'), 400);
   }

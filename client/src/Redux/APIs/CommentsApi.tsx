@@ -20,7 +20,7 @@ export const CommentsApi = apiSlice.injectEndpoints({
             query: ({ content, blogId }) => ({
                 url: `/api/v1/blog/add-comment/${blogId}`,
                 method: 'Post',
-                body: content,
+                body: { content },
             }),
             async onQueryStarted({ blogId }, { queryFulfilled, dispatch }) {
                 try {

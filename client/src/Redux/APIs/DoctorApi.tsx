@@ -13,11 +13,18 @@ interface DoctorArgs {
 interface DoctorResponse {
     status: string;
     results: number;
-    doctors: userType[]
+    allDoctors: userType[]
 }
 export const DoctorsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         GetDoctors: builder.query<DoctorResponse, { page: number, limit: number }>({
+
+            query: ({ page, limit }) => ({
+                url: `/api/v1/doctors/allDoctors?page=${page}&limit=${limit}`,
+                method: 'GET',
+            }),
+        }),
+        GetTopDoctors: builder.query<{ allDoctors: userType[] }, { page: number, limit: number }>({
 
             query: ({ page, limit }) => ({
                 url: `/api/v1/doctors?page=${page}&limit=${limit}`,
@@ -53,9 +60,9 @@ export const DoctorsApi = apiSlice.injectEndpoints({
                     dispatch(
                         DoctorsApi.util.updateQueryData("GetDoctors", { page: 1, limit: 1 }, (draft) => {
                             return {
-                                doctors: [
-                                    ...draft.doctors,
-                                    ...data.doctors,
+                                allDoctors: [
+                                    ...draft.allDoctors,
+                                    ...data.allDoctors,
                                 ],
                                 status: data.status,
                                 results: data.results,
@@ -100,6 +107,7 @@ export const DoctorsApi = apiSlice.injectEndpoints({
 export const {
     useSignUpDoctorMutation,
     useGetDoctorsQuery,
+    useGetTopDoctorsQuery,
     useGetDoctorByIdQuery,
     useSearchQuery,
 } = DoctorsApi;

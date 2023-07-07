@@ -31,7 +31,7 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
       )}
       <div className="h-20">
         <header
-          className='top-0 z-10 flex flex-wrap container max-w-full duration-300 inset-x-0 select-none bg-white dark:bg-slate-900 shadow fixed'
+          className='top-0 z-10 flex flex-wrap container max-w-full duration-300 inset-x-0  bg-white dark:bg-slate-900 shadow fixed'
           style={{ paddingLeft: `${sideMargin}` }}
         >
           <div className='w-full border-b lg:border-none flex justify-between items-center p-3 whitespace-nowrap'>

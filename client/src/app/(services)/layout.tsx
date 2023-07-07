@@ -2,10 +2,7 @@ import Footer from "@Components/app/Footer";
 import Header from "@Components/app/Header";
 import Chat from "@Components/GPT3.5/Chat";
 
-export const metadata = {
-  title: "Helth Care",
-};
-export default function RootLayout({
+export default function Layout({
   children,
 }: {
   children: React.ReactNode;

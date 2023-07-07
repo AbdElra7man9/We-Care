@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const AboutTreatment: React.FC = () => {
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 container max-w-7xl py-96 lg:py-72 select-none'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 container max-w-7xl py-96 lg:py-72 '>
             <div className='flex justify-center'>
                 <Image
                     height={350}

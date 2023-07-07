@@ -55,13 +55,17 @@ const GetData: FC<GetDataProps> = ({ }) => {
                     Add Blog
                 </button>
             </div>
-            <div className='select-none py-5 dark:text-white'>
+            <div className=' py-5 dark:text-white'>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-8 py-5'>
-                    {doctorBlogs?.map((doc) => (
-                        <div key={doc?._id}>
-                            <SingleBlog blog={doc} />
+                    {(doctorBlogs.length === 0) ?
+                        <div className='flex justify-center items-center h-96 w-full'>
+                            <p className='text-balck dark:text-slate-100'>No Blogs Founded</p>
                         </div>
-                    ))}
+                        : doctorBlogs?.map((doc) => (
+                            <div key={doc?._id}>
+                                <SingleBlog blog={doc} />
+                            </div>
+                        ))}
                 </div>
             </div>
         </>

@@ -14,7 +14,7 @@ const SingleBlog: React.FC<BlogsProps> = ({ blog }) => {
 
     return (
 
-        <div className='border dark:border-slate-700 overflow-hidden rounded-lg w-full select-none'>
+        <div className='border dark:border-slate-700 overflow-hidden rounded-lg w-full '>
             <div className='w-full h-[20rem] overflow-hidden relative'>
                 {blog?.image?.url &&
                     <Image
@@ -23,7 +23,7 @@ const SingleBlog: React.FC<BlogsProps> = ({ blog }) => {
                         width={300}
                         src={blog?.image.url}
                         className='w-full object-cover h-full hover:scale-[1.1] duration-200'
-                        alt={blog.user?.name ?? ' '}
+                        alt={blog.user?.name ?? 'blog'}
                     />
                 }
             </div>
@@ -35,7 +35,7 @@ const SingleBlog: React.FC<BlogsProps> = ({ blog }) => {
                     </div>
                     <div className='flex gap-2 items-center'>
                         <IoTimeOutline />
-                        <p className='text-sm text-gray-500 bg-[#1466fa]'>{moment(blog?.createdAt).calendar()}</p>
+                        <p className='text-sm text-gray-500'>{moment(blog?.createdAt).calendar()}</p>
                     </div>
                 </div>
                 <Link href={`/admin/blogs/${blog?._id}`} className='text-lg font-medium ellipse-2 h-16 hover:text-blue-500 dark:text-slate-400'>{blog?.des}</Link>
