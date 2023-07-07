@@ -3,8 +3,6 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
-const Appointment = require('./appointmentModel');
-
 const addressSchema = new mongoose.Schema({
   governorate: String,
   city: String,

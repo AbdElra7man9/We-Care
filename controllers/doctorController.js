@@ -112,3 +112,14 @@ exports.searchForDoctors = catchAsync(async (req, res, next) => {
     searchedDoctors,
   });
 });
+
+exports.getAllMyPatients = catchAsync(async (req, res, next) => {
+  const doctor = await Doctor.findById(req.user._id).populate({
+    path: 'patients',
+    select: ['name', 'gender', 'bloodType', 'profilePicture'],
+  });
+  const allPatients = doctor.patients;
+  res
+    .status(200)
+    .json({ status: 'success', results: allPatients.length, allPatients });
+});

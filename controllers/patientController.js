@@ -1,6 +1,5 @@
 const catchAsync = require('../utils/catchAsync');
 const Patient = require('../Models/patientModel');
-const Appointment = require('../Models/appointmentModel');
 const Features = require('../utils/Features');
 
 exports.GetAllPatients = catchAsync(async (req, res, next) => {
@@ -13,22 +12,11 @@ exports.GetAllPatients = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getAllApointmentsForPatient = catchAsync(async (req, res, next) => {
-  const pastAppointment = [];
-  const upcomingApointments = [];
-  const patient = req.user;
-  const allAppointments = await Appointment.find({
-    patient: patient._id,
-  }).populate({ path: 'doctor', select: ['name', 'profilePicture'] });
-  allAppointments.forEach((appointment) => {
-    if (appointment.date > Date.now()) upcomingApointments.push(appointment);
-    if (appointment.date < Date.now() || appointment.date === Date.now())
-      pastAppointment.push(appointment);
-  });
+exports.getMyData = catchAsync(async (req, res, next) => {
+  const patientID = req.user._id;
+  const patient = await Patient.findById(patientID);
   res.status(200).json({
     status: 'success',
-    results: allAppointments.length,
-    pastAppointment,
-    upcomingApointments,
+    patient,
   });
 });

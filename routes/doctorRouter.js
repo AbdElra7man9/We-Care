@@ -9,6 +9,7 @@ const {
   getSpecializedDoctors,
   getDoctorById,
   getAllSpecialists,
+  getAllMyPatients,
 } = require('.././controllers/doctorController');
 const { doctorSignUP } = require('../controllers/authController');
 
@@ -24,8 +25,8 @@ router.route('/specialization/:specialization').get(getSpecializedDoctors);
 router
   .route('/pending', protect, restrictTo('Coordinator'))
   .get(getAllPendingDoctors);
+router.get('/allPatients', protect, restrictTo('Doctor'), getAllMyPatients);
 router.route('/search').get(searchForDoctors);
 router.route('/:id').get(getDoctorById);
 router.patch('/:id', protect, restrictTo('Coordinator'), updateDoctorStatus);
-
 module.exports = router;

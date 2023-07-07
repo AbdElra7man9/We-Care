@@ -4,6 +4,11 @@ const catchAsync = require('../utils/catchAsync');
 const dateToEpoch = require('../utils/dateToEpoch');
 const AppError = require('../utils/AppError');
 
+exports.getAppointmentById = catchAsync(async (req, res, next) => {
+  const appointment = await Appointment.findById(req.params.appointmentId);
+  res.json({ status: 'success', appointment });
+});
+// APIs patients can do on "Doctor" model
 exports.getAllDoctorAppointments = catchAsync(async (req, res, next) => {
   const doctor = await Doctor.findById(req.params.doctorID).populate(
     'appointments'
@@ -115,25 +120,39 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   });
 });
 
+// APIs Doctor can do on him self model
+exports.getMyBookedAppointments = catchAsync(async (req, res, next) => {
+  const doctorId = req.user._id;
+  const myBookedAppointments = await Appointment.find({
+    doctor: doctorId,
+    status: 'booked',
+  });
+  res.status(200).json({
+    status: 'success',
+    results: myBookedAppointments.length,
+    myBookedAppointments,
+  });
+});
+// This controller take the user data from "protect" midleware and send the user's  appointment whatever
+//the user is doctor or patient
 exports.getMyAppointments = catchAsync(async (req, res, next) => {
   const pastAppointment = [];
   const upcomingApointments = [];
   const user = req.user;
   let allAppointments = [];
   if (user.__t == 'Patient') {
-     allAppointments = await Appointment.find({
+    allAppointments = await Appointment.find({
       patient: user._id,
     }).populate({ path: 'doctor', select: ['name', 'profilePicture'] });
   }
-  if(user.__t == "Doctor") {
+  if (user.__t == 'Doctor') {
     allAppointments = await Appointment.find({
-     doctor: user._id,
-   }).populate({ path: 'patient', select: ['name', 'profilePicture'] });
- }
+      doctor: user._id,
+    }).populate({ path: 'patient', select: ['name', 'profilePicture'] });
+  }
   allAppointments.forEach((appointment) => {
     if (appointment.date > Date.now()) upcomingApointments.push(appointment);
-    if (appointment.date < Date.now() || appointment.date === Date.now())
-      pastAppointment.push(appointment);
+    if (appointment.date < Date.now()) pastAppointment.push(appointment);
   });
   res.status(200).json({
     status: 'success',
