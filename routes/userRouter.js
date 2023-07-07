@@ -8,8 +8,13 @@ const {
   emailConfirmation,
   Refresh,
   resendPIN,
+  signOut,
 } = require('../controllers/authController');
-const { updateInfo, deleteMe, getUser } = require('../controllers/userController');
+const {
+  updateInfo,
+  deleteMe,
+  getUser,
+} = require('../controllers/userController');
 const protect = require('../Middlewares/protect');
 const mustConfirmed = require('../Middlewares/mustConfirmed');
 const uploadUserPhoto = require('../Middlewares/uploadUserPhoto');
@@ -18,6 +23,7 @@ const resizeImage = require('../Middlewares/resizeImage');
 const router = express.Router();
 
 router.post('/login', userLogin);
+router.post('/logout', signOut);
 router.get('/refresh', Refresh);
 router.post('/forgotPassword', forgotPassword);
 // routes need to authentication

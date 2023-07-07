@@ -126,6 +126,19 @@ exports.Refresh = catchAsync(async function (req, res, next) {
   return res.json({ token, user });
 });
 
+exports.signOut = catchAsync(async (req, res, next) => {
+  const token = null;
+  res.cookie('jwt', token, {
+    expires: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({
+    status: 'success',
+    message: 'You successfuly signout !',
+    token,
+  });
+});
+
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on POSTed email
   const user = await User.findOne({ email: req.body.email });
