@@ -16,7 +16,7 @@ const MedicalService: React.FC = () => {
     }
 
     return (
-        <div className='container px-5 max-w-7xl select-none dark:text-white'>
+        <div className='container px-5 max-w-7xl  dark:text-white'>
             <div className='text-center space-y-3'>
                 <h3 className='text-2xl font-medium'>Our Medical Services</h3>
                 <p className='text-gray-400 leading-loose'>

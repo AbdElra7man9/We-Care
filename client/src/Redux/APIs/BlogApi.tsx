@@ -86,9 +86,9 @@ export const BlogsApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        getAllBLOGs: builder.query<BlogResponse, { page: number }>({
-            query: ({ page }) => ({
-                url: `/api/v1/Blog?page=${page}`,
+        getAllBLOGs: builder.query<BlogResponse, { page: number, limit: number }>({
+            query: ({ page, limit }) => ({
+                url: `/api/v1/Blog?page=${page}&limit=${limit}`,
                 method: 'GET',
             }),
             providesTags: ['Blog'],
@@ -105,7 +105,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
 
                     const { data } = await queryFulfilled;
                     dispatch(
-                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1 }, (draft) => {
+                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1, limit: 3 }, (draft) => {
                             return {
                                 Blogs: [
                                     ...draft.Blogs,
@@ -142,7 +142,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
 
                     const { data } = await queryFulfilled;
                     dispatch(
-                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1 }, (draft) => {
+                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1, limit: 3 }, (draft) => {
                             return {
                                 Blogs: [
                                     data.Blog,
@@ -176,7 +176,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
             async onQueryStarted({ blogId }, { queryFulfilled, dispatch }) {
                 try {
                     dispatch(
-                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1 }, (draft) => {
+                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1, limit: 3 }, (draft) => {
                             const Blogs = draft?.Blogs?.filter((item) => item?._id !== blogId)
                             return {
                                 Blogs: [

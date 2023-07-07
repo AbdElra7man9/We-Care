@@ -44,7 +44,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
   }
   const handleLogot = () => {
     LogOut().unwrap()
-    .then(() => {
+      .then(() => {
         signOut()
         router.push('/auth/signin');
       })
@@ -55,7 +55,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
 
   const FormSearch = ({ className }: { className?: string }) => {
     return (
-      <form onSubmit={handlesearch} className={`${className} justify-center select-none`}>
+      <form onSubmit={handlesearch} className={`${className} justify-center `}>
 
         <div className="relative w-full flex gap-5">
           <input
@@ -106,7 +106,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
         }
       </AnimatePresence>
       <header
-        className={`top-0 z-10 container max-w-full duration-300 inset-x-0 select-none bg-transparent absolute
+        className={`top-0 z-10 container max-w-full duration-300 inset-x-0  bg-transparent absolute
         ${(pos === "top")
             ? "absolute"
             : "!fixed shadow-b-2xl dark:!bg-slate-900 bg-white "

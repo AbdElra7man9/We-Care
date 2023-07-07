@@ -14,7 +14,7 @@ const SingleBlog: React.FC<BlogsProps> = ({ blog }) => {
 
     return (
 
-        <div className='border dark:border-slate-700 overflow-hidden rounded-lg w-full select-none'>
+        <div className='border dark:border-slate-700 overflow-hidden rounded-lg w-full '>
             <div className='w-full h-[20rem] overflow-hidden relative'>
                 {blog?.image?.url &&
                     <Image
@@ -23,7 +23,7 @@ const SingleBlog: React.FC<BlogsProps> = ({ blog }) => {
                         width={300}
                         src={blog?.image.url}
                         className='w-full object-cover h-full hover:scale-[1.1] duration-200'
-                        alt={blog.user?.name ?? ' '}
+                        alt={blog.user?.name ?? 'blog'}
                     />
                 }
             </div>

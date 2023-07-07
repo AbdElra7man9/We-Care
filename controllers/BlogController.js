@@ -97,7 +97,7 @@ exports.userBlogById = catchAsync(async (req, res, next) => {
 });
 
 exports.AllBlogs = catchAsync(async (req, res, next) => {
-  const resultperpage = 4;
+  const resultperpage = req.body.limit;
   const features = new Features(BlogModel.find(), req.query).Pagination(
     resultperpage
   );

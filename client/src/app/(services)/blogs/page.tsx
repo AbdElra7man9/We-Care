@@ -32,7 +32,7 @@ export default function page() {
   return (
     <div className="dark:bg-slate-900">
       <Header isFull={false} />
-      <div className='h-[30rem] md:h-[40rem] duration-200 container max-w-full px-0 relative select-none'>
+      <div className='h-[30rem] md:h-[40rem] duration-200 container max-w-full px-0 relative '>
         <Image
           height={800}
           width={800}

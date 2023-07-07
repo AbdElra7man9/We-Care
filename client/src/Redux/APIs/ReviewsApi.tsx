@@ -17,6 +17,12 @@ export const ReviewsApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        GetDoctorLoggedReviews: builder.query<{ status: string; results: number; reviews: ReviewType[] }, { page: number, limit: number }>({
+            query: ({ page, limit }) => ({
+                url: `/api/v1/reviews/doctor?page=${page}&limit=${limit}`,
+                method: 'GET',
+            }),
+        }),
         GetMoreDoctorReviews: builder.query<{ status: string; results: number; reviews: ReviewType[] }, { page: number, limit: number, id: string }>({
             query: ({ page, limit, id }) => ({
                 url: `/api/v1/reviews/${id}?page=${page}&limit=${limit}`,
@@ -113,6 +119,7 @@ export const ReviewsApi = apiSlice.injectEndpoints({
 export const {
     useCreateReviewMutation,
     useGetDoctorReviewsQuery,
+    useGetDoctorLoggedReviewsQuery,
     useUpdateReviewsMutation,
     useDeleteReviewMutation,
 } = ReviewsApi;

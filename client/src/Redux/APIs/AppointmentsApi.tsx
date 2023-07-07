@@ -5,9 +5,9 @@ import { apiSlice } from '../ApiSlice';
 
 export const BlogsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        GetAppointments: builder.query<{ allAppointments: iAppointments[] }, { appointmentId: string }>({
-            query: ({ appointmentId }) => ({
-                url: `/api/v1/appointments/${appointmentId}`,
+        GetAppointments: builder.query<{ upcomingApointments: iAppointments[], pastAppointment: iAppointments[] }, void>({
+            query: () => ({
+                url: `/api/v1/appointments`,
                 method: 'GET',
             }),
             providesTags: ['Appointments']
