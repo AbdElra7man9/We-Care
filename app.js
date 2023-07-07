@@ -24,6 +24,7 @@ const MessageRouter = require('./routes/MessageRouter');
 const BlogRouter = require('./routes/BlogRouter');
 const CommentsRouter = require('./routes/CommentsRouter');
 const CoordinatorRouter = require('./routes/CoordinatorRouter');
+const contactRouter = require('./routes/contactRouter');
 const AppError = require('./utils/AppError');
 const User = require('./Models/userModel');
 
@@ -84,6 +85,9 @@ app.use('/api/v1/appointments', appointmentRouter);
 
 //review routs
 app.use('/api/v1/reviews', reviewRouter);
+
+//contacts routs
+app.use('/api/v1/contacts', contactRouter);
 
 //Chat
 app.use('/api/v1/chats', ChatRouter);
