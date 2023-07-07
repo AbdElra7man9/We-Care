@@ -9,7 +9,7 @@ interface BlogsDataProps {
 }
 
 const BlogsData: FC<BlogsDataProps> = ({ }) => {
-    const { data } = useGetAllBLOGsQuery({ page: 1 });
+    const { data } = useGetAllBLOGsQuery({ page: 1, limit: 4 });
     const { Blogs: doctorBlogs } = data || {}
 
     return (

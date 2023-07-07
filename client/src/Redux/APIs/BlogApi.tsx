@@ -105,7 +105,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
 
                     const { data } = await queryFulfilled;
                     dispatch(
-                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1, limit: 3 }, (draft) => {
+                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1, limit: 4 }, (draft) => {
                             return {
                                 Blogs: [
                                     ...draft.Blogs,
@@ -142,7 +142,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
 
                     const { data } = await queryFulfilled;
                     dispatch(
-                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1, limit: 3 }, (draft) => {
+                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1, limit: 4 }, (draft) => {
                             return {
                                 Blogs: [
                                     data.Blog,
@@ -176,7 +176,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
             async onQueryStarted({ blogId }, { queryFulfilled, dispatch }) {
                 try {
                     dispatch(
-                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1, limit: 3 }, (draft) => {
+                        BlogsApi.util.updateQueryData("getAllBLOGs", { page: 1, limit: 4 }, (draft) => {
                             const Blogs = draft?.Blogs?.filter((item) => item?._id !== blogId)
                             return {
                                 Blogs: [

@@ -35,7 +35,7 @@ const SingleBlog: React.FC<BlogsProps> = ({ blog }) => {
                     </div>
                     <div className='flex gap-2 items-center'>
                         <IoTimeOutline />
-                        <p className='text-sm text-gray-500 bg-[#1466fa]'>{moment(blog?.createdAt).calendar()}</p>
+                        <p className='text-sm text-gray-500'>{moment(blog?.createdAt).calendar()}</p>
                     </div>
                 </div>
                 <Link href={`/admin/blogs/${blog?._id}`} className='text-lg font-medium ellipse-2 h-16 hover:text-blue-500 dark:text-slate-400'>{blog?.des}</Link>

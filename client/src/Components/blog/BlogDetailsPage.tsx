@@ -20,7 +20,7 @@ const BlogDetailsPage: FC<BlogProps> = ({ blogId }) => {
     // const blogId = params?.blogId as string
     const { data: BlogQuery } = useGetBlogDetailsQuery({ blogId });
     const { data: CommentQuery } = useGetCommentsQuery({ blogId });
-    const { data } = useGetAllBLOGsQuery({ page: 1 });
+    const { data } = useGetAllBLOGsQuery({ page: 1, limit: 4 });
     const { Blogs } = data || {}
 
     const { BlogDetails } = BlogQuery || {}
