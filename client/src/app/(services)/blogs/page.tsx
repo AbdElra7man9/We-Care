@@ -31,7 +31,6 @@ export default function page() {
   }
   return (
     <div className="dark:bg-slate-900">
-      <Header isFull={false} />
       <div className='h-[30rem] md:h-[40rem] duration-200 container max-w-full px-0 relative '>
         <Image
           height={800}
@@ -74,12 +73,9 @@ export default function page() {
           </div>
         </div>
       </div>
-      <div className='container max-w-6xl my-32'>
-        <div className='max-w-3xl flex flex-col gap-y-4 items-start'>
-          <BlogsData />
-        </div>
+      <div className='container max-w-[100rem] my-32'>
+        <BlogsData />
       </div>
-      <Footer />
     </div >
   )
 }

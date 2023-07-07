@@ -151,11 +151,13 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
               onClick={() => { setIsSearchPanel(true) }}>
               <BsSearch size={15} />
             </button>
-            <button aria-label='settings'
-              onClick={handleLogot}
-              className="bg-blue-600 text-white rounded-full p-3">
-              <AiOutlineLogin size={15} />
-            </button>
+            {session &&
+              <button aria-label='settings'
+                onClick={handleLogot}
+                className="bg-blue-600 text-white rounded-full p-3">
+                <AiOutlineLogin size={15} />
+              </button>
+            }
             {!session ?
               <Link
                 aria-label='signin'

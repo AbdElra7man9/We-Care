@@ -9,7 +9,7 @@ exports.NewComment = catchAsync(async (req, res, next) => {
     if (!content) {
         return next(new AppError('Comment required!', 400));
     };
-    
+
     const Comment = await new CommentModel({
         content,
         user: req.user.id,
@@ -32,6 +32,7 @@ exports.NewComment = catchAsync(async (req, res, next) => {
 
 exports.GetComments = catchAsync(async (req, res, next) => {
     const Comments = await CommentModel.find({ blog: req.params.id })
+        .populate({ path: 'user', select: ['name', 'profilePicture'] });
     if (Comments == []) {
         return next(new AppError('Be the first to comment', 404));
     }

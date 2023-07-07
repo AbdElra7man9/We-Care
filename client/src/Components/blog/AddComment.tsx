@@ -1,41 +1,24 @@
 "use client";
-import GetError from "@lib/GetError";
-import { useSigninUserMutation } from "@Redux/APIs/AuthApi";
+import { useCreateCommentMutation } from "@Redux/APIs/CommentsApi";
 import React, { useState, useRef, useEffect } from "react";
-import { ImSpinner7 } from "react-icons/im";
+import { toast } from "react-hot-toast";
+import { ImSpinner9 } from "react-icons/im";
 
-interface Inputs {
-    name: string;
-    department: string;
-    doctor: string;
-    email: string;
-    phone: string;
-    message: string;
-}
 
-export default function AddComment(): JSX.Element {
-    const userRef = useRef<HTMLInputElement>(null);
-    const [inputs, setInputs] = useState<Inputs>({
-        name: "",
-        department: "",
-        doctor: "",
-        email: "",
-        phone: "",
-        message: "",
-    });
-    const handleChange = ({
-        currentTarget: input,
-    }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setInputs({ ...inputs, [input.name]: input.value });
-    };
-    const [signin, { isLoading, isError, error }] = useSigninUserMutation();
-    // useEffect(() => {
-    //   userRef.current.focus()
-    // }, []);
+export default function AddComment({ blogId }: { blogId: string }): JSX.Element {
+
+    const [content, setContent] = useState<string>('');
+    const [createComment, { isLoading }] = useCreateCommentMutation();
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const { email, name, department, doctor, phone, message } = inputs;
-        const data = { email, name, department, doctor, phone, message };
+        createComment({ blogId, content }).unwrap()
+            .then(() => {
+                toast.success('Comment added successfully')
+            })
+            .catch(error => {
+                toast.error(error.data.message)
+            })
     };
 
     return (
@@ -48,19 +31,20 @@ export default function AddComment(): JSX.Element {
                     placeholder="content..."
                     cols={60}
                     rows={5}
+                    onChange={(e) => setContent(e.target.value)}
                     className="border p-3 outline-none inputfield rounded-lg g-24"
                 />
 
                 <button
                     aria-label='submit'
                     type='submit'
-                    className='btn-primary mt-4'
+                    className='btn-primary mt-4 h-12'
                     disabled={isLoading}
                 >
-                    {isLoading ? <span className='flex items-center justify-center text-2xl py-1 animate-spin'>
-                        <ImSpinner7 /> </span> : 'Add Comment'}
+                    {isLoading ? <span className='flex items-center justify-center text-2xl animate-spin'>
+                        <ImSpinner9 />
+                    </span> : 'Add Comment'}
                 </button>
-                {isError && <GetError error={error} />}
             </form>
         </>
     );
