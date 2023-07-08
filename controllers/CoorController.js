@@ -32,12 +32,3 @@ exports.DeleteReview = catchAsync(async function (req, res, next) {
   //     })
   //     .catch((error) => { return next(new AppError(error.message, 500)) })
 });
-
-exports.getAllPatients = catchAsync(async (req, res, next) => {
-  const patients = Patient.find();
-  res.status(200).json({
-    status: 'success',
-    results: patients.length,
-    patients,
-  });
-});

@@ -1,5 +1,5 @@
 const express = require('express');
-
+const restrictTo = require('../Middlewares/restrictTo');
 const {
   userLogin,
   updatePassword,
@@ -14,6 +14,7 @@ const {
   updateInfo,
   deleteMe,
   getUser,
+  getMyData,
 } = require('../controllers/userController');
 const protect = require('../Middlewares/protect');
 const mustConfirmed = require('../Middlewares/mustConfirmed');
@@ -28,6 +29,7 @@ router.get('/refresh', Refresh);
 router.post('/forgotPassword', forgotPassword);
 // routes need to authentication
 router.use(protect);
+router.get('/myData', getMyData);
 router.post('/emailConfirmation', emailConfirmation);
 router.post('/resendPin', resendPIN);
 router.use(mustConfirmed);
