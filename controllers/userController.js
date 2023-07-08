@@ -4,6 +4,15 @@ const catchAsync = require('../utils/catchAsync');
 const filterObject = require('../utils/filterObject');
 const AppError = require('../utils/AppError');
 
+exports.getMyData = catchAsync(async (req, res, next) => {
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+  res.status(200).json({
+    status: 'success',
+    user: user,
+  });
+});
+
 exports.updateInfo = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
     return next(
