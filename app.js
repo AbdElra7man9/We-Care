@@ -19,6 +19,7 @@ const userRouter = require('./routes/userRouter');
 const googleAuthRouter = require('./routes/googleAuthRouter');
 const appointmentRouter = require('./routes/appointmentRouter');
 const reviewRouter = require('./routes/reviewRouter');
+const bookingRouter = require('./routes/bookingRouter');
 const ChatRouter = require('./routes/ChatRouter');
 const MessageRouter = require('./routes/MessageRouter');
 const BlogRouter = require('./routes/BlogRouter');
@@ -85,6 +86,9 @@ app.use('/api/v1/appointments', appointmentRouter);
 
 //review routs
 app.use('/api/v1/reviews', reviewRouter);
+
+//booking routs
+app.use('/api/v1/bookings', bookingRouter);
 
 //contacts routs
 app.use('/api/v1/contacts', contactRouter);

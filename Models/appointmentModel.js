@@ -28,6 +28,9 @@ const appointmentSchema = mongoose.Schema({
     type: Date,
     required: [true, 'appointment must have a date'],
   },
+  payTime: {
+    type: Date,
+  },
   price: {
     type: Number,
     required: [true, 'appointment must have a price'],
