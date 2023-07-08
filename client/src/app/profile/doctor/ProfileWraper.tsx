@@ -6,6 +6,7 @@ import React from "react";
 import { motion } from 'framer-motion';
 import { useAppSelector } from "@Hooks/useRedux";
 import { selectCurrentUser } from "@Redux/Slices/UserSlice";
+import { userType } from "@lib/types/user";
 
 interface SpecProps {
   value: number;
@@ -16,9 +17,11 @@ export default function ProfileWraper({ children }: { children: React.ReactNode 
     value: 90
   };
   const pathname = usePathname();
-  const userInfo = useAppSelector(selectCurrentUser)
-  const profile = (pathname?.includes(`${userInfo.username}`));
-  const profileSettings = (pathname?.includes('settings'));
+  const userInfo = useAppSelector(selectCurrentUser) as userType
+  const userProfile = (pathname?.includes(`${userInfo.username}`));
+  const userSettings = (pathname?.includes('settings'));
+  const userReviews = (pathname?.includes('reviews'));
+  const userTimetable = (pathname?.includes('timetable'));
 
 
   return (
@@ -36,12 +39,9 @@ export default function ProfileWraper({ children }: { children: React.ReactNode 
             />
             <div className='text-start w-full flex flex-col justify-center gap-y-5'>
               <p className='text-gray-800 text-lg font-semibold'>Good morning!</p>
-              <p className='text-xl font-bold text-blue-600'>Dr. Christopher Burrell</p>
-              <p className='text-gray-500 text-sm'>
-                {`Great doctor if you need your family member to get effective immediate assistance, 
-                emergency treatment or a simple consultation.`}
-              </p>
-              <p className="font-semibold">You have <span className="text-blue-600">18 patients</span> remaining today!</p>
+              <p className='text-xl font-bold text-blue-600'>Dr. {userInfo.name}</p>
+              <p className='text-gray-500 text-sm'>{userInfo.bio}</p>
+              <p className="font-semibold">You have <span className="text-blue-600">{userInfo?.patients?.length as number} patients</span>!</p>
               <div className='mb-5'>
                 <div className='flex justify-between text-gray-500 mb-2'>
                   <p className='font-medium text-gray-600'>Complete your profile</p>
@@ -68,29 +68,29 @@ export default function ProfileWraper({ children }: { children: React.ReactNode 
                 href={`/profile/${userInfo.username}`}
                 aria-label='profile'
                 draggable={false}
-                className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${profile && '!bg-blue-500 text-white'}`}>
+                className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${userProfile && '!bg-blue-500 text-white'}`}>
                 Profile
               </Link>
               <Link
-                href='/profile/settings'
+                href={`/profile/doctor/reviews`}
                 aria-label='settings'
                 draggable={false}
-                className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${profileSettings && '!bg-blue-500 text-white'}`}>
+                className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${userReviews && '!bg-blue-500 text-white'}`}>
                 Reviews
               </Link>
               <Link
-                href='/profile/settings'
+                href={`/profile/doctor/timetable`}
                 aria-label='settings'
                 draggable={false}
-                className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${profileSettings && '!bg-blue-500 text-white'}`}>
-                Location
+                className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${userTimetable && '!bg-blue-500 text-white'}`}>
+                Time Table
               </Link>
               <Link
-                href='/profile/settings'
+                href={`/profile/doctor/settings`}
                 aria-label='settings'
                 draggable={false}
-                className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${profileSettings && '!bg-blue-500 text-white'}`}>
-                Time Table
+                className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${userSettings && '!bg-blue-500 text-white'}`}>
+                settings
               </Link>
             </div>
             <div className='p-5'>

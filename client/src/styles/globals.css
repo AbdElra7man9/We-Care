@@ -39,7 +39,7 @@ html {
 }
 .btn-primary{
     @apply
-    bg-blue-500 rounded-md text-base font-bold text-white py-2 mb-3 focus:bg-blue-400 
+    bg-blue-500 rounded-md text-base font-bold text-white py-2 mb-3 active:bg-blue-400 
 }
 .fc-daygrid-day-number{
     @apply

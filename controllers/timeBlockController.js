@@ -16,7 +16,7 @@ exports.addTimeBlock = catchAsync(async (req, res, next) => {
     if (
       (newTimeBlock.startTime <= TB.startTime &&
         newTimeBlock.period * 60 * 60 * 1000 >
-          TB.startTime - newTimeBlock.startTime) ||
+        TB.startTime - newTimeBlock.startTime) ||
       (newTimeBlock.startTime >= TB.startTime &&
         TB.period * 60 * 60 * 1000 > newTimeBlock.startTime - TB.startTime)
     ) {
@@ -49,4 +49,28 @@ exports.addTimeBlock = catchAsync(async (req, res, next) => {
   await req.user.save({ validateBeforeSave: false });
 
   return res.status(200).json(newTimeBlock);
+});
+
+exports.getTimeBlocks = catchAsync(async (req, res, next) => {
+  const today = new Date();
+  const startOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay());
+  const endOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 6);
+  console.log('startOfWeek', startOfWeek)
+  console.log('endOfWeek', endOfWeek)
+  const TimeBlocks = await TimeBlock.find({
+    doctor: req.user.id,
+    $and: [
+      { startTime: { $gte: startOfWeek } },
+      // { startTime: { $lte: endOfWeek } }
+    ]
+  }).sort('startTime');
+  console.log(TimeBlocks)
+  if (!TimeBlocks || TimeBlocks.length === 0) {
+    return next(new AppError("No Timeblocks found for this week", 401));
+  }
+
+  res.json({
+    message: 'success',
+    TimeBlocks
+  });
 });

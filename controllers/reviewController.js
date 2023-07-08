@@ -106,8 +106,9 @@ exports.doctorReview = catchAsync(async function (req, res, next) {
         reviews,
     });
 });
+
 exports.doctorLogedReviews = catchAsync(async function (req, res, next) {
-    const reviewsNum = await Review.count({ doctor: req.params.id });
+    const reviewsNum = await Review.count({ doctor: req.user.id });
     const features = new Features(Review.find({ doctor: req.user.id }), req.query)
         .Paginate();
     const reviews = await features.query;

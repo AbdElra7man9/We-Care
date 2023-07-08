@@ -14,10 +14,23 @@ export const UserApi = apiSlice.injectEndpoints({
         getUserById: builder.query<{ status: string; user: userType }, { username: string }>({
             query: ({ username }) => ({
                 url: `/api/v1/users/${username}`,
-                method:'GET'
+                method: 'GET'
             }),
             providesTags: ['Auth'],
-        })
+        }),
+        updateUserInfo: builder.mutation<{ user: userType, message: string }, { username?: string, email?: string, specialization?: string, bio?: string, name?: string }>({
+            query: ({ username, specialization, email, name, bio }) => ({
+                url: `/api/v1/users/updateInfo`,
+                method: 'PUT',
+                body: { username, specialization, email, name, bio },
+            }),
+        }),
+        DeleteMe: builder.mutation<{ message: string }, void>({
+            query: () => ({
+                url: `/api/v1/users/deleteMe`,
+                method: 'DELETE',
+            }),
+        }),
     }),
 
 });
@@ -25,4 +38,6 @@ export const UserApi = apiSlice.injectEndpoints({
 export const {
     useSearchQuery,
     useGetUserByIdQuery,
+    useDeleteMeMutation,
+    useUpdateUserInfoMutation,
 } = UserApi;

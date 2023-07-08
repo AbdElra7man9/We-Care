@@ -125,10 +125,10 @@ const BlogDetailsPage: FC<BlogProps> = ({ blogId }) => {
                                     className='w-32 h-24 rounded-lg object-cover'
                                 />
                             }
-                            <span>
+                            <Link href={`/blogs/${BlogDetails?._id}`}>
                                 <p className='font-medium text-lg text-gray-600'>{doc.des}</p>
                                 <p className='text-slate-500 text-sm'>{moment(doc.createdAt).calendar()}</p>
-                            </span>
+                            </Link>
                         </div>
                     ))}
                     {/* <h2 className='py-3 font-medium text-lg'>Tags Cloud</h2> */}

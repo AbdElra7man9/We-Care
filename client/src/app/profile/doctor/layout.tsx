@@ -19,7 +19,7 @@ export default async function RootLayout({
   // if (!session || !doctor) {
   //   return notFound()
   // }
-  return (
+  return (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     <>
       <Header isFull={false} />
       <Chat />

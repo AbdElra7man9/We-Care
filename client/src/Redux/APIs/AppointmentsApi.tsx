@@ -1,9 +1,8 @@
 'use client';
 import { iAppointments } from '@lib/types/appointment';
-import { BlogType } from '@lib/types/blog';
 import { apiSlice } from '../ApiSlice';
 
-export const BlogsApi = apiSlice.injectEndpoints({
+export const AppointmentApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         GetAppointments: builder.query<{ upcomingApointments: iAppointments[], pastAppointment: iAppointments[] }, void>({
             query: () => ({
@@ -47,4 +46,4 @@ export const {
     useGetAppointmentsQuery,
     useGetAvailableDoctorAppointmentsByDayQuery,
     useGetAvailableDoctorAppointmentsQuery,
-} = BlogsApi;
+} = AppointmentApi;

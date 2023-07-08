@@ -146,11 +146,13 @@ export const AuthApi = apiSlice.injectEndpoints({
             }),
 
         }),
-        ChangePassword: builder.mutation({
-            query: (data) => ({
-                url: `/api/auth/changepassword`,
-                method: 'PUT',
-                body: data
+        ChangePassword: builder.mutation<{ user: userType; message: string }, {
+            passwordCurrent: string, password: string, passwordConfirm: string
+        }>({
+            query: ({ passwordCurrent, password, passwordConfirm }) => ({
+                url: `/api/v1/users/updatePassword`,
+                method: 'PATCH',
+                body: { passwordCurrent, password, passwordConfirm }
             }),
             invalidatesTags: ['Auth'],
         }),

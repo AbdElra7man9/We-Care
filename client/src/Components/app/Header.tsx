@@ -69,8 +69,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
             <BsSearch size={18} />
           </span>
         </div>
-
-      </form >
+      </form>
     )
   }
 
@@ -83,11 +82,11 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
       <>
         <Link aria-label='home' href="/" className="hover:text-blue-600">Home</Link>
         {doctor ?
-          <Link aria-label='doctor' href="/doctor/doctor-dashboard">Doctor</Link>
+          <Link aria-label='doctor' href="/doctor/doctor-dashboard">Dashboard</Link>
           : patient ?
-            <Link aria-label='patients' href="/patient/dashboard/overflow">Patients</Link>
+            <Link aria-label='patients' href="/patient/dashboard/overflow">Dashboard</Link>
             : admin &&
-            <Link aria-label='admin' href="/admin/admin-dashboard">Admin</Link>
+            <Link aria-label='admin' href="/admin/admin-dashboard">Dashboard</Link>
 
         }
         {/* <Link aria-label='pharmacy' href='/'>Pharmacy</Link> */}
@@ -105,7 +104,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
           <SearchPanel onClose={() => { setIsSearchPanel(false) }} />
         }
       </AnimatePresence>
-      <header
+      <div
         className={`top-0 z-10 container max-w-full duration-300 inset-x-0  bg-transparent absolute
         ${(pos === "top")
             ? "absolute"
@@ -194,7 +193,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
             <NavLinks />
           </div>
         )}
-      </header>
+      </div>
     </>
   );
 }

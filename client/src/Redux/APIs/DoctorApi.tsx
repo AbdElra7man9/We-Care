@@ -101,6 +101,7 @@ export const DoctorsApi = apiSlice.injectEndpoints({
                 body: data,
             }),
         }),
+
     }),
 });
 

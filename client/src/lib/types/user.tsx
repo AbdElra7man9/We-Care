@@ -16,11 +16,12 @@ export type userType = {
     emailConfirm?: string;
     numberOfRating?: string;
     gender?: string;
-    age?:string;
+    age?: string;
     timeTable?: string;
-    patients?: string;
+    patients?: string[];
     ScheduleTiming?: string;
-    appointments?: iAppointments | null;
+    bio: string;
+    appointments?: iAppointments[] | null;
 
     _id?: string;
     __t?: 'Doctor' | 'Patient' | 'Coordinator';
@@ -33,6 +34,6 @@ export type userType = {
 export interface AuthState {
     status?: string;
     token?: string;
-    expires?:string;
+    expires?: string;
     user?: userType
 }

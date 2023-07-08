@@ -25,7 +25,7 @@ export default function Providers({ children, session }: providersProps) {
             <ThemeProvider attribute="class" defaultTheme="system">
               {/* <MessagesProvider> */}
               <div className=" dark:text-gray-500 text-gray-700 transition-colors duration-300 min-h-screen">
-                <Toaster position='top-center' reverseOrder={false} />
+                <Toaster position='bottom-center' reverseOrder={false} />
                 {children}
               </div>
               {/* </MessagesProvider> */}
