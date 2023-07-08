@@ -1,6 +1,6 @@
 "use client";
 import { iAppointments } from "@lib/types/appointment";
-import { useBookAppointmentsMutation, useGetAvailableDoctorAppointmentsQuery } from "@Redux/APIs/AppointmentsApi";
+import { useBookAppointmentsMutation, useGetAvailableDaysQuery, useGetAvailableDoctorAppointmentsQuery } from "@Redux/APIs/AppointmentsApi";
 import moment from "moment";
 import { useParams } from "next/navigation";
 import React, { useState, useRef, FC, useEffect } from "react";
@@ -19,13 +19,15 @@ interface OptionType {
 const Form: FC<FormProps> = ({ }) => {
     const params = useParams() as { doctorId: string }
     const doctorId = params.doctorId
-    const { data } = useGetAvailableDoctorAppointmentsQuery({ doctorId });
-    const { availableAppointments } = data || {};
     const [AppointmentID, setSelectedAppointmentID] = useState<string>('');
+    const { data: AvailableDaysData } = useGetAvailableDaysQuery({ doctorId });
+    const { data } = useGetAvailableDoctorAppointmentsQuery({ doctorId });
+    const { availableDayes } = AvailableDaysData || {}
+    const { availableAppointments } = data || {};
 
-    const appointmentOptions = availableAppointments?.map(appointment => ({
-        label: moment(appointment.date).format('MMMM Do YYYY, h:mm:ss a'),
-        value: appointment._id,
+    const appointmentOptions = availableDayes?.map(appointment => ({
+        label: moment(appointment).format('dddd'),
+        value: appointment,
     }));
     const handleChange = (selectedOption: OptionType | null) => {
         setSelectedAppointmentID(selectedOption ? selectedOption.value : '');

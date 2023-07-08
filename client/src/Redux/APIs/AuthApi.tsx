@@ -98,7 +98,7 @@ export const AuthApi = apiSlice.injectEndpoints({
         }),
         logOut: builder.mutation<{ message: string }, void>({
             query: () => ({
-                url: '/api/auth/logout',
+                url: '/api/v1/users/logout',
                 method: 'POST',
 
             }),

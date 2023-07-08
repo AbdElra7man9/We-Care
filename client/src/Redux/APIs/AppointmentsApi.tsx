@@ -18,6 +18,20 @@ export const AppointmentApi = apiSlice.injectEndpoints({
             }),
             providesTags: ['Appointments']
         }),
+        GetAvailableDays: builder.query<{ availableDayes: string[] }, { doctorId: string }>({
+            query: ({ doctorId }) => ({
+                url: `/api/v1/appointments/availabledays/${doctorId}`,
+                method: 'GET',
+            }),
+            providesTags: ['Appointments']
+        }),
+        GetBookedAppointments: builder.query<{ availableAppointments: iAppointments[] }, { doctorId: string }>({
+            query: ({ doctorId }) => ({
+                url: `/api/v1/appointments/availabledays/${doctorId}`,
+                method: 'GET',
+            }),
+            providesTags: ['Appointments']
+        }),
         GetAvailableDoctorAppointmentsByDay: builder.query<{ availableAppointmentsByDay: iAppointments }, { appointmentId: number, day: string }>({
             query: ({ appointmentId, day }) => ({
                 url: `/api/v1/appointments/availableByday/${appointmentId}`,
@@ -46,4 +60,6 @@ export const {
     useGetAppointmentsQuery,
     useGetAvailableDoctorAppointmentsByDayQuery,
     useGetAvailableDoctorAppointmentsQuery,
+    useGetAvailableDaysQuery,
+    useGetBookedAppointmentsQuery,
 } = AppointmentApi;

@@ -59,10 +59,7 @@ exports.getTimeBlocks = catchAsync(async (req, res, next) => {
   console.log('endOfWeek', endOfWeek)
   const TimeBlocks = await TimeBlock.find({
     doctor: req.user.id,
-    $and: [
-      { startTime: { $gte: startOfWeek } },
-      // { startTime: { $lte: endOfWeek } }
-    ]
+    startTime: { $gte: startOfWeek, $lte: endOfWeek }
   }).sort('startTime');
   console.log(TimeBlocks)
   if (!TimeBlocks || TimeBlocks.length === 0) {

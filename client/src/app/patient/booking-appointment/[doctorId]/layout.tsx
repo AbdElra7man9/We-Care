@@ -4,7 +4,7 @@ import MainBookingWrapper from "./MainBookingWrapper";
 export const metadata = {
   title: "Make appointment",
 };
-export default function RootLayout({
+export default function Layout({
   children,
 }: {
   children: React.ReactNode;
