@@ -81,7 +81,7 @@ exports.userBlogById = catchAsync(async (req, res, next) => {
   const features = new Features(
     BlogModel.find({ user: req.params.id }),
     req.query
-  ).Pagination(resultperpage);
+  ).Paginate();
 
   const userBLOGs = await features.query
     .populate({ path: 'user', select: ['name', 'profilePicture'] })
@@ -97,9 +97,7 @@ exports.userBlogById = catchAsync(async (req, res, next) => {
 
 exports.AllBlogs = catchAsync(async (req, res, next) => {
   const resultperpage = req.body.limit;
-  const features = new Features(BlogModel.find(), req.query).Pagination(
-    resultperpage
-  );
+  const features = new Features(BlogModel.find(), req.query).Paginate();
 
   const Blogs = await features.query
     .populate({ path: 'user', select: ['name', 'profilePicture'] })
