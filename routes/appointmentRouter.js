@@ -14,6 +14,7 @@ const restrictTo = require('../Middlewares/restrictTo');
 
 const router = express.Router();
 
+router.get('/MyBooked', protect, restrictTo('Doctor'), getMyBookedAppointments);
 //protected routs
 router.get('/availableByday/:doctorID', getAvailableDoctorAppointmentsByDay);
 router.get('/availabledays/:doctorID', getAvailableDoctorDays);
@@ -26,5 +27,4 @@ router.get('/:appointmentId', getAppointmentById);
 router.post('/book', restrictTo('Patient'), bookAppointment);
 
 //protected routs and restrict to doctor
-router.get('/MyBooked', restrictTo('Doctor'), getMyBookedAppointments);
 module.exports = router;
