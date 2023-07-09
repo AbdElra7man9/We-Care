@@ -72,7 +72,7 @@ exports.getAvailableDoctorAppointmentsByDay = catchAsync(
     const doctor = await Doctor.findById(req.params.doctorID).populate(
       'appointments'
     );
-    const day = new Date(req.body.day);
+    const day = new Date(req.query.day);
 
     const allAppointments = doctor.appointments;
     const availableAppointmentsByDay = [];

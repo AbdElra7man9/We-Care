@@ -32,20 +32,20 @@ export const AppointmentApi = apiSlice.injectEndpoints({
             }),
             providesTags: ['Appointments']
         }),
-        GetAvailableDoctorAppointmentsByDay: builder.query<{ availableAppointmentsByDay: iAppointments }, { appointmentId: number, day: string }>({
-            query: ({ appointmentId, day }) => ({
-                url: `/api/v1/appointments/availableByday/${appointmentId}`,
+        GetAvailableDoctorAppointmentsByDay: builder.query<{ availableAppointmentsByDay: iAppointments }, { doctorId: string, day: string }>({
+            query: ({ doctorId, day }) => ({
+                url: `/api/v1/appointments/availableByday/${doctorId}`,
                 method: 'GET',
                 body: { day }
             }),
             providesTags: ['Appointments']
         }),
 
-        BookAppointments: builder.mutation<{ appointment: iAppointments, messsage: string }, { AppointmentID: string }>({
-            query: ({ AppointmentID }) => ({
+        BookAppointments: builder.mutation<{ appointment: iAppointments, messsage: string }, { AppointmentID: string, comment :string}>({
+            query: ({ AppointmentID, comment }) => ({
                 url: '/api/v1/appointments/book',
                 method: 'POST',
-                body: { AppointmentID },
+                body: { AppointmentID, comment },
             }),
             invalidatesTags: ['Appointments'],
 
