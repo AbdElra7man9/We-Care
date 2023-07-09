@@ -41,7 +41,17 @@ exports.GetComments = catchAsync(async (req, res, next) => {
         Comments
     })
 });
-
+exports.GetLikes = catchAsync(async (req, res, next) => {
+    const likes = await LikeModel.find({ blog: req.params.id })
+        .populate({ path: 'user', select: ['name', 'profilePicture'] });
+    if (likes == []) {
+        return next(new AppError('Be the first to like', 404));
+    }
+    return res.json({
+        status: 'success',
+        likes
+    })
+});
 exports.Like = catchAsync(async (req, res, next) => {
     const like = await new LikeModel({
         user: req.user.id,
