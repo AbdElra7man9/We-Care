@@ -160,12 +160,16 @@ exports.getMyAppointments = catchAsync(async (req, res, next) => {
   if (user.__t == 'Patient') {
     allAppointments = await Appointment.find({
       patient: user._id,
-    }).populate({ path: 'doctor', select: ['name', 'profilePicture'] });
+    })
+      .populate({ path: 'doctor', select: ['name', 'profilePicture'] })
+      .populate({ path: 'patient', select: '_id' });
   }
   if (user.__t == 'Doctor') {
     allAppointments = await Appointment.find({
       doctor: user._id,
-    }).populate({ path: 'patient', select: ['name', 'profilePicture'] });
+    })
+      .populate({ path: 'patient', select: ['name', 'profilePicture'] })
+      .populate({ path: 'doctor', select: '_id' });
   }
   allAppointments.forEach((appointment) => {
     if (appointment.date > Date.now()) upcomingApointments.push(appointment);
