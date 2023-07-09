@@ -4,6 +4,9 @@ const User = require('./userModel');
 const { specialists } = require('../data');
 doctorSchema = new mongoose.Schema(
   {
+    bio: {
+      type: String,
+    },
     specialization: {
       type: String,
       required: [true, 'A doctor must have a specialization'],

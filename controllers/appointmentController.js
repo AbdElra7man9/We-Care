@@ -19,6 +19,7 @@ exports.getAllDoctorAppointments = catchAsync(async (req, res, next) => {
   }
   res.json({
     status: 'success',
+    results: allAppointments.length,
     allAppointments,
   });
 });
@@ -38,6 +39,7 @@ exports.getAvailableDoctorAppointments = catchAsync(async (req, res, next) => {
   }
   res.json({
     status: 'success',
+    results: availableAppointments.length,
     availableAppointments,
   });
 });
@@ -73,17 +75,31 @@ exports.getAvailableDoctorAppointmentsByDay = catchAsync(
       'appointments'
     );
     const day = new Date(req.query.day);
-
+    const type = req.query?.type;
     const allAppointments = doctor.appointments;
     const availableAppointmentsByDay = [];
-
     allAppointments.forEach((appointment) => {
-      //   console.log(day.getTime());
-      //   console.log(dateToEpoch(appointment.date));
+      // console.log(
+      //   type,
+      //   '     ',
+      //   appointment.type,
+      //   '    ',
+      //   type ? appointment.type === type : true
+      // );
+      // console.log(
+      //   appointment.status === 'available',
+      //   '     ',
+      //   appointment.date > Date.now(),
+      //   '     ',
+      //   day.getTime() == dateToEpoch(appointment.date),
+      //   '     ',
+      //   type ? appointment.type === type : true
+      // );
       if (
         appointment.status === 'available' &&
         appointment.date > Date.now() &&
-        day.getTime() == dateToEpoch(appointment.date)
+        day.getTime() == dateToEpoch(appointment.date) &&
+        (type ? appointment.type === type : true)
       )
         availableAppointmentsByDay.push(appointment);
     });
@@ -92,6 +108,7 @@ exports.getAvailableDoctorAppointmentsByDay = catchAsync(
     }
     res.json({
       status: 'success',
+      results: availableAppointmentsByDay.length,
       availableAppointmentsByDay,
     });
   }

@@ -22,7 +22,13 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
       )
     );
   }
-  const filteredInfo = filterObject(req.body, 'name', 'username');
+  const filteredInfo = filterObject(
+    req.body,
+    'name',
+    'username',
+    'bio',
+    'fees'
+  );
   if (req.file)
     filteredInfo.profilePicture = path.join(
       __dirname,
