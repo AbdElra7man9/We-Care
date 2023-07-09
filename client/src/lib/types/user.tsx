@@ -4,6 +4,7 @@ import { ImageType } from "./Feature";
 
 export type userType = {
     name?: string;
+    bio?: string;
     email?: string;
     username?: string;
     confirmed?: boolean;
@@ -20,7 +21,6 @@ export type userType = {
     timeTable?: string;
     patients?: string[];
     ScheduleTiming?: string;
-    bio: string;
     appointments?: iAppointments[] | null;
 
     _id?: string;
