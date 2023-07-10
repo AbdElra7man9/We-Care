@@ -12,9 +12,10 @@ exports.getAppointmentById = catchAsync(async (req, res, next) => {
 });
 // APIs patients can do on "Doctor" model
 exports.getAllDoctorAppointments = catchAsync(async (req, res, next) => {
-  const doctor = await Doctor.findById(req.params.doctorID).populate(
-    'appointments'
-  );
+  const doctor = await Doctor.findById(req.params.doctorID).populate({
+    path: 'appointments',
+    select: ['-doctor'],
+  });
   const allAppointments = doctor.appointments;
   if (!doctor) {
     return next(new AppError('there is no doctor by this ID', 400));
@@ -27,9 +28,11 @@ exports.getAllDoctorAppointments = catchAsync(async (req, res, next) => {
 });
 
 exports.getAvailableDoctorAppointments = catchAsync(async (req, res, next) => {
-  const doctor = await Doctor.findById(req.params.doctorID)
-    .populate('appointments')
-    .populate({ path: 'doctor', select: '_id' });
+  const doctor = await Doctor.findById(req.params.doctorID).populate({
+    path: 'appointments',
+    select: ['-doctor'],
+  });
+
   const allAppointments = doctor.appointments;
   const availableAppointments = [];
   allAppointments.forEach((appointment) => {
@@ -73,9 +76,10 @@ exports.getAvailableDoctorDays = catchAsync(async (req, res, next) => {
 
 exports.getAvailableDoctorAppointmentsByDay = catchAsync(
   async (req, res, next) => {
-    const doctor = await Doctor.findById(req.params.doctorID).populate(
-      'appointments'
-    );
+    const doctor = await Doctor.findById(req.params.doctorID).populate({
+      path: 'appointments',
+      select: '-doctor',
+    });
     const day = new Date(req.query.day);
     const type = req.query?.type;
     const allAppointments = doctor.appointments;
@@ -118,9 +122,9 @@ exports.getAvailableDoctorAppointmentsByDay = catchAsync(
 
 exports.bookAppointment = catchAsync(async (req, res, next) => {
   const patient = req.user;
-  const appointment = await Appointment.findById(req.body.AppointmentID)
-    .populate({ path: 'doctor', select: ['specialization', 'name'] })
-    .populate({ path: 'patient', select: '_id' });
+  const appointment = await Appointment.findById(
+    req.body.AppointmentID
+  ).populate({ path: 'doctor', select: ['specialization', 'name'] });
   if (appointment?.patient?._id.toString() === patient._id.toString())
     return next(new AppError('You already booked this appointment', 400));
   if (appointment.status !== 'available')
@@ -132,6 +136,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   appointment.comment = req.body.comment;
   doctor.patients.push(patient._id);
   await doctor.save({ validateBeforeSave: false });
+  appointment.populate({ path: 'patient', select: '_id' });
   await appointment.save({ validateBeforeSave: false });
   res.status(200).json({
     status: 'success',
