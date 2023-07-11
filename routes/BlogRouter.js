@@ -12,9 +12,12 @@ const restrictTo = require('../Middlewares/restrictTo');
 const protect = require('../Middlewares/protect');
 
 const router = express.Router();
-router.use(protect, restrictTo('Doctor', 'Coordinator')); // for best practice you can add router only one :)
-router.route('/').post(NewBlog).delete(DeleteBLOG).get(AllBlogs);
-router.get('/user', userBLOG);
-router.get('/:id', userBlogById);
+router.get('/', AllBlogs);
 router.get('/details/:id', GetBlogDetails);
+router.get('/:id', userBlogById);
+router.get('/user', protect, userBLOG);
+router.post('/', protect, NewBlog);
+router.delete('/', protect, DeleteBLOG);
+// router.use(protect, restrictTo('Doctor', 'Coordinator')); // for best practice you can add router only one :)
+// router.route('/').post(NewBlog).delete(DeleteBLOG);
 module.exports = router;
