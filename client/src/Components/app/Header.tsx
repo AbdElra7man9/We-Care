@@ -171,7 +171,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
                   height={200}
                   width={200}
                   className="h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
-                  src="/Images/Doctors/01.jpg"
+                  src={userInfo.profilePicture as string}
                   alt=""
                 />
               </Link>

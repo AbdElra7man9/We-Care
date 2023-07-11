@@ -20,9 +20,7 @@ const GetData: FC<GetDataProps> = ({ }) => {
     const dispatch = useAppDispatch()
     const { isModalAddBlog } = useAppSelector(state => state.Features)
 
-    if (!doctorBlogs) {
-        return null
-    }
+
     return (
         <>
             <AnimatePresence>
@@ -57,7 +55,7 @@ const GetData: FC<GetDataProps> = ({ }) => {
             </div>
             <div className=' py-5 dark:text-white'>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xxl:grid-cols-4 gap-8 py-5'>
-                    {(doctorBlogs.length === 0) ?
+                    {(doctorBlogs?.length === 0) ?
                         <div className='flex justify-center items-center h-96 w-full'>
                             <p className='text-balck dark:text-slate-100'>No Blogs Founded</p>
                         </div>

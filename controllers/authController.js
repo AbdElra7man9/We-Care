@@ -130,8 +130,11 @@ exports.Refresh = catchAsync(async function (req, res, next) {
 exports.signOut = catchAsync(async (req, res, next) => {
   const token = null;
   res.cookie('jwt', token, {
-    expires: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
     httpOnly: true,
+    path: '/',
+    secure: process.env.NODE_ENV === "production" ? true : false,
+    expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
+    sameSite: 'none'
   });
   res.status(200).json({
     status: 'success',

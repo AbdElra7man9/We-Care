@@ -45,7 +45,7 @@ const BlogsData: FC<BlogsDataProps> = ({ }) => {
                                     <p className='text-sm text-gray-500'>{moment(blog?.createdAt).calendar()}</p>
                                 </div>
                             </div>
-                            <Link href={`/admin/blogs/${blog?._id}`} className='text-lg font-medium ellipse-2 h-16 hover:text-blue-500 dark:text-slate-400'>{blog?.des}</Link>
+                            <Link href={`/blogs/${blog?._id}`} className='text-lg font-medium ellipse-2 h-16 hover:text-blue-500 dark:text-slate-400'>{blog?.des}</Link>
                             <div className='flex justify-between items-center py-3'>
                                 <div className='flex items-center gap-3'>
                                     <div className='flex gap-2 items-center'>

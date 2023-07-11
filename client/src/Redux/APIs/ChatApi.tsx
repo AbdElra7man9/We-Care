@@ -14,27 +14,16 @@ export const ChatApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         NewChat: builder.mutation<{ status: string; chatId: string }, { id: string }>({
             query: ({ id }) => ({
-                url: `/api/v1/chat/${id}`,
+                url: `/api/v1/chats/${id}`,
                 method: 'Post',
             }),
             invalidatesTags: ['Chat', 'User'],
         }),
         GetUserChats: builder.query<ChatResponse, { page: 1 }>({
             query: ({ page }) => ({
-                url: `/api/v1/chat/all?page=${page}`,
+                url: `/api/v1/chats/all?page=${page}`,
                 method: 'GET',
             }),
-            // transformResponse(apiResponse, meta) {
-            //     // const totalCount = Number(meta.response.headers.get('X-Total-Count'));
-            //     let onlineStatus = false
-            //     for (let i = 0; i < apiResponse.length; i++) {
-            //         apiResponse[i].isOnline = onlineStatus; // add the new element to each object
-            //     }
-            //     return {
-            //         Chats: apiResponse,
-            //         totalCount: Number(apiResponse.length)
-            //     };
-            // },
             providesTags: ['Message'],
             async onCacheEntryAdded(
                 args,
@@ -46,19 +35,6 @@ export const ChatApi = apiSlice.injectEndpoints({
                 socket.on("connect", () => {
                     socket.emit("join", userId);
                 });
-                // try {
-                //     socket.on("getusers", (data) => {
-                //         for (let i = 0; i < chats.length; i++) {
-                //             const ckeckIsOnline = data?.some(user => user.userId === chats[i]?._id)
-                //             updateCachedData((draft) => {
-                //                 draft.Chats[i].isOnline = ckeckIsOnline
-                //             });
-                //         }
-
-                //     });
-
-                // } catch (err) { }
-
                 await cacheEntryRemoved;
                 socket.close();
             },
@@ -66,7 +42,7 @@ export const ChatApi = apiSlice.injectEndpoints({
 
         getMoreChats: builder.query<{ status: string; results: number; chats: ChatType[] }, { page: 1 }>({
             query: ({ page }) => ({
-                url: `/api/v1/chat/all?page=${page}`,
+                url: `/api/v1/chats/all?page=${page}`,
                 method: 'GET',
             }),
 
@@ -92,14 +68,6 @@ export const ChatApi = apiSlice.injectEndpoints({
                     }
                 },
             }),
-
-            // SingleChat: builder.query({
-            //     query: (id) => ({
-            //         url: `/api/chat/${id}`,
-            //         method: 'GET',
-            //     }),
-            //     providesTags: ['Chat', 'User'],
-            // }),
 
         }),
     });

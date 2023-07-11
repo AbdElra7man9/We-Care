@@ -15,7 +15,7 @@ exports.NewComment = catchAsync(async (req, res, next) => {
         user: req.user.id,
         blog: req.params.id
     }).save()
-
+    Comment.populate({ path: 'user', select: ['name', 'profilePicture'] });
     if (Comment) {
         await BlogModel.findByIdAndUpdate(req.params.id, {
             $inc: {

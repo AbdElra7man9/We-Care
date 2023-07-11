@@ -29,7 +29,7 @@ async function createPrice(product, price, currency) {
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   const appointment = await Appointment.findById(req.params.appointmentId);
   if (appointment.status == 'booked')
-  return next(new AppError("This appointment has been booked before", 401));
+    return next(new AppError("This appointment has been booked before", 401));
 
   // Create product and price objects
   const product = await createProduct(appointment.type);
@@ -46,8 +46,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
       },
     ],
     mode: 'payment',
-    success_url: `${process.env.client}/success`,
-    cancel_url: `${process.env.client}/cancel`,
+    success_url: `${process.env.client}/booking/${req.params.appointmentId}/success`,
+    cancel_url: `${process.env.client}/booking/${req.params.appointmentId}/cancel`,
   });
 
   res.status(200).json({
@@ -58,15 +58,15 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 
 // Utility function to give the status and appointmentId of paying from strip
-async function retrieveSession(sessionId,reqType) {
+async function retrieveSession(sessionId, reqType) {
   return new Promise((resolve, reject) => {
-    stripe.checkout.sessions.retrieve(sessionId, function(err, session) {
+    stripe.checkout.sessions.retrieve(sessionId, function (err, session) {
       if (err) {
         reject(err); // Pass the error to the promise's rejection handler
       } else {
-        if(reqType == 'payment_status'){
+        if (reqType == 'payment_status') {
           resolve(session.payment_status); // Pass the payment_status to the promise's resolution handler
-        }else if(reqType == 'client_reference_id'){
+        } else if (reqType == 'client_reference_id') {
           resolve(session.client_reference_id);  // Pass the client_reference_id to the promise's resolution handler
         }
       }
@@ -75,34 +75,36 @@ async function retrieveSession(sessionId,reqType) {
 }
 
 
-exports.createBookingCheckout = catchAsync(async(req,res,next) =>{
+exports.createBookingCheckout = catchAsync(async (req, res, next) => {
 
   const patientId = req.user._id;
-  const { appointmentId , sessionId } = req.body;
+  const comment = req.body.comment;
+  const { appointmentId, sessionId } = req.body;
   const appointment = await Appointment.findById(appointmentId);
   const doctor = await Doctor.findById(appointment.doctor);
-  const price = appointment.price ;
-  const paymentStatus = await retrieveSession(sessionId,'payment_status');
-  const clientReferenceId = await retrieveSession(sessionId,'client_reference_id');
+  const price = appointment.price;
+  const paymentStatus = await retrieveSession(sessionId, 'payment_status');
+  const clientReferenceId = await retrieveSession(sessionId, 'client_reference_id');
 
   if (paymentStatus == "unpaid")
-  return next(new AppError("you shoud pay first to book the appointment", 401));
+    return next(new AppError("you shoud pay first to book the appointment", 401));
 
   if (appointmentId != clientReferenceId)
-  return next(new AppError("you shoud pay your session first to book the appointment", 401));
+    return next(new AppError("you shoud pay your session first to book the appointment", 401));
 
   if (!appointmentId)
-  return next(new AppError("there is wrong with the appointment id from body req", 401));
+    return next(new AppError("there is wrong with the appointment id from body req", 401));
 
   if (!sessionId)
-  return next(new AppError("there is wrong with the session id from body req", 401));
+    return next(new AppError("there is wrong with the session id from body req", 401));
 
   if (appointment.status == 'booked')
-  return next(new AppError("This appointment has been booked before but contact us because you have paid to send your mony back", 401));
+    return next(new AppError("This appointment has been booked before but contact us because you have paid to send your mony back", 401));
 
   appointment.status = 'booked';
   appointment.paid = 'true';
   appointment.patient = patientId;
+  appointment.comment = comment;
   appointment.payTime = new Date();
   doctor.patients.push(patientId);
   // await Booking.create({appointmentId , patientId , price});

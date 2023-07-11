@@ -37,7 +37,6 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
         method: "POST",
         body: JSON.stringify(payload),
     });
-
     const stream = new ReadableStream({
         async start(controller) {
             // callback
@@ -69,6 +68,7 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
             // stream response (SSE) from OpenAI may be fragmented into multiple chunks
             // this ensures we properly read chunks and invoke an event for each SSE event stream
             const parser = createParser(onParse);
+            console.log(parser)
             // https://web.dev/streams/#asynchronous-iteration
             for await (const chunk of res.body as any) {
                 parser.feed(decoder.decode(chunk));
