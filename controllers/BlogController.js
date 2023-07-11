@@ -18,10 +18,10 @@ const BlogModel = require('../Models/BlogModel');
 exports.NewBlog = catchAsync(async (req, res, next) => {
   const { des, title } = req.body;
   let received = req.body.image;
-  if (!title || !des) {
-    return next(new AppError('Title and description are required'), 400);
+  // if (!title || !des) {
+  //   return next(new AppError('Title and description are required'), 400);
 
-  }
+  // }
   const result = await cloudinary.uploader.upload(received, {
     folder: 'Helth-Care/posts',
     transformation: [{ width: 1000, quality: 'auto' }],
