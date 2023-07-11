@@ -14,7 +14,7 @@ export const ChatApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         NewChat: builder.mutation<{ status: string; chatId: string }, { id: string }>({
             query: ({ id }) => ({
-                url: `/api/v1/chat/${id}`,
+                url: `/api/v1/chats/${id}`,
                 method: 'Post',
             }),
             invalidatesTags: ['Chat', 'User'],
@@ -66,7 +66,7 @@ export const ChatApi = apiSlice.injectEndpoints({
 
         getMoreChats: builder.query<{ status: string; results: number; chats: ChatType[] }, { page: 1 }>({
             query: ({ page }) => ({
-                url: `/api/v1/chat/all?page=${page}`,
+                url: `/api/v1/chats/all?page=${page}`,
                 method: 'GET',
             }),
 
