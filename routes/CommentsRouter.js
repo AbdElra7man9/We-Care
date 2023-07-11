@@ -12,8 +12,7 @@ const router = express.Router();
 
 router.get('/comments/:id', GetComments);
 router.get('/likes/:id', GetLikes);
-router.use(protect);
-router.post('/like/:id', Like);
-router.post('/unlike/:id', UnLike);
-router.post('/add-comment/:id', NewComment);
+router.post('/like/:id', protect, Like);
+router.post('/unlike/:id', protect, UnLike);
+router.post('/add-comment/:id', protect, NewComment);
 module.exports = router;
