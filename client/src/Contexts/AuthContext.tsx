@@ -1,9 +1,11 @@
+'use client'
 import { createContext, FC, useContext, useEffect, useState } from 'react';
 import { useRefreshMutation } from '@Redux/APIs/AuthApi';
 import { setCredentials } from '@Redux/Slices/UserSlice';
 import { useAppDispatch } from '@Hooks/useRedux';
 import Loadingscreen from '@Components/Layouts/Loadingscreen';
 import { userType } from '@lib/types/user';
+import { useSession } from 'next-auth/react';
 
 interface AuthContextProps {
     token?: string;
@@ -16,7 +18,8 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
 
     const [authState, setAuthState] = useState<AuthContextProps>({});
     const dispatch = useAppDispatch();
-    const [refresh, { isUninitialized, isLoading, isSuccess, isError }] = useRefreshMutation();
+    const [refresh] = useRefreshMutation();
+    const { status } = useSession();
 
     useEffect(() => {
         refresh()
@@ -31,13 +34,8 @@ export const AuthProvider: FC<{ children: React.ReactNode }> = ({ children }) =>
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (isLoading) {
-        // console.log(isUninitialized)
+    if (status === 'loading') {
         return <Loadingscreen />;
-    }
-
-    if (isError) {
-        // handle error
     }
 
     return <AuthContext.Provider value={authState}>{children}</AuthContext.Provider>;

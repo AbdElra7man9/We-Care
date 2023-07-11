@@ -2,6 +2,7 @@ import "@styles/globals.css";
 import { Inter } from "next/font/google";
 import Providers from "@app/Providers";
 import { siteConfig } from "@config/site";
+import RefreshProvider from "./RefreshProvider";
 
 export const metadata = {
   title: {
@@ -26,6 +27,7 @@ export const metadata = {
   },
 }
 const inter = Inter({ subsets: ["latin"] });
+
 export default function RootLayout({
   children,
 }: {
@@ -38,7 +40,9 @@ export default function RootLayout({
     >
       <body className="dark:bg-slate-900">
         <Providers>
-          {children}
+          {/* <RefreshProvider> */}
+            {children}
+          {/* </RefreshProvider> */}
         </Providers>
       </body>
     </html>
