@@ -6,7 +6,7 @@ const sharp = require('sharp');
 
 module.exports = (height, width, destination, fileName, quality = 90) => {
   return catchAsync(async (req, res, next) => {
-    if (!req.file) next();
+    if (!req.file) return next();
     req.file.filename = `${fileName}-${req.user._id}-${Date.now()}.jpeg`;
     await sharp(req.file.buffer)
       .resize(height, width)
