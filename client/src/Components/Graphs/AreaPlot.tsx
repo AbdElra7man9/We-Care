@@ -1,5 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import Chart from 'react-apexcharts';
+'use client';
+import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip } from 'chart.js';
+import { useRef, useEffect } from 'react';
 
 interface Data {
     timePeriod: string;
@@ -11,86 +12,77 @@ interface AreaPlotProps {
     data: Data[];
 }
 
+
 const AreaPlot: React.FC<AreaPlotProps> = ({ color, data }) => {
-    const chartRef = useRef<any>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const gradientFillId = `gradient-fill-${color}`;
 
     useEffect(() => {
-        if (chartRef.current && chartRef.current.updateOptions) { // Check if updateOptions method is available
-            const gradientFill = {
-                type: 'gradient',
-                gradient: {
-                    shade: 'light',
-                    type: 'vertical',
-                    shadeIntensity: 0.5,
-                    inverseColors: false,
-                    opacityFrom: 1,
-                    opacityTo: 0,
-                    stops: [0, 70, 100],
-                },
-            };
+        if (canvasRef.current) {
+            Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip);
 
-            const chartOptions = {
-                chart: {
-                    type: 'area',
-                    stacked: false,
-                    toolbar: {
-                        show: false,
-                    },
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                series: [
-                    {
-                        data: data.map((d) => d.value),
-                        name: 'Series 1',
-                        colors: [color],
-                    },
-                ],
-                fill: gradientFill,
-                stroke: {
-                    width: 2,
-                    curve: 'smooth',
-                },
-                markers: {
-                    size: 0,
-                },
-                xaxis: {
-                    categories: data.map((d) => d.timePeriod),
-                    labels: {
-                        show: false,
-                    },
-                    axisBorder: {
-                        show: false,
-                    },
-                },
-                yaxis: {
-                    show: false,
-                    labels: {
-                        show: false,
-                    },
-                    axisBorder: {
-                        show: false,
-                    },
-                },
-                tooltip: {
-                    enabled: true,
-                    intersect: false,
-                },
-                legend: {
-                    show: false,
-                },
-            };
+            const ctx = canvasRef.current.getContext('2d');
 
-            chartRef.current.updateOptions(chartOptions);
+            if (ctx) {
+                const gradientFill = ctx.createLinearGradient(0, 0, 0, 150);
+                gradientFill.addColorStop(0, color);
+                gradientFill.addColorStop(0.7, 'rgba(255, 255, 255, 0)');
+                gradientFill.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+                const chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.map((d) => d.timePeriod),
+                        datasets: [
+                            {
+                                data: data.map((d) => d.value),
+                                borderColor: color,
+                                backgroundColor: gradientFill,
+                                fill: true,
+                                tension: 0.4,
+                                borderWidth: 2,
+                                pointRadius: 0,
+                            },
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                display: false,
+                                grid: {
+                                    display: false,
+                                },
+                            },
+                            y: {
+                                display: false,
+                                grid: {
+                                    display: false,
+                                },
+                            },
+                        },
+                        plugins: {
+                            tooltip: {
+                                mode: 'nearest',
+                                intersect: false,
+                            },
+                            legend: {
+                                display: false,
+                            },
+                        },
+                    },
+                });
+
+                return () => {
+                    chart.destroy();
+                };
+            }
         }
-    }, [color, data]);
+    }, [canvasRef, color, data]);
 
     return (
         <div style={{ height: '70%', width: '100%' }}>
-            <Chart options={{}} series={[]} type="area" ref={chartRef} />
+            <canvas ref={canvasRef} className='!w-full' />
         </div>
     );
 };
-
-export default AreaPlot;
+export default AreaPlot

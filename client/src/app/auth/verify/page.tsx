@@ -18,7 +18,7 @@ export default function page() {
                                     src='/Images/logo-icon.png'
                                     alt='Logo Icon'
                                 />
-                                <p className='text-2xl font-bold'>Doctris</p>
+                                <p className='text-2xl font-bold'>We Care</p>
                             </div>
                         </Link>
 

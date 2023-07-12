@@ -21,7 +21,7 @@ export default function Footer() {
                                 className='w-10 h-10 rounded-xl'
                                 src="/Images/logo-icon.png"
                                 alt='' />
-                            <p className='text-2xl font-bold'>Doctris</p>
+                            <p className='text-2xl font-bold'>We Care</p>
                         </div>
                         <p className='text-gray-400 w-full text-sm leading-loose py-5'>
                             Great doctor if you need your family member to get effective immediate assistance,
@@ -83,7 +83,7 @@ export default function Footer() {
                     </div>
                 </div><hr className='text-gray-400' />
                 <div className='flex justify-between items-center text-gray-400 pt-8'>
-                    <p>2023 © Doctris. Design with  by Shreethemes.</p>
+                    <p>2023 © We Care. Design with  by Shreethemes.</p>
                     <div className='flex gap-3'>
                         <Link href='/' aria-label='terms'>Terms</Link>
                         <Link href='/' aria-label='privacy'>Privecy</Link>

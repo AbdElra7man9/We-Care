@@ -102,7 +102,7 @@ export default function page() {
               content='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.'
             />
             <AccordionJSX
-              title='Do I need a designer to use Doctris ?'
+              title='Do I need a designer to use We Care ?'
               content='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.'
             />
             <AccordionJSX

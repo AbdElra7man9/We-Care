@@ -51,7 +51,7 @@ const AdminSidebar: React.FC<WidthProps> = ({ sideWidth }) => {
                 <Link href='/' className='flex gap-3'>
                     <Image height={100} width={100} className='w-10 h-10 rounded-xl'
                         src='/Images/logo-icon.png' alt='' />
-                    <p className={`text-2xl font-bold text-black  dark:text-white`}>Doctris</p>
+                    <p className={`text-2xl font-bold text-black  dark:text-white`}>We Care</p>
                 </Link>
             </div>
             <div className='whitespace-nowrap py-3 space-y-2'>

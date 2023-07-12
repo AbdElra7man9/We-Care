@@ -38,6 +38,40 @@ export const DoctorsApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        GetAllMyPatients: builder.query<{ allPatients: userType[], results: number; }, { page: number, limit: number }>({
+
+            query: ({ page, limit }) => ({
+                url: `/api/v1/doctors/allPatients?page=${page}&limit=${limit}`,
+                method: 'GET',
+            }),
+        }),
+
+        GetMoreMyPatients: builder.query<{ allPatients: userType[], results: number; }, { page: number, limit: number }>({
+
+            query: ({ page, limit }) => ({
+                url: `/api/v1/patients?page=${page}&limit=${limit}`,
+                method: 'GET',
+            }),
+            async onQueryStarted(args, { queryFulfilled, dispatch }) {
+                try {
+
+                    const { data } = await queryFulfilled;
+                    dispatch(
+                        DoctorsApi.util.updateQueryData("GetAllMyPatients", { page: 1, limit: 10 }, (draft) => {
+                            return {
+                                results: data.results,
+                                allPatients: [
+                                    ...draft.allPatients,
+                                    ...data.allPatients,
+                                ],
+                            };
+                        })
+                    )
+                } catch (err) {
+                    // console.log(err)
+                }
+            },
+        }),
         search: builder.query<{ status: string; results: number; searchedDoctors: userType[] },
             { page: number, limit: number, keyword: string, specialization: string, minFees: number, maxFees: number, gender: string, address_governorate: string, address_city: string }>
             ({
@@ -110,5 +144,6 @@ export const {
     useGetDoctorsQuery,
     useGetTopDoctorsQuery,
     useGetDoctorByIdQuery,
+    useGetAllMyPatientsQuery,
     useSearchQuery,
 } = DoctorsApi;

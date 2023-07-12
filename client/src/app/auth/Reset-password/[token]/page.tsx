@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Form from './Form';
 
 export default function Page() {
-  
+
     return (
         <>
             <div className='container px-5 max-w-5xl flex gap-1 place-content-center mt-[2rem] md:mt-[6rem] mb-5 md:mb-28 dark:bg-slate-900'>
@@ -19,14 +19,14 @@ export default function Page() {
                                     src='/Images/logo-icon.png'
                                     alt=''
                                 />
-                                <p className='text-2xl font-bold'>Doctris</p>
+                                <p className='text-2xl font-bold'>We Care</p>
                             </div>
                         </Link>
                         <div className='text-lg space-y-2 py-4'>
                             <p className='font-medium'>Reset Password</p>
                             <p className='text-gray-400 text-sm'>Please Enter your new password</p>
                         </div>
-                        <Form/>
+                        <Form />
                     </div>
                 </div>
             </div>

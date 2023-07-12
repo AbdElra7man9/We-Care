@@ -6,6 +6,10 @@ export type userType = {
     name?: string;
     bio?: string;
     summary?: string;
+    blood?: string;
+    birth?: string;
+    height?: number;
+    weight?: number;
     email?: string;
     username?: string;
     confirmed?: boolean;

@@ -15,7 +15,7 @@ export default function page() {
                             href='/'
                             aria-label='home'
                             className='uppercase hover:text-blue-500 hover:underline'>
-                            Doctris
+                            We Care
                         </Link>
                         <BiChevronRight />
                         <Link
@@ -28,7 +28,7 @@ export default function page() {
                     </div>
                 </div>
             </div>
-            <Table/>
+            <Table />
         </div>
     )
 }

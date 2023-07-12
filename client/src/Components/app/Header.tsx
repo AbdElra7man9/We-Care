@@ -135,7 +135,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
                   src="/Images/logo-icon.png"
                   alt=""
                 />
-                <p className={`text-2xl font-bold ${(pos !== "top" || isFull) && "dark:!text-slate-100 !text-black"}`}>Doctris</p>
+                <p className={`text-2xl font-bold ${(pos !== "top" || isFull) && "dark:!text-slate-100 !text-black"}`}>We Care</p>
               </Link>
             </div>
             <div className="list-none gap-5 text-gray-800 text-sm dark:text-slate-400 font-medium uppercase hidden lg:flex">

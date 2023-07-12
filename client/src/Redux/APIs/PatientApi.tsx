@@ -23,6 +23,7 @@ export const PatientsApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+ 
         getMorePatients: builder.query<PatientResponse, { page: number, limit: number }>({
 
             query: ({ page, limit }) => ({

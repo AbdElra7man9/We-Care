@@ -2,7 +2,7 @@ import Footer from "./Footer";
 import SidePatient from "./overflow/SideBar";
 
 export const metadata = {
-  title: "Doctor Dashboard",
+  title: "Patient Dashboard",
 };
 export default function RootLayout({
   children,

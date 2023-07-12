@@ -24,7 +24,7 @@ export default function page() {
                   src='/Images/logo-icon.png'
                   alt=''
                 />
-                <p className='text-2xl font-bold dark:text-white'>Doctris</p>
+                <p className='text-2xl font-bold dark:text-white'>We Care</p>
               </div>
             </Link>
             <div className='text-lg space-y-2 py-4'>

@@ -19,7 +19,7 @@ export default function page(): JSX.Element {
                   src='/Images/logo-icon.png'
                   alt=''
                 />
-                <p className='text-2xl font-bold'>Doctris</p>
+                <p className='text-2xl font-bold'>We Care</p>
               </div>
             </Link>
             <Form />

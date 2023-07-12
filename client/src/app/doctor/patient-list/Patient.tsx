@@ -1,6 +1,6 @@
 'use client';
 import { useAppDispatch } from '@Hooks/useRedux';
-import { PatientsApi, useGetAllPatientsQuery } from '@Redux/APIs/PatientApi';
+import { DoctorsApi, useGetAllMyPatientsQuery } from '@Redux/APIs/DoctorApi';
 import Image from 'next/image';
 import { FC, useEffect, useState } from 'react'
 import { BsThreeDots } from 'react-icons/bs';
@@ -14,15 +14,15 @@ interface PatientProps {
 const Patient: FC<PatientProps> = ({ }) => {
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
-    const { data, isFetching, error, isError } = useGetAllPatientsQuery({ page: 1, limit: 10 });
-    const { Patients, results } = data || {};
+    const { data, isFetching, error, isError } = useGetAllMyPatientsQuery({ page: 1, limit: 10 });
+    const { allPatients, results } = data || {};
     const dispatch = useAppDispatch();
 
 
     useEffect(() => {
         if (page > 1) {
             dispatch(
-                PatientsApi.endpoints.getMorePatients.initiate({
+                DoctorsApi.endpoints.GetMoreMyPatients.initiate({
                     page,
                     limit: 10
                 })
@@ -37,7 +37,7 @@ const Patient: FC<PatientProps> = ({ }) => {
     }, [results, page]);
 
 
-    if (!Patient || Patients?.length === 0) {
+    if (!Patient || allPatients?.length === 0) {
         return null
     }
     return (
@@ -46,9 +46,9 @@ const Patient: FC<PatientProps> = ({ }) => {
                 <div>
 
                 </div>
-                : isError ? <p></p> : Patients &&
+                : isError ? <p></p> : allPatients &&
                     <InfiniteScroll
-                        dataLength={Patients.length} //This is important field to render the next data
+                        dataLength={allPatients.length} //This is important field to render the next data
                         next={() => setPage((prevPage) => prevPage + 1)}
                         hasMore={hasMore}
                         className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-4 gap-5 p-1 !m-0'
@@ -63,7 +63,7 @@ const Patient: FC<PatientProps> = ({ }) => {
                             </div>}
                         style={{ marginBottom: '3rem', overflow: 'hidden' }}
                     >
-                        {Patients?.map((user) => (
+                        {allPatients?.map((user) => (
                             <div
                                 className='shadow-[.2px_.2px_3px_1px] dark:shadow-slate-700 h-96 shadow-gray-100 rounded-lg overflow-hidden p-4'
                                 key={user._id}

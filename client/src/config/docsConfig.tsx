@@ -128,20 +128,20 @@ export const docsConfig: docsConfigProps = {
                 Title: 'Patients Review',
                 Href: '/doctor/patient-review'
             },
-            {
-                Icon: <AiOutlineAlipay size={20} />,
-                Title: 'Payment Information',
-                Href: '/doctor/payment'
-            },
-            {
-                Icon: <BsGear size={20} />,
-                Title: 'Profile',
-                Href: '/doctor/doctor-profile'
-            },
+            // {
+            //     Icon: <AiOutlineAlipay size={20} />,
+            //     Title: 'Payment Information',
+            //     Href: '/doctor/payment'
+            // },
+            // {
+            //     Icon: <BsGear size={20} />,
+            //     Title: 'Profile',
+            //     Href: '/doctor/doctor-profile'
+            // },
             {
                 Icon: <BsPersonLinesFill size={20} />,
                 Title: 'Profile Settings',
-                Href: '/doctor/settings'
+                Href: '/profile/doctor/settings'
             }
         ],
     },

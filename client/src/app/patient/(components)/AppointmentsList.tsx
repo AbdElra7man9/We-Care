@@ -1,6 +1,6 @@
 'use client';
 import React from 'react'
-import { BiDotsHorizontalRounded } from 'react-icons/bi';
+// import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { useGetAllMyAppointmentsQuery } from '@Redux/APIs/AppointmentsApi';
 import moment from 'moment';
 import Image from 'next/image';
@@ -13,8 +13,8 @@ const AppointmentsList = ({ status }: AppointmentsListProps) => {
     return (
         <div>
             <div className='flex justify-between'>
-                <h3 className='text-lg font-medium dark:text-slate-200'>Appointment List</h3>
-                <BiDotsHorizontalRounded />
+                <h3 className='text-lg font-medium dark:text-slate-200'>{(status === 'now') ? 'Upcoming Appointment' : 'Past Appointments'}</h3>
+                {/* <BiDotsHorizontalRounded /> */}
             </div>
             <div className='h-full overflow-scroll hideScroll'>
                 {(status === 'past') ? pastAppointment?.map(spec => (
@@ -24,7 +24,7 @@ const AppointmentsList = ({ status }: AppointmentsListProps) => {
                                 <Image
                                     height={100}
                                     width={100}
-                                    className='w-20 h-20 rounded-full object-cover'
+                                    className='w-14 h-14 rounded-full object-cover'
                                     src={spec?.doctor?.profilePicture}
                                     alt={spec?.doctor?.name as string}
                                 />
@@ -46,7 +46,7 @@ const AppointmentsList = ({ status }: AppointmentsListProps) => {
                                     <Image
                                         height={100}
                                         width={100}
-                                        className='w-20 h-20 rounded-full object-cover'
+                                        className='w-14 h-14 rounded-full object-cover'
                                         src={spec?.doctor?.profilePicture}
                                         alt={spec?.doctor?.name as string}
                                     />

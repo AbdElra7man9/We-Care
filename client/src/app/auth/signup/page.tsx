@@ -18,7 +18,7 @@ const SignUp = () => {
                                 src='/Images/logo-icon.png'
                                 alt=''
                             />
-                            <p className='text-2xl font-bold dark:text-white'>Doctris</p>
+                            <p className='text-2xl font-bold dark:text-white'>We Care</p>
                         </div>
                     </Link>
                     <p className='text-xl font-medium text-gray-600 mb-5'>

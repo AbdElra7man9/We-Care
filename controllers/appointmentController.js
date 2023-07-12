@@ -124,7 +124,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   const patient = req.user;
   const appointment = await Appointment.findById(
     req.body.AppointmentID
-  ).populate({ path: 'doctor', select: ['specialization', 'name'] });
+  ).populate({ path: 'doctor', select: ['specialization', 'name', 'profilePicture'] });
   if (appointment?.patient?._id.toString() === patient._id.toString())
     return next(new AppError('You already booked this appointment', 400));
   if (appointment.status !== 'available')
@@ -136,7 +136,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   appointment.comment = req.body.comment;
   doctor.patients.push(patient._id);
   await doctor.save({ validateBeforeSave: false });
-  appointment.populate({ path: 'patient', select: '_id' });
+  appointment.populate({ path: 'doctor', select: ['name', 'profilePicture'] });
   await appointment.save({ validateBeforeSave: false });
   res.status(200).json({
     status: 'success',
@@ -168,15 +168,15 @@ exports.getMyAppointments = catchAsync(async (req, res, next) => {
     allAppointments = await Appointment.find({
       patient: user._id,
     })
-      .populate({ path: 'doctor', select: ['name', 'profilePicture'] })
-      .populate({ path: 'patient', select: '_id' });
+      .populate({ path: 'patient', select: ['name', 'profilePicture'] })
+      .populate({ path: 'doctor', select: ['name', 'profilePicture', 'specialization'] });
   }
   if (user.__t == 'Doctor') {
     allAppointments = await Appointment.find({
       doctor: user._id,
     })
       .populate({ path: 'patient', select: ['name', 'profilePicture'] })
-      .populate({ path: 'doctor', select: '_id' });
+      .populate({ path: 'doctor', select: ['name', 'profilePicture', 'specialization'] });
   }
   allAppointments.forEach((appointment) => {
     if (appointment.date > Date.now()) upcomingApointments.push(appointment);

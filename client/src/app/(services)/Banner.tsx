@@ -43,7 +43,7 @@ const Banner: FC<ServicesWrapperProps> = ({ title, str1, str2, isdate, pageLink,
                                     href='/'
                                     aria-label='home'
                                     className='uppercase font-semibold hover:text-blue-500 hover:underline'>
-                                    Doctris
+                                    We Care
                                 </Link>
                                 <BiChevronRight />
                                 <Link
