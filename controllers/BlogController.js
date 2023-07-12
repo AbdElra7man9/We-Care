@@ -3,6 +3,7 @@ const catchAsync = require('../utils/catchAsync');
 const Features = require('../utils/Features');
 const cloudinary = require('../utils/cloudinary');
 const BlogModel = require('../Models/BlogModel');
+const LikeModel = require('../Models/LikeModel');
 
 // async function checkLike(req, res, next) {
 //     let isLiked;
@@ -116,12 +117,15 @@ exports.AllBlogs = catchAsync(async (req, res, next) => {
 
 exports.GetBlogDetails = catchAsync(async (req, res, next) => {
   const BlogDetails = await BlogModel.findById(req.params.id)
-    .populate({ path: 'user', select: ['name', 'profilePicture'] });
+  .populate({ path: 'user', select: ['name', 'profilePicture'] });
+  // const isliked = await LikeModel.findOne({ blog: req.params.id, user: req.user.id });
+
   if (!BlogDetails) {
     return next(new AppError('Blog not founded'), 400);
   }
   return res.json({
     status: 'success',
+    // isliked,
     BlogDetails,
   });
 });

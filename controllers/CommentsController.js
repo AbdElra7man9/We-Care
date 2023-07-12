@@ -53,23 +53,37 @@ exports.GetLikes = catchAsync(async (req, res, next) => {
     })
 });
 exports.Like = catchAsync(async (req, res, next) => {
-    const like = await new LikeModel({
-        user: req.user.id,
-        blog: req.params.id
-    }).save()
-
-    if (like) {
+    const isliked = await LikeModel.findOne({ blog: req.params.id, user: req.user.id });
+    if (isliked) {
+        await LikeModel.deleteOne({ blog: req.params.id, user: req.user.id });
         await BlogModel.findByIdAndUpdate(req.params.id, {
             $inc: {
-                numLikes: 1
+                numLikes: -1
             }
         }, { new: true });
+        return res.json({
+            status: 'success',
+            message: 'Unliked !'
+        });
+    } else {
+        const like = await new LikeModel({
+            user: req.user.id,
+            blog: req.params.id
+        }).save()
+        if (like) {
+            await BlogModel.findByIdAndUpdate(req.params.id, {
+                $inc: {
+                    numLikes: 1
+                }
+            }, { new: true });
 
+        }
+        return res.json({
+            status: 'success',
+            message: 'Liked !'
+        });
     }
-    return res.json({
-        status: 'success',
-        message: 'Liked !'
-    });
+
 });
 
 exports.UnLike = catchAsync(async (req, res, next) => {
