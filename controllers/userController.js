@@ -43,7 +43,7 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
     runValidators: true,
   });
 
-  return res.status(200).json({
+ res.status(200).json({
     status: 'success',
     data: {
       user: updatedUser,
