@@ -8,6 +8,7 @@ export default function page({ params, searchParams }: any) {
     return (
         <div>
             <Banner
+                link=''
                 title='Lockdowns lead to fewer people seeking medical care'
                 str1='Great doctor if you need your family member to get effective immediate assistance, emergency'
                 str2='treatment or a simple consultation.'

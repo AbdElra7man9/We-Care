@@ -21,7 +21,7 @@ const page: FC<pageProps> = ({ }) => {
                 <AppointmentsList status='now'/>
                 <PaymentsList />
             </div>
-            <Contact />
+            <Contact dashLink="/patient/dahboard/overflow" messagesLink="/patient/dashboard/messages" />
         </div>
     )
 }
