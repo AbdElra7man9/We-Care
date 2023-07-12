@@ -11,6 +11,10 @@ const Patient = User.discriminator(
         type: String,
         enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
       },
+      weight: Number,
+      height: Number,
+      waterLevel: String,
+      sugarLevel: String,
       appointments: [
         {
           type: mongoose.Schema.ObjectId,

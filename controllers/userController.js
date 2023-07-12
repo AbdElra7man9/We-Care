@@ -27,7 +27,13 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
     'name',
     'username',
     'bio',
-    'fees'
+    'fees',
+    'socialMedia',
+    'weight',
+    'height',
+    'waterLevel',
+    'sugarLevel',
+    'bloodType'
   );
   if (req.file)
     filteredInfo.profilePicture = path.join(
@@ -43,7 +49,7 @@ exports.updateInfo = catchAsync(async (req, res, next) => {
     runValidators: true,
   });
 
-  return res.status(200).json({
+  res.status(200).json({
     status: 'success',
     data: {
       user: updatedUser,

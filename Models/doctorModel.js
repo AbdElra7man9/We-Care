@@ -2,6 +2,13 @@ const mongoose = require('mongoose');
 
 const User = require('./userModel');
 const { specialists } = require('../data');
+
+const socialMediaSchema = new mongoose.Schema({
+  facebook: String,
+  instagram: String,
+  twitter: String,
+});
+
 doctorSchema = new mongoose.Schema(
   {
     bio: {
@@ -51,6 +58,7 @@ doctorSchema = new mongoose.Schema(
       default: 'pending',
       enum: ['refused', 'pending', 'accepted'],
     },
+    socialMedia: socialMediaSchema,
   },
   { discriminatorKey: 'userType' }
 );
