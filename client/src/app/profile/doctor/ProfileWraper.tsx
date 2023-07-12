@@ -29,14 +29,16 @@ export default function ProfileWraper({ children }: { children: React.ReactNode 
       <div className='container my-36 max-w-[80rem] flex flex-col gap-y-5'>
         <div className='shadow-[.2px_.2px_3px_1px] dark:shadow-slate-700 shadow-gray-100 w-full overflow-hidden rounded-lg'>
           <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
-            <Image
-              height={300}
-              width={300}
-              draggable={false}
-              className='w-96 h-full object-cover relative'
-              src='/Images/Clients/09.jpg'
-              alt=''
-            />
+          {userInfo?.profilePicture &&
+              <Image
+                height={500}
+                width={500}
+                draggable={false}
+                className='w-96 h-[27.5rem] object-cover relative'
+                src={userInfo?.profilePicture}
+                alt=''
+              />
+          }
             <div className='text-start w-full flex flex-col justify-center gap-y-5'>
               <p className='text-gray-800 text-lg font-semibold'>Good morning!</p>
               <p className='text-xl font-bold text-blue-600'>Dr. {userInfo.name}</p>

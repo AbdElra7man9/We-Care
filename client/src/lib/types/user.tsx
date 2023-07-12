@@ -5,6 +5,7 @@ import { ImageType } from "./Feature";
 export type userType = {
     name?: string;
     bio?: string;
+    summary?: string;
     email?: string;
     username?: string;
     confirmed?: boolean;

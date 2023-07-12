@@ -21,10 +21,10 @@ export default function page() {
           <SugarChart />
         </div> */}
         <div className='shadow-[.2px_.2px_3px_1px] dark:shadow-slate-700 h-[36rem] overflow-hidden shadow-gray-100 rounded-lg p-5'>
-          <AppointmentsList />
+          <AppointmentsList status="now"/>
         </div>
         <div className='shadow-[.2px_.2px_3px_1px] h-[36rem] dark:shadow-slate-700 overflow-hidden shadow-gray-100 rounded-lg p-5'>
-          <AppointmentsList />
+          <AppointmentsList status="past"/>
         </div>
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 w-full'>

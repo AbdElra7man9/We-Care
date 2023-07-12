@@ -1,12 +1,11 @@
-import Form from "./Form";
-
+import Form from "../Form";
 
 export default function Page({ params }: { params: { doctorId: string } }) {
   const doctorId = params.doctorId
 
   return (
     <div>
-      <Form doctorId={doctorId} />
+      <Form type="visit" />
     </div>
   );
 }

@@ -9,7 +9,7 @@ interface TableProps {
 }
 
 const Table: FC<TableProps> = ({ }) => {
-    const { data } = useGetAppointmentsQuery();
+    const { data } = useGetAppointmentsQuery({ limit: 15, page: 1 });
     const { pastAppointment, upcomingApointments } = data || {}
     return (
         <table className="w-full text-sm text-left text-gray-500 ">

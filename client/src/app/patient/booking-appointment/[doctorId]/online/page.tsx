@@ -1,6 +1,6 @@
-import Form from "./Form";
+import Form from "../Form";
 
 export default function Page(): JSX.Element {
   
-  return <Form />
+  return <Form type="chat"/>
 }

@@ -1,17 +1,17 @@
 import React from 'react'
-import Image from 'next/image';
-import Info from './Info';
-import Password from './Password';
-import Button from '@Components/ui/Button';
-import DeleteAccount from './DeleteAccount';
+import UpdateInfo from '../../(Components)/UpdateInfo';
+import UpdateImage from '@app/profile/(Components)/UpdateImage';
+import Password from '@app/profile/(Components)/Password';
+import DeleteAccount from '@app/profile/(Components)/DeleteAccount';
+
 
 const page: React.FC = () => {
 
     return (
         <div className=''>
             <h3 className='text-lg font-semibold'>Personal Information :</h3>
-
-            <Info />
+            <UpdateImage />
+            <UpdateInfo />
             <div className='space-y-5'>
                 <h3 className='text-lg font-semibold'>Personal Information :</h3>
                 <Password />

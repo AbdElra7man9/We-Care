@@ -18,7 +18,7 @@ const page: FC<pageProps> = ({ }) => {
                 Dummy texts have been in use by typesetters since the 16th century.`}
             </p>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-5'>
-                <AppointmentsList />
+                <AppointmentsList status='now'/>
                 <PaymentsList />
             </div>
             <Contact />

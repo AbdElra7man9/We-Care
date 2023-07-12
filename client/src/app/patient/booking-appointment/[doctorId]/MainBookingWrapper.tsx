@@ -1,7 +1,7 @@
 'use client';
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { BiChevronRight } from "react-icons/bi";
 
 export default function MainBookingWrapper({
@@ -10,6 +10,8 @@ export default function MainBookingWrapper({
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
+    const params = useParams() as { doctorId: string };
+    const doctorId = params.doctorId
     const atClinc = (pathname?.includes('clinc'));
     const atOnline = (pathname?.includes('online'));
     return (
@@ -46,14 +48,14 @@ export default function MainBookingWrapper({
             <div className='container px-0 md:max-w-3xl md:border mt-5 rounded-lg overflow-hidden dark:bg-slate-900 dark:border-slate-500'>
                 <div className='grid grid-cols-2 text-center border-b dark:border-slate-500'>
                     <Link
-                        href='/patient/booking-appointment/clinc'
+                        href={`/patient/booking-appointment/${doctorId}/clinc`}
                         aria-label='booking appointment'
                         className={`bg-[#F8F9FA] py-3 font-medium dark:bg-slate-900 dark:text-white ${atClinc && '!bg-blue-500 text-white'}`}
                     >
                         Clinc Appointment
                     </Link>
                     <Link
-                        href='/patient/booking-appointment/online'
+                        href={`/patient/booking-appointment/${doctorId}/online`}
                         aria-label='booking appointment'
                         className={`bg-[#F8F9FA] py-3 dark:bg-slate-900 dark:text-white font-medium ${atOnline && '!bg-blue-500 text-white'}`}
                     >
