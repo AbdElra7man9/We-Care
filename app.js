@@ -65,8 +65,8 @@ app.use(mongoSanitize());
 // Data sanitization against XSS
 app.use(xss());
 
-//Access Images from server side by http://localhost:5000/images/default.png
-app.use('/images', express.static('public/img/users'));
+//Access Images from server side by http://localhost:5000/images/
+app.use('/images', express.static('public/img'));
 
 // doctors routs
 app.use('/api/v1/doctors', doctorRouter);
