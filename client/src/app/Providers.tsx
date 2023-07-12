@@ -23,10 +23,7 @@ export default function Providers({ children, session }: providersProps) {
           <AuthProvider>
             <QueryClientProvider client={queryClient}>
               <MessagesProvider>
-                <div className=" dark:text-gray-500 text-gray-700 transition-colors duration-300 min-h-screen">
-                  <Toaster position='bottom-center' reverseOrder={false} />
-                  {children}
-                </div>
+                {children}
               </MessagesProvider>
             </QueryClientProvider>
           </AuthProvider>

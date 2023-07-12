@@ -7,6 +7,7 @@ const socialMediaSchema = new mongoose.Schema({
   facebook: String,
   instagram: String,
   twitter: String,
+  linkdin: String,
 });
 
 doctorSchema = new mongoose.Schema(

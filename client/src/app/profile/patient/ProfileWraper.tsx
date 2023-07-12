@@ -7,8 +7,8 @@ import { BsFillDropletFill, BsFillPersonFill, BsTelephoneFill } from "react-icon
 import { FaAddressCard } from "react-icons/fa";
 import { MdMarkEmailRead } from "react-icons/md";
 import { motion } from 'framer-motion';
-import { useAppSelector } from "@Hooks/useRedux";
-import { selectCurrentUser } from "@Redux/Slices/UserSlice";
+import { useSession } from "next-auth/react";
+import { userType } from "@lib/types/user";
 
 interface InfoProps {
   Icon: React.ReactNode;
@@ -25,7 +25,8 @@ const ProfileWraper = ({ children }: { children: React.ReactNode }) => {
   };
 
   const pathname = usePathname();
-  const userInfo = useAppSelector(selectCurrentUser);
+  const { data: session } = useSession();
+  const userInfo = session?.user as userType;
   const profile = (pathname?.includes(`${userInfo.username}`));
   const profileSettings = (pathname?.includes('settings'));
   const INFO = ({ Icon, Title, Value }: InfoProps) => {
