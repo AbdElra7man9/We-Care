@@ -29,7 +29,7 @@ export default function page() {
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 w-full'>
         <MonthlyReports />
-        <Contact />
+        <Contact dashLink="/patient/dahboard/overflow" messagesLink="/patient/dashboard/messages" />
       </div>
     </div>
   );

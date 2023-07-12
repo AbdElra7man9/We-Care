@@ -67,7 +67,7 @@ export default function ProfileWraper({ children }: { children: React.ReactNode 
           <div className='container px-0 max-w-full rounded-lg overflow-hidden'>
             <div className='grid grid-cols-2 lg:grid-cols-4 text-center text-lg border-b dark:border-slate-600'>
               <Link
-                href={`/profile/${userInfo.username}`}
+                href={`/profile/doctor/${userInfo.username}`}
                 aria-label='profile'
                 draggable={false}
                 className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${userProfile && '!bg-blue-500 text-white'}`}>

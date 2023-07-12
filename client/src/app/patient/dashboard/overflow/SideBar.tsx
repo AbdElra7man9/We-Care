@@ -116,12 +116,21 @@ const SidePatient = () => {
                     ))}
                 </div>
             </div>
-            <div className='bg-sky-100 text-sky-400 w-full py-2 my-3 text-center rounded-md shadow-blue-200 shadow-md border border-blue-200'>
+            {/* <div className='bg-sky-100 text-sky-400 w-full py-2 my-3 text-center rounded-md shadow-blue-200 shadow-md border border-blue-200'>
                 <Link
                     href={`/profile/patient/${userInfo.username}`}
                     aria-label='view profile'
                     className='w-full h-full'>
                     View Profile
+                </Link>
+            </div> */}
+            <div className='bg-orange-100 text-orange-400 w-full py-2 my-3 text-center rounded-md shadow-orange-200 shadow-md border border-orange-200 active:bg-orange-200'>
+                <Link
+                    draggable='false'
+                    href='/patient/dashboard/messages'
+                    aria-label='view profile'
+                    className='w-full h-full'>
+                    Messages
                 </Link>
             </div>
         </div>

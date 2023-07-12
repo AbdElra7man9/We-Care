@@ -1,11 +1,13 @@
+'use client';
 import React from 'react'
-import { BsChat, BsChatSquareText, BsChatText, BsGear, BsGrid, BsPeople, BsPersonLinesFill } from 'react-icons/bs'
-import { AiOutlineAlipay } from 'react-icons/ai'
-import { IoCalendarNumberOutline, IoNewspaperOutline } from 'react-icons/io5'
+import { BsChatSquareText, BsChatText, BsGear, BsGrid, BsPeople, BsPersonLinesFill } from 'react-icons/bs'
+import { IoCalendarNumberOutline } from 'react-icons/io5'
 import { GiAlarmClock } from 'react-icons/gi';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { selectCurrentUser } from '@Redux/Slices/UserSlice';
+import { useAppSelector } from '@Hooks/useRedux';
 
 interface LinkListProps {
     Icon: React.ReactNode;
@@ -18,6 +20,7 @@ interface WidthProps {
 }
 const AdminSidebar: React.FC<WidthProps> = ({ sideWidth }) => {
     const pathname = usePathname();
+    const userInfo = useAppSelector(selectCurrentUser)
     const LinkList: React.FC<LinkListProps> = ({ Icon, Title, Href, onClose }) => {
         return (
             <div className={`text-lg font-medium px-7 w-full ${(pathname === Href) ? '!text-blue-600' : ' text-gray-600'}`}>
@@ -58,14 +61,14 @@ const AdminSidebar: React.FC<WidthProps> = ({ sideWidth }) => {
                 <LinkList Icon={<BsGrid size={17} />} Title='Dashboard' Href='/admin/admin-dashboard' />
                 <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Appointment ' Href='/admin/appointment' />
                 <LinkList Icon={<GiAlarmClock size={20} />} Title='Doctors' Href='/admin/doctors-list' />
-                <LinkList Icon={<IoNewspaperOutline size={20} />} Title='Invoices' Href='/admin/invoices' />
+                {/* <LinkList Icon={<IoNewspaperOutline size={20} />} Title='Invoices' Href='/admin/invoices' /> */}
                 <LinkList Icon={<BsChatText size={20} />} Title='Blogs' Href='/admin/blogs' />
                 <LinkList Icon={<BsPeople size={20} />} Title='Patient List' Href='/admin/patient-list' />
                 <LinkList Icon={<BsChatSquareText size={20} />} Title='Patients Review' Href='/admin/patient-review' />
-                <LinkList Icon={<BsChat size={20} />} Title='Chat' Href='/admin/admin-chat' />
-                <LinkList Icon={<AiOutlineAlipay size={20} />} Title='Payment Information' Href='/admin/payment' />
-                <LinkList Icon={<BsGear size={20} />} Title='Profile' Href='/admin/admin-profile' />
-                <LinkList Icon={<BsPersonLinesFill size={20} />} Title='Profile Settings' Href='/admin/settings' />
+                {/* <LinkList Icon={<BsChat size={20} />} Title='Chat' Href='/admin/admin-chat' /> */}
+                {/* <LinkList Icon={<AiOutlineAlipay size={20} />} Title='Payment Information' Href='/admin/payment' /> */}
+                <LinkList Icon={<BsGear size={20} />} Title='Profile' Href={`/profile/doctor/${userInfo.username}`} />
+                <LinkList Icon={<BsPersonLinesFill size={20} />} Title='Profile Settings' Href='/profile/doctor/settings' />
             </div>
         </div>
 
