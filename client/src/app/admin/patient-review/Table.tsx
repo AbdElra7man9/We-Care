@@ -4,6 +4,7 @@ import { useDeleteReviewMutation, useGetAllReviewsQuery } from '@Redux/APIs/Coor
 import moment from 'moment';
 import Image from 'next/image';
 import { FC } from 'react'
+import { toast } from 'react-hot-toast';
 import { BsSearch } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
 
@@ -16,6 +17,11 @@ const Table: FC<TableProps> = ({ }) => {
     const [DeleteReview] = useDeleteReviewMutation();
     const DeleteReviewHandler = (_id: string) => {
         DeleteReview({ _id }).unwrap()
+            .then(() => {
+                toast.success('Review Deleted Successfully')
+            }).catch((err: any) => {
+                toast.error(err?.data?.message)
+            })
     }
 
     return (

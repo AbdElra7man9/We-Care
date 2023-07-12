@@ -17,48 +17,53 @@ const AppointmentsList = ({ status }: AppointmentsListProps) => {
                 {/* <BiDotsHorizontalRounded /> */}
             </div>
             <div className='h-full overflow-scroll hideScroll'>
-                {(status === 'past') ? pastAppointment?.map(spec => (
-                    <div key={spec?._id} className='border border-gray-200 dark:border-slate-700 w-full rounded-md flex justify-between items-center p-3 my-4'>
-                        <div className='flex gap-3 items-center'>
-                            {spec?.doctor?.profilePicture &&
-                                <Image
-                                    height={100}
-                                    width={100}
-                                    className='w-14 h-14 rounded-full object-cover'
-                                    src={spec?.doctor?.profilePicture}
-                                    alt={spec?.doctor?.name as string}
-                                />
-                            }
-                            <div>
-                                <p className='font-medium dark:text-slate-300'>{spec?.doctor?.name}</p>
-                                <p className='text-gray-500 text-sm'>{spec?.doctor.specialization}</p>
+                {(status === 'past') ?
+                    (upcomingApointments?.length === 0) ? <p>No past appointments founded</p>
+                        :
+                        pastAppointment?.map(spec => (
+                            <div key={spec?._id} className='border border-gray-200 dark:border-slate-700 w-full rounded-md flex justify-between items-center p-3 my-4'>
+                                <div className='flex gap-3 items-center'>
+                                    {spec?.doctor?.profilePicture &&
+                                        <Image
+                                            height={100}
+                                            width={100}
+                                            className='w-14 h-14 rounded-full object-cover'
+                                            src={spec?.doctor?.profilePicture}
+                                            alt={spec?.doctor?.name as string}
+                                        />
+                                    }
+                                    <div>
+                                        <p className='font-medium dark:text-slate-300'>{spec?.doctor?.name}</p>
+                                        <p className='text-gray-500 text-sm'>{spec?.doctor.specialization}</p>
+                                    </div>
+                                </div>
+                                <span>{moment(spec?.date).fromNow()}</span>
                             </div>
-                        </div>
-                        <span>{moment(spec?.date).fromNow()}</span>
-                    </div>
-                ))
+                        ))
                     :
                     (status === 'now') &&
-                    upcomingApointments?.map(spec => (
-                        <div key={spec?._id} className='border border-gray-200 dark:border-slate-700 w-full rounded-md flex justify-between items-center p-3 my-4'>
-                            <div className='flex gap-3 items-center'>
-                                {spec?.doctor?.profilePicture &&
-                                    <Image
-                                        height={100}
-                                        width={100}
-                                        className='w-14 h-14 rounded-full object-cover'
-                                        src={spec?.doctor?.profilePicture}
-                                        alt={spec?.doctor?.name as string}
-                                    />
-                                }
-                                <div>
-                                    <p className='font-medium dark:text-slate-300'>{spec?.doctor?.name}</p>
-                                    <p className='text-gray-500 text-sm'>{spec?.doctor.specialization}</p>
+                        (upcomingApointments?.length === 0) ? <p>No upcoming appointments yet</p>
+                        :
+                        upcomingApointments?.map(spec => (
+                            <div key={spec?._id} className='border border-gray-200 dark:border-slate-700 w-full rounded-md flex justify-between items-center p-3 my-4'>
+                                <div className='flex gap-3 items-center'>
+                                    {spec?.doctor?.profilePicture &&
+                                        <Image
+                                            height={100}
+                                            width={100}
+                                            className='w-14 h-14 rounded-full object-cover'
+                                            src={spec?.doctor?.profilePicture}
+                                            alt={spec?.doctor?.name as string}
+                                        />
+                                    }
+                                    <div>
+                                        <p className='font-medium dark:text-slate-300'>{spec?.doctor?.name}</p>
+                                        <p className='text-gray-500 text-sm'>{spec?.doctor.specialization}</p>
+                                    </div>
                                 </div>
+                                <span>{moment(spec?.date).fromNow()}</span>
                             </div>
-                            <span>{moment(spec?.date).fromNow()}</span>
-                        </div>
-                    ))
+                        ))
                 }
             </div>
         </div>

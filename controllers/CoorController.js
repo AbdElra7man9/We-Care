@@ -4,8 +4,9 @@ const AppError = require('../utils/AppError');
 const catchAsync = require('../utils/catchAsync');
 const Features = require('../utils/Features');
 const Patient = require('../Models/patientModel');
+const Coordinator = require('../Models/coordinatorModel');
 
-exports.acceptDoctor = (req, res, next) => {};
+exports.acceptDoctor = (req, res, next) => { };
 exports.AllReview = catchAsync(async function (req, res, next) {
   const features = new Features(Review.find(), req.query).Paginate();
 
@@ -22,13 +23,17 @@ exports.AllReview = catchAsync(async function (req, res, next) {
 });
 
 exports.DeleteReview = catchAsync(async function (req, res, next) {
-  res.json({ message: 'deleted' });
-  // await Review.deleteOne({ _id: req.params.id })
-  //     .then(() => {
-  //         return res.json({
-  //             status: "success",
-  //             message: "Deleted !"
-  //         })
-  //     })
-  //     .catch((error) => { return next(new AppError(error.message, 500)) })
+  await Review.deleteOne({ _id: req.params.id })
+    .then(() => {
+      return res.json({
+        status: "success",
+        message: "Deleted !"
+      })
+    })
+    .catch((error) => { return next(new AppError(error.message, 500)) })
+});
+exports.countUsers = catchAsync(async function (req, res, next) {
+  Doctor.countDocuments();
+  Patient.countDocuments();
+  Coordinator.countDocuments();
 });

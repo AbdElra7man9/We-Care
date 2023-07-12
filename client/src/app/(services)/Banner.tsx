@@ -9,11 +9,12 @@ interface ServicesWrapperProps {
     str1: string;
     str2: string;
     pageLink?: string;
+    link: string;
     isdate?: Boolean;
     doc?: BlogType;
 }
 
-const Banner: FC<ServicesWrapperProps> = ({ title, str1, str2, isdate, pageLink, doc }) => {
+const Banner: FC<ServicesWrapperProps> = ({ title, str1, str2, isdate, pageLink, link, doc }) => {
     return (
         <div className="dark:bg-slate-900 pb-20 ">
             <div className='py-20 md:py-32 mb-10 bg-[#F8F9FA] dark:bg-slate-800 dark:text-white'>
@@ -47,7 +48,7 @@ const Banner: FC<ServicesWrapperProps> = ({ title, str1, str2, isdate, pageLink,
                                 </Link>
                                 <BiChevronRight />
                                 <Link
-                                    href='/patient/booking-appointment/clinc'
+                                    href={link}
                                     aria-label='booking appointment'
                                     className='uppercase font-medium text-blue-400 hover:text-blue-500 hover:underline'
                                 >

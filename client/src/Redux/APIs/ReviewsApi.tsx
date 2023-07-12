@@ -16,12 +16,14 @@ export const ReviewsApi = apiSlice.injectEndpoints({
                 url: `/api/v1/reviews/${id}?page=${page}&limit=${limit}`,
                 method: 'GET',
             }),
+            providesTags: ['Review']
         }),
         GetDoctorLoggedReviews: builder.query<{ status: string; results: number; reviews: ReviewType[] }, { page: number, limit: number }>({
             query: ({ page, limit }) => ({
                 url: `/api/v1/reviews/doctor?page=${page}&limit=${limit}`,
                 method: 'GET',
             }),
+            providesTags: ['Review']
         }),
         GetMoreDoctorReviews: builder.query<{ status: string; results: number; reviews: ReviewType[] }, { page: number, limit: number, id: string }>({
             query: ({ page, limit, id }) => ({
@@ -94,6 +96,7 @@ export const ReviewsApi = apiSlice.injectEndpoints({
                 url: `/api/v1/reviews/delete-review/${id}`,
                 method: 'DELETE',
             }),
+            invalidatesTags: ['Review'],
             async onQueryStarted({ id }, { queryFulfilled, dispatch }) {
                 try {
                     dispatch(

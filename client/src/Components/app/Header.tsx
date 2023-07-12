@@ -76,7 +76,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
   const { data: session } = useSession();
   const doctor = session?.role === 'Doctor';
   const patient = session?.role === 'Patient';
-  const admin = session?.role === 'Coodinator';
+  const admin = session?.role === 'Coordinator';
   const NavLinks = () => {
     return (
       <>

@@ -1,5 +1,6 @@
 import AppointmentsList from '@app/patient/(components)/AppointmentsList'
 import Contact from '@app/patient/(components)/Contact'
+import GetReviews from '@app/profile/doctor/reviews/GetReviews'
 import React from 'react'
 import AppointmentChart from './(GridCharts)/AppointmentChart'
 import CanceledChart from './(GridCharts)/CanceledChart'
@@ -24,9 +25,10 @@ export default function page() {
           <div className='shadow-[.2px_.2px_3px_1px] h-[36rem] dark:shadow-slate-700 overflow-hidden shadow-gray-100 rounded-lg p-5'>
             <AppointmentsList status="past" />
           </div>
+          <GetReviews />
         </div>
         <div className='grid grid-cols-1 lg:grid-cols-2'>
-          <Contact />
+          <Contact dashLink="/doctor/doctor-dashboard" messagesLink="/doctor/doctor-messages" />
         </div>
       </div>
     </div>

@@ -44,6 +44,7 @@ export default function page() {
     <div>
       <Banner
         title='Terms & Policy'
+        link='/terms'
         str1='Great doctor if you need your family member to get effective immediate assistance, emergency'
         str2='treatment or a simple consultation.'
         pageLink='Terms & Policy'

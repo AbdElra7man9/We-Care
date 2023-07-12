@@ -1,5 +1,3 @@
-import Footer from '@Components/app/Footer'
-import Header from '@Components/app/Header'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
