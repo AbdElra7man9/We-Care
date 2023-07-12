@@ -9,6 +9,7 @@ const {
   getMyAppointments,
   getMyBookedAppointments,
   getAppointmentById,
+  completedOrNot,
 } = require('../controllers/appointmentController');
 const restrictTo = require('../Middlewares/restrictTo');
 
@@ -25,6 +26,8 @@ router.get('/', getMyAppointments);
 router.get('/:appointmentId', getAppointmentById);
 //protected route and restrict to patient
 router.post('/book', restrictTo('Patient'), bookAppointment);
+router.post('/completedOrNot', restrictTo('Doctor'), protect , completedOrNot);
+
 
 //protected routs and restrict to doctor
 module.exports = router;

@@ -189,3 +189,33 @@ exports.getMyAppointments = catchAsync(async (req, res, next) => {
     upcomingApointments,
   });
 });
+
+
+exports.completedOrNot = catchAsync(async (req, res, next) => {
+  const {appointmentId , status}  = req.body;
+  const appointment = await Appointment.findById(appointmentId);
+  const doctor = req.user._id;
+  console.log (doctor.toString());
+  console.log (appointment.doctor.toString());
+  
+  if (doctor.toString() != appointment.doctor.toString())
+  return next(new AppError("you can't accepted or rejected another doctor Apointments", 401));
+
+  if (appointment.date < Date.now())
+  return next(new AppError("you can't accepted or rejected upcoming Apointments", 401));
+
+  if (appointment.status != 'booked')
+  return next(new AppError(`this appointment is ${appointment.status} so you can't accepted or rejected it`, 401));
+
+  if(status == 'accepted'){
+    appointment.status = 'accepted';
+  }else if(status == 'rejected'){
+    appointment.status = 'rejected';
+  };
+
+  await appointment.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: `${status} successfully`,
+  });
+});
