@@ -4,7 +4,7 @@ const { Server } = require('socket.io');
 const http = require('http');
 const AllowedOrigins = require('./Origins');
 const SocketServer = require('./SocketServer');
-// // ////////////////////////////    IMPORT DATA INTO DB ///////////////////////////
+// // ////////////////////////////    load doctor to DB ///////////////////////////
 // const Doctor = require('./Models/doctorModel');
 // const fs = require('fs');
 // const doctorsString = fs.readFileSync(`${__dirname}/Data/Doctors/doctors.json`);
@@ -13,7 +13,20 @@ const SocketServer = require('./SocketServer');
 // doctorsParsed.forEach((doc) => {
 //   Doctor.create(doc);
 // });
-// ////////////////////////
+// ////////////////////////      load Patients to DB /////////////////////////////////
+
+// const Patient = require('./Models/patientModel');
+// const fs = require('fs');
+// const patientsString = fs.readFileSync(
+//   `${__dirname}/Data/Patients/patients.json`
+// );
+// const patientsParsed = JSON.parse(patientsString);
+
+// patientsParsed.forEach((doc) => {
+//   Patient.create(doc);
+// });
+
+////////////////////////////////
 
 dotenv.config({ path: './config.env' });
 const app = require('./app');
