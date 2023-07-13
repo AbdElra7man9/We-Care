@@ -18,14 +18,16 @@ export default function page() {
           <UrgentChart />
           <CanceledChart />
         </div>
-        <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5'>
           <div className='shadow-[.2px_.2px_3px_1px] dark:shadow-slate-700 h-[36rem] overflow-hidden shadow-gray-100 rounded-lg p-5'>
             <AppointmentsList status="now" />
           </div>
           <div className='shadow-[.2px_.2px_3px_1px] h-[36rem] dark:shadow-slate-700 overflow-hidden shadow-gray-100 rounded-lg p-5'>
             <AppointmentsList status="past" />
           </div>
-          <GetReviews />
+          <div className='shadow-[.2px_.2px_3px_1px] dark:shadow-slate-700 h-[36rem] overflow-hidden shadow-gray-100 rounded-lg p-5'>
+            <GetReviews />
+          </div>
         </div>
         <div className='grid grid-cols-1 lg:grid-cols-2'>
           <Contact dashLink="/doctor/doctor-dashboard" messagesLink="/doctor/doctor-messages" />

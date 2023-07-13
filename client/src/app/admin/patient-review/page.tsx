@@ -20,20 +20,20 @@ export default function page() {
                         </Link>
                         <BiChevronRight />
                         <Link
-                            href='/patient/booking-appointment/clinc'
+                            href='/admin/patient-reviews'
                             aria-label='booking appointment'
                             className='uppercase font-medium text-blue-400 hover:text-blue-500 hover:underline'
                         >
-                            Reviews
+                            Pending Doctor
                         </Link>
                     </div>
                 </div>
-                <button
+                {/* <button
                     aria-label='Add BLOG'
                     // onClick={() => dispatch(FeatureAction.setModalAddBlog(true))}
                     className='border font-semibold rounded-md p-2 px-7'>
                     Todat
-                </button>
+                </button> */}
             </div>
             <Table />
         </div>

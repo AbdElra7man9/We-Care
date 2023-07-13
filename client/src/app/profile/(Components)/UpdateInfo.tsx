@@ -69,6 +69,11 @@ const UpdateInfo: FC<InfoProps> = ({ }) => {
                     <input type='text' onChange={handleChange} defaultValue={inputs.username} name='username' className='inputfield w-full' placeholder='Username' />
                 </div>
             </div>
+            {isDoctor &&
+                <div>
+
+                </div>
+            }
             <div>
                 <label className='text-sm text-gray-500 font-medium text-start my-1 block'>Your Bio Here</label>
                 <textarea

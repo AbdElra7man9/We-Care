@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Providers from "@app/Providers";
 import { siteConfig } from "@config/site";
 import RefreshProvider from "./RefreshProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: {
@@ -36,13 +37,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`bg-whit text-slate-900 antialiased ${inter.className}`}
+      className={`bg-white text-slate-900 antialiased ${inter.className}`}
     >
       <body className="dark:bg-slate-900">
         <Providers>
-          {/* <RefreshProvider> */}
-            {children}
-          {/* </RefreshProvider> */}
+          <RefreshProvider>
+            <div className=" dark:text-gray-500 text-gray-700 transition-colors duration-300 min-h-screen">
+              <Toaster position='bottom-center' reverseOrder={false} />
+              {children}
+            </div>
+          </RefreshProvider>
         </Providers>
       </body>
     </html>

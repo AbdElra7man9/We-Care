@@ -55,7 +55,16 @@ if (process.env.NODE_ENV === 'development') {
 //   message: 'Too many requests from this IP, please try again in an hour!',
 // });
 // app.use('/api', limiter);
-
+// async function update() {
+//   const user = await User.findByIdAndUpdate(
+//     '64564d4b061fd8d24c5ef61a', {
+//       $set: {
+//         profilePicture: 'http://localhost:5000/images/default.png'
+//       }
+//     }, { new: true })
+//   console.log('updated')
+// }
+// update()
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));

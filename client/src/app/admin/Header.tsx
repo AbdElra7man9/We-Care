@@ -9,6 +9,7 @@ import Themetoggle from "@Components/Layouts/Themetoggle";
 import { useAppDispatch, useAppSelector } from "@Hooks/useRedux";
 import { selectCurrentUser } from "@Redux/Slices/UserSlice";
 import { IoReorderThreeOutline } from "react-icons/io5";
+import { useSession } from "next-auth/react";
 interface HeaderProps {
   sideMargin?: string;
   setIsSideMargin: React.Dispatch<React.SetStateAction<string>>;
@@ -19,7 +20,7 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
   const [isHeader, setIsHeader] = useState<Boolean>(false);
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(selectCurrentUser)
-
+  const { data: session } = useSession();
 
   return (
     <>
@@ -64,17 +65,16 @@ export default function Header({ setIsSideMargin, setIsSideWidth, sideMargin }: 
             </div>
             <div className="flex gap-2 md:gap-4 items-center">
               <Themetoggle />
-              <button aria-label='search' className="bg-blue-600 text-white rounded-full p-3">
-                <BsSearch size={15} />
-              </button>
-              <Link aria-label='profile' href={`/profile/${userInfo.username}`}>
-                <Image
-                  height={200}
-                  width={200}
-                  className="h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
-                  src="/Images/Doctors/01.jpg"
-                  alt=""
-                />
+              <Link aria-label='profile' href={`/profile/doctor/${userInfo.username}`}>
+                {userInfo.profilePicture &&
+                  <Image
+                    height={200}
+                    width={200}
+                    className="h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
+                    src={userInfo?.profilePicture}
+                    alt="admin profile"
+                  />
+                }
               </Link>
               <button
                 aria-label='show more'

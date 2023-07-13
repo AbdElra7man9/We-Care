@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { selectCurrentUser } from '@Redux/Slices/UserSlice';
 import { useAppSelector } from '@Hooks/useRedux';
+import { AiOutlineAlipay } from 'react-icons/ai';
 
 interface LinkListProps {
     Icon: React.ReactNode;
@@ -59,14 +60,14 @@ const AdminSidebar: React.FC<WidthProps> = ({ sideWidth }) => {
             </div>
             <div className='whitespace-nowrap py-3 space-y-2'>
                 <LinkList Icon={<BsGrid size={17} />} Title='Dashboard' Href='/admin/admin-dashboard' />
-                <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Appointment ' Href='/admin/appointment' />
+                {/* <LinkList Icon={<IoCalendarNumberOutline size={20} />} Title='Appointment ' Href='/admin/appointment' /> */}
                 <LinkList Icon={<GiAlarmClock size={20} />} Title='Doctors' Href='/admin/doctors-list' />
+                <LinkList Icon={<AiOutlineAlipay size={20} />} Title='Pending Doctors' Href='/admin/pending-doctors' />
                 {/* <LinkList Icon={<IoNewspaperOutline size={20} />} Title='Invoices' Href='/admin/invoices' /> */}
                 <LinkList Icon={<BsChatText size={20} />} Title='Blogs' Href='/admin/blogs' />
                 <LinkList Icon={<BsPeople size={20} />} Title='Patient List' Href='/admin/patient-list' />
                 <LinkList Icon={<BsChatSquareText size={20} />} Title='Patients Review' Href='/admin/patient-review' />
                 {/* <LinkList Icon={<BsChat size={20} />} Title='Chat' Href='/admin/admin-chat' /> */}
-                {/* <LinkList Icon={<AiOutlineAlipay size={20} />} Title='Payment Information' Href='/admin/payment' /> */}
                 <LinkList Icon={<BsGear size={20} />} Title='Profile' Href={`/profile/doctor/${userInfo.username}`} />
                 <LinkList Icon={<BsPersonLinesFill size={20} />} Title='Profile Settings' Href='/profile/doctor/settings' />
             </div>
