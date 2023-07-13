@@ -4,12 +4,10 @@ const { Server } = require('socket.io');
 const http = require('http');
 const AllowedOrigins = require('./Origins');
 const SocketServer = require('./SocketServer');
-// ////////////////////////////    IMPORT DATA INTO DB ///////////////////////////
+// // ////////////////////////////    IMPORT DATA INTO DB ///////////////////////////
 // const Doctor = require('./Models/doctorModel');
 // const fs = require('fs');
-// const doctorsString = fs.readFileSync(
-//   `${__dirname}/Data/Doctors/NameSpecPassUser.json`
-// );
+// const doctorsString = fs.readFileSync(`${__dirname}/Data/Doctors/doctors.json`);
 // const doctorsParsed = JSON.parse(doctorsString);
 
 // doctorsParsed.forEach((doc) => {

@@ -124,7 +124,10 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   const patient = req.user;
   const appointment = await Appointment.findById(
     req.body.AppointmentID
-  ).populate({ path: 'doctor', select: ['specialization', 'name', 'profilePicture'] });
+  ).populate({
+    path: 'doctor',
+    select: ['specialization', 'name', 'profilePicture'],
+  });
   if (appointment?.patient?._id.toString() === patient._id.toString())
     return next(new AppError('You already booked this appointment', 400));
   if (appointment.status !== 'available')
@@ -136,7 +139,7 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
   appointment.comment = req.body.comment;
   doctor.patients.push(patient._id);
   await doctor.save({ validateBeforeSave: false });
-  appointment.populate({ path: 'doctor', select: ['name', 'profilePicture'] });
+  appointment.populate({ path: 'patient', select: ['name', 'profilePicture'] });
   await appointment.save({ validateBeforeSave: false });
   res.status(200).json({
     status: 'success',
@@ -169,14 +172,20 @@ exports.getMyAppointments = catchAsync(async (req, res, next) => {
       patient: user._id,
     })
       .populate({ path: 'patient', select: ['name', 'profilePicture'] })
-      .populate({ path: 'doctor', select: ['name', 'profilePicture', 'specialization'] });
+      .populate({
+        path: 'doctor',
+        select: ['name', 'profilePicture', 'specialization'],
+      });
   }
   if (user.__t == 'Doctor') {
     allAppointments = await Appointment.find({
       doctor: user._id,
     })
       .populate({ path: 'patient', select: ['name', 'profilePicture'] })
-      .populate({ path: 'doctor', select: ['name', 'profilePicture', 'specialization'] });
+      .populate({
+        path: 'doctor',
+        select: ['name', 'profilePicture', 'specialization'],
+      });
   }
   allAppointments.forEach((appointment) => {
     if (appointment.date > Date.now()) upcomingApointments.push(appointment);
@@ -190,28 +199,39 @@ exports.getMyAppointments = catchAsync(async (req, res, next) => {
   });
 });
 
-
 exports.completedOrNot = catchAsync(async (req, res, next) => {
-  const {appointmentId , status}  = req.body;
+  const { appointmentId, status } = req.body;
   const appointment = await Appointment.findById(appointmentId);
   const doctor = req.user._id;
-  console.log (doctor.toString());
-  console.log (appointment.doctor.toString());
-  
+  console.log(doctor.toString());
+  console.log(appointment.doctor.toString());
+
   if (doctor.toString() != appointment.doctor.toString())
-  return next(new AppError("you can't accepted or rejected another doctor Apointments", 401));
+    return next(
+      new AppError(
+        "you can't accepted or rejected another doctor Apointments",
+        401
+      )
+    );
 
   if (appointment.date < Date.now())
-  return next(new AppError("you can't accepted or rejected upcoming Apointments", 401));
+    return next(
+      new AppError("you can't accepted or rejected upcoming Apointments", 401)
+    );
 
   if (appointment.status != 'booked')
-  return next(new AppError(`this appointment is ${appointment.status} so you can't accepted or rejected it`, 401));
+    return next(
+      new AppError(
+        `this appointment is ${appointment.status} so you can't accepted or rejected it`,
+        401
+      )
+    );
 
-  if(status == 'accepted'){
+  if (status == 'accepted') {
     appointment.status = 'accepted';
-  }else if(status == 'rejected'){
+  } else if (status == 'rejected') {
     appointment.status = 'rejected';
-  };
+  }
 
   await appointment.save({ validateBeforeSave: false });
 
