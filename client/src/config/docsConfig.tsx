@@ -103,11 +103,11 @@ export const docsConfig: docsConfigProps = {
                 Title: 'Schedule Timing',
                 Href: '/doctor/doctor-schedule'
             },
-            {
-                Icon: <IoNewspaperOutline size={20} />,
-                Title: 'Invoices',
-                Href: '/doctor/invoices'
-            },
+            // {
+            //     Icon: <IoNewspaperOutline size={20} />,
+            //     Title: 'Invoices',
+            //     Href: '/doctor/invoices'
+            // },
             {
                 Icon: <BsChatText size={20} />,
                 Title: 'Messages',
@@ -121,7 +121,7 @@ export const docsConfig: docsConfigProps = {
             {
                 Icon: <BsPeople size={20} />,
                 Title: 'Patient List',
-                Href: '/doctor/patient-list'
+                Href: '/doctor/patients-list'
             },
             {
                 Icon: <BsChatSquareText size={20} />,

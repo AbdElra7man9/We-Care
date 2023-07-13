@@ -1,18 +1,16 @@
 'use client';
 import React from 'react'
-import { BsChat, BsChatSquareText, BsChatText, BsGear, BsGrid, BsPeople, BsPersonLinesFill } from 'react-icons/bs'
 import AnimSlideRight from '@Animation/AnimSlideRight';
-import { AiOutlineAlipay } from 'react-icons/ai'
-import { IoCalendarNumberOutline, IoNewspaperOutline } from 'react-icons/io5'
 import useBreakpoint from '@Hooks/useBreakpoint';
 import { AnimatePresence, motion } from 'framer-motion'
 import { FeatureAction } from '@Redux/Slices/FeaturesSlice';
-import { GiAlarmClock } from 'react-icons/gi';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@Hooks/useRedux';
 import Image from 'next/image';
 import { docsConfig } from '@config/docsConfig';
+import { userInfo } from 'os';
+import { selectCurrentUser } from '@Redux/Slices/UserSlice';
 
 const SideBar: React.FC = () => {
     const { breakpoint } = useBreakpoint();
@@ -20,7 +18,7 @@ const SideBar: React.FC = () => {
     const pathname = usePathname();
     const dispatch = useAppDispatch();
     const { DocSide } = useAppSelector(state => state.Features);
-
+    const userInfo = useAppSelector(selectCurrentUser)
     const LinkList: React.FC = ({ }) => {
         return (
             <>
@@ -83,8 +81,8 @@ const SideBar: React.FC = () => {
                 <div className='shadow-[.2px_.2px_3px_1px] sticky top-[80px] duration-300 shadow-gray-100 dark:shadow-slate-700 hidden md:block px-0 overflow-hidden rounded-lg'>
                     <BackGroundImage />
                     <div className='text-center w-full mt-12 mb-3'>
-                        <p className='font-medium text-lg'>Dr. Calvin Carlo</p>
-                        <p className='text-gray-500'>Orthopedic</p>
+                        <p className='font-medium text-lg'>Dr. {userInfo.name}</p>
+                        <p className='text-gray-500'>{userInfo.specialization}</p>
                     </div>
                     <LinkList />
                 </div>

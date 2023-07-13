@@ -7,12 +7,13 @@ interface LayoutProps {
   children: ReactNode
 }
 export const metadata = {
-  title: "Doctor Dashboard",
+  title: "Admin Dashboard",
 };
 const Layout = async ({ children }: LayoutProps) => {
   const session = await getServerSession(authOptions)
-  // console.log(session?.role)
-  if (!session) notFound()
+  if (session?.role !== 'Coordinator'){
+    notFound()
+  }
   return (
     <DoctorWraper>
       {children}

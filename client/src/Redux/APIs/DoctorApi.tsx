@@ -31,6 +31,13 @@ export const DoctorsApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        GetPendingDoctors: builder.query<{ results: number; pendingDoctors: userType[] }, { page: number, limit: number }>({
+
+            query: ({ page, limit }) => ({
+                url: `/api/v1/pending?page=${page}&limit=${limit}`,
+                method: 'GET',
+            }),
+        }),
         GetDoctorById: builder.query<{ status: string; results: number; doctor: userType }, { doctorId: string }>({
 
             query: ({ doctorId }) => ({
@@ -128,11 +135,10 @@ export const DoctorsApi = apiSlice.injectEndpoints({
                 }
             },
         }),
-        updateDoctorsStatus: builder.mutation<{ user: userType, message: string }, { data: DoctorArgs, id: string }>({
-            query: ({ data, id }) => ({
+        updateDoctorsStatus: builder.mutation<{ user: userType, message: string }, { id: string }>({
+            query: ({ id }) => ({
                 url: `/api/v1/Doctors/${id}`,
-                method: 'PUT',
-                body: data,
+                method: 'PATCH',
             }),
         }),
 
@@ -141,9 +147,11 @@ export const DoctorsApi = apiSlice.injectEndpoints({
 
 export const {
     useSignUpDoctorMutation,
+    useGetPendingDoctorsQuery,
     useGetDoctorsQuery,
     useGetTopDoctorsQuery,
     useGetDoctorByIdQuery,
     useGetAllMyPatientsQuery,
+    useUpdateDoctorsStatusMutation,
     useSearchQuery,
 } = DoctorsApi;
