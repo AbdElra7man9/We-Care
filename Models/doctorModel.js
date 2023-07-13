@@ -21,7 +21,6 @@ doctorSchema = new mongoose.Schema(
       trim: true,
       enum: specialists,
     },
-    experience: Number,
     fees: {
       type: Number,
       default: 300,
