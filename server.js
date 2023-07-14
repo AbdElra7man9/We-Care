@@ -26,7 +26,7 @@ const SocketServer = require('./SocketServer');
 //   Patient.create(doc);
 // });
 
-////////////////////////////////
+// //////////////////////////////
 
 dotenv.config({ path: './config.env' });
 const app = require('./app');
