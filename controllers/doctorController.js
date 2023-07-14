@@ -103,6 +103,28 @@ exports.searchForDoctors = catchAsync(async (req, res, next) => {
     .Paginate()
     .Filter();
   const searchedDoctors = await features.query;
+  const totalCount = await Doctor.countDocuments({
+    $or: [
+      {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i'
+        }
+      },
+      {
+        username: {
+          $regex: req.query.keyword,
+          $options: 'i'
+        }
+      },
+      {
+        email: {
+          $regex: req.query.keyword,
+          $options: 'i'
+        }
+      }
+    ]
+  })
   if (searchedDoctors.length == 0) {
     return next(new AppError('No doctors match your search!', 404));
   }
@@ -110,6 +132,7 @@ exports.searchForDoctors = catchAsync(async (req, res, next) => {
     status: 'success',
     results: searchedDoctors.length,
     searchedDoctors,
+    totalCount
   });
 });
 

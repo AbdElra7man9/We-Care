@@ -7,6 +7,7 @@ import Link from 'next/link';
 import GetError from '@lib/GetError';
 import { BsGoogle } from 'react-icons/bs';
 import { useSigninUserMutation } from '@Redux/APIs/AuthApi';
+import { toast } from 'react-hot-toast';
 interface Inputs {
     email: string;
     password: string;
@@ -39,7 +40,9 @@ const Form: FC = ({ }) => {
                     password,
                     // redirect: false,
                 })
-            })
+            }).catch((err) => {
+                toast.error(err?.data?.message)
+            });
     }
 
 
@@ -68,7 +71,7 @@ const Form: FC = ({ }) => {
                 type='submit'
                 aria-label='submit'
                 className='btn-primary mt-4 !mb-8'
-            disabled={isLoading}
+                disabled={isLoading}
             >
                 {isLoading ?
                     <span className='flex items-center justify-center text-2xl py-1 animate-spin'>
@@ -117,8 +120,6 @@ const Form: FC = ({ }) => {
                     Sign up
                 </Link>
             </p>
-            {isError && <GetError error={error}/>}
-
         </form >
     )
 }

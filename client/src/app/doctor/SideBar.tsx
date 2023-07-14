@@ -62,15 +62,17 @@ const SideBar: React.FC = () => {
                     src='/Images/profile-bg.jpg'
                     alt=''
                 />
-                <Image
-                    className='w-24 h-24 rounded-full absolute flex inset-x-0 !left-[40%] -bottom-10 shadow-lg'
-                    height={200}
-                    width={200}
-                    priority
-                    draggable={false}
-                    src='/Images/Clients/09.jpg'
-                    alt=''
-                />
+                {userInfo?.profilePicture &&
+                    <Image
+                        className='w-24 h-24 rounded-full absolute flex inset-x-0 !left-[40%] -bottom-10 shadow-lg'
+                        height={200}
+                        width={200}
+                        priority
+                        draggable={false}
+                        src={userInfo?.profilePicture}
+                        alt=''
+                    />
+                }
             </div>
         )
     }

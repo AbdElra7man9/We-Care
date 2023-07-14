@@ -2,7 +2,7 @@ import Form from './Form';
 import Image from 'next/image';
 import Link from 'next/link';
 export default function page() {
-    (
+    return (
         <div>
             <div className='container px-0 max-w-4xl flex place-content-center h-[80%] lg:mt-20 mb-5'>
                 <div className='max-w-md'>

@@ -3,6 +3,7 @@ import GetError from '@lib/GetError';
 import { useForgetPasswordMutation } from '@Redux/APIs/AuthApi';
 import Link from 'next/link';
 import { FC, useEffect, useRef, useState } from 'react'
+import { toast } from 'react-hot-toast';
 import { ImSpinner7 } from 'react-icons/im';
 
 const Form: FC = () => {
@@ -27,8 +28,8 @@ const Form: FC = () => {
                 setSuccess(`We Send a reset message to your email ${email}`);
                 setEMail('')
             })
-            .catch((err: any) => {
-                console.log(err?.data?.message);
+            .catch((err) => {
+                toast.error(err?.data?.message)
             });
     }
     return (
@@ -63,7 +64,6 @@ const Form: FC = () => {
                 className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm font-medium mt-3'>
                 Create New Account ?
             </Link>
-            {isError && <GetError error={error} />}
             {success && <span className="text-green-500 pb-3 font-poppins font-medium">{success}</span>}
         </form>
     )
