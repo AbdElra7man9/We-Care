@@ -19,7 +19,7 @@ const page: FC<pageProps> = ({ }) => {
             </p>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-5'>
                 <AppointmentsList status='now'/>
-                <PaymentsList />
+                <AppointmentsList status='past'/>
             </div>
             <Contact dashLink="/patient/dahboard/overflow" messagesLink="/patient/dashboard/messages" />
         </div>

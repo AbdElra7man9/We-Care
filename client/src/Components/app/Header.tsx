@@ -162,7 +162,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
                 aria-label='signin'
                 href='/auth/signin'
                 draggable={false}
-                className="bg-blue-600 text-white rounded-md font-medium active:scale-95 duration-300 p-2 px-4">
+                className="bg-blue-600 text-white rounded-md text-xs md:text-base md:font-medium active:scale-95 duration-300 p-2 px-3 md:px-4">
                 Sign In
               </Link>
               :

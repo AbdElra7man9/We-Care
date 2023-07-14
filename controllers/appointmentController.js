@@ -153,7 +153,12 @@ exports.getMyBookedAppointments = catchAsync(async (req, res, next) => {
   const myBookedAppointments = await Appointment.find({
     doctor: doctorId,
     status: 'booked',
-  });
+  })
+    .populate({ path: 'patient', select: ['name', 'email', 'username', 'profilePicture'] })
+    .populate({
+      path: 'doctor',
+      select: ['name', 'profilePicture', 'specialization'],
+    });
   res.status(200).json({
     status: 'success',
     results: myBookedAppointments.length,

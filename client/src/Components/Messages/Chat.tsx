@@ -86,10 +86,10 @@ const Chat = ({ params }: { params: { username: string; chatId: string } }) => {
                             <p className='my-auto'>
                                 {user?.name}
                             </p>
-                            <div className='flex gap-1 items-end'>
+                            {/* <div className='flex gap-1 items-end'>
                                 <span className='h-2 w-2 bg-green-600 rounded-full'></span>
                                 <p className='text-xs text-light mt-1'>Online Now</p>
-                            </div>
+                            </div> */}
                         </div>
                     </Link>
                 </div>

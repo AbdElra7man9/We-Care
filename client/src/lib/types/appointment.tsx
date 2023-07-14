@@ -7,6 +7,7 @@ export interface iAppointments {
     paid: string;
     date: string;
     price: number;
+    comment: string;
     doctor: userType;
     patient: userType;
     createdAt: string;

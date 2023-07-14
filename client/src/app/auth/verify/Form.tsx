@@ -30,7 +30,7 @@ const Form: FC<FormProps> = ({ }) => {
         const data = { pin }
         await VerifyEmail(data).unwrap()
             .then(() => {
-                route.push(`/`)
+                route.push(`/auth/signin`)
                 setPin('');
             })
     }

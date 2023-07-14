@@ -17,6 +17,28 @@ const DoctorsList: React.FC<{ Doctors: userType[] }> = ({ Doctors }) => {
         { id: 'github', icon: <SlSocialGithub size={23} /> },
         { id: 'twitter', icon: <SlSocialTwitter size={23} /> },
     ];
+        const handleAddItem = ({ doc }: { doc: userType }) => {
+        // Retrieve existing array from localStorage
+        const existingArray = localStorage.getItem('favorites');
+        let updatedArray: userType[] = [];
+
+        if (existingArray) {
+            // Parse the existing array into a JavaScript object
+            updatedArray = JSON.parse(existingArray);
+        }
+
+        // Push the new item into the array
+        updatedArray.push(doc);
+
+        // Convert the modified array back to a string
+        const updatedArrayString = JSON.stringify(updatedArray);
+
+        // Update localStorage with the modified array
+        localStorage.setItem('favorites', updatedArrayString);
+        toast.success('Doctor added to favorites')
+    };
+
+
     return (
         <>
             {(Doctors?.length === 0) ?
@@ -38,10 +60,7 @@ const DoctorsList: React.FC<{ Doctors: userType[] }> = ({ Doctors }) => {
                                 }
                                 <button
                                     aria-label='save'
-                                    onClick={() => {
-                                        localStorage.setItem('fav', doc?._id as string);
-                                        toast.success('Doctor added to fauvoite')
-                                    }}
+                                    onClick={handleAddItem}
                                     className='w-10 h-10 absolute top-0 m-3 right-0 rounded-full bg-red-100 shadow-red-600 drop-shadow-xl text-red-500 active:bg-red-600 active:scale-95 
                                             hover:bg-red-500 hover:text-white duration-150 flex justify-center items-center shadow-2xl'
                                 >

@@ -63,7 +63,7 @@ const ProfileWraper = ({ children }: { children: React.ReactNode }) => {
               />
             </div>
             <div className='text-center w-full mt-12'>
-              <p className='font-medium text-lg'>Christopher Burrell</p>
+              <p className='font-medium text-lg'>{userInfo?.name}</p>
               <p className='text-gray-500'>25 Years old</p>
             </div><hr className="dark:border-slate-500 mt-5" />
             <div className='lg:p-5 px-3 py-5'>
@@ -83,7 +83,7 @@ const ProfileWraper = ({ children }: { children: React.ReactNode }) => {
                 </div>
               </div>
               <div className='space-y-3'>
-                <INFO Icon={<BsFillPersonFill size={23} />} Title='Gender' Value='Female' />
+                <INFO Icon={<BsFillPersonFill size={23} />} Title='Gender' Value={userInfo?.gender as string} />
                 <INFO Icon={<MdMarkEmailRead size={23} />} Title='Birthday' Value='19th January 1995' />
                 <INFO Icon={<BsTelephoneFill size={22} />} Title='Phone No' Value='+(125) 458-8547' />
                 <INFO Icon={<FaAddressCard size={22} />} Title='Address' Value='Sydney, Australia' />
