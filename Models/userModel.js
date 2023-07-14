@@ -52,7 +52,7 @@ const userSchema = mongoose.Schema({
   profilePicture: {
     type: String,
     default:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/340px-Default_pfp.svg.png?20220226140232',
+      'https://static.wixstatic.com/media/3e54e0_f787e8aa3d08464fa8151d1f4ad535b6~mv2.jpg/v1/fill/w_413,h_414,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/male-icon.jpg',
   },
   account: Number,
   confirmed: {
