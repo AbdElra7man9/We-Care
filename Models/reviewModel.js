@@ -33,10 +33,10 @@ reviewSchema.index({ doctor:1 , patient: 1}, {unique: true});
 reviewSchema.pre(/^find/, function(next){
   this.populate({
     path: 'doctor',
-    select: 'name'
+    select: 'name profilePicture'
   }).populate({
     path: 'patient',
-    select: 'name'
+    select: 'name profilePicture'
   });
 
   next();
