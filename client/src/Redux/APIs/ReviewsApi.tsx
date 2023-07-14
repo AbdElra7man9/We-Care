@@ -13,7 +13,7 @@ export const ReviewsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         GetDoctorReviews: builder.query<{ status: string; results: number; reviews: ReviewType[] }, { page: number, limit: number, id: string }>({
             query: ({ page, limit, id }) => ({
-                url: `/api/v1/reviews/${id}?page=${page}&limit=${limit}`,
+                url: `/api/v1/reviews/doctor/${id}?page=${page}&limit=${limit}`,
                 method: 'GET',
             }),
             providesTags: ['Review']
@@ -27,7 +27,7 @@ export const ReviewsApi = apiSlice.injectEndpoints({
         }),
         GetMoreDoctorReviews: builder.query<{ status: string; results: number; reviews: ReviewType[] }, { page: number, limit: number, id: string }>({
             query: ({ page, limit, id }) => ({
-                url: `/api/v1/reviews/${id}?page=${page}&limit=${limit}`,
+                url: `/api/v1/reviews/doctor/${id}?page=${page}&limit=${limit}`,
                 method: 'GET',
             }),
             async onQueryStarted({ id }, { queryFulfilled, dispatch }) {

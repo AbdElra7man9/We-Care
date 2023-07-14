@@ -63,13 +63,11 @@ exports.getTimeBlocks = catchAsync(async (req, res, next) => {
     today.getMonth(),
     today.getDate() - today.getDay() + 6
   );
-  console.log('startOfWeek', startOfWeek);
-  console.log('endOfWeek', endOfWeek);
+
   const TimeBlocks = await TimeBlock.find({
-    doctor: req.user.id,
+    doctor: req.params.username,
     startTime: { $gte: startOfWeek, $lte: endOfWeek },
   }).sort('startTime');
-  console.log(TimeBlocks);
   if (!TimeBlocks || TimeBlocks.length === 0) {
     return next(new AppError('No Timeblocks found for this week', 401));
   }

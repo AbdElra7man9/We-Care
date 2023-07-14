@@ -1,17 +1,22 @@
 'use client';
 import ShowRating from '@Components/Parts/ShowRating';
-import { useGetDoctorLoggedReviewsQuery } from '@Redux/APIs/ReviewsApi';
+import { useGetDoctorReviewsQuery } from '@Redux/APIs/ReviewsApi';
+import { useGetUserByIdQuery } from '@Redux/APIs/UserApi';
 import moment from 'moment';
 import Image from 'next/image'
 import { FC } from 'react'
+import { useParams } from "next/navigation";
 
 interface GeReviewsProps {
 
 }
 
 const GetReviews: FC<GeReviewsProps> = ({ }) => {
-    const { data } = useGetDoctorLoggedReviewsQuery({ page: 1, limit: 10 })
-    const { reviews } = data || {}
+    const params = useParams() as { username: string };
+    const username = params.username
+    const { data } = useGetUserByIdQuery({ username })
+    const { data: ReviewData } = useGetDoctorReviewsQuery({ page: 1, limit: 10, id: data?.user._id as string })
+    const { reviews } = ReviewData || {}
     return (
         <div className='my-5'>
             <h2 className='py-3 font-medium text-lg'>Reviews :</h2>

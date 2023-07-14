@@ -1,6 +1,5 @@
 "use client";
-import { useGetAvailableDoctorAppointmentsQuery } from "@Redux/APIs/AppointmentsApi";
-import { useGetTimeBlockQuery, useNewTimeBlockMutation } from "@Redux/APIs/TimeBlockApi";
+import { useGetTimeBlockByDocIdQuery, useNewTimeBlockMutation } from "@Redux/APIs/TimeBlockApi";
 import moment from "moment";
 import { useParams } from "next/navigation";
 import React, { useState, FC, useEffect } from "react";
@@ -17,7 +16,9 @@ interface OptionType {
     value: string;
 }
 const Form: FC<FormProps> = ({ }) => {
-    const { data } = useGetTimeBlockQuery();
+    const params = useParams() as { username: string };
+    const username = params.username
+    const { data } = useGetTimeBlockByDocIdQuery({ username });
     const { TimeBlocks } = data || {};
     const [type, setType] = useState<string>('')
     const [period, setPeriod] = useState<number>();

@@ -166,11 +166,11 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
                 Sign In
               </Link>
               :
-              <Link aria-label='profile' href={`${doctor ? `/profile/doctor/${userInfo.username}` : patient && `/profile/patient/${userInfo.username}`}`}>
+              <Link aria-label='profile' href={`${doctor ? `/${userInfo.username}/doctor` : patient && `/${userInfo.username}/patient`}`}>
                 <Image
                   height={200}
                   width={200}
-                  className="h-10 w-10 rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
+                  className="h-10 w-10 object-cover rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
                   src={userInfo.profilePicture as string}
                   alt=""
                 />

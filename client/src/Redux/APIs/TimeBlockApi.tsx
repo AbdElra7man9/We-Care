@@ -11,9 +11,9 @@ export const TimeBlockApi = apiSlice.injectEndpoints({
             }),
             providesTags: ['TimeBlock']
         }),
-        GetTimeBlockByDocId: builder.query<{ upcomingApointments: iTimeBlock[], pastAppointment: iTimeBlock[] }, void>({
-            query: () => ({
-                url: `/api/v1/TimeBlock`,
+        GetTimeBlockByDocId: builder.query<{ TimeBlocks: iTimeBlock[] }, { username: string }>({
+            query: ({ username }) => ({
+                url: `/api/v1/TimeBlock/${username}`,
                 method: 'GET',
             }),
             providesTags: ['TimeBlock']
