@@ -9,6 +9,7 @@ import { BsGoogle } from 'react-icons/bs';
 import { ImSpinner7 } from 'react-icons/im';
 import { signIn } from "next-auth/react"
 import Select from 'react-select';
+import { toast } from 'react-hot-toast';
 
 interface InpupProps {
     email: string;
@@ -40,17 +41,17 @@ const Form: FC = ({ }) => {
         { value: 'male', label: 'Male' },
         { value: 'female', label: 'Female' },
     ];
-    const [signup, { isError, error, isLoading }] = useSignupMutation();
+    const [signup, { isLoading }] = useSignupMutation();
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const { email, password, name, passwordConfirm } = inputs;
         const data = { email, password, name, passwordConfirm, gender }
         await signup(data).unwrap()
-            .then((payload) => {
+            .then(() => {
                 router.push(`/auth/verify?email=${email}`)
             })
             .catch((err) => {
-                console.log(err?.data?.message);
+                toast.error(err?.data?.message)
             });
     }
 
@@ -89,10 +90,7 @@ const Form: FC = ({ }) => {
                 className='inputfield'
                 placeholder='Password'
             />
-            <div>
-                <label className="text-sm text-gray-500 font-medium text-start my-3">Gender</label>
-                <Select options={GenderOptions} onChange={(data) => setGender(data?.value as string)} />
-            </div>
+            <Select options={GenderOptions} onChange={(data) => setGender(data?.value as string)} placeholder={<div className='flex justify-start'>Select gender</div>} />
             <p className='text-sm font-normal text-gray-500'>
                 People who use our service may have uploaded your contact information to Instagram.
                 <Link href='/more' aria-label='more' className='font-semibold text-gray-500'>Learn More</Link>
@@ -149,14 +147,13 @@ const Form: FC = ({ }) => {
                 </div>
                 <p className="my-5 text-sm inline">{`Don't have an account? `}
                     <Link
-                        href="/auth/signup"
+                        href="/auth/signin"
                         aria-label='sign up'
                         className='font-semibold text-black'>
                         Sign In
                     </Link>
                 </p>
             </div>
-            {isError && <GetError error={error} />}
         </form >
 
     )

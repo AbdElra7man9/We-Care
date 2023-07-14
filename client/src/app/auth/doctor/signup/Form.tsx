@@ -1,14 +1,15 @@
 'use client';
-import GetError from '@lib/GetError';
 import { useSignupDoctorMutation } from '@Redux/APIs/AuthApi';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useState } from 'react'
+import { toast } from 'react-hot-toast';
 import { ImSpinner7 } from 'react-icons/im';
+import Select from 'react-select';
+import specializations from '@Data/specializations.json'
 
 interface InpupProps {
     email: string;
-    specialization: string;
     password: string;
     name: string;
     passwordConfirm: string;
@@ -18,28 +19,37 @@ const Form: FC = ({ }) => {
     const router = useRouter();
     const [inputs, setInputs] = useState<InpupProps>({
         email: '',
-        specialization: '',
         password: '',
         name: '',
         passwordConfirm: ''
-    })
+    });
+    const [gender, setGender] = useState<string>('');
+    const [specialization, setSpecialization] = useState<string>('');
+
     const handleChange = ({
         currentTarget: input,
     }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setInputs({ ...inputs, [input.name]: input.value });
     };
-
+    const GenderOptions = [
+        { value: 'male', label: 'Male' },
+        { value: 'female', label: 'Female' },
+    ];
+    const SpecializationOptions = specializations.map(spec => ({
+        value: spec.id,
+        label: spec.specialization
+    }));
     const [signupDoctor, { isError, error, isLoading }] = useSignupDoctorMutation();
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const { email, password, specialization, name, passwordConfirm } = inputs;
-        const data = { email, password, name, specialization, passwordConfirm }
+        const { email, password, name, passwordConfirm } = inputs;
+        const data = { email, password, name, specialization, passwordConfirm, gender }
         await signupDoctor(data).unwrap()
-            .then((payload) => {
+            .then(() => {
                 router.push(`/auth/verify?email=${email}`)
             })
             .catch((err) => {
-                console.log(err?.data?.message);
+                toast.error(err?.data?.message)
             });
     }
 
@@ -61,14 +71,6 @@ const Form: FC = ({ }) => {
                 className='inputfield'
                 placeholder='First Name'
             />
-            <input
-                onChange={handleChange}
-                value={inputs.specialization}
-                name='specialization'
-                type='text'
-                className='inputfield'
-                placeholder='Specialization'
-            />
 
             <input
                 onChange={handleChange}
@@ -86,6 +88,10 @@ const Form: FC = ({ }) => {
                 className='inputfield'
                 placeholder='Password'
             />
+            <div className='flex flex-col gap-3'>
+                <Select options={SpecializationOptions} onChange={(data) => setSpecialization(data?.label as string)} placeholder={<div className='flex justify-start'>Select Speciaztion</div>} />
+                <Select options={GenderOptions} onChange={(data) => setGender(data?.value as string)} placeholder={<div className='flex justify-start'>Select gender</div>} />
+            </div>
             <p className='text-sm font-normal text-gray-500'>
                 People who use our service may have uploaded your contact information to Instagram.
                 <Link href='/more' aria-label='more' className='font-semibold text-gray-500'>Learn More</Link>
@@ -114,7 +120,6 @@ const Form: FC = ({ }) => {
                 className='text-blue-800 dark:text-blue-400 focus:text-blue-300 md:mb-4 text-lg font-serif hover:underline'>
                 sign up as a doctor ?
             </Link>
-            {isError && <GetError error={error} />}
         </form>
 
     )

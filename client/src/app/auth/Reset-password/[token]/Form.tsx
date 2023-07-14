@@ -5,6 +5,7 @@ import { useResetPasswordMutation } from '@Redux/APIs/AuthApi';
 import GetError from '@lib/GetError';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { toast } from 'react-hot-toast';
 interface Inputs {
     password: string;
     passwordConfirm: string;
@@ -45,8 +46,8 @@ const Form: FC = ({ }) => {
                     passwordConfirm: ''
                 })
             })
-            .catch((err: any) => {
-                console.log(err);
+            .catch((err) => {
+                toast.error(err?.data?.message)
             });
     }
 
@@ -89,7 +90,6 @@ const Form: FC = ({ }) => {
                 className='text-blue-800 focus:text-blue-300 md:mb-7 text-sm font-medium mt-3'>
                 Create New Account ?
             </Link>
-            {isError && <GetError error={errorres} />}
         </form>
     )
 }

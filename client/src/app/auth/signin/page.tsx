@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Form from './Form';
 
-export default function page(): JSX.Element {
+export default function page(){
 
   return (
     <>

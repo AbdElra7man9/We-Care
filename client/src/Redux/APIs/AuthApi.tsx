@@ -21,6 +21,7 @@ interface SignUpDoctorData {
     name: string;
     specialization: string;
     passwordConfirm: string;
+    gender: string;
 }
 export const AuthApi = apiSlice.injectEndpoints({
     endpoints: builder => ({

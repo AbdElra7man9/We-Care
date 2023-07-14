@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "specialization": "Neurologist"
+  },
+  {
+    "id": 2,
+    "specialization": "Dentist"
+  },
+  {
+    "id": 3,
+    "specialization": "Phoniatrician"
+  },
+  {
+    "id": 4,
+    "specialization": "Endocrinologist"
+  },
+  {
+    "id": 5,
+    "specialization": "Oncologist"
+  },
+  {
+    "id": 6,
+    "specialization": "Dermatologist"
+  },
+  {
+    "id": 7,
+    "specialization": "Nephrologist"
+  },
+  {
+    "id": 8,
+    "specialization": "Hematologist"
+  },
+  {
+    "id": 9,
+    "specialization": "Andrologist"
+  },
+  {
+    "id": 10,
+    "specialization": "ENT Doctor (Otolaryngologist)"
+  },
+  {
+    "id": 11,
+    "specialization": "Gastroenterologist"
+  },
+  {
+    "id": 12,
+    "specialization": "Cardiologist"
+  },
+  {
+    "id": 13,
+    "specialization": "Hepatologist"
+  },
+  {
+    "id": 14,
+    "specialization": "Andrologist"
+  },
+  {
+    "id": 15,
+    "specialization": "Cardiothoracic Surgeon"
+  },
+  {
+    "id": 16,
+    "specialization": "Pediatric Surgeon"
+  },
+  {
+    "id": 17,
+    "specialization": "Neurosurgeon"
+  },
+  {
+    "id": 18,
+    "specialization": "Nutritionist"
+  },
+  {
+    "id": 19,
+    "specialization": "Ophthalmologist"
+  },
+  {
+    "id": 20,
+    "specialization": "Anesthesiologist"
+  },
+  {
+    "id": 21,
+    "specialization": "Infertility Specialist"
+  },
+  {
+    "id": 22,
+    "specialization": "Family Doctor (General Practitioner)"
+  },
+  {
+    "id": 23,
+    "specialization": "Pediatrician"
+  },
+  {
+    "id": 24,
+    "specialization": "Laboratory"
+  },
+  {
+    "id": 25,
+    "specialization": "Gynecologist"
+  }
+]

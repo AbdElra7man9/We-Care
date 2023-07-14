@@ -6,6 +6,8 @@ import { useSession } from 'next-auth/react';
 import { FC, useState } from 'react'
 import { toast } from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
+import Select from 'react-select';
+import specializations from '@Data/specializations.json'
 
 interface InfoProps {
 
@@ -13,7 +15,6 @@ interface InfoProps {
 interface InputProps {
     email: string;
     name: string;
-    specialization: string;
     bio: string;
     username: string;
     summary: string;
@@ -23,11 +24,13 @@ const UpdateInfo: FC<InfoProps> = ({ }) => {
     const [inputs, setInputs] = useState<InputProps>({
         name: userInfo.name as string,
         email: userInfo.email as string,
-        specialization: userInfo.specialization as string,
         username: userInfo.username as string,
         bio: userInfo.bio as string,
         summary: userInfo.summary as string,
     });
+    const [specialization, setSpecialization] = useState<string>(userInfo.specialization as string);
+    const [gender, setGender] = useState<string>('');
+
     const handleChange = ({
         currentTarget: input,
     }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -36,10 +39,19 @@ const UpdateInfo: FC<InfoProps> = ({ }) => {
     const { data: session } = useSession();
     const isDoctor = session?.role === 'Doctor'
     const [updateUserInfo, { isLoading }] = useUpdateUserInfoMutation();
+
+    const SpecializationOptions = specializations.map(spec => ({
+        value: spec.id,
+        label: spec.specialization
+    }));
+    const GenderOptions = [
+        { value: 'male', label: 'Male' },
+        { value: 'female', label: 'Female' },
+    ];
     const HandleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const { name, username, specialization, bio, summary, email } = inputs
-        updateUserInfo({ name, username, specialization, summary, bio, email }).unwrap()
+        const { name, username, bio, summary, email } = inputs
+        updateUserInfo({ name, username, specialization, gender, summary, bio, email }).unwrap()
             .then(() => {
                 toast.success('Updated successfully')
             })
@@ -60,10 +72,18 @@ const UpdateInfo: FC<InfoProps> = ({ }) => {
                 </div>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-                <div>
-                    <label className='text-sm text-gray-500 font-medium text-start my-1.5'>Your Specialztion</label>
-                    <input type='text' onChange={handleChange} defaultValue={inputs.specialization} name='specialization' className='inputfield w-full' placeholder='Specialization' />
-                </div>
+                {isDoctor ?
+
+                    <div>
+                        <label className='text-sm text-gray-500 font-medium text-start my-1.5'>Username</label>
+                        <Select options={SpecializationOptions} onChange={(data) => setSpecialization(data?.label as string)} placeholder={<div className='flex justify-start'>Select Speciaztion</div>} />
+                    </div>
+                    :
+                    <div>
+                        <label className='text-sm text-gray-500 font-medium text-start my-1.5'>Username</label>
+                        <Select options={GenderOptions} onChange={(data) => setGender(data?.value as string)} placeholder={<div className='flex justify-start'>Select gender</div>} />
+                    </div>
+                }
                 <div>
                     <label className='text-sm text-gray-500 font-medium text-start my-1.5'>Username</label>
                     <input type='text' onChange={handleChange} defaultValue={inputs.username} name='username' className='inputfield w-full' placeholder='Username' />
