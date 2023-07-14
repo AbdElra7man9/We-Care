@@ -16,12 +16,6 @@ interface InpupProps {
 
 const Form: FC = ({ }) => {
     const router = useRouter();
-    // const userRef = useRef<HTMLInputElement>(null);
-    // useEffect(() => {
-    //     if (localStorage.getItem("Logedin ?")) {
-    //         navigate("/");
-    //     }
-    // })
     const [inputs, setInputs] = useState<InpupProps>({
         email: '',
         specialization: '',
@@ -34,9 +28,7 @@ const Form: FC = ({ }) => {
     }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setInputs({ ...inputs, [input.name]: input.value });
     };
-    // useEffect(() => {
-    //     userRef.current?.focus()
-    // }, []);
+
     const [signupDoctor, { isError, error, isLoading }] = useSignupDoctorMutation();
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -56,7 +48,6 @@ const Form: FC = ({ }) => {
             <input
                 onChange={handleChange}
                 value={inputs.email}
-                // ref={userRef}
                 name='email'
                 type='email'
                 className='inputfield'

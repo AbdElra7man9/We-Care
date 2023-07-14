@@ -1,8 +1,7 @@
-import Table from '@app/admin/patient-review/Table'
-import { useGetDoctorReviewsQuery } from '@Redux/APIs/ReviewsApi'
 import Link from 'next/link'
 import React from 'react'
 import { BiChevronRight } from 'react-icons/bi'
+import Table from './Table'
 
 export default function page() {
 

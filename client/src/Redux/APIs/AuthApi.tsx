@@ -13,6 +13,7 @@ interface SignUpData {
     password: string;
     name: string;
     passwordConfirm: string;
+    gender: string;
 }
 interface SignUpDoctorData {
     email: string;

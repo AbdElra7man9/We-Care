@@ -1,5 +1,5 @@
 const AllowedOrigins = [
     'http://localhost:3000',
-    process.env.deployedWebsite,
+    process.env.client,
 ]
 module.exports = AllowedOrigins;

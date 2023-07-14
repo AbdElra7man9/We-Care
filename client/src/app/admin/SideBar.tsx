@@ -65,7 +65,7 @@ const AdminSidebar: React.FC<WidthProps> = ({ sideWidth }) => {
                 <LinkList Icon={<AiOutlineAlipay size={20} />} Title='Pending Doctors' Href='/admin/pending-doctors' />
                 {/* <LinkList Icon={<IoNewspaperOutline size={20} />} Title='Invoices' Href='/admin/invoices' /> */}
                 <LinkList Icon={<BsChatText size={20} />} Title='Blogs' Href='/admin/blogs' />
-                <LinkList Icon={<BsPeople size={20} />} Title='Patient List' Href='/admin/patient-list' />
+                <LinkList Icon={<BsPeople size={20} />} Title='Patient List' Href='/admin/patients-list' />
                 <LinkList Icon={<BsChatSquareText size={20} />} Title='Patients Review' Href='/admin/patient-review' />
                 {/* <LinkList Icon={<BsChat size={20} />} Title='Chat' Href='/admin/admin-chat' /> */}
                 <LinkList Icon={<BsGear size={20} />} Title='Profile' Href={`/profile/doctor/${userInfo.username}`} />
