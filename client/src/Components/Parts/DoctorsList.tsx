@@ -60,7 +60,7 @@ const DoctorsList: React.FC<{ Doctors: userType[] }> = ({ Doctors }) => {
                                 }
                                 <button
                                     aria-label='save'
-                                    onClick={handleAddItem}
+                                    onClick={() => { handleAddItem({ doc }) }}
                                     className='w-10 h-10 absolute top-0 m-3 right-0 rounded-full bg-red-100 shadow-red-600 drop-shadow-xl text-red-500 active:bg-red-600 active:scale-95 
                                             hover:bg-red-500 hover:text-white duration-150 flex justify-center items-center shadow-2xl'
                                 >
