@@ -27,6 +27,29 @@ const SocketServer = require('./SocketServer');
 // });
 
 // //////////////////////////////
+/////////////////////////// creat coordinator //////////////////////////////
+
+// const Coordinator = require('./Models/coordinatorModel');
+// const coordinator = {
+//   name: 'coor',
+//   password: 'coordinator',
+//   passwordConfirm: 'coordinator',
+//   gender: 'male',
+//   email: 'coor@we.com',
+// };
+// Coordinator.create(coordinator);
+
+////////////////////////////////  add summery for doctors /////////////////////////
+// const Doctor = require('./Models/doctorModel');
+// const addSummery = async () => {
+//   const doctors = await Doctor.find();
+//   doctors.forEach((doc) => {
+//     doc.summery = `${doc.name}, a renowned Egyptian ${doc.specialization}, spearheads advancements in cardiovascular medicine. With expertise and compassion, he delivers exceptional care, making a profound impact on patients' lives. His dedication and innovation have established him as a respected leader in the field.`;
+//     doc.save({ validateBeforeSave: false });
+//   });
+// };
+// addSummery();
+/////////////////////////////////
 
 dotenv.config({ path: './config.env' });
 const app = require('./app');

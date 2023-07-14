@@ -59,6 +59,7 @@ doctorSchema = new mongoose.Schema(
       enum: ['refused', 'pending', 'accepted'],
     },
     socialMedia: socialMediaSchema,
+    summery: String,
   },
   { discriminatorKey: 'userType' }
 );

@@ -185,6 +185,7 @@ exports.getMyAppointments = catchAsync(async (req, res, next) => {
   if (user.__t == 'Doctor') {
     allAppointments = await Appointment.find({
       doctor: user._id,
+      status: 'booked',
     })
       .populate({ path: 'patient', select: ['name', 'profilePicture'] })
       .populate({
