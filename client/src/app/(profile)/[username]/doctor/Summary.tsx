@@ -1,7 +1,5 @@
 'use client';
-import { useAppSelector } from '@Hooks/useRedux'
 import { useGetUserByIdQuery } from '@Redux/APIs/UserApi';
-import { selectCurrentUser } from '@Redux/Slices/UserSlice'
 import { useParams } from 'next/navigation';
 import { FC } from 'react'
 
