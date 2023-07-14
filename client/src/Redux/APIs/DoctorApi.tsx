@@ -20,7 +20,7 @@ export const DoctorsApi = apiSlice.injectEndpoints({
         GetDoctors: builder.query<DoctorResponse, { page: number, limit: number }>({
 
             query: ({ page, limit }) => ({
-                url: `/api/v1/doctors/allDoctors?page=${page}&limit=${limit}`,
+                url: `/api/v1/doctors?page=${page}&limit=${limit}`,
                 method: 'GET',
             }),
         }),
@@ -34,7 +34,7 @@ export const DoctorsApi = apiSlice.injectEndpoints({
         GetPendingDoctors: builder.query<{ results: number; pendingDoctors: userType[] }, { page: number, limit: number }>({
 
             query: ({ page, limit }) => ({
-                url: `/api/v1/pending?page=${page}&limit=${limit}`,
+                url: `/api/v1/doctors/pending?page=${page}&limit=${limit}`,
                 method: 'GET',
             }),
         }),

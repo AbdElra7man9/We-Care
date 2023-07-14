@@ -146,15 +146,15 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
             <Themetoggle />
             <button
               aria-label='search'
-              className="bg-blue-600 text-white rounded-full p-3"
+              className="bg-blue-600 text-white rounded-full text-xs sm:text-lg p-2 sm:p-3"
               onClick={() => { setIsSearchPanel(true) }}>
-              <BsSearch size={15} />
+              <BsSearch />
             </button>
             {session &&
               <button aria-label='settings'
                 onClick={handleLogot}
-                className="bg-blue-600 text-white rounded-full p-3">
-                <AiOutlineLogin size={15} />
+                className="bg-blue-600 text-white rounded-full text-xs sm:text-lg p-2 sm:p-3">
+                <AiOutlineLogin />
               </button>
             }
             {!session ?
@@ -170,7 +170,7 @@ export default function Header({ isFull, drDash }: { isFull: Boolean; drDash?: B
                 <Image
                   height={200}
                   width={200}
-                  className="h-10 w-10 object-cover rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
+                  className="h-8 w-8 object-cover rounded-full shadow-blue-600 shadow-md drop-shadow-xl"
                   src={userInfo.profilePicture as string}
                   alt=""
                 />

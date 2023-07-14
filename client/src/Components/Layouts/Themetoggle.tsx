@@ -17,15 +17,11 @@ export default function Themetoggle() {
             <button
                 aria-label='change mode'
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="bg-blue-600 text-white rounded-full p-3">
+                className="bg-blue-600 text-white rounded-full text-xs sm:text-lg p-2 sm:p-3">
                 {isLight ? (
-                    <BsMoonFill
-                        fontSize={15}
-                    />
+                    <BsMoonFill />
                 ) : (
-                    <BsSun
-                        fontSize={15}
-                    />
+                    <BsSun />
                 )}
             </button>
         </div>

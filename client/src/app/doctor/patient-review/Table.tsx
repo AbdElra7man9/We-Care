@@ -39,12 +39,15 @@ const Table: FC<TableProps> = ({ }) => {
                             <tr key={item._id} className="bg-white border-b dark:bg-slate-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 whitespace-nowrap">
                                 <td className="w-4 p-4">{index}</td>
                                 <th scope="row" className="flex items-center px-6 py-4 text-gray-900 dark:text-white">
-                                    <Image
-                                        height={100}
-                                        width={100}
-                                        className="w-10 h-10 rounded-full"
-                                        src={item.patient?.image?.url ?? process.env.NEXT_PUBLIC_ICON as string}
-                                        alt={item.patient?.name ?? ' ' as string} />
+                                    {item?.patient?.profilePicture &&
+                                        <Image
+                                            height={100}
+                                            width={100}
+                                            className="w-10 h-10 rounded-full"
+                                            src={item.patient?.profilePicture}
+                                            alt={item.patient?.name ?? ' ' as string}
+                                        />
+                                    }
                                     <div className="pl-3">
                                         <div className="text-base font-semibold">{item.patient?.name}</div>
                                         <div className="font-normal text-gray-500">{item.patient?.email}</div>
