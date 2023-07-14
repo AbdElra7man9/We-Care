@@ -17,7 +17,7 @@ interface InputProps {
     name: string;
     bio: string;
     username: string;
-    summary: string;
+    summery: string;
 }
 const UpdateInfo: FC<InfoProps> = ({ }) => {
     const userInfo = useAppSelector(selectCurrentUser)
@@ -26,7 +26,7 @@ const UpdateInfo: FC<InfoProps> = ({ }) => {
         email: userInfo.email as string,
         username: userInfo.username as string,
         bio: userInfo.bio as string,
-        summary: userInfo.summary as string,
+        summery: userInfo.summery as string,
     });
     const [specialization, setSpecialization] = useState<string>(userInfo.specialization as string);
     const [gender, setGender] = useState<string>('');
@@ -50,8 +50,8 @@ const UpdateInfo: FC<InfoProps> = ({ }) => {
     ];
     const HandleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const { name, username, bio, summary, email } = inputs
-        updateUserInfo({ name, username, specialization, gender, summary, bio, email }).unwrap()
+        const { name, username, bio, summery, email } = inputs
+        updateUserInfo({ name, username, specialization, gender, summery, bio, email }).unwrap()
             .then(() => {
                 toast.success('Updated successfully')
             })
@@ -110,12 +110,12 @@ const UpdateInfo: FC<InfoProps> = ({ }) => {
             </div>
             {isDoctor &&
                 <div>
-                    <label className='text-sm text-gray-500 font-medium text-start my-1 block'>Summary</label>
+                    <label className='text-sm text-gray-500 font-medium text-start my-1 block'>summery</label>
                     <textarea
                         placeholder='content...'
                         cols={60}
                         rows={7}
-                        value={inputs.summary}
+                        value={inputs.summery}
                         onChange={handleChange}
                         name='bio'
                         className='w-full border p-3 outline-none focus:border-black

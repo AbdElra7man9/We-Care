@@ -5,16 +5,16 @@ import { selectCurrentUser } from '@Redux/Slices/UserSlice'
 import { useParams } from 'next/navigation';
 import { FC } from 'react'
 
-interface SummaryProps {
+interface summeryProps {
 
 }
 
-const Summary: FC<SummaryProps> = ({ }) => {
+const summery: FC<summeryProps> = ({ }) => {
     const params = useParams() as { username: string };
     const username = params.username
     const { data } = useGetUserByIdQuery({ username })
     const { user } = data || {}
-    return <p className='text-gray-400 leading-loose'>{user?.summary}</p>
+    return <p className='text-gray-400 leading-loose'>{user?.summery}</p>
 }
 
-export default Summary
+export default summery

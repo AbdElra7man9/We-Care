@@ -10,9 +10,9 @@ interface TopDoctorProps {
 
 const TopDoctor: FC<TopDoctorProps> = ({ }) => {
     const { data } = useGetTopDoctorsQuery({ page: 1, limit: 4 });
-    const { allDoctors } = data || {}
+    const { topDoctors } = data || {}
     return (
-        <DoctorsList Doctors={allDoctors as userType[]} />
+        <DoctorsList Doctors={topDoctors as userType[]} />
     )
 }
 

@@ -24,10 +24,10 @@ export const DoctorsApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-        GetTopDoctors: builder.query<{ allDoctors: userType[] }, { page: number, limit: number }>({
+        GetTopDoctors: builder.query<{ topDoctors: userType[] }, { page: number, limit: number }>({
 
             query: ({ page, limit }) => ({
-                url: `/api/v1/doctors?page=${page}&limit=${limit}`,
+                url: `/api/v1/doctors/topdoctors?page=${page}&limit=${limit}`,
                 method: 'GET',
             }),
         }),

@@ -18,11 +18,11 @@ export const UserApi = apiSlice.injectEndpoints({
             }),
             providesTags: ['Auth'],
         }),
-        updateUserInfo: builder.mutation<{ user: userType, message: string }, { username?: string, summary?: string, profilePicture?: string, gender?: string; email?: string, specialization?: string, bio?: string, name?: string }>({
-            query: ({ username, specialization, profilePicture, summary, email, name, bio, gender }) => ({
+        updateUserInfo: builder.mutation<{ user: userType, message: string }, { username?: string, summery?: string, profilePicture?: string, gender?: string; email?: string, specialization?: string, bio?: string, name?: string }>({
+            query: ({ username, specialization, profilePicture, summery, email, name, bio, gender }) => ({
                 url: `/api/v1/users/updateInfo`,
                 method: 'PATCH',
-                body: { username, specialization, email, name, bio, profilePicture, summary, gender },
+                body: { username, specialization, email, name, bio, profilePicture, summery, gender },
             }),
         }),
         DeleteMe: builder.mutation<{ message: string }, void>({
