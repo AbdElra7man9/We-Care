@@ -1,5 +1,5 @@
 const express = require('express');
-const { AllReview, DeleteReview } = require('../controllers/CoorController');
+const { AllReview, DeleteReview, sendEmail } = require('../controllers/CoorController');
 const { getAllPatients } = require('../controllers/CoorController');
 const protect = require('../Middlewares/protect');
 
@@ -11,4 +11,5 @@ router.use(protect, restrictTo('Coordinator'));
 
 router.get('/all-reviews', AllReview);
 router.delete('/delete-review/:id', DeleteReview);
+router.post('/email', sendEmail);
 module.exports = router;
