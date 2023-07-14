@@ -15,16 +15,16 @@ const SocketServer = require('./SocketServer');
 // });
 // ////////////////////////      load Patients to DB /////////////////////////////////
 
-const Patient = require('./Models/patientModel');
-const fs = require('fs');
-const patientsString = fs.readFileSync(
-  `${__dirname}/Data/Patients/patients.json`
-);
-const patientsParsed = JSON.parse(patientsString);
+// const Patient = require('./Models/patientModel');
+// const fs = require('fs');
+// const patientsString = fs.readFileSync(
+//   `${__dirname}/Data/Patients/patients.json`
+// );
+// const patientsParsed = JSON.parse(patientsString);
 
-patientsParsed.forEach((doc) => {
-  Patient.create(doc);
-});
+// patientsParsed.forEach((doc) => {
+//   Patient.create(doc);
+// });
 
 // //////////////////////////////
 
