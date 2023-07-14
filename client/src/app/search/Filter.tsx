@@ -5,9 +5,10 @@ import 'rc-slider/assets/index.css';
 import { useDispatch } from 'react-redux';
 import { FeatureAction } from '@Redux/Slices/FeaturesSlice';
 import Select from 'react-select';
+import specializations from '@Data/specializations.json'
 
 const Filter: FC = () => {
-    const [rangeValues, setRangeValues] = useState<number[]>([0, 100]);
+    const [rangeValues, setRangeValues] = useState<number[]>([0, 1000]);
     const dispatch = useDispatch();
     const handleRangeChange = (values: number | number[]) => {
         if (Array.isArray(values)) {
@@ -16,18 +17,21 @@ const Filter: FC = () => {
         }
     };
     const GenderOptions = [
+        { value: '', label: 'All Genders' },
         { value: 'male', label: 'Male' },
         { value: 'female', label: 'Female' },
     ];
-    const SpecialzationOptions = [
-        { value: 'Gynecologist', label: 'Gynecologist' },
-        { value: 'female', label: 'Female' },
-    ];
+    const SpecializationOptions = specializations.map(spec => ({
+        value: spec.id,
+        label: spec.specialization
+    }));
     const GovernmentOptions = [
+        { value: '', label: 'All options' },
         { value: 'Gynecologist', label: 'Gynecologist' },
         { value: 'female', label: 'Female' },
     ];
     const CityOption = [
+        { value: '', label: 'All options' },
         { value: 'Gynecologist', label: 'Gynecologist' },
         { value: 'female', label: 'Female' },
     ];
@@ -35,15 +39,6 @@ const Filter: FC = () => {
         <div>
             <p>Filter By</p>
             <div className="px-5 flex flex-col gap-4">
-                <div>
-                    <label className="text-sm text-gray-500 font-medium text-start my-3">Specialication</label>
-                    <select
-                        name="Specialication"
-                        className="inputfield w-full px-5"
-                    >
-                        <option>Eye</option>
-                    </select>
-                </div>
                 <label className="text-sm text-gray-500 font-medium text-start my-3">Fees</label>
                 <Slider
                     min={0}
@@ -59,7 +54,7 @@ const Filter: FC = () => {
                 </div>
                 <div>
                     <label className="text-sm text-gray-500 font-medium text-start my-3">Specialization</label>
-                    <Select options={SpecialzationOptions} onChange={(data) => dispatch(FeatureAction.setSpecialization(data?.value))} />
+                    <Select options={SpecializationOptions} onChange={(data) => dispatch(FeatureAction.setSpecialization(data?.label))} />
                 </div>
                 <div>
                     <label className="text-sm text-gray-500 font-medium text-start my-3">Government</label>

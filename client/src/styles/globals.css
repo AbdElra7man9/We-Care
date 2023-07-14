@@ -69,3 +69,35 @@ html {
     opacity: 1;
     transition: all 0.2s ease-in;
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.page-item {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.page-link {
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.previous {
+  margin-right: 5px;
+}
+
+.next {
+  margin-left: 5px;
+}
+
+.active {
+  font-weight: bold;
+}

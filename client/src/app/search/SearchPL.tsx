@@ -1,17 +1,19 @@
 'use client';
 import { FC, useState } from 'react'
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface SearchPLProps {
 
 }
 
 const SearchPL: FC<SearchPLProps> = ({ }) => {
-    const [keyword, setKeyword] = useState<string>('');
+    const query = useSearchParams();
+    const keyword = query?.get('keyword') || '' as string;
+    const [keywordtext, setKeyword] = useState<string>(keyword);
     const router = useRouter();
     const submitsearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        router.push(`/search?keyword=${keyword}`)
+        router.push(`/search?keyword=${keywordtext}`)
     }
     return (
         <div className='flex justify-end w-full mb-5'>
