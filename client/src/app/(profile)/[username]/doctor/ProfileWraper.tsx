@@ -58,10 +58,10 @@ export default function ProfileWraper({ children }: { children: React.ReactNode 
               <p className='text-gray-800 text-lg font-semibold'>Good morning!</p>
               <p className='text-xl font-bold text-blue-600'>Dr. {user?.name}</p>
               <p className='text-gray-500 text-sm'>{user?.bio}</p>
-              <p className="font-semibold">You have <span className="text-blue-600">{user?.patients?.length as number} patients</span>!</p>
+              <p className="font-semibold">{logged ? 'You' : 'Doctor'} have <span className="text-blue-600">{user?.patients?.length as number} patients</span>!</p>
               <div className='mb-5'>
                 <div className='flex justify-between text-gray-500 mb-2'>
-                  <p className='font-medium text-gray-600'>Complete your profile</p>
+                  <p className='font-medium text-gray-600'>{logged ? 'Complete your profile' : 'Profile complitation'}</p>
                   <p className='font-medium'>{spec?.value} %</p>
                 </div>
                 <div

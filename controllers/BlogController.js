@@ -96,6 +96,7 @@ exports.userBlogById = catchAsync(async (req, res, next) => {
   return res.json({
     status: 'success',
     Blogs: userBLOGs,
+    totalCount: userBLOGs.length
   });
 });
 

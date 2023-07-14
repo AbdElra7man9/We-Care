@@ -54,15 +54,15 @@ export const BlogsApi = apiSlice.injectEndpoints({
             },
         }),
         getUserBlogsById: builder.query<BlogResponse, { id: string, page: number }>({
-            query: (id) => ({
-                url: `/api/v1/Blog/get/all/${id}?page=${1}`,
+            query: ({ id, page }) => ({
+                url: `/api/v1/Blog/${id}?page=${page}`,
                 method: 'GET',
             }),
             providesTags: ['Blog'],
         }),
         getMoreUserBlogsById: builder.query<BlogResponse, { id: string, page: number }>({
             query: ({ id, page }) => ({
-                url: `/api/v1/Blog/get/all/${id}?page=${page}`,
+                url: `/api/v1/Blog/${id}?page=${page}`,
                 method: 'GET',
             }),
             async onQueryStarted(args, { queryFulfilled, dispatch }) {
@@ -70,7 +70,7 @@ export const BlogsApi = apiSlice.injectEndpoints({
 
                     const { data } = await queryFulfilled;
                     dispatch(
-                        BlogsApi.util.updateQueryData("getUserBlogsById", args, (draft) => {
+                        BlogsApi.util.updateQueryData("getUserBlogsById", { page: 1, id: args.id }, (draft) => {
                             return {
                                 Blogs: [
                                     ...draft.Blogs,
