@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const Features = require('../utils/Features');
 const Patient = require('../Models/patientModel');
 const Coordinator = require('../Models/coordinatorModel');
+const nodemailer = require('nodemailer');
 
 exports.acceptDoctor = (req, res, next) => { };
 exports.AllReview = catchAsync(async function (req, res, next) {
@@ -37,3 +38,42 @@ exports.countUsers = catchAsync(async function (req, res, next) {
   Patient.countDocuments();
   Coordinator.countDocuments();
 });
+
+function sendEmail(email, subject, text) {
+  const transporter = nodemailer.createTransport({
+      service: 'outlook',
+      auth: {
+          user: 're00zq@outlook.com',
+          pass: 'mahmoud1Q2W3E#',
+      },
+  });
+
+  var mailOptions = {
+      from: 're00zq@outlook.com',
+      to: email,
+      subject,
+      text,
+    // html: '<h1>test</h1>'
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+      console.log(error);
+      } else {
+      console.log(`Email sent: ${info.response}`);
+      }
+  });
+};
+
+exports.sendEmail = catchAsync(async function (req, res, next) {
+  const { email, subject, text } = req.body;
+  try {
+      sendEmail(email, subject, text);
+  } catch (err) {
+      console.log("2")
+      return next(
+          new AppError('faild'),
+          500
+      );
+      }
+  });
