@@ -6,7 +6,7 @@ const restrictTo = require('../Middlewares/restrictTo');
 
 const router = express.Router();
 
-router.route('/:username').get(getTimeBlocks);
+router.route('/:id').get(getTimeBlocks);
 router.use(protect, restrictTo('Doctor'), acceptedDoctor);
 router.route('/').post(addTimeBlock);
 

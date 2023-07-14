@@ -1,6 +1,6 @@
 import AppointmentsList from '@app/patient/(components)/AppointmentsList'
 import Contact from '@app/patient/(components)/Contact'
-import GetReviews from '@app/profile/doctor/reviews/GetReviews'
+import GetReviews from '@Components/Parts/GetReviews'
 import React from 'react'
 import AppointmentChart from './(GridCharts)/AppointmentChart'
 import CanceledChart from './(GridCharts)/CanceledChart'

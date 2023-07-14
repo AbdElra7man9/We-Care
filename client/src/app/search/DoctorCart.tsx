@@ -112,10 +112,10 @@ const DoctorCart: FC<DoctorCartProps> = () => {
                                     </button>
                                 </div>
                                 <div className='space-y-3 p-5 overflow-hidden'>
-                                    <div>
+                                    <Link href={`/${doc.username}/doctor`} className='hover:underline'>
                                         <p className='text-lg font-medium text-gray-800 dark:text-white'>Dr. {doc?.name}</p>
                                         <p className='text-sm text-gray-500 dark:text-gray-400'>{doc?.specialization}</p>
-                                    </div>
+                                    </Link>
                                     <ShowRating Rating={doc?.averageRating as number} />
                                     <div className='space-y-3'>
                                         <div className='flex items-center gap-3'>

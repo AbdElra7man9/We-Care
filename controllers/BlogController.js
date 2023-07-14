@@ -64,7 +64,7 @@ exports.DeleteBLOG = catchAsync(async (req, res, next) => {
 exports.userBLOG = catchAsync(async (req, res, next) => {
   const resultperpage = 4;
   const features = new Features(
-    BlogModel.find({ user: req.user.id }),
+    BlogModel.find({ _id: req.user.id }),
     req.query
   ).Pagination(resultperpage);
 

@@ -1,5 +1,7 @@
 "use client";
+import { useAppSelector } from "@Hooks/useRedux";
 import { useGetTimeBlockByDocIdQuery, useNewTimeBlockMutation } from "@Redux/APIs/TimeBlockApi";
+import { useGetUserByIdQuery } from "@Redux/APIs/UserApi";
 import moment from "moment";
 import { useParams } from "next/navigation";
 import React, { useState, FC, useEffect } from "react";
@@ -16,9 +18,12 @@ interface OptionType {
     value: string;
 }
 const Form: FC<FormProps> = ({ }) => {
+    const { logged } = useAppSelector(state => state.Features)
     const params = useParams() as { username: string };
-    const username = params.username
-    const { data } = useGetTimeBlockByDocIdQuery({ username });
+    const username = params.username;
+    const { data: userData } = useGetUserByIdQuery({ username })
+    const { user } = userData || {};
+    const { data } = useGetTimeBlockByDocIdQuery({ doctorId: user?._id as string });
     const { TimeBlocks } = data || {};
     const [type, setType] = useState<string>('')
     const [period, setPeriod] = useState<number>();
@@ -87,52 +92,54 @@ const Form: FC<FormProps> = ({ }) => {
     ];
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            <form className="flex flex-col gap-y-4" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                        <label className="text-sm text-gray-500 font-medium text-start my-1">
-                            Choose day
-                        </label>
-                        <Select
-                            options={dayOptions}
-                            onChange={(data) => { setDay(data?.value as string) }}
-                            isClearable
-                            placeholder="-- Select a day --"
-                        />
+            {logged &&
+                <form className="flex flex-col gap-y-4" onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label className="text-sm text-gray-500 font-medium text-start my-1">
+                                Choose day
+                            </label>
+                            <Select
+                                options={dayOptions}
+                                onChange={(data) => { setDay(data?.value as string) }}
+                                isClearable
+                                placeholder="-- Select a day --"
+                            />
+                        </div>
+                        <div>
+                            <label className="text-sm text-gray-500 font-medium text-start my-1">
+                                Choose time
+                            </label>
+                            <Select
+                                options={startTimeOptions}
+                                onChange={(data) => { setTime(data?.value as string) }}
+                                isClearable
+                                placeholder="-- Select a start time --"
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <label className="text-sm text-gray-500 font-medium text-start my-1">
-                            Choose time
-                        </label>
-                        <Select
-                            options={startTimeOptions}
-                            onChange={(data) => { setTime(data?.value as string) }}
-                            isClearable
-                            placeholder="-- Select a start time --"
-                        />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label className="text-sm text-gray-500 font-medium text-start my-1">
+                                Type
+                            </label>
+                            <Select options={TypeOption} onChange={(data) => setType(data?.value as string)} />
+                        </div>
+                        <div>
+                            <label className="text-sm text-gray-500 font-medium text-start my-1">
+                                Type
+                            </label>
+                            <Select options={PeriodOption} onChange={(data) => setPeriod(data?.value as number)} />
+                        </div>
                     </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                        <label className="text-sm text-gray-500 font-medium text-start my-1">
-                            Type
-                        </label>
-                        <Select options={TypeOption} onChange={(data) => setType(data?.value as string)} />
-                    </div>
-                    <div>
-                        <label className="text-sm text-gray-500 font-medium text-start my-1">
-                            Type
-                        </label>
-                        <Select options={PeriodOption} onChange={(data) => setPeriod(data?.value as number)} />
-                    </div>
-                </div>
-                <button aria-label='make time block' type='submit' className='btn-primary h-12 mt-4' disabled={isLoading}>
-                    {isLoading ? <span className='flex items-center justify-center text-2xl py-1 animate-spin'>
-                        <ImSpinner7 />
-                    </span> : 'Save time block'}
-                </button>
+                    <button aria-label='make time block' type='submit' className='btn-primary h-12 mt-4' disabled={isLoading}>
+                        {isLoading ? <span className='flex items-center justify-center text-2xl py-1 animate-spin'>
+                            <ImSpinner7 />
+                        </span> : 'Save time block'}
+                    </button>
 
-            </form>
+                </form>
+            }
             <div className='shadow-[.2px_.2px_3px_1px] w-full flex flex-col gap-y-2 ml-auto dark:shadow-slate-700 shadow-gray-100 rounded-lg overflow-hidden p-5'>
                 {TimeBlocks?.map((time) => (
                     <div key={time?._id} className="grid grid-cols-4">

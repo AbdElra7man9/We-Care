@@ -1,7 +1,7 @@
-import DeleteAccount from '@app/profile/(Components)/DeleteAccount'
-import Password from '@app/profile/(Components)/Password'
-import UpdateImage from '@app/profile/(Components)/UpdateImage'
-import UpdateInfo from '@app/profile/(Components)/UpdateInfo'
+import DeleteAccount from '@app/(profile)/(Components)/DeleteAccount'
+import Password from '@app/(profile)/(Components)/Password'
+import UpdateImage from '@app/(profile)/(Components)/UpdateImage'
+import UpdateInfo from '@app/(profile)/(Components)/UpdateInfo'
 import React from 'react'
 
 

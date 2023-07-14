@@ -65,7 +65,7 @@ exports.getTimeBlocks = catchAsync(async (req, res, next) => {
   );
 
   const TimeBlocks = await TimeBlock.find({
-    doctor: req.params.username,
+    doctor: req.params.id,
     startTime: { $gte: startOfWeek, $lte: endOfWeek },
   }).sort('startTime');
   if (!TimeBlocks || TimeBlocks.length === 0) {

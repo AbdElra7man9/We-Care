@@ -7,6 +7,8 @@ import { motion } from 'framer-motion';
 import { useGetUserByIdQuery } from "@Redux/APIs/UserApi";
 import { useAppSelector } from "@Hooks/useRedux";
 import { selectCurrentUser } from "@Redux/Slices/UserSlice";
+import { useDispatch } from "react-redux";
+import { FeatureAction } from "@Redux/Slices/FeaturesSlice";
 
 interface SpecProps {
   value: number;
@@ -16,13 +18,14 @@ export default function ProfileWraper({ children }: { children: React.ReactNode 
   const spec: SpecProps = {
     value: 90
   };
-  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const { logged } = useAppSelector(state => state.Features);
   const userInfo = useAppSelector(selectCurrentUser);
   const pathname = usePathname();
   const params = useParams() as { username: string };
   const username = params.username
   const { data } = useGetUserByIdQuery({ username })
-  const { user } = data || {}
+  const { user } = data || {};
+  const dispatch = useDispatch();
   const userProfile = (pathname === `/${userInfo?.username}/doctor`);
   const userSettings = (pathname?.includes('settings'));
   const userReviews = (pathname?.includes('reviews'));
@@ -30,11 +33,11 @@ export default function ProfileWraper({ children }: { children: React.ReactNode 
   const userTimetable = (pathname?.includes('timetable'));
   useEffect(() => {
     if (userInfo?._id === user?._id) {
-      setIsLogged(true)
+      dispatch(FeatureAction.setLogged(true))
     } else {
-      setIsLogged(false)
+      dispatch(FeatureAction.setLogged(false))
     }
-  }, [])
+  }, [userInfo, user])
 
   return (
     <>
@@ -99,7 +102,7 @@ export default function ProfileWraper({ children }: { children: React.ReactNode 
                 className={`bg-[#F8F9FA] dark:bg-slate-900 py-3 font-medium ${userTimetable && '!bg-blue-500 text-white'}`}>
                 Time Table
               </Link>
-              {isLogged ?
+              {logged ?
                 <Link
                   href={`/${user?.username}/doctor/settings`}
                   aria-label='settings'

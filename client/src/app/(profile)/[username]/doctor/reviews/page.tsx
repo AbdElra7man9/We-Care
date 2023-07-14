@@ -1,5 +1,5 @@
 import React from 'react'
-import GetReviews from './GetReviews'
+import GetReviews from '@Components/Parts/GetReviews'
 
 export default function page() {
     return (

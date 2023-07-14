@@ -2,6 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 interface FeaturesProps {
     DocSide: Boolean;
+    logged: Boolean;
     isModalAddBlog: Boolean;
     rangeValues: number[];
     gender: string;
@@ -11,6 +12,7 @@ interface FeaturesProps {
 }
 const initialState: FeaturesProps = {
     DocSide: false,
+    logged: false,
     isModalAddBlog: false,
     rangeValues: [0, 100],
     gender: '',
@@ -25,6 +27,9 @@ const FeaturesSlice = createSlice({
     reducers: {
         setDocSide(state) {
             state.DocSide = !state.DocSide;
+        },
+        setLogged(state, action) {
+            state.logged = action.payload;
         },
         setModalAddBlog(state, action) {
             state.isModalAddBlog = action.payload;
