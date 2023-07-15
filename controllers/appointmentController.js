@@ -179,7 +179,7 @@ exports.getMyAppointments = catchAsync(async (req, res, next) => {
       .populate({ path: 'patient', select: ['name', 'profilePicture'] })
       .populate({
         path: 'doctor',
-        select: ['name', 'profilePicture', 'specialization'],
+        select: ['name', 'profilePicture', 'specialization', "numberOfRating" , "averageRating"]
       });
   }
   if (user.__t == 'Doctor') {
