@@ -154,7 +154,10 @@ exports.getMyBookedAppointments = catchAsync(async (req, res, next) => {
     doctor: doctorId,
     status: 'booked',
   })
-    .populate({ path: 'patient', select: ['name', 'email', 'username', 'profilePicture'] })
+    .populate({
+      path: 'patient',
+      select: ['name', 'email', 'username', 'profilePicture'],
+    })
     .populate({
       path: 'doctor',
       select: ['name', 'profilePicture', 'specialization'],
@@ -179,7 +182,13 @@ exports.getMyAppointments = catchAsync(async (req, res, next) => {
       .populate({ path: 'patient', select: ['name', 'profilePicture'] })
       .populate({
         path: 'doctor',
-        select: ['name', 'profilePicture', 'specialization', "numberOfRating" , "averageRating"]
+        select: [
+          'name',
+          'profilePicture',
+          'specialization',
+          'numberOfRating',
+          'averageRating',
+        ],
       });
   }
   if (user.__t == 'Doctor') {
@@ -187,7 +196,10 @@ exports.getMyAppointments = catchAsync(async (req, res, next) => {
       doctor: user._id,
       status: 'booked',
     })
-      .populate({ path: 'patient', select: ['name', 'profilePicture'] })
+      .populate({
+        path: 'patient',
+        select: ['name', 'profilePicture', 'height', 'weight', 'gender'],
+      })
       .populate({
         path: 'doctor',
         select: ['name', 'profilePicture', 'specialization'],
