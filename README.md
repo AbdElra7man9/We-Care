@@ -1,7 +1,7 @@
 # We Care
 
 A Telemedicine Consultation Platform through a user friendly and responsive website.
-[Demo](https://youtu.be/AWEEoaXadO4)
+
 
 ## Table of Contents
 
@@ -10,6 +10,7 @@ A Telemedicine Consultation Platform through a user friendly and responsive webs
 - [Users](#users)
 - [Technology Used](#technology-used)
 - [Getting Started](#getting-started)
+- [Demo](https://youtu.be/AWEEoaXadO4)
 
 ## Project Overview
 
