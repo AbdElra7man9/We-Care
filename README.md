@@ -31,8 +31,7 @@ A Telemedicine Consultation Platform through a user friendly and responsive webs
 ## Users
 - Doctor
   
-  email: "dr-ahmed-ammar@gmail.com"
-  
+  email: "dr-ahmed-ammar@gmail.com"                
   password: "DR-AHMED-AMMAR"
   
 - Patient
