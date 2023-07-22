@@ -30,14 +30,14 @@ A Telemedicine Consultation Platform through a user friendly and responsive webs
 
 ## Users
 - Doctor
-  email: "dr-ahmed-ammar@gmail.com"
-  password: "DR-AHMED-AMMAR"
+  -- email: "dr-ahmed-ammar@gmail.com"
+  -- password: "DR-AHMED-AMMAR"
 - Patient
-  email: "ahmed.ali@yahoo.com"
-  password: "Ahmed Ali"
+  -- email: "ahmed.ali@yahoo.com"
+  -- password: "Ahmed Ali"
 - Coordinator
-   email: "coor@we.com"
-   password: "coordinator"
+   -- email: "coor@we.com"
+   -- password: "coordinator"
 - Unauthorized
 
 ## Technology used
